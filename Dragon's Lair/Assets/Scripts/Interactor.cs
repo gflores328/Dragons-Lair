@@ -1,19 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interactor : MonoBehaviour
 {
+    [SerializeField] private Transform _interactionPoint;
+    [SerializeField] private float _interactionPointRadius = 0.5f;
+    [SerializeField] private LayerMask _interactableMask;
+    [SerializeField] private InteractUI _interactionUI;
+
+    private readonly Collider[] _colliders = new Collider[3];
+    [SerializeField] private int _numFound;
+
+    private IInteractable _interactable;
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        _numFound = Physics.OverlapSphereNonAlloc(_interactionPoint.position, _interactionPointRadius, _colliders, _interactableMask);
+
+        if (_numFound > 0)
         {
-            float interactRange = 2f;
-            Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
-            foreach(Collider collider in colliderArray)
+            _interactable = _colliders[0].GetComponent<IInteractable>();
+            
+            if (_interactable != null)
             {
-                Debug.Log(collider);
+                if (!_interactionUI.isDisplayed)
+                {
+                    _interactionUI.SetUp(_interactable.InteractionPrompt);
+                }
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    _interactable.Interact(this);
+                }
             }
         }
+        else
+        {
+            if (_interactable != null)
+            {
+                _interactable = null;
+            }
+
+            if (_interactionUI.isDisplayed)
+            {
+                _interactionUI.Close();
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_interactionPoint.position, _interactionPointRadius);
     }
 }

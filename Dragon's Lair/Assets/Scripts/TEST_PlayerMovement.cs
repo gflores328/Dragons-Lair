@@ -6,6 +6,7 @@ public class TEST_PlayerMovement : MonoBehaviour
 {
     public float horizontalInput;
     public float verticalInput;
+    public float moveSpeed = 15;
     
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,8 @@ public class TEST_PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.forward * Time.deltaTime * verticalInput);
-        transform.Translate(Vector3.right * Time.deltaTime * horizontalInput);
+        transform.Translate(Vector3.forward * Time.deltaTime * verticalInput * moveSpeed);
+        transform.Translate(Vector3.right * Time.deltaTime * horizontalInput * moveSpeed);
+
     }
 }
