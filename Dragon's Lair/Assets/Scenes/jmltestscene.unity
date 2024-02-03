@@ -123,6 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &104053070 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3625192427593688084, guid: 1e059053d5dc046e9a6d50741eceb33a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6088805844161250025}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &211619579
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +216,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &317150463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 946835371399296283, guid: 1e059053d5dc046e9a6d50741eceb33a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6088805844161250025}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1074418883
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +320,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299622088 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 428053966384750444, guid: 1e059053d5dc046e9a6d50741eceb33a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6088805844161250025}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1363356512
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760601667}
+  - component: {fileID: 1760601668}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -445,6 +482,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1760601668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760601666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7febc7264353946b295d7ebc7d6ee670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartGame: {fileID: 0}
+  resumeGame: {fileID: 1299622088}
+  mainMenu: {fileID: 317150463}
+  quitGame: {fileID: 104053070}
+  Number: 0
+  gameManager: {fileID: 0}
+  Panel: {fileID: 0}
+  ChoicePanel: {fileID: 0}
+  VictoryPanel: {fileID: 0}
+  DeathPanel: {fileID: 0}
+  canvasObject: {fileID: 0}
 --- !u!1001 &6088805844161250025
 PrefabInstance:
   m_ObjectHideFlags: 0

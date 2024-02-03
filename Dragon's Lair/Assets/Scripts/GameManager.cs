@@ -10,39 +10,38 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-	#region Fields
-
-    [Header("Connections")]
-
-    [Header("Buttons")]
-    public Button restartGame;
-    public Button resumeGame;
-    public Button mainMenu;
-    public Button quitGame;
-
-    [Header("Meters")]
-
-    public int Number;
-
-    public GameManager gameManager;
+    #region Fields
 
     // statics
+    public GameManager gameManager; //creates gamemanager object to hold values
+
     public static int state = 0; // 0 = main menu, 1 = in game, 2 = game over
 
-    static GameManager gm;
+    static GameManager gm; //creates a static gamemanage that can hold values from one level to the next
 
-    int counter;
+    int counter; //used in showhidePanel() to change to active state
 
+    [Header("Buttons")]
+    [Tooltip("restartGame button in inspector pairs with restartGame button on UI to add functionality")]
+    public Button restartGame;
+    [Tooltip("resumeGame button in inspector pairs with resumeGame button on UI to add functionality")]
+    public Button resumeGame;
+    [Tooltip("mainMenu button in inspector pairs with mainMenu button on UI to add functionality")]
+    public Button mainMenu;
+    [Tooltip("quitGame button in inspector pairs with quitGame button on UI to add functionality")]
+    public Button quitGame;
+
+    [Header("Panels")]
+    [Tooltip("Panel GameObject in inspector pairs with a chosen UI panel to add make active/hide functionality")]
     public GameObject Panel;
-
-    public GameObject ChoicePanel;
-
+    [Tooltip("VictoryPanel GameObject in inspector pairs with a chosen UI panel to add make active/hide functionality")]
     public GameObject VictoryPanel;
-
+    [Tooltip("DeathPanel GameObject in inspector pairs with a chosen UI panel to add make active/hide functionality")]
     public GameObject DeathPanel;
-
+    [Tooltip("canvasObject GameObject in inspector pairs with a chosen UI GameObject to add make active/hide functionality")]
     public GameObject canvasObject; // drag your canvas object to this variable in the editor
-                                    // make your canvas active from a disables state by calling this method
+
+    // make your canvas active from a disables state by calling this method
     public void MakeActive()
     {
         canvasObject.SetActive(true);
@@ -56,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // init
+        // initialize with only main menu active and all other panels hidden
 
         if (restartGame != null) { restartGame.gameObject.SetActive(false); }
         if (resumeGame != null) { resumeGame.gameObject.SetActive(false); }
@@ -83,7 +82,7 @@ public class GameManager : MonoBehaviour
     {
         if (state == 1)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape)) //Escape brings up pause UI
             {
                 if (resumeGame != null)
                 {
@@ -115,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     #region Methods
 
-    public void hidePanel()
+    public void hidePanel() //hides a panel from an active state
     {
         Panel.gameObject.SetActive(false);
     }
@@ -126,16 +125,16 @@ public class GameManager : MonoBehaviour
         counter++;
         if (counter % 2 == 1) // if odd number
         {
-            Panel.gameObject.SetActive(false);
+            Panel.gameObject.SetActive(false); //hides panel if active
         }
         else
         {
-            Panel.gameObject.SetActive(true);
+            Panel.gameObject.SetActive(true); //sets active if hidden
         }
         
     }
 
-    public void Choice()
+    public void Choice() //allows for a panel to be selected in inspector to be active or hidden
     {
         Panel.gameObject.SetActive(true);
     }
@@ -144,7 +143,7 @@ public class GameManager : MonoBehaviour
 
     #region UI Callbacks
 
-    public void RestartGame()
+    public void RestartGame() //reload the game at level 1
     {
         state = 1;
         if (restartGame != null)
@@ -153,7 +152,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ResumeGame()
+    public void ResumeGame() //closes pause menu and resume game
     {
 
         canvasObject.SetActive(false);
@@ -163,19 +162,23 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu"); //go back to main menu screen
     }
 
-    public void Quit()
+    public void Quit() //press Q to quit the game
     {
-        Application.Quit();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Application.Quit();
+        }
     }
 
-    public void LoadLevel1()
+    public void LoadLevel1() //loads the first level of the game with all default values
     {
         SceneManager.LoadScene("Level1");
     }
-    public void LoadLevelbyName(string levelName)
+
+    public void LoadLevelbyName(string levelName) //allows for the selections of what level to load into on inspector
     {
         SceneManager.LoadScene(levelName);
     }
