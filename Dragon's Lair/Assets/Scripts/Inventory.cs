@@ -1,7 +1,13 @@
 /*
  * CREATED BY: Trevor Minarik
  * 
- * Manages a list of strings representing items
+ * LAST MODIFIED BY: Trevor Minarik
+ * LAST MODIFIED ON: Feb 4, 2024
+ * 
+ * Manages a list of items by
+ * - Adding items
+ * - Removing items
+ * - Retrieving a list of items
  */
  
 using System.Collections;
@@ -10,59 +16,132 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    //A list of strings representing items
-    public List<string> inventory;
+    //A list of items in the inventory
+    public List<Item> inventory;
     
     //Start is called before the first frame update
     //Initializes the inventory list as an empty list of strings
     void Start()
     {
-        inventory = new List<string>();
+        inventory = new List<Item>();
     }
 
-    //Adds one or more of the given item represented by a string
-    public void AddItem(string item, int quantity)
+    //Returns an item with a name matching the given item name. Accepts a string for the item name.
+    private Item FindItem(string itemName)
+    {
+        //Search through the inventory
+        foreach (Item i in inventory)
+        {
+            //Compare the current item's name to the given name
+            if (i.getName().Equals(itemName))
+            {
+                //If the item name matches, return the reference to the item
+                return i;
+            }
+        }
+
+        //If no item with a matching name was found return a null reference
+        return null;
+    }
+
+    //Adds one or more of the given item based on the item name
+    public void AddItem(string itemName, int quantity)
     {
         //The quantity of items being added must be a positive integer
         if (quantity > 0)
         {
-            for (int i = 0; i < quantity; i++)
+            //Check to see if the item to be added already exists in the inventory
+            Item item = FindItem(itemName);
+
+            //If the item isn't already in the inventory create a new entry for the item
+            if (item == null)
             {
-                inventory.Add(item);
+                inventory.Add(new Item(itemName, quantity));
+            }
+            //If the item does aready exist simply increase the quantity
+            else
+            {
+                item.increaseQuantity(quantity);
             }
         }
     }
 
     //Adds one of the given item represented by a string
-    public void AddItem(string item)
+    public void AddItem(string itemName)
     {
         //Call the other AddItem function, specifing that only one item is to be added
-        AddItem(item, 1);
+        AddItem(itemName, 1);
     }
 
-    //Removes one of the given item represented by a string
-    public bool RemoveItem(string item)
+    //Removes a specific amount or all of a given item
+    private bool RemoveItem(string itemName, int quantity, bool removeAll)
     {
         //A variable to keep track of whether the item has been removed or not
         //This is returned at the end of the function
-        bool itemRemoved = false;
+        bool wasItemRemoved = false;
 
         //Check to see if the inventory has the item that is going to be removed
-        if (inventory.Contains(item))
+        Item item = FindItem(itemName);
+
+        if (item == null)
         {
-            inventory.Remove(item);
+            wasItemRemoved = false;
+        }
+        else
+        {
+            //Calculate the new quantity of the item
+            int newQuantity = item.getQuantity() - quantity;
+
+            //If the new quantity is less than one or if removeAll is true remove the item from the inventory completely
+            if (removeAll || newQuantity < 1)
+            {
+                inventory.Remove(item);
+            }
+            //If the new quantity results in a postive integer simply decrease the quantity of the item
+            else
+            {
+                item.decreaseQuantity(quantity);
+            }
+
             //Mark that the item was removed
-            itemRemoved = true;
+            wasItemRemoved = true;
         }
 
         //Report whether the item was successfully removed or not
-        return itemRemoved;
+        return wasItemRemoved;
+    }
+
+    //Removes a specific amount of a given item
+    public bool RemoveItem(string itemName, int quantity)
+    {
+        return RemoveItem(itemName, quantity, false);
+    }
+
+    //Removes all of a given item
+    public bool RemoveItem(string itemName, bool removeAll)
+    {
+        return RemoveItem(itemName, 0, removeAll);
+    }
+
+    //Removes one of a given item
+    public bool RemoveItem(string itemName)
+    {
+        return RemoveItem(itemName, 1, false);
     }
 
     //Returns the inventory as an array of strings
     public string[] GetInventory()
     {
-        string[] items = inventory.ToArray();
-        return items;
+        //Create a list of strings to store the item information
+        List<string> items = new List<string>();
+
+        //Convert each item into a string containing the name and the quantity  e.g. "Paper x3" or "Coins x56"
+        foreach (Item i in inventory)
+        {
+            items.Add( i.getName() + " x" + i.getQuantity() );
+        }
+
+        //Return the list of strings as an array
+        return items.ToArray();
     }
 }
