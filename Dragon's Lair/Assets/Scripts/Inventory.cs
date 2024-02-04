@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 4, 2024
+ * LAST MODIFIED ON: Feb 4, 2024 at 4:27 PM
  * 
  * Manages a list of items by
  * - Adding items
@@ -17,7 +17,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     //A list of items in the inventory
-    public List<Item> inventory;
+    private List<Item> inventory;
     
     //Start is called before the first frame update
     //Initializes the inventory list as an empty list of strings
@@ -143,5 +143,34 @@ public class Inventory : MonoBehaviour
 
         //Return the list of strings as an array
         return items.ToArray();
+    }
+
+    //Returns if there is at least a specified quantity of an item in an inventory
+    //e.g. a quantity of 3 would return true if the item's quantity is 3 or above and return false for 2 and below
+    public bool Contains(string itemName, int quantity)
+    {
+        //Tracks whether the desired item exists in the inventory
+        bool containsItem = false;
+        //A reference to the desired item
+        Item item = FindItem(itemName);
+
+        //First, check to make sure the item exists before trying to access its data
+        if (item != null)
+        {
+            //If the given quantity is greater than zero and the found item's quantity is greater than the given quantity marks the level as contained
+            if (quantity > 0 && item.getQuantity() >= quantity)
+            {
+                containsItem = true;
+            }
+        }
+
+        //Return the state of the desired item existing or not
+        return containsItem;
+    }
+
+    //Returns if there is at least one of an item in the inventory
+    public bool Contains(string itemName)
+    {
+        return Contains(itemName, 1);
     }
 }
