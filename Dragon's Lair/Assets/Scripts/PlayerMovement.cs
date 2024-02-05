@@ -101,16 +101,23 @@ public class PlayerMovement : MonoBehaviour
     //Designed to be the function that will actively move the player object in the game. allowing movement in all directions 
     void RealLifeMovePlayer()
     {
-        //Debug.Log(walkAction.ReadValue<Vector2>());
         Vector3 currentVelocity = playerRB.velocity;
         Vector2 direction = walkAction.ReadValue<Vector2>();
-        Vector3 targetVelocity = new Vector3(direction.x,0,direction.y);
+        Vector3 targetVelocity = new Vector3(direction.x, 0, direction.y);
+        
+        // Get the camera's forward direction
+        Vector3 cameraForward = Camera.main.transform.forward;
+        cameraForward.y = 0f; // Ensure no vertical component
+        
+        // Transform the movement direction based on the camera's forward direction
+        targetVelocity = Quaternion.LookRotation(cameraForward) * targetVelocity;
+        
         targetVelocity *= playerSpeedMultiplier;
-        //targetVelocity = transform.TransformDirection(targetVelocity);
+        
         Vector3 velocityChange = (targetVelocity - currentVelocity);
-        Vector3.ClampMagnitude(velocityChange,maxForce); // Creates a vector2 variable to assign and store the values of the walk action to be used to determine which way the player wants to move.
-        //transform.position += new Vector3(direction.x,0,direction.y) * Time.deltaTime * playerSpeedMultiplier; // Multiplies the values of the a new vector3 position time and the speed multiplier to make the player move.
-        playerRB.AddForce(velocityChange,ForceMode.VelocityChange);
+        Vector3.ClampMagnitude(velocityChange, maxForce);
+
+        playerRB.AddForce(velocityChange, ForceMode.VelocityChange);
         
     }
 
@@ -150,7 +157,8 @@ public class PlayerMovement : MonoBehaviour
         // You can adjust the jump force according to your needs
         Debug.Log("I am jumping");
         //float jumpForce = 10f;
-        playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        playerRB.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+        
     }
 
     bool IsGrounded()
