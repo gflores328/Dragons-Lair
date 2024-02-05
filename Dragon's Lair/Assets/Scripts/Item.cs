@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 4, 2024
+ * LAST MODIFIED ON: Feb 4, 2024 at 6:40 pm
  * 
  * A container for storing and retrieving information about an item including:
  * - The item's name
@@ -31,7 +31,7 @@ public class Item
     public Item(string itemName)
     {
         setName(itemName);
-        increaseQuantity(quantity);
+        increaseQuantity(1);
     }
 
     //Sets the name of the item. Item name is given as a string.
