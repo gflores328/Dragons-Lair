@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DialougeTrigger : MonoBehaviour
+public class DialougeInteraction : MonoBehaviour
 {
     [Header("Dialouge")]
     [Tooltip("The number of lines in a dialouge interaction and what they say")]
