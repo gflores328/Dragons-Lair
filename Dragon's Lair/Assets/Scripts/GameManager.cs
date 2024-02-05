@@ -1,12 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.AI;
-using System;
-using System.Text;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     static GameManager gm; //creates a static gamemanage that can hold values from one level to the next
 
-    int counter; //used in showhidePanel() to change to active state
+    int counter = 2; //used in showhidePanel() to change to active state
 
     [Header("Buttons")]
     [Tooltip("restartGame button in inspector pairs with restartGame button on UI to add functionality")]
@@ -38,13 +32,11 @@ public class GameManager : MonoBehaviour
     public GameObject VictoryPanel;
     [Tooltip("DeathPanel GameObject in inspector pairs with a chosen UI panel to add make active/hide functionality")]
     public GameObject DeathPanel;
-    [Tooltip("canvasObject GameObject in inspector pairs with a chosen UI GameObject to add make active/hide functionality")]
-    public GameObject canvasObject; // drag your canvas object to this variable in the editor
 
     // make your canvas active from a disables state by calling this method
     public void MakeActive()
     {
-        canvasObject.SetActive(true);
+        Panel.gameObject.SetActive(true);
     }
 
     #endregion
@@ -84,28 +76,28 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.P)) //P brings up pause UI
             {
-                if (resumeGame != null)
+                if ((resumeGame != null)&& (Time.timeScale == 1))
                 {
-                    //MakeActive();
                     resumeGame.gameObject.SetActive(true);
                     mainMenu.gameObject.SetActive(true);
                     quitGame.gameObject.SetActive(true);
                     Time.timeScale = 0;
                 }
-            
-                if (restartGame != null)
-                {
-                    restartGame.gameObject.SetActive(true);
-                }
 
-                if ((resumeGame != null) && (Time.timeScale == 0))  
+
+                else if ((resumeGame != null) && (Time.timeScale == 0))  
                 {
-                    Input.GetKeyDown(KeyCode.P); //P brings up pause UI
+                    Input.GetKeyDown(KeyCode.P); //P hides pause UI
 
                     showhidePanel();
 
                     Time.timeScale = 1;
 
+                }
+
+                if (restartGame != null)
+                {
+                    restartGame.gameObject.SetActive(true);
                 }
                 if (quitGame != null)
                 {
@@ -123,20 +115,23 @@ public class GameManager : MonoBehaviour
 
     public void hidePanel() //hides a panel from an active state
     {
-        canvasObject.SetActive(false);
+        Panel.gameObject.SetActive(false);
     }
 
     public void showhidePanel()
     {
+
         
-        counter++;
         if (counter % 2 == 1) // if odd number
         {
-            Panel.gameObject.SetActive(true); //sets active if hidden
+            Panel.gameObject.SetActive(false); //hides panel if active
+            counter--;
+
         }
         else
         {
-            Panel.gameObject.SetActive(false); //hides panel if active
+            Panel.gameObject.SetActive(true); //sets active if hidden
+            counter++;
         }
         
     }
@@ -161,7 +156,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame() //closes pause menu and resume game
     {
-         canvasObject.SetActive(false);
+         Panel.gameObject.SetActive(false);
          Time.timeScale = 1;
     }
 
