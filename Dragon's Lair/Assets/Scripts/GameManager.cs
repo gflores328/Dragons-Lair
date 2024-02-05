@@ -82,28 +82,35 @@ public class GameManager : MonoBehaviour
     {
         if (state == 1)
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) //Escape brings up pause UI
+            if (Input.GetKeyDown(KeyCode.P)) //P brings up pause UI
             {
                 if (resumeGame != null)
                 {
-                    MakeActive();
+                    //MakeActive();
                     resumeGame.gameObject.SetActive(true);
+                    mainMenu.gameObject.SetActive(true);
+                    quitGame.gameObject.SetActive(true);
                     Time.timeScale = 0;
                 }
-
+            
                 if (restartGame != null)
                 {
                     restartGame.gameObject.SetActive(true);
                 }
 
-                if (resumeGame != null)
+                if ((resumeGame != null) && (Time.timeScale == 0))  
                 {
-                    resumeGame.gameObject.SetActive(true);
-                }
+                    Input.GetKeyDown(KeyCode.P); //P brings up pause UI
 
+                    showhidePanel();
+
+                    Time.timeScale = 1;
+
+                }
                 if (quitGame != null)
                 {
-                    quitGame.gameObject.SetActive(true);
+     
+                    Quit();
                 }
 
             }
@@ -116,7 +123,7 @@ public class GameManager : MonoBehaviour
 
     public void hidePanel() //hides a panel from an active state
     {
-        Panel.gameObject.SetActive(false);
+        canvasObject.SetActive(false);
     }
 
     public void showhidePanel()
@@ -125,11 +132,11 @@ public class GameManager : MonoBehaviour
         counter++;
         if (counter % 2 == 1) // if odd number
         {
-            Panel.gameObject.SetActive(false); //hides panel if active
+            Panel.gameObject.SetActive(true); //sets active if hidden
         }
         else
         {
-            Panel.gameObject.SetActive(true); //sets active if hidden
+            Panel.gameObject.SetActive(false); //hides panel if active
         }
         
     }
@@ -154,10 +161,8 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame() //closes pause menu and resume game
     {
-
-        canvasObject.SetActive(false);
-        Time.timeScale = 1;
-
+         canvasObject.SetActive(false);
+         Time.timeScale = 1;
     }
 
     public void MainMenu()
@@ -167,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     public void Quit() //press Q to quit the game
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
