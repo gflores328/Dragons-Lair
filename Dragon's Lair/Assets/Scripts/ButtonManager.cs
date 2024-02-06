@@ -10,6 +10,7 @@ public class ButtonManager : MonoBehaviour
     public Button creditsScreen;
     public Button quitGame;
     public Button aboutGame;
+    public Button settings;
 
     [Header("Panels")]
     [Tooltip("Panel GameObject in inspector pairs with a chosen UI panel to add make active/hide functionality")]
@@ -22,6 +23,7 @@ public class ButtonManager : MonoBehaviour
         else if (creditsScreen != null) { creditsScreen.gameObject.SetActive(true); }
         else if (quitGame != null) { quitGame.gameObject.SetActive(true); }
         else if (aboutGame != null) { aboutGame.gameObject.SetActive(true); }
+        else if (settings != null) { settings.gameObject.SetActive(true); }
     }
 
     // Start is called before the first frame update

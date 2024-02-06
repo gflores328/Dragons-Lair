@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public Button mainMenu;
     [Tooltip("quitGame button in inspector pairs with quitGame button on UI to add functionality")]
     public Button quitGame;
+    [Tooltip("back button in inspector pairs with back button on UI to add functionality")]
+    public Button back;
 
     [Header("Panels")]
     [Tooltip("Panel GameObject in inspector pairs with a chosen UI panel to add make active/hide functionality")]
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
         if (resumeGame != null) { resumeGame.gameObject.SetActive(false); }
         if (quitGame != null) { quitGame.gameObject.SetActive(false); }
         if (mainMenu != null) { mainMenu.gameObject.SetActive(true); }
+        if (back != null) { back.gameObject.SetActive(true); }
 
         gm = this;
         Time.timeScale = 1;
