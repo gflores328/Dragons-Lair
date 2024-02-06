@@ -46,6 +46,7 @@ public class ButtonManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+        Debug.Log("Player has Quit");
     }
 
     public void LoadLevel1()
