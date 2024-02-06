@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
         // You can adjust the jump force according to your needs
         Debug.Log("I am jumping");
         //float jumpForce = 10f;
-        playerRB.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+        playerRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         
     }
 
