@@ -14,7 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item
+public class Item : ScriptableObject
 {
     private string itemName;    //The name of the item
     private string description; //The description of the item   Currently, this value isn't used
