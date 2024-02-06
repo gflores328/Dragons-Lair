@@ -10,7 +10,7 @@
  * - The quantity of the item
  */
 
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,10 +20,20 @@ public class Item
     private string description; //The description of the item   Currently, this value isn't used
     private int quantity;       //The quantity of the item
 
+    //Stores the descriptions for each item
+    //This will have to be updated manually with each item that is added
+    private static readonly Dictionary<string, string> descriptions = new Dictionary<string, string>()
+    {
+        //Example item/description pair
+        //Item names should be in lowercase
+        { "banana", "long yellow things" },
+    };
+
     //Constructor for an item that accepts an item name as a string and an item quantity as an int
     public Item(string itemName, int quantity)
     {
         setName(itemName);
+        setDescription(itemName);
         increaseQuantity(quantity);
     }
 
@@ -31,6 +41,7 @@ public class Item
     public Item(string itemName)
     {
         setName(itemName);
+        setDescription(itemName);
         increaseQuantity(1);
     }
 
@@ -39,6 +50,24 @@ public class Item
     private void setName(string itemName)
     {
         this.itemName = itemName;
+    }
+
+    //Sets the description of the item based on the given item name
+    private void setDescription(string itemName)
+    {
+        string description; //Stores the description
+        itemName = itemName.ToLower();  //Convert the item name to lowercase to match the keys in the descriptions dictionary
+
+        //If the item has a matching description, add the description to the item
+        if (descriptions.TryGetValue(itemName, out description))
+        {
+            this.description = description;
+        }
+        //If the item doesn't have a matching descripion, give it a default value
+        else
+        {
+            this.description = "[No description provided]";
+        }
     }
 
     //Returns the name of the item as a string
