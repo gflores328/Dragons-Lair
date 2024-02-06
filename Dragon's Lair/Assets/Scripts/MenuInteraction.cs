@@ -31,6 +31,8 @@ public class MenuInteraction : MonoBehaviour
 
     private bool inDialouge; // bool to see if player is in dialouge
     private int currentLine; // the index of the dialouge array that is being shown
+    private bool inTrigger;
+    private bool lockDialogue;
 
     // Start is called before the first frame update
     void Start()
@@ -38,12 +40,17 @@ public class MenuInteraction : MonoBehaviour
         inDialouge = false;
         currentLine = 0;
         menu.SetActive(false);
+        inTrigger = false;
+        lockDialogue = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (inTrigger && Input.GetKeyDown(KeyCode.E) && !lockDialogue)
+        {
+            Interact();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,6 +58,7 @@ public class MenuInteraction : MonoBehaviour
         // When Player enters trigger the UI prompt will be shown
         if (other.tag == "Player")
         {
+            inTrigger = true;
             textBox.SetActive(true);
             dialougeText.text = "Press E to interact";
         }
@@ -66,17 +74,22 @@ public class MenuInteraction : MonoBehaviour
             dialougeText.text = null;
             menu.SetActive(false);
             inDialouge = false;
+            inTrigger = false;
+            lockDialogue = false;
         }
     }
 
+    /*
     private void OnTriggerStay(Collider other)
     {
         // When player is in trigger and E is pressed the Interact function is run
         if (other.tag == "Player" && Input.GetKeyDown(KeyCode.E))
         {
             Interact();
+            Debug.Log("E pressed");
         }
     }
+    */
 
     // The text background is set active and the first line of text is set to the text UI
     private void StartDiolouge()
@@ -93,6 +106,7 @@ public class MenuInteraction : MonoBehaviour
         dialougeText.text = null;
         currentLine = 0;
         inDialouge = false;
+        lockDialogue = true;
 
         // The menu UI is shown
         menu.SetActive(true);

@@ -28,18 +28,23 @@ public class DialougeInteraction : MonoBehaviour
 
     private bool inDialouge; // bool to see if player is in dialouge
     private int currentLine; // the index of the dialouge array that is being shown
+    private bool inTrigger;
 
     // Start is called before the first frame update
     void Start()
     {
         inDialouge = false;
         currentLine = 0;
+        inTrigger = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentLine);
+        if (inTrigger && Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,6 +54,7 @@ public class DialougeInteraction : MonoBehaviour
         {
             textBox.SetActive(true);
             dialougeText.text = "Press E to interact";
+            inTrigger = true;
         }
     }
 
@@ -61,17 +67,29 @@ public class DialougeInteraction : MonoBehaviour
             textBox.SetActive(false);
             dialougeText.text = null;
             inDialouge = false;
+            inTrigger = false;
         }
     }
 
-    private void OnTriggerStay(Collider other)
+   /* private void OnTriggerStay(Collider other)
     {
+        if (other.tag == "Player")
+        {
+            Debug.Log("player");
+        }
+        else
+        {
+            Debug.Log("NO player");
+        }
+
+
         // When player is in trigger and E is pressed the Interact function is run
         if (other.tag == "Player" && Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }
     }
+   */
 
     // The text background is set active and the first line of text is set to the text UI
     private void StartDiolouge()
