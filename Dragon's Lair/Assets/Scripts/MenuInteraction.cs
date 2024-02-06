@@ -37,6 +37,7 @@ public class MenuInteraction : MonoBehaviour
     {
         inDialouge = false;
         currentLine = 0;
+        menu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,9 +61,11 @@ public class MenuInteraction : MonoBehaviour
         // When player exits the trigger then the UI will dissapear
         if (other.tag == "Player")
         {
+            currentLine = 0;
             textBox.SetActive(false);
             dialougeText.text = null;
             menu.SetActive(false);
+            inDialouge = false;
         }
     }
 
@@ -93,6 +96,7 @@ public class MenuInteraction : MonoBehaviour
 
         // The menu UI is shown
         menu.SetActive(true);
+        //Cursor.lockState = CursorLockMode.None;
     }
 
     private void Interact()

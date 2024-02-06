@@ -39,7 +39,7 @@ public class DialougeInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(currentLine);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,8 +57,10 @@ public class DialougeInteraction : MonoBehaviour
         // When player exits the trigger then the UI will dissapear
         if (other.tag == "Player")
         {
+            currentLine = 0;
             textBox.SetActive(false);
             dialougeText.text = null;
+            inDialouge = false;
         }
     }
 
