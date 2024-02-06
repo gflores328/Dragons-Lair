@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         walkAction = playerInput.actions.FindAction("Walk"); // Searches for the action and stores it inside of the  walk action variable
         jumpAction = playerInput.actions.FindAction("Jump"); // Assigns the jump action to the jump action input
         jumpAction.performed += Jump; // assigns when the jumpaction is performed then jump function will be called
-        isGrounded = IsGrounded();
+        //isGrounded = IsGrounded();
         
        
     }
@@ -80,8 +80,8 @@ public class PlayerMovement : MonoBehaviour
             //CheckJump();
 
         }
-       
-    
+
+        isGrounded = IsGrounded();
         //Apply gravity if not on the ground
         if (!isGrounded)
         {
@@ -133,36 +133,41 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetVelocity = new Vector3(direction.x,0,0);
         targetVelocity *= playerSpeedMultiplier;
         //targetVelocity = transform.TransformDirection(targetVelocity);
-        Vector3 velocityChange = (targetVelocity - currentVelocity);
+        Vector3 velocityChange = (targetVelocity + currentVelocity);
         Vector3.ClampMagnitude(velocityChange,maxForce); // Creates a vector2 variable to assign and store the values of the walk action to be used to determine which way the player wants to move.
         //transform.position += new Vector3(direction.x,0,direction.y) * Time.deltaTime * playerSpeedMultiplier; // Multiplies the values of the a new vector3 position time and the speed multiplier to make the player move.
         playerRB.AddForce(velocityChange,ForceMode.VelocityChange);
     }
     
     //This is the function that is called when the jump button is pressed
+  
+   
     public void Jump(InputAction.CallbackContext value)
     {
-
-        if (value.phase == InputActionPhase.Started && isGrounded)
-
+        Debug.Log("Jump Function");
+        /*if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-
+            Debug.Log("Can Jump");
             OnJump();
 
         }
-       
+        */
     }
-
+    
     //This is the function that is actually moving the player's rigid body
     void OnJump()
     {
-        // You can adjust the jump force according to your needs
-        Debug.Log("I am jumping");
-        //float jumpForce = 10f;
-        playerRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        
+        if (isGrounded)
+        {
+            // You can adjust the jump force according to your needs
+            Debug.Log("I am jumping");
+            //float jumpForce = 10f;
+            playerRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            
+        }
     }
 
+   
     bool IsGrounded()
     {
         
@@ -170,13 +175,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 rayOrigin = transform.position;
 
         // Cast a ray downward to check if the player is on the ground
-        bool isHit = Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hitInfo, groundRayLength, groundLayer);
+        bool isHit = Physics.Raycast(rayOrigin, Vector3.down, groundRayLength, groundLayer);
 
-        Debug.Log("Is Grounded: " + isHit); // Comment to see if grounded is true
+       Debug.Log(isGrounded); // Comment to see if grounded is true
 
 
         return isHit;
         
     }
-    
+  
 }
