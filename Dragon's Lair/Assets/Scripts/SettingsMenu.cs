@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;    //Used by volume slider
+using UnityEngine.UI;       //Used by volume slider
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -18,12 +19,14 @@ public class SettingsMenu : MonoBehaviour
     //A text mesh pro dropdown box.
     //Its options will be overwritten to match Unity's list based on the computer that is running the game
     public TMPro.TMP_Dropdown resolutionDropdown;
+    //A slider that alters the master volume
+    public Slider volumeSlider;
 
     //An array that stores a list of resolutions
     private Resolution[] resolutions;
 
     //This function is run when the scene starts
-    //Initalizes the options in the 'resolutionDropdown' dropdown box
+    //Initalizes the options in the 'resolutionDropdown' dropdown box and the position of the volume slider
     private void Start()
     {
         //Set up local variables
@@ -62,6 +65,16 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         //Refresh the attached dropdown box to show the option that matches the current screen resolution
         resolutionDropdown.RefreshShownValue();
+
+        //Update the default slider position to match the current audio mixer volume
+
+        //A float for storing the volume
+        float volume;
+        //Get the current audio volume from the audio mixer
+        audioMixer.GetFloat("masterVolume", out volume);
+        //Set the default slider value to the saved volume value
+        volumeSlider.value = volume;
+        
     }
 
     //Updates the current resolution of the game window based on the given resolution index
