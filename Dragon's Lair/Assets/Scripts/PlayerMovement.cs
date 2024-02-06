@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     
     private Rigidbody playerRB; // A rigid body object which will hold the player's rigid body
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
+    private bool isGrounded;
     
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
     {
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         walkAction = playerInput.actions.FindAction("Walk"); // Searches for the action and stores it inside of the  walk action variable
         jumpAction = playerInput.actions.FindAction("Jump"); // Assigns the jump action to the jump action input
         jumpAction.performed += Jump; // assigns when the jumpaction is performed then jump function will be called
+        isGrounded = IsGrounded();
         
        
     }
@@ -78,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
             //CheckJump();
 
         }
-        bool isGrounded = IsGrounded();
+       
     
         //Apply gravity if not on the ground
         if (!isGrounded)
@@ -141,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext value)
     {
 
-        if (value.phase == InputActionPhase.Started && IsGrounded())
+        if (value.phase == InputActionPhase.Started && isGrounded)
 
         {
 
