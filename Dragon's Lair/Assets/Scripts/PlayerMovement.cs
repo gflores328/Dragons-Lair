@@ -128,15 +128,15 @@ public class PlayerMovement : MonoBehaviour
     void ChibiMovePlayer()
     {
         //Debug.Log(walkAction.ReadValue<Vector2>());
-        Vector3 currentVelocity = playerRB.velocity;
+        //Vector3 currentVelocity = playerRB.velocity;
         Vector2 direction = walkAction.ReadValue<Vector2>();
-        Vector3 targetVelocity = new Vector3(direction.x,0,0);
-        targetVelocity *= playerSpeedMultiplier;
+        //Vector3 targetVelocity = new Vector3(direction.x,0,0);
+        //targetVelocity *= playerSpeedMultiplier;
         //targetVelocity = transform.TransformDirection(targetVelocity);
-        Vector3 velocityChange = (targetVelocity + currentVelocity);
-        Vector3.ClampMagnitude(velocityChange,maxForce); // Creates a vector2 variable to assign and store the values of the walk action to be used to determine which way the player wants to move.
-        //transform.position += new Vector3(direction.x,0,direction.y) * Time.deltaTime * playerSpeedMultiplier; // Multiplies the values of the a new vector3 position time and the speed multiplier to make the player move.
-        playerRB.AddForce(velocityChange,ForceMode.VelocityChange);
+        //Vector3 velocityChange = (targetVelocity + currentVelocity);
+        //Vector3.ClampMagnitude(velocityChange,maxForce); // Creates a vector2 variable to assign and store the values of the walk action to be used to determine which way the player wants to move.
+        transform.Translate(new Vector3(direction.x,0,direction.y) * Time.deltaTime * playerSpeedMultiplier); // Multiplies the values of the a new vector3 position time and the speed multiplier to make the player move.
+        //playerRB.AddForce(velocityChange,ForceMode.VelocityChange);
     }
     
     //This is the function that is called when the jump button is pressed
