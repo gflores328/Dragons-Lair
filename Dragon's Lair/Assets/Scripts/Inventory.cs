@@ -173,4 +173,10 @@ public class Inventory : MonoBehaviour
     {
         return Contains(itemName, 1);
     }
+
+    public void AddItem(Item item)
+    {
+        Debug.Log(item + " added to inventory");
+        inventory.Add(item);
+    }
 }

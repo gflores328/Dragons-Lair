@@ -14,11 +14,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class Item : ScriptableObject
 {
+    [SerializeField]
     private string itemName;    //The name of the item
+    [SerializeField]
     private string description; //The description of the item   Currently, this value isn't used
-    private int quantity;       //The quantity of the item
+    [SerializeField]
+    private int quantity;       //The quantity of the ite
 
     //Stores the descriptions for each item
     //This will have to be updated manually with each item that is added
