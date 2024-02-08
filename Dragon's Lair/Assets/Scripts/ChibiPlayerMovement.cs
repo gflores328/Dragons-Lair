@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 //Created by Aaron Torres
-//Script Title: PlayerMovement
-//Description: This script will be handling the player movement.
+//Script Title: Chibi PlayerMovement
+//Description: This script will be handling the player movement inside of the chibi game world
 
-public class PlayerMovement : MonoBehaviour
+public class ChibiPlayerMovement : MonoBehaviour
 {
-
+    [Header("Player Movement Settings")]
     public float playerSpeedMultiplier,maxForce,jumpForce,gravityForce; // A float variable that will deteremine how fast the player is moving, The max force that can be applied to the movement, how powerful the jump is, how strong the gravity is.
     
     public bool inRealLife = true; // A public bool to determine if the player is in real life or the arcade chibi world used to restrict movement
     public LayerMask groundLayer;
-    public float groundRayLength = 0.6f;
+    public float groundRayLength = 1f;
     
     private PlayerInput playerInput; // A private variable that is meant to grab the PlayerInput component that is attached to the player.
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
@@ -45,48 +45,16 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (inRealLife && playerInput.currentActionMap.name != "RealLifeMovement") // Checks to see if the player is in real life and that the current action map is not already real life movement
-
-        {
-
-            SwitchActionMap("RealLifeMovement"); //Calls the switch action map function and switches it to real life
-            currentPlayerState = playerState.RealLife; // Sets the current player state to reallife
-           
-
-        }
-
-        else if (!inRealLife && playerInput.currentActionMap.name != "ChibiMovement") // Checks to see if the player is in real life and that the current action map is not already in chibi movement
-
-        {
-
-            SwitchActionMap("ChibiMovement"); //Calls the switch action map function and switches it to ChibiMovement
-            currentPlayerState = playerState.Chbi; // sets the current player state to chibi
-            
-
-        }
-
-        if(currentPlayerState == playerState.RealLife)
-
-        {
-            RealLifeMovePlayer(); // Calls the RealLifeMovePlayer function
-        }
         
-        
-        if(currentPlayerState == playerState.Chbi)
+        ChibiMovePlayer(); // Calls the ChibiMovePlayer function
+        //CheckJump();
 
-        {
-
-            ChibiMovePlayer(); // Calls the ChibiMovePlayer function
-            //CheckJump();
-
-        }
 
         isGrounded = IsGrounded();
         //Apply gravity if not on the ground
         if (!isGrounded)
         {
-            // You can adjust the gravity force according to your needs
-            //float gravityForce = 20f;
+            
             playerRB.AddForce(Vector3.down * gravityForce);
         }
 
@@ -99,29 +67,7 @@ public class PlayerMovement : MonoBehaviour
         walkAction = playerInput.currentActionMap.FindAction("Walk");
     }
 
-    //MovePlayer Function Description:
-    //Designed to be the function that will actively move the player object in the game. allowing movement in all directions 
-    void RealLifeMovePlayer()
-    {
-        Vector3 currentVelocity = playerRB.velocity;
-        Vector2 direction = walkAction.ReadValue<Vector2>();
-        Vector3 targetVelocity = new Vector3(direction.x, 0, direction.y);
-        
-        // Get the camera's forward direction
-        Vector3 cameraForward = Camera.main.transform.forward;
-        cameraForward.y = 0f; // Ensure no vertical component
-        
-        // Transform the movement direction based on the camera's forward direction
-        targetVelocity = Quaternion.LookRotation(cameraForward) * targetVelocity;
-        
-        targetVelocity *= playerSpeedMultiplier;
-        
-        Vector3 velocityChange = (targetVelocity - currentVelocity);
-        Vector3.ClampMagnitude(velocityChange, maxForce);
-
-        playerRB.AddForce(velocityChange, ForceMode.VelocityChange);
-        
-    }
+    
 
     //ChibiMovePlayer Function Description:
     //Designed to be the function that will actively move the player object in the game. but only in the x axis.
@@ -144,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
    
     public void Jump(InputAction.CallbackContext value)
     {
-        Debug.Log("Jump Function");
+        //Debug.Log("JumpButton has been pressed");
+        OnJump();
         /*if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Debug.Log("Can Jump");
@@ -160,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             // You can adjust the jump force according to your needs
-            Debug.Log("I am jumping");
+            //Debug.Log("I am jumping");
             //float jumpForce = 10f;
             playerRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
             
@@ -172,12 +119,14 @@ public class PlayerMovement : MonoBehaviour
     {
         
 
-        Vector3 rayOrigin = transform.position;
+        Vector3 rayOrigin = transform.position + Vector3.down * .5f;
 
         // Cast a ray downward to check if the player is on the ground
         bool isHit = Physics.Raycast(rayOrigin, Vector3.down, groundRayLength, groundLayer);
 
-       Debug.Log(isGrounded); // Comment to see if grounded is true
+        Debug.DrawRay(rayOrigin, Vector3.down * groundRayLength, isHit ? Color.green : Color.red);
+
+        Debug.Log(isGrounded); // Comment to see if grounded is true
 
 
         return isHit;
