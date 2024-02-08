@@ -107,7 +107,7 @@ public class ItemInteraction : MonoBehaviour
         PickUp();
     }
 
-    private void Interact()
+    public void Interact()
     {
         // If inDialogue is false then StartDiolougue is run and inDiolouge is set to true
         if (!inDialouge)
@@ -139,5 +139,6 @@ public class ItemInteraction : MonoBehaviour
     {
         Destroy(worldItem);
         inventory.GetComponent<Inventory>().AddItem(item);
+        Destroy(gameObject);
     }
 }
