@@ -8,7 +8,7 @@ public class AaronGameManager : MonoBehaviour
     private bool ButtonClicked =  false;
     //private bool quitButtonClicked = false;
     //private bool settingButtonClicked = false;
-    private bool settingsOn = false;
+    //private bool settingsOn = false;
     private bool howToOn = false;
     private bool creditsOn = false;
     private bool pauseOn = false;
