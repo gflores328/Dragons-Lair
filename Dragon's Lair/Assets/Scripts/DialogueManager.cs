@@ -40,4 +40,5 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueText.text = text;
     }
+
 }

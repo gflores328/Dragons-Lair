@@ -867,6 +867,52 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &27366408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27366410}
+  - component: {fileID: 27366409}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &27366409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27366408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e04fd919ff60a4f912a3b5a856e5ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textBox: {fileID: 270056931}
+  dialogueText: {fileID: 879283854}
+--- !u!4 &27366410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27366408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.946723, y: -4.3390274, z: 33.410656}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &37298585
 GameObject:
   m_ObjectHideFlags: 0
@@ -52205,10 +52251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7768046d7a17c464ebc5b7612764b22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialougeLines:
-  - What is up bub?
-  textBox: {fileID: 270056931}
-  dialougeText: {fileID: 879283854}
+  dialogue: {fileID: 11400000, guid: daf85c128cbd67f46a22aa3fc733a623, type: 2}
+  dialogueManger: {fileID: 27366408}
 --- !u!1 &1553809705
 GameObject:
   m_ObjectHideFlags: 0
@@ -65686,3 +65730,4 @@ SceneRoots:
   - {fileID: 3528822669471202759}
   - {fileID: 2052235662}
   - {fileID: 6287610}
+  - {fileID: 27366410}

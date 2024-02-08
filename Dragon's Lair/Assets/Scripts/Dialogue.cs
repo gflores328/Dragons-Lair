@@ -11,6 +11,5 @@ public class Dialogue : ScriptableObject
     [Tooltip("The number of lines of dialogue and the text that is in them")]
     [TextArea]
     public string[] dialogue;
-
 }
 
