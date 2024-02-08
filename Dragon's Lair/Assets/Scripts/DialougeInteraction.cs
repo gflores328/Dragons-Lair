@@ -12,6 +12,7 @@ Needs some sort of pause so that when diolouge is being read the world stops
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class DialougeInteraction : MonoBehaviour
@@ -26,10 +27,13 @@ public class DialougeInteraction : MonoBehaviour
     public GameObject textBox; // The texbox UI
     public TextMeshProUGUI dialougeText; // The text UI
 
+    [Header("Input Action")]
+    
     private bool inDialouge; // bool to see if player is in dialouge
     private int currentLine; // the index of the dialouge array that is being shown
     private bool inTrigger;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,13 +43,13 @@ public class DialougeInteraction : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (inTrigger && Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }
-    }
+    // void Update()
+    // {
+    //     if (inTrigger && Input.GetKeyDown(KeyCode.E))
+    //     {
+    //         Interact();
+    //     }
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -108,7 +112,7 @@ public class DialougeInteraction : MonoBehaviour
         inDialouge = false;
     }
 
-    private void Interact()
+    public void Interact()
     {
         // If inDialogue is false then StartDiolougue is run and inDiolouge is set to true
         if (!inDialouge)

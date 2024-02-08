@@ -18,11 +18,14 @@ public class RealPlayerMovement : MonoBehaviour
 
     private PlayerInput playerInput; // A private variable that is meant to grab the PlayerInput component that is attached to the player.
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
+    private InputAction interactAction; // A private variable that is meant to hold the interact action
 
-    
     private CharacterController characterController; // A Character Controller object which will hold the player's character controller
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
+    private DialougeInteraction dialougeInteraction;
+    private MenuInteraction menuInteraction;
     
+    private GameObject currentInteractable;
     
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
     {
@@ -34,7 +37,8 @@ public class RealPlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>(); // Grabs the Player Input compoent from the player and assigns it to the playerInput that was initalized above
         walkAction = playerInput.actions.FindAction("Walk"); // Searches for the action and stores it inside of the  walk action variable
-        
+        interactAction = playerInput.actions.FindAction("Interact"); // Searches for the action and stores it inside of the  interact action variable
+        interactAction.performed += OnInteract;
         
        
     }
@@ -102,8 +106,36 @@ public class RealPlayerMovement : MonoBehaviour
         }
     }
     
+    void OnInteract(InputAction.CallbackContext value)
+    {
+        if(currentInteractable != null && currentInteractable.tag == "InteractMenu")
+        {
+            menuInteraction.Interact();
+        }
+        if(currentInteractable != null && currentInteractable.tag == "Interact")
+        {
+           dialougeInteraction.Interact();
+        }
+
+        
+       
+    }
   
-   
+   private void OnTriggerEnter(Collider other)
+   {
+        if(other.tag == "InteractMenu")
+        {
+            currentInteractable = other.gameObject;
+            menuInteraction = currentInteractable.GetComponent<MenuInteraction>();
+        }
+        else if(other.tag == "Interact")
+        {
+            Debug.Log(other.gameObject.name);
+            currentInteractable = other.gameObject;
+            dialougeInteraction = currentInteractable.GetComponent<DialougeInteraction>();
+        }
+       
+   }
    
     
     

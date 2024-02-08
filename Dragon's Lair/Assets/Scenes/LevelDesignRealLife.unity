@@ -4745,7 +4745,7 @@ Transform:
   m_GameObject: {fileID: 191089025}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.69002616, z: -0, w: 0.7237844}
-  m_LocalPosition: {x: 13.9, y: 9.306001, z: 25.81}
+  m_LocalPosition: {x: 7.42, y: 8.26, z: 27.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27288,7 +27288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765184627}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3413398, y: 0.5916249, z: -0.30410212, w: 0.66407007}
+  m_LocalRotation: {x: 0.3413398, y: 0.59162486, z: -0.30410212, w: 0.66407007}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40822,6 +40822,7 @@ GameObject:
   - component: {fileID: 1109447038}
   - component: {fileID: 1109447037}
   - component: {fileID: 1109447044}
+  - component: {fileID: 1109447046}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -40894,6 +40895,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ee412373-8419-4f57-937b-267f890b2195
     m_ActionName: ChibiMovement/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 95fbee9f-1f9c-45c8-bdff-9e80ba6de10f
+    m_ActionName: RealLifeMovement/Pause[/Keyboard/escape,/Keyboard/p,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a8abb086-f728-4834-a6cd-2eb491c7d9dd
+    m_ActionName: RealLifeMovement/Interact[/Keyboard/e,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f1d17d3-8404-4912-9bfd-9013b57843d2
+    m_ActionName: ChibiMovement/Pause[/Keyboard/escape,/Keyboard/p,/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: RealLifeMovement
@@ -40981,7 +40994,7 @@ Transform:
   m_GameObject: {fileID: 1109447036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 13.9, y: 0.786, z: 30.81}
+  m_LocalPosition: {x: 7.42, y: -0.26, z: 32.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41028,6 +41041,27 @@ CharacterController:
   m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1109447046
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109447036}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000002, y: 2, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1118133229
 GameObject:
@@ -46009,7 +46043,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351024577}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.295275, y: 0.6109797, z: -0.26306266, w: 0.68579483}
+  m_LocalRotation: {x: 0.29527506, y: 0.6109797, z: -0.2630627, w: 0.6857949}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -53252,7 +53286,7 @@ GameObject:
   - component: {fileID: 1585535818}
   m_Layer: 0
   m_Name: Interactpoint
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54063,7 +54097,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606833088}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34133974, y: 0.5916249, z: -0.30410206, w: 0.66407007}
+  m_LocalRotation: {x: 0.3413398, y: 0.5916249, z: -0.30410212, w: 0.66407007}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -61386,7 +61420,7 @@ GameObject:
   - component: {fileID: 1996009031}
   m_Layer: 0
   m_Name: MimicTrigger
-  m_TagString: Untagged
+  m_TagString: InteractMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61460,7 +61494,7 @@ GameObject:
   - component: {fileID: 2009851161}
   m_Layer: 0
   m_Name: VRMimic
-  m_TagString: Untagged
+  m_TagString: InteractMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65005,8 +65039,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085008186}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4568948, y: -0.03001691, z: 0.015429042, w: 0.88888025}
-  m_LocalPosition: {x: 13.9, y: 9.306001, z: 25.81}
+  m_LocalRotation: {x: 0.4568949, y: -0.030016886, z: 0.015429033, w: 0.88888025}
+  m_LocalPosition: {x: 7.42, y: 8.26, z: 27.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

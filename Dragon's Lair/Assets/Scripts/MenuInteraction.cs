@@ -11,6 +11,7 @@ Needs some sort of pause so that when diolouge is being read the world stops
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class MenuInteraction : MonoBehaviour
@@ -29,6 +30,8 @@ public class MenuInteraction : MonoBehaviour
     [Tooltip("The UI menu that will popup when dialouge is finished")]
     public GameObject menu;
 
+    [Header("Input Action")]
+    
     private bool inDialouge; // bool to see if player is in dialouge
     private int currentLine; // the index of the dialouge array that is being shown
     private bool inTrigger;
@@ -44,14 +47,15 @@ public class MenuInteraction : MonoBehaviour
         lockDialogue = false;
     }
 
+    
     // Update is called once per frame
-    void Update()
-    {
-        if (inTrigger && Input.GetKeyDown(KeyCode.E) && !lockDialogue)
-        {
-            Interact();
-        }
-    }
+    // void Update()
+    // {
+    //     if (inTrigger && Input.GetKeyDown(KeyCode.E) && !lockDialogue)
+    //     {
+    //         Interact();
+    //     }
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -113,7 +117,7 @@ public class MenuInteraction : MonoBehaviour
         //Cursor.lockState = CursorLockMode.None;
     }
 
-    private void Interact()
+    public void Interact()
     {
         // If inDialogue is false then StartDiolougue is run and inDiolouge is set to true
         if (!inDialouge)
