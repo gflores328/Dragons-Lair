@@ -5,7 +5,7 @@ This script will take a dialogue and dialogue manager object.
 The text in the dialogue script will be output into the dialogue manager each time the Interact function is run
 
 WHAT IT STILL NEEDS:
-Needs some sort of pause so that when diolouge is being read the world stops
+Needs some sort of pause so that when diolouge is being read the player cant move
 */
 
 

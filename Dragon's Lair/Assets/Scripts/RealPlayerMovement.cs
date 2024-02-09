@@ -24,6 +24,9 @@ public class RealPlayerMovement : MonoBehaviour
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
     private DialougeInteraction dialougeInteraction;
     private MenuInteraction menuInteraction;
+
+    //GABE ADDED
+    private ItemInteraction itemInteraction;
     
     private GameObject currentInteractable;
     
@@ -117,6 +120,11 @@ public class RealPlayerMovement : MonoBehaviour
            dialougeInteraction.Interact();
         }
 
+        // GABE ADDED
+        if(currentInteractable != null && currentInteractable.tag == "InteractItem")
+        {
+            itemInteraction.Interact();
+        }
         
        
     }
@@ -134,8 +142,16 @@ public class RealPlayerMovement : MonoBehaviour
             currentInteractable = other.gameObject;
             dialougeInteraction = currentInteractable.GetComponent<DialougeInteraction>();
         }
-       
-   }
+
+        // GABE ADDED
+        else if (other.tag == "InteractItem")
+        {
+            Debug.Log(other.gameObject.name);
+            currentInteractable = other.gameObject;
+            itemInteraction = currentInteractable.GetComponent<ItemInteraction>();
+        }
+
+    }
    
     
     

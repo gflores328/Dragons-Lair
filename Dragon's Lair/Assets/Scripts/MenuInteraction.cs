@@ -5,7 +5,7 @@ This script will be for a trigger so that when the player walks into it thay can
 lines of dialouge. Once dialouge is done a UI menu will popup
 
 WHAT IT STILL NEEDS:
-Needs some sort of pause so that when diolouge is being read the world stops
+Needs some sort of pause so that when diolouge is being read the player cant move
 */
 
 using System.Collections;
@@ -16,130 +16,78 @@ using TMPro;
 
 public class MenuInteraction : MonoBehaviour
 {
-    [Header("Dialouge")]
-    [Tooltip("The number of lines in a dialouge interaction and what they say")]
-    [TextArea]
-    public string[] dialougeLines; // The lines of dialouge will be shown
+    [Tooltip("The dialogue asset that the script will read through")]
+    public Dialogue dialogue; // This is the dialogue object that holds all the text
 
-    [Tooltip("The UI objects that the dialouge will use")]
-    [Header("UI")]
-    public GameObject textBox; // The texbox UI
-    public TextMeshProUGUI dialougeText; // The text UI
+    [Tooltip("The object that holds the DialogueManger script")]
+    public GameObject dialogueManger; // This is the object that holds the DialogueManager script
 
-    [Header("Menu")]
-    [Tooltip("The UI menu that will popup when dialouge is finished")]
+    [Tooltip("The UI menu that will pop up once the dialogue is done")]
     public GameObject menu;
 
-    [Header("Input Action")]
-    
     private bool inDialouge; // bool to see if player is in dialouge
-    private int currentLine; // the index of the dialouge array that is being shown
-    private bool inTrigger;
-    private bool lockDialogue;
+    private int currentLine; // the index of the dialouge array that is currently being shown
+
 
     // Start is called before the first frame update
     void Start()
     {
         inDialouge = false;
         currentLine = 0;
-        menu.SetActive(false);
-        inTrigger = false;
-        lockDialogue = false;
     }
-
-    
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     if (inTrigger && Input.GetKeyDown(KeyCode.E) && !lockDialogue)
-    //     {
-    //         Interact();
-    //     }
-    // }
 
     private void OnTriggerEnter(Collider other)
     {
-        // When Player enters trigger the UI prompt will be shown
+        // When Player enters trigger the StartDialogue function is run to change the text
         if (other.tag == "Player")
         {
-            inTrigger = true;
-            textBox.SetActive(true);
-            dialougeText.text = "Press E to interact";
+            dialogueManger.GetComponent<DialogueManager>().StartDialogue("Press E to interact");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // When player exits the trigger then the UI will dissapear
+        // When player exits the trigger EndDialogue is called, current line is set to, and inDialogue is set false;
         if (other.tag == "Player")
         {
+            dialogueManger.GetComponent<DialogueManager>().EndDialogue();
             currentLine = 0;
-            textBox.SetActive(false);
-            dialougeText.text = null;
-            menu.SetActive(false);
             inDialouge = false;
-            inTrigger = false;
-            lockDialogue = false;
+            menu.SetActive(false); 
         }
     }
 
-    /*
-    private void OnTriggerStay(Collider other)
-    {
-        // When player is in trigger and E is pressed the Interact function is run
-        if (other.tag == "Player" && Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-            Debug.Log("E pressed");
-        }
-    }
-    */
-
-    // The text background is set active and the first line of text is set to the text UI
-    private void StartDiolouge()
-    {
-        textBox.SetActive(true);
-        dialougeText.text = dialougeLines[currentLine];
-        inDialouge = true;
-    }
-
-    // The background is set asleep, text UI is null, and current line is reset to 0
-    private void EndDiolouge()
-    {
-        textBox.SetActive(false);
-        dialougeText.text = null;
-        currentLine = 0;
-        inDialouge = false;
-        lockDialogue = true;
-
-        // The menu UI is shown
-        menu.SetActive(true);
-        //Cursor.lockState = CursorLockMode.None;
-    }
-
+    // This function will run differently depending on if inDialogue is true or false
     public void Interact()
     {
         // If inDialogue is false then StartDiolougue is run and inDiolouge is set to true
         if (!inDialouge)
         {
-            StartDiolouge();
+            dialogueManger.GetComponent<DialogueManager>().StartDialogue(dialogue.dialogue[0]);
+            inDialouge = true;
         }
-        // If inDiolouge is true then the next line of text is displayed if there is one
-        // If there is no nect line then EndDiolouge is run
+
+        // if inDialogue is true
         else if (inDialouge)
         {
-            if (currentLine < dialougeLines.Length)
+            // Checks to see if current line is less than the dialogue objects array legnth
+            if (currentLine + 1 < dialogue.dialogue.Length)
             {
+                // 1 is added to currentLine and TextChange is called with the string from the dialogue arrays current line element
                 currentLine++;
-                if (!(currentLine >= dialougeLines.Length))
-                {
-                    dialougeText.text = dialougeLines[currentLine];
-                }
-                else
-                {
-                    EndDiolouge();
-                }
+                dialogueManger.GetComponent<DialogueManager>().TextChange(dialogue.dialogue[currentLine]);
             }
+            // If current line + 1 isnt less than legnth then EndDialogue is called, current line is set to 0, and inDialogue is set to false
+            else
+            {
+                dialogueManger.GetComponent<DialogueManager>().EndDialogue();
+                currentLine = 0;
+                inDialouge = false;
+
+                // When the text is done the menu is set active
+                menu.SetActive(true);
+            }
+
         }
     }
 }

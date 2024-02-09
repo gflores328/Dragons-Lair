@@ -1,3 +1,14 @@
+
+/*
+Created by: Gabriel Flors
+
+This script will be for a trigger so that when the player walks into it thay can interact and bring up lines of dialouge. 
+Once dialouge is done the game object that thescript is attached to will be destroyed and the Item attached to the script will be added to the Inventory
+
+WHAT IT STILL NEEDS:
+Needs some sort of pause so that when diolouge is being read the player cant move
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,130 +16,76 @@ using TMPro;
 
 public class ItemInteraction : MonoBehaviour
 {
-    [Header("Dialouge")]
-    [Tooltip("The number of lines in a dialouge interaction and what they say")]
-    [TextArea]
-    public string[] dialougeLines; // The lines of dialouge will be shown
+    [Tooltip("The dialogue asset that the script will read through")]
+    public Dialogue dialogue; // This is the dialogue object that holds all the text
 
-    [Tooltip("The UI objects that the dialouge will use")]
-    [Header("UI")]
-    public GameObject textBox; // The texbox UI
-    public TextMeshProUGUI dialougeText; // The text UI
+    [Tooltip("The object that holds the DialogueManger script")]
+    public GameObject dialogueManger; // This is the object that holds the DialogueManager script
 
-    [Header("Item Pick Up")]
-    [Tooltip("The game object that holds the inventory")]
-    public GameObject inventory; // This will be the object that hold the inventory script so the script can be referenced
-    [Tooltip("The item that is picked up after the interaction")]
-    public Item item; // This is a Item scriptable object thats data will be obtained
-    [Tooltip("The game object that represents the item in the world")]
-    public GameObject worldItem; // This game object is the object in the scene that represents the item
-
+    [Header("Inventory")]
+    [Tooltip("The game object that holds the Inventory script")]
+    public GameObject inventoryManager;
+    [Tooltip("The item that will be picked up once the dialogue is done")]
+    public Item item;
 
     private bool inDialouge; // bool to see if player is in dialouge
-    private int currentLine; // the index of the dialouge array that is being shown
-    private bool inTrigger;
+    private int currentLine; // the index of the dialouge array that is currently being shown
+
 
     // Start is called before the first frame update
     void Start()
     {
         inDialouge = false;
         currentLine = 0;
-        inTrigger = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (inTrigger && Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // When Player enters trigger the UI prompt will be shown
+        // When Player enters trigger the StartDialogue function is run to change the text
         if (other.tag == "Player")
         {
-            textBox.SetActive(true);
-            dialougeText.text = "Press E to interact";
-            inTrigger = true;
+            dialogueManger.GetComponent<DialogueManager>().StartDialogue("Press E to interact");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // When player exits the trigger then the UI will dissapear
+        // When player exits the trigger EndDialogue is called, current line is set to, and inDialogue is set false;
         if (other.tag == "Player")
         {
+            dialogueManger.GetComponent<DialogueManager>().EndDialogue();
             currentLine = 0;
-            textBox.SetActive(false);
-            dialougeText.text = null;
             inDialouge = false;
-            inTrigger = false;
         }
     }
 
-    /* private void OnTriggerStay(Collider other)
-     {
-         if (other.tag == "Player")
-         {
-             Debug.Log("player");
-         }
-         else
-         {
-             Debug.Log("NO player");
-         }
-
-
-         // When player is in trigger and E is pressed the Interact function is run
-         if (other.tag == "Player" && Input.GetKeyDown(KeyCode.E))
-         {
-             Interact();
-         }
-     }
-    */
-
-    // The text background is set active and the first line of text is set to the text UI
-    private void StartDiolouge()
-    {
-        textBox.SetActive(true);
-        dialougeText.text = dialougeLines[currentLine];
-        inDialouge = true;
-    }
-
-    // The background is set asleep, text UI is null, and current line is reset to 0
-    private void EndDiolouge()
-    {
-        textBox.SetActive(false);
-        dialougeText.text = null;
-        currentLine = 0;
-        inDialouge = false;
-        PickUp();
-    }
-
+    // This function will run differently depending on if inDialogue is true or false
     public void Interact()
     {
         // If inDialogue is false then StartDiolougue is run and inDiolouge is set to true
         if (!inDialouge)
         {
-            StartDiolouge();
+            dialogueManger.GetComponent<DialogueManager>().StartDialogue(dialogue.dialogue[0]);
+            inDialouge = true;
         }
-        // If inDiolouge is true then the next line of text is displayed if there is one
-        // If there is no nect line then EndDiolouge is run
+
+        // if inDialogue is true
         else if (inDialouge)
         {
-            if (currentLine < dialougeLines.Length)
+            // Checks to see if current line is less than the dialogue objects array legnth
+            if (currentLine + 1 < dialogue.dialogue.Length)
             {
+                // 1 is added to currentLine and TextChange is called with the string from the dialogue arrays current line element
                 currentLine++;
-                if (!(currentLine >= dialougeLines.Length))
-                {
-                    dialougeText.text = dialougeLines[currentLine];
-                }
-                else
-                {
-                    EndDiolouge();
-                }
+                dialogueManger.GetComponent<DialogueManager>().TextChange(dialogue.dialogue[currentLine]);
+            }
+            // If current line + 1 isnt less than legnth then EndDialogue is called, current line is set to 0, and inDialogue is set to false
+            else
+            {
+                dialogueManger.GetComponent<DialogueManager>().EndDialogue();
+                currentLine = 0;
+                inDialouge = false;
+                PickUp();
             }
 
         }
@@ -137,8 +94,7 @@ public class ItemInteraction : MonoBehaviour
     //This function will pick up the item 
     private void PickUp()
     {
-        Destroy(worldItem);
-        inventory.GetComponent<Inventory>().AddItem(item);
+        inventoryManager.GetComponent<Inventory>().AddItem(item);
         Destroy(gameObject);
     }
 }
