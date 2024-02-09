@@ -1,11 +1,11 @@
-//Jo Marie Leatherman
+//Jo Marie Leatherman 
 using UnityEngine;
 
 //helpds player stay on ledges when they jump to them
 public class StickyPlatform : MonoBehaviour
 {
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player"))
         {
@@ -14,7 +14,7 @@ public class StickyPlatform : MonoBehaviour
     }
 
     //when exiting the collider the player can continue to other ledges
-    private void OnTriggerExit2D(Collider2D collider)
+    private void OnTriggerExit(Collider collider)
     {
         if (collider.CompareTag("Player"))
         {
