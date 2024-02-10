@@ -7,22 +7,24 @@ public class GameManager : MonoBehaviour
     #region Fields
 
     // statics
-    public GameManager gameManager; //creates gamemanager object to hold values
+    //public GameManager gameManager; //creates gamemanager object to hold values
 
     
 
     [Header("Panels")]
     [Tooltip("Panel GameObject in inspector pairs with a chosen UI panel to add make active/hide functionality")]
-    public GameObject mainMenu;
-    public GameObject HowToMenu;
-    public GameObject CreditsMenu;
+    public GameObject pauseMenu;
+    // public GameObject HowToMenu;
+    // public GameObject CreditsMenu;
     
-
-    // make your canvas active from a disables state by calling this method
-    public void MakeActive(GameObject currentPanel)
+    private pauseState currentState;
+    public enum pauseState
     {
-        currentPanel.gameObject.SetActive(true);
+        Paused,
+        Unpaused,
     }
+    // make your canvas active from a disables state by calling this method
+    
 
     #endregion
 
@@ -42,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        currentState = pauseState.Unpaused;
 
     }
 
@@ -88,27 +90,16 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Methods
+    
 
     public void hidePanel(GameObject currentPanel) //hides a panel from an active state
     {
         currentPanel.SetActive(false);
     }
 
-    public void showhidePanel(GameObject currentPanel)
+    public void showPanel(GameObject currentPanel)
     {
-
-        
-        // if (counter % 2 == 1) // if odd number
-        // {
-        //     currentPanel.SetActive(false); //hides panel if active
-        //     counter--;
-
-        // }
-        // else
-        // {
-        //     currentPanel.SetActive(true); //sets active if hidden
-        //     counter++;
-        // }
+        currentPanel.SetActive(true);
         
     }
 
@@ -119,20 +110,32 @@ public class GameManager : MonoBehaviour
 
     
 
-    public void ResumeGame() //closes pause menu and resume game
+    
+
+    public void PauseGame()
     {
+        if(currentState == pauseState.Unpaused)
+        {
+            showPanel(pauseMenu);
+            Time.timeScale = 0;
+            currentState = pauseState.Paused;
+        }
+        else if(currentState == pauseState.Paused)
+        {
+            hidePanel(pauseMenu);
+            Time.timeScale = 1;
+            currentState = pauseState.Unpaused;
+        }
         
-        Time.timeScale = 1;
     }
 
     
 
     public void Quit() //press Q to quit the game
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+       
+        Application.Quit();
+        
     }
 
     

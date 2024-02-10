@@ -18,8 +18,10 @@ public class ChibiPlayerMovement : MonoBehaviour
     
     private PlayerInput playerInput; // A private variable that is meant to grab the PlayerInput component that is attached to the player.
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
-    private InputAction jumpAction;
-    
+    private InputAction jumpAction; 
+    private InputAction pauseAction; // A private variable that holds the pause action
+    private GameObject gameManagerObj;
+    private GameManager gameManager;
     private Rigidbody playerRB; // A rigid body object which will hold the player's rigid body
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
     private bool isGrounded;
@@ -37,8 +39,11 @@ public class ChibiPlayerMovement : MonoBehaviour
         walkAction = playerInput.actions.FindAction("Walk"); // Searches for the action and stores it inside of the  walk action variable
         jumpAction = playerInput.actions.FindAction("Jump"); // Assigns the jump action to the jump action input
         jumpAction.performed += Jump; // assigns when the jumpaction is performed then jump function will be called
-        //isGrounded = IsGrounded();
         
+        pauseAction = playerInput.actions.FindAction("Pause"); // Searches for the action and stores it inside of the  interact action variable
+        pauseAction.performed += Pause;
+        gameManagerObj =  GameObject.Find("GameManager");
+        gameManager = gameManagerObj.GetComponent<GameManager>();
        
     }
 
@@ -131,6 +136,11 @@ public class ChibiPlayerMovement : MonoBehaviour
 
         return isHit;
         
+    }
+    private void Pause(InputAction.CallbackContext value)
+    {
+        Debug.Log("Paused");
+        gameManager.PauseGame();
     }
   
 }

@@ -19,7 +19,7 @@ public class RealPlayerMovement : MonoBehaviour
     private PlayerInput playerInput; // A private variable that is meant to grab the PlayerInput component that is attached to the player.
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
     private InputAction interactAction; // A private variable that is meant to hold the interact action
-
+    private InputAction pauseAction; // A private variable that holds the pause action
     private CharacterController characterController; // A Character Controller object which will hold the player's character controller
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
     private DialougeInteraction dialougeInteraction;
@@ -27,7 +27,10 @@ public class RealPlayerMovement : MonoBehaviour
 
     //GABE ADDED
     private ItemInteraction itemInteraction;
-    
+
+    //
+    private GameObject gameManagerObj;
+    private GameManager gameManager;
     private GameObject currentInteractable;
     
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
@@ -42,7 +45,10 @@ public class RealPlayerMovement : MonoBehaviour
         walkAction = playerInput.actions.FindAction("Walk"); // Searches for the action and stores it inside of the  walk action variable
         interactAction = playerInput.actions.FindAction("Interact"); // Searches for the action and stores it inside of the  interact action variable
         interactAction.performed += OnInteract;
-        
+        pauseAction = playerInput.actions.FindAction("Pause"); // Searches for the action and stores it inside of the  interact action variable
+        pauseAction.performed += Pause;
+        gameManagerObj =  GameObject.Find("GameManager");
+        gameManager = gameManagerObj.GetComponent<GameManager>();
        
     }
 
@@ -51,7 +57,7 @@ public class RealPlayerMovement : MonoBehaviour
     {
        
         RealLifeMovePlayer(); // Calls the RealLifeMovePlayer function
-        AdjustForSlope();
+        AdjustForSlope(); // Calls the Adjust for slope
 
     }
 
@@ -153,7 +159,11 @@ public class RealPlayerMovement : MonoBehaviour
 
     }
    
-    
+    private void Pause(InputAction.CallbackContext value)
+    {
+        Debug.Log("Paused");
+        gameManager.PauseGame();
+    }
     
 
    

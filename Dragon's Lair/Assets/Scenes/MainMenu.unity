@@ -3337,15 +3337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7febc7264353946b295d7ebc7d6ee670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 1487831854}
-  restartGame: {fileID: 0}
-  resumeGame: {fileID: 0}
-  mainMenu: {fileID: 0}
-  quitGame: {fileID: 0}
-  back: {fileID: 0}
-  Panel: {fileID: 1123921873}
-  VictoryPanel: {fileID: 0}
-  DeathPanel: {fileID: 0}
+  pauseMenu: {fileID: 0}
 --- !u!4 &1487831855
 Transform:
   m_ObjectHideFlags: 0
@@ -5320,7 +5312,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3337413324559004668, guid: 3e0f303353d084ab89deac9d7ef90851, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6167993158681937444, guid: 3e0f303353d084ab89deac9d7ef90851, type: 3}
+    - {fileID: 9048254128505193881, guid: 3e0f303353d084ab89deac9d7ef90851, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 674816163758404524, guid: 3e0f303353d084ab89deac9d7ef90851,
         type: 3}
