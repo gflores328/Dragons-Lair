@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 888072346758192612, guid: 184378623dbd8634d92b7b0d9bce26a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.7022266
+      value: 26.92
       objectReference: {fileID: 0}
     - target: {fileID: 888072346758192612, guid: 184378623dbd8634d92b7b0d9bce26a4,
         type: 3}
@@ -909,6 +909,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1329928879}
+  - component: {fileID: 1329928881}
+  - component: {fileID: 1329928880}
   m_Layer: 0
   m_Name: DisappearingLedges
   m_TagString: Untagged
@@ -932,6 +934,40 @@ Transform:
   - {fileID: 1188468745}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1329928880
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329928878}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.9743462, y: 0.4438247, z: 1}
+  m_Center: {x: -0.49315834, y: -0.27808765, z: 0}
+--- !u!114 &1329928881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329928878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a5ba150547d4cc9a11c70000d6b1ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 1188468740}
 --- !u!1 &1994371863
 GameObject:
   m_ObjectHideFlags: 0

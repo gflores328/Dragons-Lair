@@ -7,34 +7,35 @@ public class JMLTest_DisappearingLedges : MonoBehaviour
     [SerializeField] private GameObject obj;
     //[SerializeField] private int speed;
 
-
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(Vanish());
+        if (other.tag == "Player")
+        {
+            StartCoroutine(Vanish());
+            Debug.Log("player on");
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+        // Update is called once per frame
+        void Update()
     {
-        StartCoroutine(Vanish());  //makes platform vanish on its own without player interaction
+        //StartCoroutine(Vanish());  //makes platform vanish on its own without player interaction
     }
 
     IEnumerator Vanish()
     {
-        for (; ; )
-        {
-            obj.SetActive(true);
-            yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
+        obj.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
 
-            obj.SetActive(false);
-            yield return new WaitForSeconds(2);
-
-        }
+        yield return new WaitForSeconds(5);
+        obj.SetActive(true);
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
+
 }
