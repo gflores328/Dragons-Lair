@@ -25,6 +25,7 @@ public class MenuInteraction : MonoBehaviour
     [Tooltip("The UI menu that will pop up once the dialogue is done")]
     public GameObject menu;
 
+    
     private bool inDialouge; // bool to see if player is in dialouge
     private int currentLine; // the index of the dialouge array that is currently being shown
 
@@ -86,6 +87,8 @@ public class MenuInteraction : MonoBehaviour
 
                 // When the text is done the menu is set active
                 menu.SetActive(true);
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(menu); // Selects the button for the controller
+                
             }
 
         }
