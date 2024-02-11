@@ -49,7 +49,7 @@ public class RealPlayerMovement : MonoBehaviour
         pauseAction.performed += Pause;
         gameManagerObj =  GameObject.Find("GameManager");
         gameManager = gameManagerObj.GetComponent<GameManager>();
-       
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     
@@ -106,7 +106,7 @@ public class RealPlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("RayCast did not hit anything.");
+            //Debug.Log("RayCast did not hit anything.");
 
             // If raycast doesn't hit anything, move character down by the full raycast length
             characterController.Move(Vector3.down * raycastLength);

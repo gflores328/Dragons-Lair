@@ -22,9 +22,14 @@ public class SettingsMenu : MonoBehaviour
     //A slider that alters the master volume
     public Slider volumeSlider;
 
+    public GameObject backButton; // The reference to the back button so the controller knows to be selected on it when it first loads in;
+
     //An array that stores a list of resolutions
     private Resolution[] resolutions;
-
+    private void Awake()
+    {
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(backButton);
+    }
     //This function is run when the scene starts
     //Initalizes the options in the 'resolutionDropdown' dropdown box and the position of the volume slider
     private void Start()
@@ -74,6 +79,8 @@ public class SettingsMenu : MonoBehaviour
         audioMixer.GetFloat("masterVolume", out volume);
         //Set the default slider value to the saved volume value
         volumeSlider.value = volume;
+
+        
         
     }
 
