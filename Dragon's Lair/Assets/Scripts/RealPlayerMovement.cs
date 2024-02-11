@@ -27,6 +27,7 @@ public class RealPlayerMovement : MonoBehaviour
 
     //GABE ADDED
     private ItemInteraction itemInteraction;
+    private DialogueTree dialogueTree;
 
     //
     private GameObject gameManagerObj;
@@ -49,7 +50,7 @@ public class RealPlayerMovement : MonoBehaviour
         pauseAction.performed += Pause;
         gameManagerObj =  GameObject.Find("GameManager");
         gameManager = gameManagerObj.GetComponent<GameManager>();
-        Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.lockState = CursorLockMode.Locked;
     }
 
     
@@ -132,7 +133,10 @@ public class RealPlayerMovement : MonoBehaviour
             itemInteraction.Interact();
         }
         
-       
+       if(currentInteractable != null && currentInteractable.tag == "DialogueTree")
+        {
+            dialogueTree.Interact();
+        }
     }
   
    private void OnTriggerEnter(Collider other)
@@ -155,6 +159,13 @@ public class RealPlayerMovement : MonoBehaviour
             Debug.Log(other.gameObject.name);
             currentInteractable = other.gameObject;
             itemInteraction = currentInteractable.GetComponent<ItemInteraction>();
+        }
+
+        else if (other.tag == "DialogueTree")
+        {
+            Debug.Log(other.gameObject.name);
+            currentInteractable = other.gameObject;
+            dialogueTree = currentInteractable.GetComponent<DialogueTree>();
         }
 
     }
