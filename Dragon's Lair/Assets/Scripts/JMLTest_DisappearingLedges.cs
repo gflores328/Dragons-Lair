@@ -6,7 +6,8 @@ public class JMLTest_DisappearingLedges : MonoBehaviour
 {
     [SerializeField] private GameObject obj;
     //[SerializeField] private int speed;
-
+    [SerializeField] private float timeToDisappear;
+    [SerializeField] private float timeToReappear;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,11 +30,11 @@ public class JMLTest_DisappearingLedges : MonoBehaviour
 
     IEnumerator Vanish()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(timeToDisappear);
         obj.SetActive(false);
         gameObject.GetComponent<BoxCollider>().enabled = false;
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(timeToReappear);
         obj.SetActive(true);
         gameObject.GetComponent<BoxCollider>().enabled = true;
     }
