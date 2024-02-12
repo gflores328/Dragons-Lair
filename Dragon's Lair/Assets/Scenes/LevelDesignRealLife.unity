@@ -55708,6 +55708,121 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1581498259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5746120719881062626, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3192466083374412767}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1581498267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581498259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004216f2500a64e4eb7267a9e2aa5195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepsSound: {fileID: 1581498268}
+--- !u!82 &1581498268
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581498259}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e7bd85114c46491488e1030f42cce7b2, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!43 &1588785898
 Mesh:
   m_ObjectHideFlags: 0
@@ -68269,6 +68384,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2342828963334199583, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342828963334199583, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 8175e984-318c-4135-b252-6a9e13fb7d52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342828963334199583, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: c39fb244-2757-45fb-b105-d935847c6347
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342828963334199583, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: ChibiMovement/Aim[/Mouse/position]
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342828963334199583, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: ChibiMovement/Fire[/Mouse/leftButton]
+      objectReference: {fileID: 0}
     - target: {fileID: 5746120719881062626, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
         type: 3}
       propertyPath: m_Name
@@ -68327,7 +68467,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5746120719881062626, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1581498268}
+    - targetCorrespondingSourceObject: {fileID: 5746120719881062626, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1581498267}
   m_SourcePrefab: {fileID: 100100000, guid: 4b2d3a1fa6dd2834599390fb95d58a9f, type: 3}
 --- !u!1001 &5819893595717478834
 PrefabInstance:
