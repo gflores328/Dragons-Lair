@@ -23,6 +23,9 @@ public class Item : ScriptableObject
     private string description; //The description of the item   Currently, this value isn't used
     [SerializeField]
     private int quantity;       //The quantity of the ite
+    
+    public Sprite image;       //The sprite image of the item
+    private int slotNumber; // The slot number the item takes in the inventory UI
 
     //Stores the descriptions for each item
     //This will have to be updated manually with each item that is added
@@ -121,5 +124,17 @@ public class Item : ScriptableObject
     public int getQuantity()
     {
         return quantity;
+    }
+
+    //GABE ADDED
+
+    public void SetSlotNumber(int number)
+    {
+        slotNumber = number;
+    }
+
+    public int GetSlotNumber()
+    {
+        return slotNumber;
     }
 }

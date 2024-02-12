@@ -13,17 +13,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
     //A list of items in the inventory
     private List<Item> inventory;
+
+    //GABE ADDED
+    public GameObject inventoryUI;
+    private int slotNumber;
     
     //Start is called before the first frame update
     //Initializes the inventory list as an empty list of strings
     void Start()
     {
         inventory = new List<Item>();
+
+        //GABE ADDED
+        slotNumber = 0;
     }
 
     //Returns an item with a name matching the given item name. Accepts a string for the item name.
@@ -174,9 +183,26 @@ public class Inventory : MonoBehaviour
         return Contains(itemName, 1);
     }
 
+    // GABE ADDED
     public void AddItem(Item item)
     {
+        foreach (Item i in inventory)
+        {
+            if (item.name == i.name)
+            {
+                i.increaseQuantity(item.getQuantity());
+                inventoryUI.transform.GetChild(item.GetSlotNumber()).GetChild(0).GetComponent<TextMeshProUGUI>().text = item.getName() + "X" + item.getQuantity();
+                return;
+            }
+        }
+
         Debug.Log(item + " added to inventory");
         inventory.Add(item);
+
+        inventoryUI.transform.GetChild(slotNumber).GetComponent<Image>().sprite = item.image;
+        inventoryUI.transform.GetChild(slotNumber).GetChild(0).GetComponent<TextMeshProUGUI>().text = item.getName() + "X" + item.getQuantity();
+        item.SetSlotNumber(slotNumber);
+
+        slotNumber++;
     }
 }
