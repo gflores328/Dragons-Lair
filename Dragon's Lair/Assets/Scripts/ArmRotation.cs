@@ -10,8 +10,6 @@ public class ArmRotation : MonoBehaviour
     public float rotationSpeed = 5f; // Speed of arm rotation
     public float maxRotationAngle = 45f; // Maximum rotation angle in degrees
     public float targetYRotation = 90f; // Target Y rotation
-    //private Vector2 currentMousePosition;
-
     private Vector2 lastMousePosition; // Last mouse position in screen space
     private Camera mainCamera;
     private Quaternion initialRotation; // Initial rotation of the arm
@@ -67,40 +65,39 @@ public class ArmRotation : MonoBehaviour
         }
         else if (context.control.device is Mouse)
         {
-            Vector2 currentMousePosition = Mouse.current.position.ReadValue();
+            // Get the current mouse position
+            Vector3 mousePosition = Input.mousePosition;
 
-            // Calculate the mouse delta
-            Vector2 mouseDelta = currentMousePosition - lastMousePosition;
+            // Convert the mouse position to a point in the game world
+            Vector3 targetPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, transform.position.z - mainCamera.transform.position.z));
 
-            // Convert mouse delta to world space
-            Vector3 mouseDeltaWorld = mainCamera.ScreenToWorldPoint(new Vector3(mouseDelta.x, mouseDelta.y, mainCamera.nearClipPlane));
-            Vector3 lastMousePositionWorld = mainCamera.ScreenToWorldPoint(new Vector3(lastMousePosition.x, lastMousePosition.y, mainCamera.nearClipPlane));
+            // Set the Z-axis of the target position to the current Z position of the arm pivot
+            targetPosition.z = armPivot.position.z;
 
-            // Calculate the direction vector from the arm pivot to the mouse position
-            Vector3 direction = mouseDeltaWorld - lastMousePositionWorld;
-
-            // Calculate the rotation angle around the X-axis based on mouse movement
-            float angleX = Mathf.Atan2(direction.y, direction.z) * Mathf.Rad2Deg;
-
-            // Clamp the rotation angle to a certain range
-            angleX = Mathf.Clamp(angleX, -maxRotationAngle, maxRotationAngle);
-
-            // Create the rotation quaternion
-            Quaternion targetRotation = Quaternion.Euler(angleX, targetYRotation, 0f);
-
-            // Apply smooth rotation
-            armPivot.rotation = Quaternion.Slerp(armPivot.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-            // Update the last mouse position
-            lastMousePosition = currentMousePosition;
-
+            // Rotate the gun towards the cursor position
+            RotateGun(targetPosition);
         }
-        //Debug.Log(input);
-        // Calculate the target rotation angle based on input
-        // float targetAngle = input.x * maxRotationAngle;
+        
+    }
 
-        // // Apply the target rotation to the arm while keeping the Y rotation unchanged
-        // armPivot.localRotation = initialRotation * Quaternion.Euler(targetAngle, 0f, 0f);
-        // armPivot.localEulerAngles = new Vector3(armPivot.localEulerAngles.x, targetYRotation, armPivot.localEulerAngles.z);
+    void RotateGun(Vector3 targetPosition)
+    {
+        // Calculate the direction to the target
+        Vector3 lookDirection = targetPosition - armPivot.position;
+
+        // Ignore the z-axis rotation
+        lookDirection.z = 0f;
+
+        if (lookDirection.magnitude > 0.001f)
+        {
+            // Calculate the angle to rotate the arm pivot around the X-axis
+            float angleX = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+
+            // Create the target rotation quaternion
+            Quaternion targetRotation = Quaternion.Euler(-angleX, 90f, 0f);
+
+            // Smoothly rotate the arm pivot to face the cursor position
+            armPivot.rotation = Quaternion.Slerp(armPivot.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
     }
 }

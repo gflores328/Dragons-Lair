@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     {
         if(currentState == pauseState.Unpaused)
         {
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
             showPanel(pauseMenu);
             Time.timeScale = 0;
             currentState = pauseState.Paused;
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         }
         else if(currentState == pauseState.Paused)
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
             hidePanel(pauseMenu);
             Time.timeScale = 1;
             currentState = pauseState.Unpaused;
