@@ -1,24 +1,35 @@
 //Jo Marie Leatherman 
+using System;
 using UnityEngine;
 
 //helpds player stay on ledges when they jump to them
-public class StickyPlatform : MonoBehaviour
+public class StickyPlatformClass : MonoBehaviour
 {
+    public GameObject child;
+    public GameObject parent;
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collider.CompareTag("Player"))
-        {
-            collider.gameObject.transform.SetParent(transform);
-        }
+
+        //void OnCollisionEnter(Collision collision)
+        //{
+        // Sets newParent as parent to the child object
+        //child.transform.SetParent(parent.transform);
+
+        //keeps player from falling off the ledge > set worldPosistionStays to false
+        //keeps local orientation instead of global orientation
+
+        child.transform.SetParent(parent.transform);
+        //}
     }
 
-    //when exiting the collider the player can continue to other ledges
-    private void OnTriggerExit(Collider collider)
+    private void OnCollisionExit(Collision collision)
     {
-        if (collider.CompareTag("Player"))
-        {
-            collider.gameObject.transform.SetParent(null);
-        }
+
+        //void OnCollisionExit(Collision collision)
+        //{
+        //Setting parent to null unparents the objects
+        child.transform.SetParent(null);
+        //
     }
 }
