@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5339420602195815055}
   - component: {fileID: 2725814764895017358}
+  - component: {fileID: 2107398402100189534}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2310668301937853152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.816494, y: 48.072422, z: 6.147106}
+  m_LocalPosition: {x: -1.3599343, y: -13.3242, z: 88.629}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,14 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7febc7264353946b295d7ebc7d6ee670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  restartGame: {fileID: 0}
-  resumeGame: {fileID: 0}
-  mainMenu: {fileID: 0}
-  quitGame: {fileID: 0}
-  back: {fileID: 0}
-  Panel: {fileID: 822378857744048982, guid: 1e059053d5dc046e9a6d50741eceb33a, type: 3}
-  VictoryPanel: {fileID: 822378857744048982, guid: 1e059053d5dc046e9a6d50741eceb33a,
-    type: 3}
-  DeathPanel: {fileID: 822378857744048982, guid: 1e059053d5dc046e9a6d50741eceb33a,
-    type: 3}
+  pauseMenu: {fileID: 0}
+  resumeButton: {fileID: 0}
+  asyncLoader: {fileID: 2107398402100189534}
+--- !u!114 &2107398402100189534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2310668301937853152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bc0830ff7640fd41a304cc854306659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: MainMenu
+  loadingText: {fileID: 0}
+  spaceText: {fileID: 0}
+  sliderBar: {fileID: 0}
+  loadingScreen: {fileID: 0}

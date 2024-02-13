@@ -7,14 +7,15 @@ public class NextLevelTrigger : MonoBehaviour
     [SerializeField] private GameManager gameManager;
 
     [SerializeField] private string levelToLoad;
-
+    [SerializeField] private GameObject LoadingScreen;
     
 
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            gameManager.LoadLevelbyName(levelToLoad);
+            Time.timeScale = 0;
+            gameManager.LoadSceneAsync(levelToLoad);
         }
         
     }

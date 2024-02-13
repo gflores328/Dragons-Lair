@@ -21,6 +21,7 @@ public class DialogueTree : MonoBehaviour
     [Header("UI")]
     [Tooltip("This will be the game object that holds the UI buttons for choosing dialogue")]
     public GameObject buttons;
+    public GameObject firstButton; // Button for controller ref
 
     private Dialogue dialogueToDisplay; // This dialogue object will hold the dialogue that is to be displayed
     private bool introStarted; // This bool is to see if the intro text has started or not 
@@ -54,12 +55,14 @@ public class DialogueTree : MonoBehaviour
         introStarted = false;
         buttons.SetActive(false);
         dialogueToDisplay = intro;
+        Time.timeScale = 1;
     }
 
     // This function will run differently depending on what bools are set
     public void Interact()
     {
         // If Interact is run and introStarted is false
+        Time.timeScale = 0;
         if (!introStarted)
         {
             // The intro  Dialogue is started and bools are set to true
@@ -84,6 +87,7 @@ public class DialogueTree : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 buttons.SetActive(true);
                 dialogueLine = 0;
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);   
 
             }
         }
@@ -94,7 +98,7 @@ public class DialogueTree : MonoBehaviour
         // When Player enters trigger the StartDialogue function is run to change the text
         if (other.tag == "Player")
         {
-            dialogueManager.GetComponent<DialogueManager>().StartDialogue("Press E to interact");
+            dialogueManager.GetComponent<DialogueManager>().StartDialogue("Press E or X Button to interact");
         }
     }
 

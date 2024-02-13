@@ -42,7 +42,7 @@ public class MenuInteraction : MonoBehaviour
         // When Player enters trigger the StartDialogue function is run to change the text
         if (other.tag == "Player")
         {
-            dialogueManger.GetComponent<DialogueManager>().StartDialogue("Press E to interact");
+            dialogueManger.GetComponent<DialogueManager>().StartDialogue("Press E or X Button to interact");
         }
     }
 

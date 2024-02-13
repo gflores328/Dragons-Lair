@@ -14,9 +14,10 @@ public class GameManager : MonoBehaviour
     [Tooltip("Panel GameObject in inspector pairs with a chosen UI panel to add make active/hide functionality")]
     public GameObject pauseMenu; // The pause menu used to turn it active and not active
     public GameObject resumeButton; // Grabs the resume button so when paused the event system knows to select it first for the controller;
-    
+    public AsyncLoader asyncLoader;
     
     private pauseState currentState;
+    
     public enum pauseState
     {
         Paused,
@@ -108,6 +109,22 @@ public class GameManager : MonoBehaviour
     public void LoadLevelbyName(string levelName) //allows for the selections of what level to load into on inspector
     {
         SceneManager.LoadScene(levelName);
+    }
+
+    public void LoadSceneAsync(string sceneName)
+    {
+        if (asyncLoader != null)
+        {
+            // Set the scene to load in the asyncLoader
+            asyncLoader.sceneToLoad = sceneName;
+            // Enable the asyncLoader to start loading the scene
+            asyncLoader.enabled = true;
+            asyncLoader.runAsync();
+        }
+        else
+        {
+            Debug.LogError("AsyncLoader reference not set in GameManager!");
+        }
     }
 
     #endregion

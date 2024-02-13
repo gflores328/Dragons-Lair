@@ -83,6 +83,11 @@ public class RealPlayerMovement : MonoBehaviour
         targetVelocity = Quaternion.LookRotation(cameraForward) * targetVelocity;
         
         targetVelocity *= playerSpeedMultiplier;
+        if (targetVelocity.magnitude >= 0.1f)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(targetVelocity.normalized);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+    }
         
         characterController.Move(targetVelocity * Time.deltaTime);
 
