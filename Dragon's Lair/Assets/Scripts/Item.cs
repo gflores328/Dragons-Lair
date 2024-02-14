@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 4, 2024 at 6:40 pm
+ * LAST MODIFIED ON: Feb 13, 2024 at 11:26 PM
  * 
  * A container for storing and retrieving information about an item including:
  * - The item's name
@@ -20,72 +20,41 @@ public class Item : ScriptableObject
     [SerializeField]
     private string itemName;    //The name of the item
     [SerializeField]
-    private string description; //The description of the item   Currently, this value isn't used
+    private string description; //The description of the item
     [SerializeField]
     private int quantity;       //The quantity of the ite
     
     public Sprite image;       //The sprite image of the item
     private int slotNumber; // The slot number the item takes in the inventory UI
 
-    //Stores the descriptions for each item
-    //This will have to be updated manually with each item that is added
-    private static readonly Dictionary<string, string> descriptions = new Dictionary<string, string>()
-    {
-        //Example item/description pair
-        //Item names should be in lowercase
-        { "banana", "long yellow things" },
-    };
-
-    //Constructor for an item that accepts an item name as a string and an item quantity as an int
-    public Item(string itemName, int quantity)
-    {
-        setName(itemName);
-        setDescription(itemName);
-        increaseQuantity(quantity);
-    }
-
-    //Constructor for an item that accepts an item name as a string and assumes a quantity of one
-    public Item(string itemName)
-    {
-        setName(itemName);
-        setDescription(itemName);
-        increaseQuantity(1);
-    }
-
     //Sets the name of the item. Item name is given as a string.
-    //This function only needs to be used by the Item class itself. The item name shouldn've have to be changed once created.
-    private void setName(string itemName)
+    //This function only needs to be used by the Item class itself. The item name shouldn't have to be changed once created.
+    public void SetName(string itemName)
     {
         this.itemName = itemName;
     }
 
-    //Sets the description of the item based on the given item name
-    private void setDescription(string itemName)
-    {
-        string description; //Stores the description
-        itemName = itemName.ToLower();  //Convert the item name to lowercase to match the keys in the descriptions dictionary
-
-        //If the item has a matching description, add the description to the item
-        if (descriptions.TryGetValue(itemName, out description))
-        {
-            this.description = description;
-        }
-        //If the item doesn't have a matching descripion, give it a default value
-        else
-        {
-            this.description = "[No description provided]";
-        }
-    }
-
     //Returns the name of the item as a string
-    public string getName()
+    public string GetName()
     {
         return itemName;
     }
 
+    //Sets the description of the item.
+    public void SetDescription(string description)
+    {
+        this.description = description;
+    }
+
+    //Returns the description of the item as a string
+    public string GetDescription()
+    {
+        return description;
+    }
+
     //Increases the quantity of the item by a specified amount
     //The provided amount must be greater than 0 (it wouldn't make sense to add 0 additional items or add a negative amount of items).
-    public void increaseQuantity(int amount)
+    public void IncreaseQuantity(int amount)
     {
         if (amount > 0)
         {
@@ -94,14 +63,14 @@ public class Item : ScriptableObject
     }
 
     //Increases the quantity of the item by one
-    public void increaseQuantity()
+    public void IncreaseQuantity()
     {
-        increaseQuantity(1);
+        IncreaseQuantity(1);
     }
 
     //Decrease the quantity of the item by the specified amount (represented by a POSITIVE integer)
     //If the item count drops below zero, set it back to zero
-    public void decreaseQuantity(int amount)
+    public void DecreaseQuantity(int amount)
     {
         if (amount > 0)
         {
@@ -115,13 +84,13 @@ public class Item : ScriptableObject
     }
 
     //Decrease the quantity of the item by one
-    public void decreaseQuantity()
+    public void DecreaseQuantity()
     {
-        decreaseQuantity(1);
+        DecreaseQuantity(1);
     }
 
     //Return the quantity of the item as an int
-    public int getQuantity()
+    public int GetQuantity()
     {
         return quantity;
     }
