@@ -28,6 +28,7 @@ public class MenuInteraction : MonoBehaviour
     
     private bool inDialouge; // bool to see if player is in dialouge
     private int currentLine; // the index of the dialouge array that is currently being shown
+    private bool menuOpen; // A bool to check if the menu is open
 
 
     // Start is called before the first frame update
@@ -35,6 +36,7 @@ public class MenuInteraction : MonoBehaviour
     {
         inDialouge = false;
         currentLine = 0;
+        menuOpen = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,7 +56,8 @@ public class MenuInteraction : MonoBehaviour
             dialogueManger.GetComponent<DialogueManager>().EndDialogue();
             currentLine = 0;
             inDialouge = false;
-            menu.SetActive(false); 
+            menu.SetActive(false);
+            menuOpen = false;
         }
     }
 
@@ -62,7 +65,7 @@ public class MenuInteraction : MonoBehaviour
     public void Interact()
     {
         // If inDialogue is false then StartDiolougue is run and inDiolouge is set to true
-        if (!inDialouge)
+        if (!inDialouge && !menuOpen)
         {
             dialogueManger.GetComponent<DialogueManager>().StartDialogue(dialogue.dialogue[0]);
             inDialouge = true;
@@ -87,6 +90,7 @@ public class MenuInteraction : MonoBehaviour
 
                 // When the text is done the menu is set active
                 menu.SetActive(true);
+                menuOpen = true;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(menu); // Selects the button for the controller
                 
             }

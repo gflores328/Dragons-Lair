@@ -27,6 +27,7 @@ public class DialogueTree : MonoBehaviour
     private bool introStarted; // This bool is to see if the intro text has started or not 
     private bool inDialogue; // A bool to see if the player is currently in dialogue
     private int dialogueLine; // This int holds the index number of the dialogue objects line that is to be displayed
+    private bool inTree; // A bool to check if the player is in the diaogue tree options or not
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class DialogueTree : MonoBehaviour
         introStarted = false;
         inDialogue = false;
         buttons.SetActive(false);
+        inTree = false;
     }
 
     // This function will be put on a buttons on click event and will take an int value that represents the question number
@@ -45,6 +47,7 @@ public class DialogueTree : MonoBehaviour
         // StartDialogue is started with and the buttons are set inactive
         dialogueManager.GetComponent<DialogueManager>().StartDialogue(dialogueToDisplay.dialogue[dialogueLine]);
         buttons.SetActive(false);
+        inTree = false;
     }
 
     // This function will be put on a buttons on click event and will close everything dialogue related
@@ -56,6 +59,7 @@ public class DialogueTree : MonoBehaviour
         buttons.SetActive(false);
         dialogueToDisplay = intro;
         Time.timeScale = 1;
+        inTree = false;
     }
 
     // This function will run differently depending on what bools are set
@@ -71,7 +75,7 @@ public class DialogueTree : MonoBehaviour
             introStarted = true;
         }
         // If introStarted is true
-        else if (introStarted)
+        else if (introStarted && !inTree)
         {
             // If the dialogueLine integer + 1 is less than the dialogueToDiaplay legnth
             if (dialogueLine + 1 < dialogueToDisplay.dialogue.Length)
@@ -87,6 +91,7 @@ public class DialogueTree : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 buttons.SetActive(true);
                 dialogueLine = 0;
+                inTree = true;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);   
 
             }

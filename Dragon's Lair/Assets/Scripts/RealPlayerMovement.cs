@@ -180,8 +180,15 @@ public class RealPlayerMovement : MonoBehaviour
         Debug.Log("Paused");
         gameManager.PauseGame();
     }
-    
 
-   
-   
+    // GABE ADDED:
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "InteractMenu" || other.tag == "Interact" || other.tag == "InteractItem" || other.tag == "DialogueTree")
+        {
+            currentInteractable = null;
+        }
+    }
+
+
 }
