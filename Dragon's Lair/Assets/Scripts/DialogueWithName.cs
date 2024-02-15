@@ -15,5 +15,5 @@ public struct DialogueAndName
 [CreateAssetMenu]
 public class DialogueWithName : ScriptableObject
 {
-    public DialogueAndName[] dialogue;
+    public DialogueAndName[] dialogueArray;
 }

@@ -17,15 +17,26 @@ public class DialogueManager : MonoBehaviour
     public GameObject textBox; // The UI textbox that is shown when dialogue is active
     [Tooltip("The text UI that will be shown")]
     public TextMeshProUGUI dialogueText;
-
+    [Tooltip("The UI for the name textbox")]
+    public GameObject nameBox;
+    [Tooltip("The text UI to show the name")]
+    public TextMeshProUGUI nameText;
     
 
     // This function will take a string variable and start the dialogue by showing the UI
-    public void StartDialogue(string text)
+    public void StartDialogue(DialogueAndName dialogueAndName)
     {
         // textBox is set active and dialogueText is set to the string value that was passed
         textBox.SetActive(true);
-        dialogueText.text = text;
+        dialogueText.text = dialogueAndName.dialogue;
+        nameBox.SetActive(true);
+        nameText.text = dialogueAndName.name;
+    }
+
+    public void StartDialogue(string dialogue)
+    {
+        textBox.SetActive(true);
+        dialogueText.text = dialogue;
     }
 
     // This function will be used to switch the UI off
@@ -33,12 +44,24 @@ public class DialogueManager : MonoBehaviour
     {
         textBox.SetActive(false);
         dialogueText.text = null;
+        nameBox.SetActive(false);
+        nameText.text = null;
     }
 
     // This function will be used to change the text using a string that was passed through
-    public void TextChange(string text)
+    public void TextChange(DialogueAndName dialogueAndName)
     {
-        dialogueText.text = text;
+        if (!nameBox.activeInHierarchy)
+        {
+            nameBox.SetActive(true);
+        }
+        if (!textBox.activeInHierarchy)
+        {
+            textBox.SetActive(true);
+        }
+
+        dialogueText.text = dialogueAndName.dialogue;
+        nameText.text = dialogueAndName.name;
     }
 
 }

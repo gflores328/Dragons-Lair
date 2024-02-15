@@ -12,9 +12,9 @@ public class DialogueTree : MonoBehaviour
 {
     [Header("Dialogue")]
     [Tooltip("The dialogue option that is run through at the start of interaction")]
-    public Dialogue intro;
+    public DialogueWithName intro;
     [Tooltip("A list of dialogue options that represent dialogue branch points. Can only have a max 4 elements")]
-    public List<Dialogue> dialogueBranches;
+    public List<DialogueWithName> dialogueBranches;
     [Tooltip("The dialogue manager")]
     public GameObject dialogueManager;
 
@@ -23,7 +23,7 @@ public class DialogueTree : MonoBehaviour
     public GameObject buttons;
     public GameObject firstButton; // Button for controller ref
 
-    private Dialogue dialogueToDisplay; // This dialogue object will hold the dialogue that is to be displayed
+    private DialogueWithName dialogueToDisplay; // This dialogue object will hold the dialogue that is to be displayed
     private bool introStarted; // This bool is to see if the intro text has started or not 
     private bool inDialogue; // A bool to see if the player is currently in dialogue
     private int dialogueLine; // This int holds the index number of the dialogue objects line that is to be displayed
@@ -45,7 +45,7 @@ public class DialogueTree : MonoBehaviour
         dialogueToDisplay = dialogueBranches[questionNumber - 1];
 
         // StartDialogue is started with and the buttons are set inactive
-        dialogueManager.GetComponent<DialogueManager>().StartDialogue(dialogueToDisplay.dialogue[dialogueLine]);
+        dialogueManager.GetComponent<DialogueManager>().StartDialogue(dialogueToDisplay.dialogueArray[dialogueLine]);
         buttons.SetActive(false);
         inTree = false;
     }
@@ -70,7 +70,7 @@ public class DialogueTree : MonoBehaviour
         if (!introStarted)
         {
             // The intro  Dialogue is started and bools are set to true
-            dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogue[dialogueLine]);
+            dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[dialogueLine]);
             inDialogue = true;
             introStarted = true;
         }
@@ -78,11 +78,11 @@ public class DialogueTree : MonoBehaviour
         else if (introStarted && !inTree)
         {
             // If the dialogueLine integer + 1 is less than the dialogueToDiaplay legnth
-            if (dialogueLine + 1 < dialogueToDisplay.dialogue.Length)
+            if (dialogueLine + 1 < dialogueToDisplay.dialogueArray.Length)
             {
                 // 1 is added to dialogueLine and TextChange is called for the current dialogueToDisplay with the new dialogueLine as the index
                 dialogueLine++;
-                dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogue[dialogueLine]);
+                dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[dialogueLine]);
             }
             // If dialogueLine is not less than the dialogueToDisplaye legnth
             else
