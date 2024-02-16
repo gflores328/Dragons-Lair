@@ -25,6 +25,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     private Rigidbody playerRB; // A rigid body object which will hold the player's rigid body
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
     private bool isGrounded;
+    static float playerHealth = 100f;
     
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
     {
@@ -142,7 +143,7 @@ public class ChibiPlayerMovement : MonoBehaviour
 
         Debug.DrawRay(rayOrigin, Vector3.down * groundRayLength, isHit ? Color.green : Color.red);
 
-        Debug.Log(isGrounded); // Comment to see if grounded is true
+        //Debug.Log(isGrounded); // Comment to see if grounded is true
 
 
         return isHit;
@@ -152,6 +153,19 @@ public class ChibiPlayerMovement : MonoBehaviour
     {
         Debug.Log("Paused");
         gameManager.PauseGame();
+    }
+    public void takeDamage(float dmgAmount)
+    {
+        playerHealth -= dmgAmount;
+    }
+    private void die()
+    {
+        if(playerHealth <= 0f)
+
+           { 
+                Destroy(this);
+           }
+        
     }
   
 }
