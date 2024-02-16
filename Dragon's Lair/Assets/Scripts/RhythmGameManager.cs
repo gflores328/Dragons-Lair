@@ -2,14 +2,19 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 16, 2024 at 10:17 AM
+ * LAST MODIFIED ON: Feb 16, 2024 at 3:19 PM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
  *                    How To Make a Rhythm Game #3 - Score and Multipliers https://www.youtube.com/watch?v=dV9rdTlMHxs
- *                    How To Make a Rhythm Game #4 - Timing Hits For Better Score https://www.youtube.com/watch?v=Oi0tT7QnFhs
+ *                    Rhythm Game Tutorial #4 - Timing Hits For Better Score https://www.youtube.com/watch?v=Oi0tT7QnFhs
+ *                    Rhythm Game Tutorial #5 - Showing Reslts & Ranking https://www.youtube.com/watch?v=Usuh7WUAPbg
  * 
- * Keeps track of if the note can be hit by the player.
- * Reports to the game manager if the note has been hit or missed.
+ * Manages the game in a variety of ways:
+ * - Keeps track of score and multipliers
+ * - Keeps track of the total number of notes hit or missed by the player
+ * - Plays music
+ * - Updates text boxes
+ * - Moves the notes
  */
 
 using System.Collections;
@@ -27,9 +32,7 @@ public class RhythmGameManager : MonoBehaviour
     [Tooltip("The current score of the player.")]
     public int currentScore;
     [Tooltip("The score of each note.")]
-    public int scorePerNote;
-    public int scorePerGoodNote = 125;
-    public int scorePerPerfectNote = 150;
+    public int scorePerNote, scorePerGoodNote, scorePerPerfectNote;
 
     [Header("Multiplier Variables")]
 
@@ -39,6 +42,13 @@ public class RhythmGameManager : MonoBehaviour
     public int multiplierTracker;
     [Tooltip("Keeps track of the amount of consecutive notes that need to be hit in order to increase the score multiplier.")]
     public int[] multiplierThresholds;
+
+    [Header("Total Note Counts")]
+
+    [Tooltip("The total number of notes in the scene")]
+    public int totalNotes;
+    [Tooltip("Total amount of notes with a certain hit quality.")]
+    public int normalHits, goodHits, perfectHits, missedHits;
 
     [Header("Game Objects")]
 
@@ -50,6 +60,13 @@ public class RhythmGameManager : MonoBehaviour
     public Text multiplierText;
     [Tooltip("Object that controlls how fast the notes move.")]    
     public RhythmBeatScroller beatScroller;
+
+    [Header("Results Screen Objects")]
+
+    [Tooltip("Canvas containing results screen")]
+    public GameObject resultsScreen;
+    [Tooltip("Text boxes in results screen")]
+    public Text percentHitText, normalsText, goodsText, perfectsText, missesText, rankText, finalScoreText;
 
     //The instance of the Rhythm Game Manager
     public static RhythmGameManager instance;
@@ -65,9 +82,14 @@ public class RhythmGameManager : MonoBehaviour
         //Initialize score and multiplier values
         currentScore = 0;
         scorePerNote = 100;
+        scorePerGoodNote = 125;
+        scorePerPerfectNote = 150;
         scoreText.text = "Score: " + currentScore;
         currentMultiplier = 1;
         multiplierText.text = "Multiplier: x" + currentMultiplier;
+
+        //Initialize the total number of notes in the scene
+        totalNotes = FindObjectsOfType<RhythmNoteObject>().Length;
 
         //Initialize multiplier thresholds
         multiplierThresholds = new int[] { 4, 8, 12 };
@@ -86,6 +108,55 @@ public class RhythmGameManager : MonoBehaviour
                 beatScroller.hasStarted = true;
                 //Play the music
                 music.Play();
+            }
+        }
+        //If the game has already started, the music has stopped playing, AND the results screen isn't active yet...
+        //Update the text in the results screen and display the results screen
+        else
+        {
+            if (!music.isPlaying && !resultsScreen.activeInHierarchy)
+            {
+                //Update the results text
+                normalsText.text = normalHits.ToString();
+                goodsText.text = goodHits.ToString();
+                perfectsText.text = perfectHits.ToString();
+                missesText.text = missedHits.ToString();
+
+                //Calculate the percentage of notes hit
+                float totalHit = totalNotes - missedHits;
+                float percentHit = (totalHit / totalNotes) * 100f;
+                //Update the results text
+                percentHitText.text = percentHit.ToString("F1");
+
+                //Calculate player rank and update rank text
+                //Not a fan of how this looks but in terms of logic this seems to be the most "readable"
+                rankText.text = "F";
+                if (percentHit > 40)
+                {
+                    rankText.text = "D";
+                    if (percentHit > 55)
+                    {
+                        rankText.text = "C";
+                        if (percentHit > 70)
+                        {
+                            rankText.text = "B";
+                            if (percentHit > 85)
+                            {
+                                rankText.text = "A";
+                                if (percentHit > 95)
+                                {
+                                    rankText.text = "S";
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //Update final score text
+                finalScoreText.text = currentScore.ToString();
+
+                //Display the results screen
+                resultsScreen.SetActive(true);
             }
         }
     }
@@ -121,6 +192,7 @@ public class RhythmGameManager : MonoBehaviour
     {
         //Increase the score according to the current multiplier
         currentScore += scorePerNote * currentMultiplier;
+        normalHits++;
         NoteHit();
     }
 
@@ -129,6 +201,7 @@ public class RhythmGameManager : MonoBehaviour
     {
         //Increase the score according to the current multiplier
         currentScore += scorePerGoodNote * currentMultiplier;
+        goodHits++;
         NoteHit();
     }
 
@@ -137,6 +210,7 @@ public class RhythmGameManager : MonoBehaviour
     {
         //Increase the score according to the current multiplier
         currentScore += scorePerPerfectNote * currentMultiplier;
+        perfectHits++;
         NoteHit();
     }
 
@@ -144,6 +218,8 @@ public class RhythmGameManager : MonoBehaviour
     public void NoteMissed()
     {
         Debug.Log("Missed Note");
+
+        missedHits++;
 
         //Reset the multiplier back to one
         currentMultiplier = 1;
