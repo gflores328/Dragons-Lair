@@ -2,10 +2,11 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 12, 2024 at 11:11 PM
+ * LAST MODIFIED ON: Feb 16, 2024 at 10:17 AM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
  *                    How To Make a Rhythm Game #3 - Score and Multipliers https://www.youtube.com/watch?v=dV9rdTlMHxs
+ *                    How To Make a Rhythm Game #4 - Timing Hits For Better Score https://www.youtube.com/watch?v=Oi0tT7QnFhs
  * 
  * Keeps track of if the note can be hit by the player.
  * Reports to the game manager if the note has been hit or missed.
@@ -20,16 +21,26 @@ public class RhythmGameManager : MonoBehaviour
 {
     [Tooltip("Keeps track of if the game has started or not.")]
     public bool startPlaying;
+
+    [Header("Score Variables")]
+
     [Tooltip("The current score of the player.")]
     public int currentScore;
     [Tooltip("The score of each note.")]
     public int scorePerNote;
+    public int scorePerGoodNote = 125;
+    public int scorePerPerfectNote = 150;
+
+    [Header("Multiplier Variables")]
+
     [Tooltip("The current score multiplier.")]
     public int currentMultiplier;
     [Tooltip("Keeps track of how many notes in a row have been hit.")]
     public int multiplierTracker;
     [Tooltip("Keeps track of the amount of consecutive notes that need to be hit in order to increase the score multiplier.")]
     public int[] multiplierThresholds;
+
+    [Header("Game Objects")]
 
     [Tooltip("The music that plays along with the game.")]
     public AudioSource music;
@@ -39,7 +50,8 @@ public class RhythmGameManager : MonoBehaviour
     public Text multiplierText;
     [Tooltip("Object that controlls how fast the notes move.")]    
     public RhythmBeatScroller beatScroller;
-    [Tooltip("The instance of the Rhythm Game Manager.")]
+
+    //The instance of the Rhythm Game Manager
     public static RhythmGameManager instance;
 
     
@@ -78,9 +90,10 @@ public class RhythmGameManager : MonoBehaviour
         }
     }
 
+    //Adjusts multiplier values and text boxes when a note is hit
     public void NoteHit()
     {
-        Debug.Log("Hit on time");
+        //Debug.Log("Hit on time");
 
         //If there are still multiplier thresholds to hit...
         if (currentMultiplier - 1 < multiplierThresholds.Length)
@@ -99,12 +112,35 @@ public class RhythmGameManager : MonoBehaviour
             }
         }
         
-        //Increase the score according to the current multiplier
-        currentScore += scorePerNote * currentMultiplier;
         //Update the score text
         scoreText.text = "Score: " + currentScore;
     }
 
+    //Increases the score based on a normal hit
+    public void NormalHit()
+    {
+        //Increase the score according to the current multiplier
+        currentScore += scorePerNote * currentMultiplier;
+        NoteHit();
+    }
+
+    //Increases the score based on a good hit
+    public void GoodHit()
+    {
+        //Increase the score according to the current multiplier
+        currentScore += scorePerGoodNote * currentMultiplier;
+        NoteHit();
+    }
+
+    //Increases the score based on a perfect hit
+    public void PerfectHit()
+    {
+        //Increase the score according to the current multiplier
+        currentScore += scorePerPerfectNote * currentMultiplier;
+        NoteHit();
+    }
+
+    //Resets multiplier values when a note is missed
     public void NoteMissed()
     {
         Debug.Log("Missed Note");
