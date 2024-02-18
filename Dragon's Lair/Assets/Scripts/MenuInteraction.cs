@@ -30,7 +30,7 @@ public class MenuInteraction : MonoBehaviour
     private int currentLine; // the index of the dialouge array that is currently being shown
     private bool menuOpen; // A bool to check if the menu is open
 
-
+    
     // Start is called before the first frame update
     void Start()
     {
