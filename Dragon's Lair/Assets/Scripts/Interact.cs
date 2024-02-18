@@ -58,7 +58,7 @@ public class Interact : MonoBehaviour
     [HideInInspector, SerializeField]
     private GameObject questionUI;
 
-    // Variables for checking ifan item is needed to interact
+    // Variables for checking if an item is needed to interact
     [HideInInspector, SerializeField]
     private Item itemNeeded;
     [HideInInspector, SerializeField]
@@ -76,19 +76,23 @@ public class Interact : MonoBehaviour
         {
             dialogueManager.GetComponent<DialogueManager>().StartDialogue("Press Interact Button");
 
+            // If the player needs an item to interact then Inventory.Contains is called to check if it it in the inventory
             if (needItem)
             {
+                // If it is then dialogueToDisplay is set to interactDialogue and hasItemNeeded is set to true
                 if (inventory.GetComponent<Inventory>().Contains(itemNeeded))
                 {
                     dialogueToDisplay = interactDialogue;
                     hasItemNeeded = true;
                 }
+                // If it is not there then the dialogueToDisplay is set ti the itemNotObtained dialogue and hasItemNeeded is set to false
                 else
                 {
                     dialogueToDisplay = itemNotObtained;
                     hasItemNeeded = false;
                 }
             }
+            // If the player does not need an item then dialogueToDisplay is set to interactDialogue
             else
             {
                 dialogueToDisplay = interactDialogue;
@@ -96,13 +100,15 @@ public class Interact : MonoBehaviour
         }
     }
 
-    // When player exits the trigger multiple variables are reset
+    // When player exits the trigger multiple variables are reset and EndDialogue is run
     private void OnTriggerExit(Collider other)
     {
         currentLine = 0;
         //inDialogue = false;
         menuOpen = false;
         dialogueManager.GetComponent<DialogueManager>().EndDialogue();
+
+        // If the interactionType is menu then the menuUI that belongs to that interaction type will also be set to false
         if (interactionType == InteractionType.menu)
         {
             menuUI.SetActive(false);
@@ -112,30 +118,37 @@ public class Interact : MonoBehaviour
     // Everytime this script is called it checks which enem type is selected and will run differently according to that
     public void Interacted()
     {
+        // Time scale is set to 0 when interact is run
         Time.timeScale = 0;
+
+        // This if is multi purpose and will run if interaction type is inspect or if hasItemNeeded is false 
         if (interactionType == InteractionType.inspect || !hasItemNeeded)
         {
+            // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
+            // If currentLine is not less than then EndDialogue is run and timeScale is set back to 1;
             else
-            {
-
+            { 
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 currentLine = 0;
                 Time.timeScale = 1;            
             }
         }
 
+        // If interaction type is menu and hasItemNeeded is true
         if (interactionType == InteractionType.menu && !menuOpen && hasItemNeeded)
         {
+            // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
+            // When dialogue is over then the menuUI will be set active
             else
             {
                 currentLine = 0;
@@ -146,13 +159,16 @@ public class Interact : MonoBehaviour
             }
         }
 
+        // If interaction type is item and hasItemNeeded is true
         if (interactionType == InteractionType.item && hasItemNeeded)
         {
+            // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
+            // When dilogue is over then the item set will be added to the inventory and the game object is destroyed
             else
             { 
             
@@ -163,13 +179,16 @@ public class Interact : MonoBehaviour
             }
         }
 
+        // If interaction type is dialogue and hasItemNeeded is true
         if (interactionType == InteractionType.dialogue && !menuOpen && hasItemNeeded)
         {
+            // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
+            // When dialogue is done then the questionsUI is set active
             else
             {
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
@@ -181,8 +200,10 @@ public class Interact : MonoBehaviour
         }
     }
 
+    // This function is for a button click event
     public void QuestionSelected(int questionNumber)
     {
+        // It takes and int and will set dialogueToDisplay to the index of it in dialogueBranches - 1
         dialogueToDisplay =  dialogueBranches[questionNumber - 1];
         dialogueManager.GetComponent<DialogueManager>().StartDialogue(dialogueToDisplay.dialogueArray[currentLine]);
         currentLine++;
@@ -190,6 +211,7 @@ public class Interact : MonoBehaviour
         menuOpen = false;
     }
 
+    // For an on click event that will close menus and end dialogue also sets timeScale back to 1
     public void CloseButton()
     {
         Time.timeScale = 1;
