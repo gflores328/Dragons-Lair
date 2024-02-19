@@ -11,8 +11,9 @@ public class ChibiPlayerMovement : MonoBehaviour
 {
     [Header("Player Movement Settings")]
     public float playerSpeedMultiplier,maxForce,jumpForce,gravityForce; // A float variable that will deteremine how fast the player is moving, The max force that can be applied to the movement, how powerful the jump is, how strong the gravity is.
-    
-    public bool inRealLife = true; // A public bool to determine if the player is in real life or the arcade chibi world used to restrict movement
+    //public float jumpBufferDuration = 0.1f;
+    //private float jumpBufferTimer = 0f;
+    //private bool inRealLife = true; // A public bool to determine if the player is in real life or the arcade chibi world used to restrict movement
     public LayerMask groundLayer;
     public float groundRayLength = 1f;
     
@@ -22,6 +23,8 @@ public class ChibiPlayerMovement : MonoBehaviour
     private InputAction pauseAction; // A private variable that holds the pause action
     private GameObject gameManagerObj;
     private GameManager gameManager;
+    
+    private PlayerOneWay playerOneWay;
     private Rigidbody playerRB; // A rigid body object which will hold the player's rigid body
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
     private bool isGrounded;
@@ -34,54 +37,39 @@ public class ChibiPlayerMovement : MonoBehaviour
     }
     void Start()
     {
-        playerRB = GetComponent<Rigidbody>(); // assigns the rigid body
-        playerRB.freezeRotation = true; // freeze rotation so player doesn't rotate
-        playerInput = GetComponent<PlayerInput>(); // Grabs the Player Input compoent from the player and assigns it to the playerInput that was initalized above
-        walkAction = playerInput.actions.FindAction("Walk"); // Searches for the action and stores it inside of the  walk action variable
-        jumpAction = playerInput.actions.FindAction("Jump"); // Assigns the jump action to the jump action input
-        jumpAction.performed += Jump; // assigns when the jumpaction is performed then jump function will be called
-        
-        pauseAction = playerInput.actions.FindAction("Pause"); // Searches for the action and stores it inside of the  interact action variable
-        pauseAction.performed += Pause;
-        gameManagerObj =  GameObject.Find("GameManager");
-        gameManager = gameManagerObj.GetComponent<GameManager>();
+        playerRB = GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
+        walkAction = playerInput.actions.FindAction("Walk");
+        jumpAction = playerInput.actions.FindAction("Jump");
+        jumpAction.performed += OnJump;
+        playerOneWay = GetComponent<PlayerOneWay>();
+        pauseAction = playerInput.actions.FindAction("Pause");
+        gameManager = FindObjectOfType<GameManager>();
        
     }
 
-    
     void FixedUpdate()
     {
-        
-        ChibiMovePlayer(); // Calls the ChibiMovePlayer function
-        //CheckJump();
-
-
+        ChibiMovePlayer();
         isGrounded = IsGrounded();
-        //Apply gravity if not on the ground
+
         if (!isGrounded)
         {
-            
-            playerRB.AddForce(Vector3.down * gravityForce);
+            ApplyGravity();
         }
-
-     
+        // else
+        // {
+        //     if (jumpBufferTimer > 0f)
+        //     {
+        //         jumpBufferTimer -= Time.deltaTime;
+        //     }
+        // }
     }
 
-    void SwitchActionMap(string actionMapName) // The function that switches the action map.
-    {
-        playerInput.SwitchCurrentActionMap(actionMapName);
-        walkAction = playerInput.currentActionMap.FindAction("Walk");
-    }
-
-    
-
-    //ChibiMovePlayer Function Description:
-    //Designed to be the function that will actively move the player object in the game. but only in the x axis.
     void ChibiMovePlayer()
     {
-        
-        Vector2 direction = walkAction.ReadValue<Vector2>();
 
+        Vector2 direction = walkAction.ReadValue<Vector2>();
         if (direction.x > 0) // Moving right
 
         {
@@ -97,41 +85,32 @@ public class ChibiPlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1); // Flipped scale along x-axis
             
         }
-       
-        transform.Translate(new Vector3(direction.x,0,direction.y) * Time.deltaTime * playerSpeedMultiplier); // Multiplies the values of the a new vector3 position time and the speed multiplier to make the player move.
+        Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
+        moveDirection = transform.TransformDirection(moveDirection);
+        playerRB.MovePosition(transform.position + moveDirection * Time.deltaTime * playerSpeedMultiplier);
+    }
+
+    void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed && IsGrounded() && !playerOneWay.isMovingDown)
+        {
+            playerRB.velocity = new Vector2(playerRB.velocity.x, jumpForce);
+        }
         
-    }
-    
-    //This is the function that is called when the jump button is pressed
-  
-   
-    public void Jump(InputAction.CallbackContext value)
-    {
-        //Debug.Log("JumpButton has been pressed");
-        OnJump();
-        /*if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            Debug.Log("Can Jump");
-            OnJump();
-
-        }
-        */
-    }
-    
-    //This is the function that is actually moving the player's rigid body
-    void OnJump()
-    {
-        if (isGrounded)
-        {
-            // You can adjust the jump force according to your needs
-            //Debug.Log("I am jumping");
-            //float jumpForce = 10f;
-            playerRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-            
-        }
+        // Debug.Log("started jumping");
+        // if (context.canceled && playerRB.velocity.y > 0f)
+        // {
+        //    playerRB.velocity = new Vector2(playerRB.velocity.x, playerRB.velocity.y * 0.5f);
+        // }
     }
 
-   
+    
+
+    void ApplyGravity()
+    {
+        playerRB.AddForce(Vector3.down * gravityForce);
+    }
+
     bool IsGrounded()
     {
         
@@ -151,10 +130,10 @@ public class ChibiPlayerMovement : MonoBehaviour
     }
     private void Pause(InputAction.CallbackContext value)
     {
-        Debug.Log("Paused");
+        //Debug.Log("Paused");
         gameManager.PauseGame();
     }
-    public void takeDamage(float dmgAmount)
+    public void takeDamage(float dmgAmount) // The amount put in here will be subtracted 
     {
         playerHealth -= dmgAmount;
     }

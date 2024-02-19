@@ -49,11 +49,11 @@ public class ArmRotation : MonoBehaviour
             {
                 armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f);
             }
-            else if(input.y >= -1.0f && input.y <= -0.9f)
-            {
-                armPivot.localRotation = Quaternion.Euler(90f, 90f, 0f);
+            // else if(input.y >= -1.0f && input.y <= -0.9f)
+            // {
+            //     armPivot.localRotation = Quaternion.Euler(90f, 90f, 0f);
 
-            }
+            // }
             else if(input.y >= -0.9f && input.y <= -0.5f) 
             {
                 armPivot.localRotation = Quaternion.Euler(45f, 90f, 0f);

@@ -57,6 +57,7 @@ public class Interact : MonoBehaviour
     private List<DialogueWithName> dialogueBranches;
     [HideInInspector, SerializeField]
     private GameObject questionUI;
+    [SerializeField] GameObject firstButton;
 
     // Variables for checking if an item is needed to interact
     [HideInInspector, SerializeField]
@@ -155,6 +156,7 @@ public class Interact : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 menuOpen = true;
                 menuUI.SetActive(true);
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);
                 Time.timeScale = 1;
             }
         }
@@ -194,6 +196,7 @@ public class Interact : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 currentLine = 0;
                 questionUI.SetActive(true);
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);
                 menuOpen = true;
                  
             }
