@@ -5047,7 +5047,7 @@ Transform:
   m_GameObject: {fileID: 191089025}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.69002616, z: -0, w: 0.7237844}
-  m_LocalPosition: {x: 12.55, y: 10.610001, z: 20.09}
+  m_LocalPosition: {x: 14.21, y: 10.610001, z: 21.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11029,6 +11029,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VRMachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ef11c74609af884ab5378e35db3c9f1,
+        type: 3}
+      propertyPath: m_TagString
+      value: InteractItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41750,8 +41755,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1520475201}
-        m_TargetAssemblyTypeName: DialogueTree, Assembly-CSharp
-        m_MethodName: QuestionClicked
+        m_TargetAssemblyTypeName: Interact, Assembly-CSharp
+        m_MethodName: QuestionSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -45841,7 +45846,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 74e0d07d0f7c23243b414621a2c8f7d5,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1216210997}
+      addedObject: {fileID: 1216211001}
   m_SourcePrefab: {fileID: 100100000, guid: 74e0d07d0f7c23243b414621a2c8f7d5, type: 3}
 --- !u!1 &1216210994 stripped
 GameObject:
@@ -45849,22 +45854,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1216210993}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1216210997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216210994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48a4d6a00a9a5a445964fabd159d07c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: 442a878ad7c042d429851d4b90c5b29a, type: 2}
-  dialogueManger: {fileID: 27366408}
-  inventoryManager: {fileID: 6287608}
-  item: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
 --- !u!65 &1216210998
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45886,6 +45875,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.87201047, y: 1.891336, z: 1.3535198}
   m_Center: {x: -0.02314635, y: 0.10013837, z: 0.22712502}
+--- !u!114 &1216211001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216210994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a97a959c363fb4daaff5f70dc57fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 2
+  interactDialogue: {fileID: 11400000, guid: 442a878ad7c042d429851d4b90c5b29a, type: 2}
+  dialogueManager: {fileID: 27366408}
+  needItem: 0
+  menuUI: {fileID: 0}
+  itemToPickup: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
+  inventory: {fileID: 6287608}
+  dialogueBranches: []
+  questionUI: {fileID: 0}
+  itemNeeded: {fileID: 0}
+  itemNotObtained: {fileID: 0}
 --- !u!1 &1222519162
 GameObject:
   m_ObjectHideFlags: 0
@@ -48151,7 +48163,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1520475201}
-        m_TargetAssemblyTypeName: DialogueTree, Assembly-CSharp
+        m_TargetAssemblyTypeName: Interact, Assembly-CSharp
         m_MethodName: CloseButton
         m_Mode: 1
         m_Arguments:
@@ -54263,8 +54275,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1520475201}
-        m_TargetAssemblyTypeName: DialogueTree, Assembly-CSharp
-        m_MethodName: QuestionClicked
+        m_TargetAssemblyTypeName: Interact, Assembly-CSharp
+        m_MethodName: QuestionSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -55441,7 +55453,7 @@ GameObject:
   - component: {fileID: 1520475201}
   m_Layer: 0
   m_Name: StoreManager
-  m_TagString: DialogueTree
+  m_TagString: InteractItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55564,17 +55576,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1520475194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36f66ed14f5bac4ea6eeb2285155bf2, type: 3}
+  m_Script: {fileID: 11500000, guid: 86a97a959c363fb4daaff5f70dc57fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intro: {fileID: 11400000, guid: 3ce149ccad5e3ed44b90ed6f45787c2f, type: 2}
+  interactionType: 3
+  interactDialogue: {fileID: 11400000, guid: 3ce149ccad5e3ed44b90ed6f45787c2f, type: 2}
+  dialogueManager: {fileID: 27366408}
+  needItem: 0
+  menuUI: {fileID: 0}
+  itemToPickup: {fileID: 0}
+  inventory: {fileID: 0}
   dialogueBranches:
   - {fileID: 11400000, guid: 21e3fc63acb406f489068888d3e6713c, type: 2}
   - {fileID: 11400000, guid: 13d80ec39c05f9d4da86fe8921157666, type: 2}
   - {fileID: 11400000, guid: 736e93ec341e16041819f208210cbba4, type: 2}
-  dialogueManager: {fileID: 27366408}
-  buttons: {fileID: 903787052}
-  firstButton: {fileID: 0}
+  questionUI: {fileID: 903787052}
+  itemNeeded: {fileID: 0}
+  itemNotObtained: {fileID: 0}
 --- !u!1 &1533711285
 GameObject:
   m_ObjectHideFlags: 0
@@ -58682,8 +58700,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1520475201}
-        m_TargetAssemblyTypeName: DialogueTree, Assembly-CSharp
-        m_MethodName: QuestionClicked
+        m_TargetAssemblyTypeName: Interact, Assembly-CSharp
+        m_MethodName: QuestionSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -65598,29 +65616,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1996009033}
   - component: {fileID: 1996009032}
-  - component: {fileID: 1996009031}
+  - component: {fileID: 1996009034}
   m_Layer: 0
   m_Name: MimicTrigger
-  m_TagString: InteractMenu
+  m_TagString: InteractItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1996009031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1996009030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af056cfc23b4ac045b9c83d3bb019b1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: b8676c63c3ab2d346aa3ac2563360150, type: 2}
-  dialogueManger: {fileID: 27366408}
-  menu: {fileID: 1751216850}
 --- !u!65 &1996009032
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65657,6 +65660,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1996009034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996009030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a97a959c363fb4daaff5f70dc57fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 1
+  interactDialogue: {fileID: 11400000, guid: b8676c63c3ab2d346aa3ac2563360150, type: 2}
+  dialogueManager: {fileID: 27366408}
+  needItem: 1
+  menuUI: {fileID: 1751216850}
+  itemToPickup: {fileID: 0}
+  inventory: {fileID: 6287608}
+  dialogueBranches: []
+  questionUI: {fileID: 0}
+  itemNeeded: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
+  itemNotObtained: {fileID: 11400000, guid: 1a1dafe343a1f6544be74d28240992ad, type: 2}
 --- !u!1 &2009851160
 GameObject:
   m_ObjectHideFlags: 0
@@ -69405,7 +69431,7 @@ Transform:
   m_GameObject: {fileID: 2085008186}
   serializedVersion: 2
   m_LocalRotation: {x: 0.39846256, y: 0.00053599826, z: -0.00023285965, w: 0.9171844}
-  m_LocalPosition: {x: 12.55, y: 10.610001, z: 20.09}
+  m_LocalPosition: {x: 14.21, y: 10.610001, z: 21.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69883,7 +69909,7 @@ PrefabInstance:
     - target: {fileID: 8853170034161557234, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.55
+      value: 14.21
       objectReference: {fileID: 0}
     - target: {fileID: 8853170034161557234, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
         type: 3}
@@ -69893,7 +69919,7 @@ PrefabInstance:
     - target: {fileID: 8853170034161557234, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27
+      value: 28.25
       objectReference: {fileID: 0}
     - target: {fileID: 8853170034161557234, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
         type: 3}

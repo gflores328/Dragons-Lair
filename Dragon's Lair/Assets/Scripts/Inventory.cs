@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 13, 2024 at 11:45 PM
+ * LAST MODIFIED ON: Feb 16, 2024 at 10:01 AM
  * 
  * Manages a list of items by
  * - Adding items
@@ -17,36 +17,42 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     //A list of items in the inventory
+    [Tooltip("List of Items to represent the inventory")]
     private static List<Item> inventory;
 
     //GABE ADDED
+    [Tooltip("Inventory UI Controller")]
     public InventoryUI inventoryUI;
     
     //Start is called before the first frame update
-    //Initializes the inventory list as an empty list of strings
+    //Initializes the inventory list as an empty list of Items
     void Start()
     {
         inventory = new List<Item>();
     }
 
-    //Adds one or more of the given item based on the item name
-    public void AddItem(Item newItem)
+    /*
+     * Adds the given item
+     * If an item with the same name already exists in the inventory, add the given item's quantity to the existing item
+     * If an item with the same name does NOT already exist in the inventory, add the new item
+     */
+    public void AddItem(Item givenItem)
     {
-        //The quantity of item being added must be a positive integer
-        if (newItem.GetQuantity() > 0)
+        //The quantity of the item being added must be a positive integer
+        if (givenItem.GetQuantity() > 0)
         {
             //Check to see if the item to be added already exists in the inventory
-            Item item = FindItem(newItem.GetName());
+            Item existingItem = FindItem(givenItem.GetName());
 
             //If the item isn't already in the inventory accept the given item
-            if (item == null)
+            if (existingItem == null)
             {
-                inventory.Add(newItem);
+                inventory.Add(givenItem);
             }
             //If the item does aready exist simply increase the quantity of the existing item
             else
             {
-                item.IncreaseQuantity(newItem.GetQuantity());
+                existingItem.IncreaseQuantity(givenItem.GetQuantity());
             }
 
             //Update the Inventory UI
@@ -55,17 +61,17 @@ public class Inventory : MonoBehaviour
     }
 
     //Removes a specific amount or all of a given item
-    private bool RemoveItem(Item newItem, bool removeAll)
+    private bool RemoveItem(Item givenItem, bool removeAll)
     {
         //A variable to keep track of whether the item has been removed or not
         //This is returned at the end of the function
         bool wasItemRemoved = false;
 
         //Check to see if the inventory has the item that is going to be removed
-        Item item = FindItem(newItem.GetName());
+        Item existingItem = FindItem(givenItem.GetName());
 
         //If the item doesn't already exist in the inventory, do nothing
-        if (item == null)
+        if (existingItem == null)
         {
             wasItemRemoved = false;
         }
@@ -73,17 +79,17 @@ public class Inventory : MonoBehaviour
         else
         {
             //Calculate the new quantity of the item
-            int newQuantity = item.GetQuantity() - newItem.GetQuantity();
+            int newQuantity = existingItem.GetQuantity() - givenItem.GetQuantity();
 
             //If the new quantity is less than one or if removeAll is true remove the item from the inventory completely
             if (removeAll || newQuantity < 1)
             {
-                inventory.Remove(item);
+                inventory.Remove(existingItem);
             }
-            //If the new quantity results in a postive integer simply decrease the quantity of the item
+            //If the new quantity results in a postive integer simply decrease the quantity of the existing item
             else
             {
-                item.DecreaseQuantity(newItem.GetQuantity());
+                existingItem.DecreaseQuantity(givenItem.GetQuantity());
             }
 
             //Mark that the item was removed

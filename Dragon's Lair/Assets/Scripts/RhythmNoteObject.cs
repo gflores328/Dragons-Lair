@@ -2,10 +2,11 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 12, 2024 at 10:59 PM
+ * LAST MODIFIED ON: Feb 16, 2024 at 2:10 PM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #1 - Hitting Notes https://www.youtube.com/watch?v=cZzf1FQQFA0
  *                    How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
+ *                    How To Make a Rhythm Game #4 - Timing Hits For Better Score https://www.youtube.com/watch?v=Oi0tT7QnFhs
  * 
  * Keeps track of if the note can be hit by the player.
  * Reports to the game manager if the note has been hit or missed.
@@ -24,11 +25,8 @@ public class RhythmNoteObject : MonoBehaviour
     [Tooltip("The key that needs to be pressed in order for the note to be hit.")]
     public KeyCode keyToPress;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Tooltip("Effects to be played for various note hit/miss conditions")]
+    public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
 
     // Update is called once per frame
     void Update()
@@ -38,8 +36,28 @@ public class RhythmNoteObject : MonoBehaviour
         {
             if (canBePressed)
             {
+                //Check the position of the note to determine the quality of the hit
                 //Tell the game manager that the note has been hit
-                RhythmGameManager.instance.NoteHit();
+                //Instantiate the appropriate particle effect
+                if (Mathf.Abs(transform.position.y) > 0.25f)
+                {
+                    Debug.Log("Hit");
+                    RhythmGameManager.instance.NormalHit();
+                    Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
+                }
+                else if (Mathf.Abs(transform.position.y) > 0.05f)
+                {
+                    Debug.Log("Good Hit");
+                    RhythmGameManager.instance.GoodHit();
+                    Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
+                }
+                else
+                {
+                    Debug.Log("Perfect Hit");
+                    RhythmGameManager.instance.PerfectHit();
+                    Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
+                }
+                
                 //Mark the note has having been hit
                 obtained = true;
                 //Deactivate the note
@@ -69,7 +87,10 @@ public class RhythmNoteObject : MonoBehaviour
             //For some reason trigger exits work differently in this build of Unity so this extra workaround is necessary
             if (!obtained)
             {
+                //Tell the game manager the note has been missed
                 RhythmGameManager.instance.NoteMissed();
+                //Instantiate the appropriate particle effect
+                Instantiate(missEffect, transform.position, missEffect.transform.rotation);
             }
         }
     }

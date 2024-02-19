@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
     public GameObject resumeButton; // Grabs the resume button so when paused the event system knows to select it first for the controller;
     public AsyncLoader asyncLoader;
     
+
+    private bool isMouse = true;
+
     private pauseState currentState;
     
     public enum pauseState
@@ -46,6 +50,28 @@ public class GameManager : MonoBehaviour
     {
         currentState = pauseState.Unpaused;
 
+    }
+
+    void Update()
+    {
+        // Check if any of the devices are Gamepads
+        bool isControllerConnected = Gamepad.current != null;
+
+        // If a controller is connected and it was previously using mouse, switch to controller
+        if (isControllerConnected && isMouse)
+        {
+            isMouse = false;
+            // Call a method or perform actions specific to controller input
+            // For example:
+            // SwitchToControllerInput();
+            Debug.Log("Switched to controller input");
+        }
+        // If no controller is connected and it was previously using controller, switch to mouse
+        else if (!isControllerConnected && !isMouse)
+        {
+            isMouse = true;
+            Debug.Log("Switched to mouse input");
+        }
     }
 
     

@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 12, 2024 at 10:49 PM
+ * LAST MODIFIED ON: Feb 16, 2024 at 2:10 PM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #1 - Hitting Notes https://www.youtube.com/watch?v=cZzf1FQQFA0
  * 
@@ -23,7 +23,7 @@ public class RhythmBeatScroller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Convert temp to beats per second
+        //Convert tempo to beats per second
         beatTempo /= 60f;
     }
 

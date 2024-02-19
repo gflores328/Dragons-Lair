@@ -28,6 +28,7 @@ public class RealPlayerMovement : MonoBehaviour
     //GABE ADDED
     private ItemInteraction itemInteraction;
     private DialogueTree dialogueTree;
+    private Interact interact;
 
     //
     private GameObject gameManagerObj;
@@ -135,7 +136,7 @@ public class RealPlayerMovement : MonoBehaviour
         // GABE ADDED
         if(currentInteractable != null && currentInteractable.tag == "InteractItem")
         {
-            itemInteraction.Interact();
+            interact.Interacted();
         }
         
        if(currentInteractable != null && currentInteractable.tag == "DialogueTree")
@@ -163,7 +164,7 @@ public class RealPlayerMovement : MonoBehaviour
         {
             Debug.Log(other.gameObject.name);
             currentInteractable = other.gameObject;
-            itemInteraction = currentInteractable.GetComponent<ItemInteraction>();
+            interact = currentInteractable.GetComponent<Interact>();
         }
 
         else if (other.tag == "DialogueTree")
