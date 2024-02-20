@@ -14,21 +14,21 @@ public class ChibiPlayerMovement : MonoBehaviour
     //public float jumpBufferDuration = 0.1f;
     //private float jumpBufferTimer = 0f;
     //private bool inRealLife = true; // A public bool to determine if the player is in real life or the arcade chibi world used to restrict movement
-    public LayerMask groundLayer;
-    public float groundRayLength = 1f;
+    public LayerMask groundLayer; // A layermask that holds the ground layer
+    public float groundRayLength = 1f; // the length of the ray that will check if the player is grounded
     
     private PlayerInput playerInput; // A private variable that is meant to grab the PlayerInput component that is attached to the player.
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
-    private InputAction jumpAction; 
+    private InputAction jumpAction; // A private variable that is meant to hold the jump action 
     private InputAction pauseAction; // A private variable that holds the pause action
-    private GameObject gameManagerObj;
-    private GameManager gameManager;
+    private GameObject gameManagerObj; // A gameObject variable that will hold the game manager game object
+    private GameManager gameManager; // A GameManger object that will hold the instance of the script of GameManger
     
-    private PlayerOneWay playerOneWay;
+    private PlayerOneWay playerOneWay; // Grabs the Player oneway script to access the isMOving down
     private Rigidbody playerRB; // A rigid body object which will hold the player's rigid body
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
-    private bool isGrounded;
-    static float playerHealth = 100f;
+    private bool isGrounded; // A bool to know if the player is grounded
+    static float playerHealth = 100f; // A float that holds the players health
     
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
     {
@@ -37,26 +37,26 @@ public class ChibiPlayerMovement : MonoBehaviour
     }
     void Start()
     {
-        playerRB = GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>();
-        walkAction = playerInput.actions.FindAction("Walk");
-        jumpAction = playerInput.actions.FindAction("Jump");
-        jumpAction.performed += OnJump;
-        playerOneWay = GetComponent<PlayerOneWay>();
-        pauseAction = playerInput.actions.FindAction("Pause");
-        pauseAction.performed += Pause;
-        gameManager = FindObjectOfType<GameManager>();
+        playerRB = GetComponent<Rigidbody>(); // Gets the rigid body of the player
+        playerInput = GetComponent<PlayerInput>(); // Gets the playerinput component
+        walkAction = playerInput.actions.FindAction("Walk"); // binds the walk action to the walk action that holds the inputs
+        jumpAction = playerInput.actions.FindAction("Jump"); // binds the jump to the jump buttons
+        jumpAction.performed += OnJump; // When action is performed it is assigned to the onJump function
+        playerOneWay = GetComponent<PlayerOneWay>(); // Gets the player one way script from the player
+        pauseAction = playerInput.actions.FindAction("Pause"); // Assigns the pause action to the pause action from the chibi movement
+        pauseAction.performed += Pause; // Assigns the on performed pause action to the pause function 
+        gameManager = FindObjectOfType<GameManager>(); // Finds the game manger in the scene
        
     }
 
-    void FixedUpdate()
+    void FixedUpdate() 
     {
-        ChibiMovePlayer();
-        isGrounded = IsGrounded();
+        ChibiMovePlayer(); // Calls the chibiMovePlayer function
+        isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
 
-        if (!isGrounded)
+        if (!isGrounded) // if the player is not grounded
         {
-            ApplyGravity();
+            ApplyGravity(); // Run the apply Gravity function
         }
         // else
         // {
@@ -67,10 +67,10 @@ public class ChibiPlayerMovement : MonoBehaviour
         // }
     }
 
-    void ChibiMovePlayer()
+    void ChibiMovePlayer() // Chibi move player function that moves and flips the player
     {
 
-        Vector2 direction = walkAction.ReadValue<Vector2>();
+        Vector2 direction = walkAction.ReadValue<Vector2>(); // gets the value of the walk action and assigns it to the direction
         if (direction.x > 0) // Moving right
 
         {
@@ -86,16 +86,16 @@ public class ChibiPlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1); // Flipped scale along x-axis
             
         }
-        Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
-        moveDirection = transform.TransformDirection(moveDirection);
-        playerRB.MovePosition(transform.position + moveDirection * Time.deltaTime * playerSpeedMultiplier);
+        Vector3 moveDirection = new Vector3(direction.x, 0, direction.y); // Move the player left or right depending on the movement of the move action assigns it to a vector 3
+        moveDirection = transform.TransformDirection(moveDirection); // the move direction is the transform direction that is needed to go the direction
+        playerRB.MovePosition(transform.position + moveDirection * Time.deltaTime * playerSpeedMultiplier); // THis is the function that moves the player by using time move direction and the player current position
     }
 
-    void OnJump(InputAction.CallbackContext context)
+    void OnJump(InputAction.CallbackContext context) // THe on jump that is called  when the jump button is pressed
     {
-        if (context.performed && IsGrounded() && !playerOneWay.isMovingDown)
+        if (context.performed && IsGrounded() && !playerOneWay.isMovingDown) // if it is performed and the player is grounded and it is not moving down then allow it to jump
         {
-            playerRB.velocity = new Vector2(playerRB.velocity.x, jumpForce);
+            playerRB.velocity = new Vector2(playerRB.velocity.x, jumpForce); // Push the player up
         }
         
         // Debug.Log("started jumping");
@@ -107,16 +107,16 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     
 
-    void ApplyGravity()
+    void ApplyGravity() // Apply the gravity function which pushed the player down
     {
-        playerRB.AddForce(Vector3.down * gravityForce);
+        playerRB.AddForce(Vector3.down * gravityForce); // Push the player in the down direction by adding force down
     }
 
-    bool IsGrounded()
+    bool IsGrounded() // A function that returns a bool if the raycast hits the ground
     {
         
 
-        Vector3 rayOrigin = transform.position + Vector3.down * .5f;
+        Vector3 rayOrigin = transform.position + Vector3.down * .5f; // Shoots it from the players feet
 
         // Cast a ray downward to check if the player is on the ground
         bool isHit = Physics.Raycast(rayOrigin, Vector3.down, groundRayLength, groundLayer);
@@ -126,24 +126,24 @@ public class ChibiPlayerMovement : MonoBehaviour
         //Debug.Log(isGrounded); // Comment to see if grounded is true
 
 
-        return isHit;
+        return isHit; // return the result
         
     }
-    private void Pause(InputAction.CallbackContext value)
+    private void Pause(InputAction.CallbackContext value) // The pause function that is called when the button is pressed
     {
-        Debug.Log("Paused");
-        gameManager.PauseGame();
+        //Debug.Log("Paused");
+        gameManager.PauseGame(); // Calls the pause function from the game manager script
     }
     public void takeDamage(float dmgAmount) // The amount put in here will be subtracted 
     {
-        playerHealth -= dmgAmount;
+        playerHealth -= dmgAmount; // Substract the damage amount from the players health
     }
-    private void die()
+    private void die() // Checks to see if the player needs to die
     {
-        if(playerHealth <= 0f)
+        if(playerHealth <= 0f) // player health hits zero
 
            { 
-                Destroy(this);
+                Destroy(this); // Destroy player
            }
         
     }

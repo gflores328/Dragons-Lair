@@ -3,6 +3,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
+
+// GameManager 
+// Created by Jo Marie and Aaron Torres
+// Controles the pause function and the level switching by using
 public class GameManager : MonoBehaviour
 {
     #region Fields
@@ -18,16 +22,16 @@ public class GameManager : MonoBehaviour
     public AsyncLoader asyncLoader;
     
 
-    private bool isMouse = true;
+    private bool isMouse = true; // A bool variable to see if the mouse is connected or the controller
 
-    private pauseState currentState;
+    private pauseState currentState; // A variable that is type of the enum created pause state
     
-    public enum pauseState
+    public enum pauseState // pauseState Enum that has paused or unpaused states
     {
         Paused,
         Unpaused,
     }
-    // make your canvas active from a disables state by calling this method
+    
     
 
     #endregion
@@ -48,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        currentState = pauseState.Unpaused;
+        currentState = pauseState.Unpaused; // The Game should not start paused when loaded in
 
     }
 
@@ -60,17 +64,14 @@ public class GameManager : MonoBehaviour
         // If a controller is connected and it was previously using mouse, switch to controller
         if (isControllerConnected && isMouse)
         {
-            isMouse = false;
-            // Call a method or perform actions specific to controller input
-            // For example:
-            // SwitchToControllerInput();
-            Debug.Log("Switched to controller input");
+            isMouse = false; // Switch to controller 
+            
         }
         // If no controller is connected and it was previously using controller, switch to mouse
         else if (!isControllerConnected && !isMouse)
         {
-            isMouse = true;
-            Debug.Log("Switched to mouse input");
+            isMouse = true; // switch to mouse
+           
         }
     }
 
@@ -83,10 +84,10 @@ public class GameManager : MonoBehaviour
 
     public void hidePanel(GameObject currentPanel) //hides a panel from an active state
     {
-        currentPanel.SetActive(false);
+        currentPanel.SetActive(false); 
     }
 
-    public void showPanel(GameObject currentPanel)
+    public void showPanel(GameObject currentPanel) //Shows the panel by making an active state
     {
         currentPanel.SetActive(true);
         
@@ -101,29 +102,33 @@ public class GameManager : MonoBehaviour
 
     
 
-    public void PauseGame()
+    public void PauseGame() // Pause game function that switches between pause and unpause
     {
-        if(currentState == pauseState.Unpaused)
+        if(currentState == pauseState.Unpaused) // If the game is unpaused flip it and pause the game.
         {
             //Cursor.lockState = CursorLockMode.None;
-            showPanel(pauseMenu);
-            Time.timeScale = 0;
-            currentState = pauseState.Paused;
-            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(resumeButton);
+            showPanel(pauseMenu); //Show the pause menu
+            Time.timeScale = 0; // Pause the game by setting time to 0
+            currentState = pauseState.Paused; // Change the current state to paused
+            if(!isMouse)
+            {
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(resumeButton); // Select the top button when paused if a controller is connected
+            }
+            
         }
         else if(currentState == pauseState.Paused)
         {
             //Cursor.lockState = CursorLockMode.Locked;
-            hidePanel(pauseMenu);
-            Time.timeScale = 1;
-            currentState = pauseState.Unpaused;
+            hidePanel(pauseMenu); // Hide the pause menu
+            Time.timeScale = 1; // Resume the game time
+            currentState = pauseState.Unpaused; // Set the current state to unpaused
         }
         
     }
 
     
 
-    public void Quit() //press Q to quit the game
+    public void Quit() //Function to call to quit the game
     {
        
         Application.Quit();
@@ -132,24 +137,24 @@ public class GameManager : MonoBehaviour
 
     
 
-    public void LoadLevelbyName(string levelName) //allows for the selections of what level to load into on inspector
+    public void LoadLevelbyName(string levelName) //A function that allows the loading of the level by the name of the level usinge normal load scene
     {
         SceneManager.LoadScene(levelName);
     }
 
-    public void LoadSceneAsync(string sceneName)
+    public void LoadSceneAsync(string sceneName) // A function that allows a loading screen before loading the level
     {
-        if (asyncLoader != null)
+        if (asyncLoader != null) // check there is an asyncLoader 
         {
             // Set the scene to load in the asyncLoader
             asyncLoader.sceneToLoad = sceneName;
             // Enable the asyncLoader to start loading the scene
             asyncLoader.enabled = true;
-            asyncLoader.runAsync();
+            asyncLoader.runAsync(); // calls the runAsync function from the asycnLoaderScript
         }
         else
         {
-            Debug.LogError("AsyncLoader reference not set in GameManager!");
+            Debug.LogError("AsyncLoader reference not set in GameManager!"); // Deploy Error message To he console
         }
     }
 

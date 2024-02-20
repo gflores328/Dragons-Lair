@@ -11,14 +11,14 @@ public class ArmRotation : MonoBehaviour
     public float maxRotationAngle = 45f; // Maximum rotation angle in degrees
     public float targetYRotation = 90f; // Target Y rotation
     private Vector2 lastMousePosition; // Last mouse position in screen space
-    private Camera mainCamera;
+    private Camera mainCamera; // Canera that will hold the reference for the cursor 
     private Quaternion initialRotation; // Initial rotation of the arm
 
     private void Start()
     {
-        // Store the initial rotation of the arm
-        initialRotation = armPivot.localRotation;
-        mainCamera = Camera.main;
+       
+        initialRotation = armPivot.localRotation;  // Store the initial rotation of the arm
+        mainCamera = Camera.main; // sets the mainCamera object to the game main camera object
     }
 
     private void OnEnable()
@@ -40,30 +40,26 @@ public class ArmRotation : MonoBehaviour
         if (context.control.device is Gamepad)
         {
             Vector2 input = context.ReadValue<Vector2>(); // Read input value
-            if(input.y <= 1.0f && input.y >= 0.9f)
+            if(input.y <= 1.0f && input.y >= 0.9f) // If the joy stick is going to the top  these are the parameters
             {
-                armPivot.localRotation = Quaternion.Euler(-90f, 90f, 0f);
+                armPivot.localRotation = Quaternion.Euler(-90f, 90f, 0f); // rotate the gun all the way up
 
             }
-            else if(input.y < 0.9f && input.y >= 0.5f) 
+            else if(input.y < 0.9f && input.y >= 0.5f) // If the joy stick is going to the top right or left
             {
-                armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f);
+                armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f); // rotate the gun to the top right or left 
             }
-            // else if(input.y >= -1.0f && input.y <= -0.9f)
-            // {
-            //     armPivot.localRotation = Quaternion.Euler(90f, 90f, 0f);
-
-            // }
-            else if(input.y >= -0.9f && input.y <= -0.5f) 
+            
+            else if(input.y >= -0.9f && input.y <= -0.5f) // if the joy stick is pointed to the bottom right or left 
             {
-                armPivot.localRotation = Quaternion.Euler(45f, 90f, 0f);
+                armPivot.localRotation = Quaternion.Euler(45f, 90f, 0f); // rotate the gun to the bottom right and left
             }
             else
             {
-                armPivot.localRotation = Quaternion.Euler(0f, 90f, 0f);
+                armPivot.localRotation = Quaternion.Euler(0f, 90f, 0f); // if not moving the joystick point it forward
             }
         }
-        else if (context.control.device is Mouse)
+        else if (context.control.device is Mouse) // If not using a controller it must use the cursor
         {
             // Get the current mouse position
             Vector3 mousePosition = Input.mousePosition;
