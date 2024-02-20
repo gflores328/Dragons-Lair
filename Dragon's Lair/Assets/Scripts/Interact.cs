@@ -57,7 +57,8 @@ public class Interact : MonoBehaviour
     private List<DialogueWithName> dialogueBranches;
     [HideInInspector, SerializeField]
     private GameObject questionUI;
-    [SerializeField] GameObject firstButton;
+    [SerializeField, HideInInspector] 
+    GameObject firstButton;
 
     // Variables for checking if an item is needed to interact
     [HideInInspector, SerializeField]
@@ -247,7 +248,12 @@ public class Interact : MonoBehaviour
                 interact.menuUI = EditorGUILayout.ObjectField(interact.menuUI, typeof(GameObject),true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
 
-                
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("First Button", GUILayout.MaxWidth(126));
+                interact.firstButton = EditorGUILayout.ObjectField(interact.firstButton, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
+                EditorGUILayout.EndHorizontal();
+
+
             }
 
             if(interact.interactionType == InteractionType.item)
@@ -278,6 +284,11 @@ public class Interact : MonoBehaviour
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Questions UI", GUILayout.MaxWidth(126));
                 interact.questionUI = EditorGUILayout.ObjectField(interact.questionUI, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("First Button", GUILayout.MaxWidth(126));
+                interact.firstButton= EditorGUILayout.ObjectField(interact.firstButton, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.Space();
