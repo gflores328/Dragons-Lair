@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 545156521681365858}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.020945072, y: 0.03, z: -0.68099976}
+  m_LocalPosition: {x: 0.016, y: 0, z: -0.662}
   m_LocalScale: {x: 0.25569314, y: 0.22333154, z: 0.92717475}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -78,6 +78,9 @@ GameObject:
   - component: {fileID: 2216240655436234287}
   - component: {fileID: 4452075940523032472}
   - component: {fileID: 4646314587350214425}
+  - component: {fileID: 7112737368637150450}
+  - component: {fileID: 84233016656146126}
+  - component: {fileID: 3673441571437299980}
   m_Layer: 8
   m_Name: PlayerW_Gun
   m_TagString: Player
@@ -189,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: ee89979ffb1c10d49a0c463a6c04ce8e,
     type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -200,7 +203,47 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7db88024-69fd-43b9-82a7-c9aea4bbfb61
+    m_ActionName: RealLifeMovement/Walk[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 95fbee9f-1f9c-45c8-bdff-9e80ba6de10f
+    m_ActionName: RealLifeMovement/Pause[/Keyboard/escape,/Keyboard/p,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a8abb086-f728-4834-a6cd-2eb491c7d9dd
+    m_ActionName: RealLifeMovement/Interact[/Keyboard/e,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 11137cdb-eb3e-45fb-a612-a18f7be3c9bb
+    m_ActionName: RealLifeMovement/Look[/Mouse/position,/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 687187da-e4b0-45be-9481-92bd547ee7a8
+    m_ActionName: ChibiMovement/Walk[/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ee412373-8419-4f57-937b-267f890b2195
+    m_ActionName: ChibiMovement/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f1d17d3-8404-4912-9bfd-9013b57843d2
+    m_ActionName: ChibiMovement/Pause[/Keyboard/escape,/Keyboard/p,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8175e984-318c-4135-b252-6a9e13fb7d52
+    m_ActionName: ChibiMovement/Aim[/Mouse/delta,/XInputControllerWindows/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c39fb244-2757-45fb-b105-d935847c6347
+    m_ActionName: ChibiMovement/Fire[/Mouse/leftButton,/XInputControllerWindows/buttonWest,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f6b1a9eb-e9ee-416e-a135-781d82946adf
+    m_ActionName: ChibiMovement/Down[/Keyboard/s,/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: ChibiMovement
@@ -231,7 +274,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!114 &4646314587350214425
 MonoBehaviour:
@@ -247,13 +290,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeedMultiplier: 5
   maxForce: 2
-  jumpForce: 8
+  jumpForce: 13
   gravityForce: 9.81
-  inRealLife: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
   groundRayLength: 1
+--- !u!114 &7112737368637150450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453006537471203003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa60e8cf6339a9443841382430e2ac02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimAction: {fileID: 5979198381072014160, guid: ee89979ffb1c10d49a0c463a6c04ce8e,
+    type: 3}
+  armPivot: {fileID: 5593056612105285791}
+  rotationSpeed: 5
+  maxRotationAngle: 45
+  targetYRotation: 90
+--- !u!114 &84233016656146126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453006537471203003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54f246bc7d3cda49b136da6ce779bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downAction: {fileID: -7938134971223447537, guid: ee89979ffb1c10d49a0c463a6c04ce8e,
+    type: 3}
+  playerCollider: {fileID: 2587964116773383494}
+  isMovingDown: 0
+--- !u!65 &3673441571437299980
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453006537471203003}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5318055, y: 0.27625275, z: 1}
+  m_Center: {x: 0.052802324, y: 1.2708664, z: 0}
 --- !u!1001 &2504953410428209818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -280,18 +377,23 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 4601176893083455661, guid: 79e1e66ebdfd6fb41b8a8455782654b7,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2324506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601176893083455661, guid: 79e1e66ebdfd6fb41b8a8455782654b7,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.214
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601176893083455661, guid: 79e1e66ebdfd6fb41b8a8455782654b7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601176893083455661, guid: 79e1e66ebdfd6fb41b8a8455782654b7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6823
+      value: 0.7855
       objectReference: {fileID: 0}
     - target: {fileID: 4601176893083455661, guid: 79e1e66ebdfd6fb41b8a8455782654b7,
         type: 3}
@@ -328,7 +430,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 150207942122085290, guid: 79e1e66ebdfd6fb41b8a8455782654b7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

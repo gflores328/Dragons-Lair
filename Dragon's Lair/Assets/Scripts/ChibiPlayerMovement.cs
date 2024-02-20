@@ -44,6 +44,7 @@ public class ChibiPlayerMovement : MonoBehaviour
         jumpAction.performed += OnJump;
         playerOneWay = GetComponent<PlayerOneWay>();
         pauseAction = playerInput.actions.FindAction("Pause");
+        pauseAction.performed += Pause;
         gameManager = FindObjectOfType<GameManager>();
        
     }
@@ -130,7 +131,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     }
     private void Pause(InputAction.CallbackContext value)
     {
-        //Debug.Log("Paused");
+        Debug.Log("Paused");
         gameManager.PauseGame();
     }
     public void takeDamage(float dmgAmount) // The amount put in here will be subtracted 
