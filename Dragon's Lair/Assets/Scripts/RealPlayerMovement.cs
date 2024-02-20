@@ -22,12 +22,12 @@ public class RealPlayerMovement : MonoBehaviour
     private InputAction pauseAction; // A private variable that holds the pause action
     private CharacterController characterController; // A Character Controller object which will hold the player's character controller
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
-    private DialougeInteraction dialougeInteraction;
-    private MenuInteraction menuInteraction;
+//    private DialougeInteraction dialougeInteraction;
+   // private MenuInteraction menuInteraction;
 
     //GABE ADDED
-    private ItemInteraction itemInteraction;
-    private DialogueTree dialogueTree;
+   // private ItemInteraction itemInteraction;
+    //private DialogueTree dialogueTree;
     private Interact interact;
 
     //
@@ -126,11 +126,11 @@ public class RealPlayerMovement : MonoBehaviour
     {
         if(currentInteractable != null && currentInteractable.tag == "InteractMenu")
         {
-            menuInteraction.Interact();
+            //menuInteraction.Interact();
         }
         if(currentInteractable != null && currentInteractable.tag == "Interact")
         {
-           dialougeInteraction.Interact();
+         //  dialougeInteraction.Interact();
         }
 
         // GABE ADDED
@@ -141,7 +141,7 @@ public class RealPlayerMovement : MonoBehaviour
         
        if(currentInteractable != null && currentInteractable.tag == "DialogueTree")
         {
-            dialogueTree.Interact();
+            //dialogueTree.Interact();
         }
     }
   
@@ -150,13 +150,13 @@ public class RealPlayerMovement : MonoBehaviour
         if(other.tag == "InteractMenu")
         {
             currentInteractable = other.gameObject;
-            menuInteraction = currentInteractable.GetComponent<MenuInteraction>();
+           // menuInteraction = currentInteractable.GetComponent<MenuInteraction>();
         }
         else if(other.tag == "Interact")
         {
             Debug.Log(other.gameObject.name);
             currentInteractable = other.gameObject;
-            dialougeInteraction = currentInteractable.GetComponent<DialougeInteraction>();
+            //dialougeInteraction = currentInteractable.GetComponent<DialougeInteraction>();
         }
 
         // GABE ADDED
@@ -171,7 +171,7 @@ public class RealPlayerMovement : MonoBehaviour
         {
             Debug.Log(other.gameObject.name);
             currentInteractable = other.gameObject;
-            dialogueTree = currentInteractable.GetComponent<DialogueTree>();
+           // dialogueTree = currentInteractable.GetComponent<DialogueTree>();
         }
 
     }
