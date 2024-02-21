@@ -1,40 +1,59 @@
+/*
+ * Created By: Gabriel Flores
+ * 
+ * This script contains the code that will allow the newt enemy to fire a bullet towards the player when it enters its trigger
+ * 
+ * 
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NewtFire : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject bulletPrefab;
-    public float bulletSpeed;
+    public GameObject player; // The game object that represents the player
+    public GameObject bulletPrefab; // The game object for the bullet prefab
+    public float bulletSpeed; // The speed of the buller
 
-    private Vector3 fireDirection;
-    private bool firing = false;
+    private Vector3 fireDirection; // The direction that the bullet will be shot in
+    private bool firing = false; // A bool to check if the enemy is firing or not
 
     private void Update()
-    {
+    {   
+        // fireDirection is set to the direction of the player from the position of this game object
         fireDirection = (player.transform.position - transform.position).normalized;
     }
+
+    
     private void OnTriggerStay(Collider other)
     {
+        // While the player is on the trigger and firing is false
         if (other.tag == "Player" && !firing)
         {
+            // ShootWithDelay is started
             StartCoroutine(ShootWithDelay());
         }
     }
 
+    // This function will shoot a bullet at the player and then wait 2 seconds
     IEnumerator ShootWithDelay()
     {
-        Debug.Log("Firing");
+        // firing is set to true
         firing = true;
+        
+        // The bullet prefab is cloned to a new object called clonedBullet
         GameObject clonedBullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity);
+
+        // Force is applied to the clonedBullet in the direction of the player times the bullet speed
         Rigidbody rb = clonedBullet.GetComponent<Rigidbody>();
         rb.velocity = fireDirection * bulletSpeed;
 
         
-
+        // Wait for 2 seconds and then destroy the clonedBullet
         yield return new WaitForSeconds(2);
         Destroy(clonedBullet);
+
+        // firing set to false to allow a new bullet to be shot
         firing = false;
     }
 
