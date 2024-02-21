@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject resumeButton; // Grabs the resume button so when paused the event system knows to select it first for the controller;
     public AsyncLoader asyncLoader;
     
+    public bool mainMenu = false;
 
     private bool isMouse = true; // A bool variable to see if the mouse is connected or the controller
 
@@ -64,14 +65,17 @@ public class GameManager : MonoBehaviour
         // If a controller is connected and it was previously using mouse, switch to controller
         if (isControllerConnected && isMouse)
         {
-            isMouse = false; // Switch to controller 
-            
+            isMouse = false; // Switch to controller
+            if(mainMenu)
+            {
+                SetButtonForController(resumeButton);
+            }
         }
         // If no controller is connected and it was previously using controller, switch to mouse
         else if (!isControllerConnected && !isMouse)
         {
             isMouse = true; // switch to mouse
-           
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
         }
     }
 
@@ -158,5 +162,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetButtonForController(GameObject gameObject)
+    
+    {
+        if(!isMouse)
+
+        {
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(gameObject);
+        }
+    }
+    
+    public void setMainMenuBool(bool newBool)
+    {
+        mainMenu = newBool;
+    }
     #endregion
 }
