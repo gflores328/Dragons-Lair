@@ -17,9 +17,16 @@ public class AsyncLoader : MonoBehaviour
     private Slider sliderBar; //slider for progress
     public GameObject loadingScreen;
     // Start is called before the first frame update
+
+    public GameObject gameState; // The game object that will hold the GameState object
+    private Scene scene; // A variable to hold the current scene
     void Start()
     {
+        
         spaceText.enabled = false; //hide the spacebar text 
+
+        scene = SceneManager.GetActiveScene(); // scene is set to the active scene
+        gameState = GameObject.Find("GameState"); // gameState is set to find GameState
     }
 
     // Update is called once per frame
@@ -36,6 +43,14 @@ public class AsyncLoader : MonoBehaviour
             loadingScreen.SetActive(true);
             sceneLoaded = true;
             StartCoroutine(LoadNewScene(sceneToLoad));
+
+            // If the current scene is LevelDesignRealLife
+            if (scene.name == "LevelDesignRealLife")
+            {
+                // First time load is set to false and the position of Player is stored
+                gameState.GetComponent<GameState>().SetFirstTimeLoad(false);
+                gameState.GetComponent<GameState>().SetPlayerPosition(GameObject.Find("Player").transform.position);
+            }
         }
     }
     IEnumerator LoadNewScene(string sceneName)

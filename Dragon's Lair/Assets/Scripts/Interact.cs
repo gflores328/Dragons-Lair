@@ -34,8 +34,8 @@ public class Interact : MonoBehaviour
     [Tooltip("A bool that is used to set whether or not the interaction needs a certain Item")]
     public bool needItem;
 
-    public static DialogueWithName dialogueToDisplay; // A dialogueWitName object to hold the dialogue that needs to be displayed
-    public static int currentLine = 0; // An into to see which line of the array in dialogueToDisplay is being shown
+    public DialogueWithName dialogueToDisplay; // A dialogueWitName object to hold the dialogue that needs to be displayed
+    public int currentLine = 0; // An into to see which line of the array in dialogueToDisplay is being shown
     //private bool inDialogue = false; // A bool to check if whether or not the player is in dialogue or not
     private bool hasItemNeeded = true; // A bool to check if the player has the item needed to interact
 
@@ -44,7 +44,7 @@ public class Interact : MonoBehaviour
     [HideInInspector, SerializeField]
     private GameObject menuUI;
 
-    public static bool menuOpen; // A bool that checks to see if the menu is open
+    public bool menuOpen; // A bool that checks to see if the menu is open
 
     // Variables for item type interact
     [HideInInspector, SerializeField]
@@ -69,18 +69,7 @@ public class Interact : MonoBehaviour
     private void Start()
     {
         dialogueToDisplay = interactDialogue;
-    }
-
-    private void Update()
-    {
-        if (menuOpen && interactionType == InteractionType.dialogue)
-        {
-            questionUI.SetActive(true);
-        }
-        else if(!menuOpen && interactionType == InteractionType.dialogue)
-        {
-            questionUI.SetActive(false);
-        }
+        inventory = GameObject.Find("Inventory");
     }
 
     // When player steps onto the trigger then the prompt to interact is shown
@@ -132,15 +121,16 @@ public class Interact : MonoBehaviour
     // Everytime this script is called it checks which enem type is selected and will run differently according to that
     public void Interacted()
     {
-        // Time scale is set to 0 when interact is run
-        Time.timeScale = 0;
-
+       
         // This if is multi purpose and will run if interaction type is inspect or if hasItemNeeded is false 
         if (interactionType == InteractionType.inspect || !hasItemNeeded)
         {
             // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
+                // Time scale is set to 0 when interact is run
+                Time.timeScale = 0;
+
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
@@ -158,9 +148,13 @@ public class Interact : MonoBehaviour
         {
             // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
-            {
+            { 
+                // Time scale is set to 0 when interact is run
+                Time.timeScale = 0;
+
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
+
             }
             // When dialogue is over then the menuUI will be set active
             else
@@ -180,6 +174,9 @@ public class Interact : MonoBehaviour
             // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
+                // Time scale is set to 0 when interact is run
+                Time.timeScale = 0;
+
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
@@ -200,6 +197,9 @@ public class Interact : MonoBehaviour
             // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
+                // Time scale is set to 0 when interact is run
+                Time.timeScale = 0;
+
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
@@ -280,10 +280,12 @@ public class Interact : MonoBehaviour
                 interact.itemToPickup = EditorGUILayout.ObjectField(interact.itemToPickup, typeof(Item), true, GUILayout.MaxWidth(220)) as Item;
                 EditorGUILayout.EndHorizontal();
 
+                /*
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Inventory", GUILayout.MaxWidth(126));
                 interact.inventory = EditorGUILayout.ObjectField(interact.inventory, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
+                */
             }
            
             if(interact.interactionType == InteractionType.dialogue)
@@ -328,11 +330,12 @@ public class Interact : MonoBehaviour
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Need Item", EditorStyles.boldLabel);
 
+                /*
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Inventory", GUILayout.MaxWidth(126));
                 interact.inventory = EditorGUILayout.ObjectField(interact.inventory, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
-
+                */
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Item Needed", GUILayout.MaxWidth(126));
                 interact.itemNeeded = EditorGUILayout.ObjectField(interact.itemNeeded, typeof(Item), true, GUILayout.MaxWidth(220)) as Item;

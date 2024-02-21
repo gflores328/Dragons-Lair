@@ -31,6 +31,7 @@ public class Inventory : MonoBehaviour
         inventory = new List<Item>();
     }
 
+
     /*
      * Adds the given item
      * If an item with the same name already exists in the inventory, add the given item's quantity to the existing item
