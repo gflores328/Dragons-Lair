@@ -34,8 +34,8 @@ public class Interact : MonoBehaviour
     [Tooltip("A bool that is used to set whether or not the interaction needs a certain Item")]
     public bool needItem;
 
-    private DialogueWithName dialogueToDisplay; // A dialogueWitName object to hold the dialogue that needs to be displayed
-    private int currentLine = 0; // An into to see which line of the array in dialogueToDisplay is being shown
+    public static DialogueWithName dialogueToDisplay; // A dialogueWitName object to hold the dialogue that needs to be displayed
+    public static int currentLine = 0; // An into to see which line of the array in dialogueToDisplay is being shown
     //private bool inDialogue = false; // A bool to check if whether or not the player is in dialogue or not
     private bool hasItemNeeded = true; // A bool to check if the player has the item needed to interact
 
@@ -44,7 +44,7 @@ public class Interact : MonoBehaviour
     [HideInInspector, SerializeField]
     private GameObject menuUI;
 
-    private bool menuOpen; // A bool that checks to see if the menu is open
+    public static bool menuOpen; // A bool that checks to see if the menu is open
 
     // Variables for item type interact
     [HideInInspector, SerializeField]
@@ -69,6 +69,18 @@ public class Interact : MonoBehaviour
     private void Start()
     {
         dialogueToDisplay = interactDialogue;
+    }
+
+    private void Update()
+    {
+        if (menuOpen && interactionType == InteractionType.dialogue)
+        {
+            questionUI.SetActive(true);
+        }
+        else if(!menuOpen && interactionType == InteractionType.dialogue)
+        {
+            questionUI.SetActive(false);
+        }
     }
 
     // When player steps onto the trigger then the prompt to interact is shown

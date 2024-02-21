@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject nameBox;
     [Tooltip("The text UI to show the name")]
     public TextMeshProUGUI nameText;
+    [Tooltip ("Questions UI")]
     
 
     // This function will take a string variable and start the dialogue by showing the UI
@@ -62,6 +63,14 @@ public class DialogueManager : MonoBehaviour
 
         dialogueText.text = dialogueAndName.dialogue;
         nameText.text = dialogueAndName.name;
+    }
+
+    public void QuestionClicked(DialogueWithName dialogue)
+    {
+        Interact.dialogueToDisplay = dialogue;
+        StartDialogue(dialogue.dialogueArray[0]);
+        Interact.menuOpen = false;
+        Interact.currentLine++;
     }
 
 }
