@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 //Created by Aaron Torres
 //Script Title: Chibi PlayerMovement
@@ -136,15 +137,19 @@ public class ChibiPlayerMovement : MonoBehaviour
     }
     public void takeDamage(float dmgAmount) // The amount put in here will be subtracted 
     {
-        playerHealth -= dmgAmount; // Substract the damage amount from the players health
+        
+        playerHealth -= dmgAmount;
+        if(playerHealth <= 0f)
+            {
+                die();
+            } // Substract the damage amount from the players health
+        Debug.Log($"I have been Hit! Health: {playerHealth}");
     }
+
     private void die() // Checks to see if the player needs to die
     {
-        if(playerHealth <= 0f) // player health hits zero
-
-           { 
-                Destroy(this); // Destroy player
-           }
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        gameManager.LoadSceneAsync(currentSceneName);
         
     }
   

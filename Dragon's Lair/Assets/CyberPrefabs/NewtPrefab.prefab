@@ -26,17 +26,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6e89ad96352e2b34db54550c4166a9b5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100.829994
+      value: 20.77
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e89ad96352e2b34db54550c4166a9b5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.3899975
+      value: 39.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e89ad96352e2b34db54550c4166a9b5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.21
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e89ad96352e2b34db54550c4166a9b5,
         type: 3}
@@ -96,12 +96,17 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6e89ad96352e2b34db54550c4166a9b5,
         type: 3}
       propertyPath: m_Name
-      value: NewtPlaceHolder
+      value: NewtPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6e89ad96352e2b34db54550c4166a9b5,
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e89ad96352e2b34db54550c4166a9b5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4444558461230370346, guid: 6e89ad96352e2b34db54550c4166a9b5,
         type: 3}
@@ -120,11 +125,7 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 114998181529431742}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6e89ad96352e2b34db54550c4166a9b5,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8104556033047848669}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e89ad96352e2b34db54550c4166a9b5, type: 3}
 --- !u!4 &476431012471850624 stripped
 Transform:
@@ -132,35 +133,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 78291851624325483}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &997353630827617338 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6e89ad96352e2b34db54550c4166a9b5,
-    type: 3}
-  m_PrefabInstance: {fileID: 78291851624325483}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &8104556033047848669
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997353630827617338}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.0503782
-  m_Height: 6.9952908
-  m_Direction: 1
-  m_Center: {x: -0.55037844, y: 2.9976454, z: -7.159224e-16}
 --- !u!1001 &6762362528547668871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,6 +150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 237481852295462172, guid: 6f449f2cca8777c4c961a7967b8100d6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6647368956440980793, guid: 6f449f2cca8777c4c961a7967b8100d6,
         type: 3}
@@ -228,6 +205,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845937064323661761, guid: 6f449f2cca8777c4c961a7967b8100d6,
+        type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

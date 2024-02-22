@@ -57,4 +57,6 @@ public class NewtFire : MonoBehaviour
         firing = false;
     }
 
+    
+   
 }

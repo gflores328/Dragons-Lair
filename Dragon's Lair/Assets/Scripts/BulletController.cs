@@ -12,6 +12,7 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public float speed = 15; // Movement speed of the bullet (Default = 15)
+    public float damageAmount = 50;
 
     private ParticleSystem part; // Particle System
     private List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>(); // For particle collision
@@ -30,7 +31,19 @@ public class BulletController : MonoBehaviour
         // If particle hits an enemy
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Hit " + other.gameObject); // Debug message
+            // Get the Enemy component from the collided GameObject
+            Enemy enemy = other.GetComponent<Enemy>();
+
+            // Check if the enemy component exists
+            if (enemy != null)
+            {
+                // Call the TakeDamage function of the enemy with the specified damage amount
+                enemy.TakeDamage(damageAmount);
+            }
+            else
+            {
+                Debug.LogError("Enemy component not found on " + other.gameObject.name);
+            }
         }
     }
 

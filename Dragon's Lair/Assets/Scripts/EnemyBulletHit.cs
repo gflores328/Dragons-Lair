@@ -11,10 +11,22 @@ using UnityEngine;
 
 public class EnemyBulletHit : MonoBehaviour
 {
+    public float damageAmount = 10f; // Amount of damage the bullet does to the player
 
     private void OnCollisionEnter(Collision collision)
     { 
-        // When this object hits anything it is destroyed
-            Destroy(gameObject);   
+        // Check if the collided object has a ChibiPlayerMovement component (assuming the player has this component)
+        ChibiPlayerMovement player = collision.gameObject.GetComponent<ChibiPlayerMovement>();
+
+        // If the collided object is the player and we found the ChibiPlayerMovement component
+        if (player != null)
+        {
+            // Call the player's takeDamage function and pass the damage amount
+            player.takeDamage(damageAmount);
+
+            
+        }
+        // Destroy the bullet gameObject
+        Destroy(gameObject);
     }
 }
