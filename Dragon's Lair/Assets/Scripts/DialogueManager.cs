@@ -37,6 +37,7 @@ public class DialogueManager : MonoBehaviour
     {
         textBox.SetActive(true);
         dialogueText.text = dialogue;
+        //Cursor.lockState = CursorLockMode.None;
     }
 
     // This function will be used to switch the UI off
@@ -46,6 +47,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = null;
         nameBox.SetActive(false);
         nameText.text = null;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     // This function will be used to change the text using a string that was passed through

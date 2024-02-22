@@ -121,7 +121,7 @@ public class Interact : MonoBehaviour
     // Everytime this script is called it checks which enem type is selected and will run differently according to that
     public void Interacted()
     {
-       
+        //Cursor.lockState = CursorLockMode.None;
         // This if is multi purpose and will run if interaction type is inspect or if hasItemNeeded is false 
         if (interactionType == InteractionType.inspect || !hasItemNeeded)
         {
@@ -139,7 +139,8 @@ public class Interact : MonoBehaviour
             { 
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 currentLine = 0;
-                Time.timeScale = 1;            
+                Time.timeScale = 1;
+                //Cursor.lockState = CursorLockMode.Locked;            
             }
         }
 
@@ -358,6 +359,7 @@ public class Interact : MonoBehaviour
 
         public void ClearPanels()
         {
+            //Cursor.lockState = CursorLockMode.Locked;
             Interact interact = (Interact)target;
 
             interact.menuUI = null;

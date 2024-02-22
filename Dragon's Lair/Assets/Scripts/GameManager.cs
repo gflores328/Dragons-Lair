@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     [Header("UI Components Needed")]
     
     public GameObject pauseMenu; // The pause menu used to turn it active and not active
+
     public GameObject resumeButton; // Grabs the resume button so when paused the event system knows to select it first for the controller;
+
     public AsyncLoader asyncLoader;
     
     public bool mainMenu = false;
@@ -177,4 +179,6 @@ public class GameManager : MonoBehaviour
         mainMenu = newBool;
     }
     #endregion
+
+    
 }
