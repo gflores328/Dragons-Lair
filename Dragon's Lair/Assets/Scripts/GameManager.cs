@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     
 
     [Header("UI Components Needed")]
-    [Tooltip("Panel GameObject in inspector pairs with a chosen UI panel to add make active/hide functionality")]
+    
     public GameObject pauseMenu; // The pause menu used to turn it active and not active
     public GameObject resumeButton; // Grabs the resume button so when paused the event system knows to select it first for the controller;
     public AsyncLoader asyncLoader;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private bool isMouse = true; // A bool variable to see if the mouse is connected or the controller
 
-    private pauseState currentState; // A variable that is type of the enum created pause state
+    [HideInInspector] public pauseState currentState; // A variable that is type of the enum created pause state
     
     public enum pauseState // pauseState Enum that has paused or unpaused states
     {

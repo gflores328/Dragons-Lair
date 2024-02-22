@@ -13,12 +13,14 @@ public class ArmRotation : MonoBehaviour
     private Vector2 lastMousePosition; // Last mouse position in screen space
     private Camera mainCamera; // Canera that will hold the reference for the cursor 
     private Quaternion initialRotation; // Initial rotation of the arm
+    private GameManager gameManager;
 
     private void Start()
     {
        
         initialRotation = armPivot.localRotation;  // Store the initial rotation of the arm
         mainCamera = Camera.main; // sets the mainCamera object to the game main camera object
+        gameManager = FindObjectOfType<GameManager>(); // Find and store a refernce to the GameManager
     }
 
     private void OnEnable()
@@ -35,45 +37,47 @@ public class ArmRotation : MonoBehaviour
 
     private void OnAimPerformed(InputAction.CallbackContext context)
     {
-        // currentMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // Debug.Log(currentMousePosition);
-        if (context.control.device is Gamepad)
+        if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused)
         {
-            Vector2 input = context.ReadValue<Vector2>(); // Read input value
-            if(input.y <= 1.0f && input.y >= 0.9f) // If the joy stick is going to the top  these are the parameters
+            // currentMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // Debug.Log(currentMousePosition);
+            if (context.control.device is Gamepad)
             {
-                armPivot.localRotation = Quaternion.Euler(-90f, 90f, 0f); // rotate the gun all the way up
+                Vector2 input = context.ReadValue<Vector2>(); // Read input value
+                if(input.y <= 1.0f && input.y >= 0.9f) // If the joy stick is going to the top  these are the parameters
+                {
+                    armPivot.localRotation = Quaternion.Euler(-90f, 90f, 0f); // rotate the gun all the way up
 
+                }
+                else if(input.y < 0.9f && input.y >= 0.5f) // If the joy stick is going to the top right or left
+                {
+                    armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f); // rotate the gun to the top right or left 
+                }
+                
+                else if(input.y >= -0.9f && input.y <= -0.5f) // if the joy stick is pointed to the bottom right or left 
+                {
+                    armPivot.localRotation = Quaternion.Euler(45f, 90f, 0f); // rotate the gun to the bottom right and left
+                }
+                else
+                {
+                    armPivot.localRotation = Quaternion.Euler(0f, 90f, 0f); // if not moving the joystick point it forward
+                }
             }
-            else if(input.y < 0.9f && input.y >= 0.5f) // If the joy stick is going to the top right or left
+            else if (context.control.device is Mouse) // If not using a controller it must use the cursor
             {
-                armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f); // rotate the gun to the top right or left 
-            }
-            
-            else if(input.y >= -0.9f && input.y <= -0.5f) // if the joy stick is pointed to the bottom right or left 
-            {
-                armPivot.localRotation = Quaternion.Euler(45f, 90f, 0f); // rotate the gun to the bottom right and left
-            }
-            else
-            {
-                armPivot.localRotation = Quaternion.Euler(0f, 90f, 0f); // if not moving the joystick point it forward
+                // Get the current mouse position
+                Vector3 mousePosition = Input.mousePosition;
+
+                // Convert the mouse position to a point in the game world
+                Vector3 targetPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, transform.position.z - mainCamera.transform.position.z));
+
+                // Set the Z-axis of the target position to the current Z position of the arm pivot
+                targetPosition.z = armPivot.position.z;
+
+                // Rotate the gun towards the cursor position
+                RotateGun(targetPosition);
             }
         }
-        else if (context.control.device is Mouse) // If not using a controller it must use the cursor
-        {
-            // Get the current mouse position
-            Vector3 mousePosition = Input.mousePosition;
-
-            // Convert the mouse position to a point in the game world
-            Vector3 targetPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, transform.position.z - mainCamera.transform.position.z));
-
-            // Set the Z-axis of the target position to the current Z position of the arm pivot
-            targetPosition.z = armPivot.position.z;
-
-            // Rotate the gun towards the cursor position
-            RotateGun(targetPosition);
-        }
-        
     }
 
     void RotateGun(Vector3 targetPosition)

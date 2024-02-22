@@ -89,11 +89,15 @@ public class PlayerOneWay : MonoBehaviour
         Collider platformCollider = currentOneWayPlatform.GetComponent<Collider>(); // A collider object created to get the collider of the platform
 
         Physics.IgnoreCollision(playerCollider, platformCollider); // ignores the collision between player and platform 
-        yield return new WaitForSeconds(1.5f); // Waits a set amount of time
+        yield return new WaitForSeconds(1f); // Waits a set amount of time
         Physics.IgnoreCollision(playerCollider, platformCollider,false); // Turn the ignore collision back on 
         isMovingDown = false; // Turns is moving down down
     }
 
+    public bool IsDownActionActive()
+    {
+        return downAction.action.triggered;
+    }
     
     
 }
