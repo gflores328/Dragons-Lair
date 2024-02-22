@@ -94,7 +94,7 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     void OnJump(InputAction.CallbackContext context) // THe on jump that is called  when the jump button is pressed
     {
-        if (context.performed && IsGrounded() && !playerOneWay.isMovingDown) // if it is performed and the player is grounded and it is not moving down then allow it to jump
+        if (context.performed && IsGrounded() && !playerOneWay.IsDownActionActive()) // if it is performed and the player is grounded and it is not moving down then allow it to jump
         {
             playerRB.velocity = new Vector2(playerRB.velocity.x, jumpForce); // Push the player up
         }
