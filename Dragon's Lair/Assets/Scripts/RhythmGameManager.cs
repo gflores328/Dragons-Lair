@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 16, 2024 at 3:19 PM
+ * LAST MODIFIED ON: Feb 21, 2024 at 10:25 PM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
  *                    How To Make a Rhythm Game #3 - Score and Multipliers https://www.youtube.com/watch?v=dV9rdTlMHxs
@@ -60,6 +60,8 @@ public class RhythmGameManager : MonoBehaviour
     public Text multiplierText;
     [Tooltip("Object that controlls how fast the notes move.")]    
     public RhythmBeatScroller beatScroller;
+    [Tooltip("Introduction / Tutorial screen")]
+    public GameObject introScreen;
 
     [Header("Results Screen Objects")]
 
@@ -67,6 +69,9 @@ public class RhythmGameManager : MonoBehaviour
     public GameObject resultsScreen;
     [Tooltip("Text boxes in results screen")]
     public Text percentHitText, normalsText, goodsText, perfectsText, missesText, rankText, finalScoreText;
+
+    //A list of directions recognized by the game
+    public enum Direction { Up, Down, Left, Right };
 
     //The instance of the Rhythm Game Manager
     public static RhythmGameManager instance;
@@ -101,9 +106,11 @@ public class RhythmGameManager : MonoBehaviour
         //If the game has not started begin the game once any key has been pressed
         if (!startPlaying)
         {
-            if (Input.anyKeyDown)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 startPlaying = true;
+                //Remove the intro screen
+                introScreen.SetActive(false);
                 //Begin moving the notes
                 beatScroller.hasStarted = true;
                 //Play the music
@@ -126,7 +133,7 @@ public class RhythmGameManager : MonoBehaviour
                 float totalHit = totalNotes - missedHits;
                 float percentHit = (totalHit / totalNotes) * 100f;
                 //Update the results text
-                percentHitText.text = percentHit.ToString("F1");
+                percentHitText.text = percentHit.ToString("F1") + "%";
 
                 //Calculate player rank and update rank text
                 //Not a fan of how this looks but in terms of logic this seems to be the most "readable"
@@ -217,7 +224,7 @@ public class RhythmGameManager : MonoBehaviour
     //Resets multiplier values when a note is missed
     public void NoteMissed()
     {
-        Debug.Log("Missed Note");
+        //Debug.Log("Missed Note");
 
         missedHits++;
 

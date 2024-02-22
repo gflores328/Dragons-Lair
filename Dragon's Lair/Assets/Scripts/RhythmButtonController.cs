@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 12, 2024 at 10:35 PM
+ * LAST MODIFIED ON: Feb 21, 2024 at 3:01 PM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #1 - Hitting Notes https://www.youtube.com/watch?v=cZzf1FQQFA0
  * 
@@ -20,8 +20,8 @@ public class RhythmButtonController : MonoBehaviour
     [Tooltip("Sprite used when the player has pressed the key associated with the button.")]
     public Sprite pressedImage;
     [Tooltip("Key that the button responds to.")]
-    public KeyCode keyToPress;
-    
+    public RhythmGameManager.Direction direction;
+
     //Sprite renderer that is attached to the button object
     //This is grabbed from the button in the start function
     private SpriteRenderer sr;
@@ -37,13 +37,19 @@ public class RhythmButtonController : MonoBehaviour
     void Update()
     {
         //Change the sprite of the button when the player presses the specified button
-        if (Input.GetKeyDown(keyToPress))
+        if (direction == RhythmGameManager.Direction.Up     && Input.GetAxis("Vertical") > 0.1f ||
+            direction == RhythmGameManager.Direction.Down   && Input.GetAxis("Vertical") < -0.1f ||
+            direction == RhythmGameManager.Direction.Left   && Input.GetAxis("Horizontal") < -0.1f ||
+            direction == RhythmGameManager.Direction.Right  && Input.GetAxis("Horizontal") > 0.1f)
         {
             sr.sprite = pressedImage;
         }
 
         //Reset the sprite of the button when the player releases the specified button
-        if (Input.GetKeyUp(keyToPress))
+        if (direction == RhythmGameManager.Direction.Up     && Input.GetAxis("Vertical") < 0.1f ||
+            direction == RhythmGameManager.Direction.Down   && Input.GetAxis("Vertical") > -0.1f ||
+            direction == RhythmGameManager.Direction.Left   && Input.GetAxis("Horizontal") > -0.1f ||
+            direction == RhythmGameManager.Direction.Right  && Input.GetAxis("Horizontal") < 0.1f)
         {
             sr.sprite = defaultImage;
         }
