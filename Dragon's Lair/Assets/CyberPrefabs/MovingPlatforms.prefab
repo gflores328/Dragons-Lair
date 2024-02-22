@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 4684614777965060539}
   - component: {fileID: 8618232181869297799}
   - component: {fileID: 5309897172733743404}
-  - component: {fileID: 5871618001279050534}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1121302423444884123}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.868, y: 0, z: 0}
+  m_LocalPosition: {x: 8.86, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -48,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2325c13641c804d92b9f7738f11c20f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   waypoints:
   - {fileID: 1904916331485593084}
   - {fileID: 8291664982959961327}
@@ -71,8 +70,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5.067753, y: 1, z: 1}
+  m_Center: {x: -0.5338764, y: 0, z: 0}
 --- !u!65 &5309897172733743404
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92,22 +91,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5871618001279050534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121302423444884123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55092f75d32544691a52005d0874842d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  child: {fileID: 0}
-  parent: {fileID: 1740794756718677469}
+  m_Size: {x: 4.9952164, y: 1, z: 1}
+  m_Center: {x: -0.49760818, y: 0, z: 0}
 --- !u!1 &1740794756718677469
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,8 +120,8 @@ Transform:
   m_GameObject: {fileID: 1740794756718677469}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalPosition: {x: -0.5136, y: 0, z: 0}
+  m_LocalScale: {x: 5.027406, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6144195273232650225}
@@ -201,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5023734798556229468}
   - component: {fileID: 6324474181878414043}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: waypointA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +202,7 @@ Transform:
   m_GameObject: {fileID: 1904916331485593084}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.57, y: -0.46, z: 0}
+  m_LocalPosition: {x: 14.59, y: -0.46, z: 0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -253,7 +238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8581099180098659487}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MovingPlatforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1025459579379921459}
   - component: {fileID: 1464071727178173395}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: waypointB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 8291664982959961327}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.74, y: -0.01, z: 0}
+  m_LocalPosition: {x: 2.71, y: -0.01, z: 0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
