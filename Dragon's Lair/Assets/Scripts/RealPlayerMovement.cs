@@ -51,7 +51,7 @@ public class RealPlayerMovement : MonoBehaviour
         pauseAction.performed += Pause;
         gameManagerObj =  GameObject.Find("GameManager");
         gameManager = gameManagerObj.GetComponent<GameManager>();
-       Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     
