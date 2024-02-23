@@ -15,6 +15,8 @@ public class GameState : MonoBehaviour
 {
     private Vector3 playerPosition; // A variable to hold the position of the player
     private bool firstTimeLoad = true; // A bool to determine if the irl scene has been loaded before or not
+    public enum state {newGame, Level1Complete, Level2Complete} // An enem that holds values that represent the current state of the game
+    public List<string> nonRespawnable;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public class GameState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // Set function for playerPosition
@@ -50,5 +52,10 @@ public class GameState : MonoBehaviour
     public void SetFirstTimeLoad(bool i)
     {
         firstTimeLoad = i;
+    }
+
+    public void AddNonRespawnable(string dontRespawn)
+    {
+        nonRespawnable.Add(dontRespawn);
     }
 }

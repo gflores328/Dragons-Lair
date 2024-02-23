@@ -34,8 +34,8 @@ public class Interact : MonoBehaviour
     [Tooltip("A bool that is used to set whether or not the interaction needs a certain Item")]
     public bool needItem;
 
-    public DialogueWithName dialogueToDisplay; // A dialogueWitName object to hold the dialogue that needs to be displayed
-    public int currentLine = 0; // An into to see which line of the array in dialogueToDisplay is being shown
+    private DialogueWithName dialogueToDisplay; // A dialogueWitName object to hold the dialogue that needs to be displayed
+    private int currentLine = 0; // An into to see which line of the array in dialogueToDisplay is being shown
     //private bool inDialogue = false; // A bool to check if whether or not the player is in dialogue or not
     private bool hasItemNeeded = true; // A bool to check if the player has the item needed to interact
 
@@ -44,7 +44,7 @@ public class Interact : MonoBehaviour
     [HideInInspector, SerializeField]
     private GameObject menuUI;
 
-    public bool menuOpen; // A bool that checks to see if the menu is open
+    private bool menuOpen; // A bool that checks to see if the menu is open
 
     // Variables for item type interact
     [HideInInspector, SerializeField]
@@ -140,7 +140,7 @@ public class Interact : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 currentLine = 0;
                 Time.timeScale = 1;
-                //Cursor.lockState = CursorLockMode.Locked;            
+                          
             }
         }
 
@@ -165,7 +165,7 @@ public class Interact : MonoBehaviour
                 menuOpen = true;
                 menuUI.SetActive(true);
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);
-                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.None;
             }
         }
 
@@ -188,6 +188,7 @@ public class Interact : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 inventory.GetComponent<Inventory>().AddItem(itemToPickup);
                 Time.timeScale = 1;
+                GameObject.Find("GameState").GetComponent<GameState>().AddNonRespawnable(gameObject.name);
                 Destroy(gameObject);
             }
         }
@@ -212,6 +213,7 @@ public class Interact : MonoBehaviour
                 questionUI.SetActive(true);
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);
                 menuOpen = true;
+                Cursor.lockState = CursorLockMode.None;
                  
             }
         }
@@ -237,6 +239,16 @@ public class Interact : MonoBehaviour
         //inDialogue = false;
         menuOpen = false;
         questionUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    // For on on click event that will close the UI that the menu type interact pops up
+    public void MenuClose()
+    {
+        Time.timeScale = 1;
+        menuOpen = false;
+        menuUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     #region Editor
