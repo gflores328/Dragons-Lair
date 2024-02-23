@@ -18,9 +18,13 @@ public class DontRespawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Finds the game state object
         gameState = GameObject.Find("GameState");
+
+        // Foreach string in the game states non respawnable list
         foreach (string dontRespawn in gameState.GetComponent<GameState>().nonRespawnable)
         {
+            // if the string is the name of the game obect then it destroys itself
             if (dontRespawn == gameObject.name)
             {
                 Destroy(gameObject);
@@ -28,9 +32,4 @@ public class DontRespawn : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

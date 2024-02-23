@@ -257,22 +257,28 @@ public class Interact : MonoBehaviour
     [CustomEditor(typeof(Interact))]
     public class InteractEditor : Editor
     {
+        // This function overrides the inspector for this gameobject
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-            Interact interact = (Interact)target;
+            base.OnInspectorGUI(); // The base inspector values
+            Interact interact = (Interact)target; // A reference to this game object
 
+            // If the interaction type is menu then these fields are shown in the editor
             if (interact.interactionType == InteractionType.menu)
             {
                 // ClearPanels();
 
+                // A header called Menu Interaction
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Menu Interaction", EditorStyles.boldLabel);
                 EditorGUILayout.BeginHorizontal();
+
+                // A game object field for the Menu UI
                 EditorGUILayout.LabelField("Menu UI", GUILayout.MaxWidth(126));
                 interact.menuUI = EditorGUILayout.ObjectField(interact.menuUI, typeof(GameObject),true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
 
+                // A game object field for the first button 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("First Button", GUILayout.MaxWidth(126));
                 interact.firstButton = EditorGUILayout.ObjectField(interact.firstButton, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
@@ -281,13 +287,15 @@ public class Interact : MonoBehaviour
 
             }
 
+            // If interaction type is set to item then these fields will show on the editor
             if(interact.interactionType == InteractionType.item)
             {
-              // ClearPanels();
-
+              
+                // A header named Item Interaction
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Item Interaction", EditorStyles.boldLabel);
 
+                // A Item field fot the Item thats picked up on interaction
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Item", GUILayout.MaxWidth(126));
                 interact.itemToPickup = EditorGUILayout.ObjectField(interact.itemToPickup, typeof(Item), true, GUILayout.MaxWidth(220)) as Item;
@@ -301,18 +309,20 @@ public class Interact : MonoBehaviour
                 */
             }
            
+            // If interaction type is dialogue then these fields will be shown in the inspector
             if(interact.interactionType == InteractionType.dialogue)
             {
-                //ClearPanels();
-
+                // A header named Dialogue Interaction
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Dialogue Interaction", EditorStyles.boldLabel);
 
+                // A game object field for the questions UI
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Questions UI", GUILayout.MaxWidth(126));
                 interact.questionUI = EditorGUILayout.ObjectField(interact.questionUI, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
 
+                // A game object field for the first button
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("First Button", GUILayout.MaxWidth(126));
                 interact.firstButton= EditorGUILayout.ObjectField(interact.firstButton, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
@@ -320,9 +330,11 @@ public class Interact : MonoBehaviour
 
                 EditorGUILayout.Space();
 
+                // An integer field fot the number of questions
                 List<DialogueWithName> list = interact.dialogueBranches;
                 int size = Mathf.Max(0, EditorGUILayout.IntField("Number of Questions", list.Count));
 
+                // Checks the int in the int field and shows that many DialogueWithName fields in the inspector
                 while (size > list.Count)
                 {
                     list.Add(null);
@@ -338,8 +350,10 @@ public class Interact : MonoBehaviour
                 }
             }
 
+            // If need item is set to true then these fields will show in the inspector
             if (interact.needItem)
             {
+                // A header named Need Item
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Need Item", EditorStyles.boldLabel);
 
@@ -349,11 +363,14 @@ public class Interact : MonoBehaviour
                 interact.inventory = EditorGUILayout.ObjectField(interact.inventory, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
                 */
+
+                // A Item field for the item needed
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Item Needed", GUILayout.MaxWidth(126));
                 interact.itemNeeded = EditorGUILayout.ObjectField(interact.itemNeeded, typeof(Item), true, GUILayout.MaxWidth(220)) as Item;
                 EditorGUILayout.EndHorizontal();
 
+                // A DialogueWithName field for the no item dialogue
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("No Item Dialogue", GUILayout.MaxWidth(126));
                 interact.itemNotObtained = EditorGUILayout.ObjectField(interact.itemNotObtained, typeof(DialogueWithName), false, GUILayout.MaxWidth(220)) as DialogueWithName;
@@ -369,6 +386,8 @@ public class Interact : MonoBehaviour
             */
         }
 
+        // A function that will clear the panels upon enum switch
+        // Currecntly not working
         public void ClearPanels()
         {
             //Cursor.lockState = CursorLockMode.Locked;

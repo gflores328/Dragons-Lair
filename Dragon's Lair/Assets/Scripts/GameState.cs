@@ -54,6 +54,7 @@ public class GameState : MonoBehaviour
         firstTimeLoad = i;
     }
 
+    // A function to add to the non respawnable list
     public void AddNonRespawnable(string dontRespawn)
     {
         nonRespawnable.Add(dontRespawn);
