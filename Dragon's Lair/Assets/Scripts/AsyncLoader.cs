@@ -18,7 +18,7 @@ public class AsyncLoader : MonoBehaviour
     public GameObject loadingScreen;
     // Start is called before the first frame update
 
-    public GameObject gameState; // The game object that will hold the GameState object
+    private GameObject gameState; // The game object that will hold the GameState object
     private Scene scene; // A variable to hold the current scene
     void Start()
     {
