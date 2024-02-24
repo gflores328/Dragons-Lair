@@ -13,7 +13,7 @@ using UnityEngine;
 
 public class PlayerPosition : MonoBehaviour
 {
-    public GameObject gameState; // A variable to hold the game state object
+    private GameObject gameState; // A variable to hold the game state object
 
     // Start is called before the first frame update
     void Start()

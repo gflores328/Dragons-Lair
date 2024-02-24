@@ -34,8 +34,8 @@ public class Interact : MonoBehaviour
     [Tooltip("A bool that is used to set whether or not the interaction needs a certain Item")]
     public bool needItem;
 
-    public DialogueWithName dialogueToDisplay; // A dialogueWitName object to hold the dialogue that needs to be displayed
-    public int currentLine = 0; // An into to see which line of the array in dialogueToDisplay is being shown
+    private DialogueWithName dialogueToDisplay; // A dialogueWitName object to hold the dialogue that needs to be displayed
+    private int currentLine = 0; // An into to see which line of the array in dialogueToDisplay is being shown
     //private bool inDialogue = false; // A bool to check if whether or not the player is in dialogue or not
     private bool hasItemNeeded = true; // A bool to check if the player has the item needed to interact
 
@@ -44,7 +44,7 @@ public class Interact : MonoBehaviour
     [HideInInspector, SerializeField]
     private GameObject menuUI;
 
-    public bool menuOpen; // A bool that checks to see if the menu is open
+    private bool menuOpen; // A bool that checks to see if the menu is open
 
     // Variables for item type interact
     [HideInInspector, SerializeField]
@@ -140,7 +140,7 @@ public class Interact : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 currentLine = 0;
                 Time.timeScale = 1;
-                //Cursor.lockState = CursorLockMode.Locked;            
+                          
             }
         }
 
@@ -165,7 +165,7 @@ public class Interact : MonoBehaviour
                 menuOpen = true;
                 menuUI.SetActive(true);
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);
-                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.None;
             }
         }
 
@@ -188,6 +188,7 @@ public class Interact : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 inventory.GetComponent<Inventory>().AddItem(itemToPickup);
                 Time.timeScale = 1;
+                GameObject.Find("GameState").GetComponent<GameState>().AddNonRespawnable(gameObject.name);
                 Destroy(gameObject);
             }
         }
@@ -212,6 +213,7 @@ public class Interact : MonoBehaviour
                 questionUI.SetActive(true);
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);
                 menuOpen = true;
+                Cursor.lockState = CursorLockMode.None;
                  
             }
         }
@@ -237,6 +239,16 @@ public class Interact : MonoBehaviour
         //inDialogue = false;
         menuOpen = false;
         questionUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    // For on on click event that will close the UI that the menu type interact pops up
+    public void MenuClose()
+    {
+        Time.timeScale = 1;
+        menuOpen = false;
+        menuUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     #region Editor
@@ -245,22 +257,28 @@ public class Interact : MonoBehaviour
     [CustomEditor(typeof(Interact))]
     public class InteractEditor : Editor
     {
+        // This function overrides the inspector for this gameobject
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-            Interact interact = (Interact)target;
+            base.OnInspectorGUI(); // The base inspector values
+            Interact interact = (Interact)target; // A reference to this game object
 
+            // If the interaction type is menu then these fields are shown in the editor
             if (interact.interactionType == InteractionType.menu)
             {
                 // ClearPanels();
 
+                // A header called Menu Interaction
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Menu Interaction", EditorStyles.boldLabel);
                 EditorGUILayout.BeginHorizontal();
+
+                // A game object field for the Menu UI
                 EditorGUILayout.LabelField("Menu UI", GUILayout.MaxWidth(126));
                 interact.menuUI = EditorGUILayout.ObjectField(interact.menuUI, typeof(GameObject),true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
 
+                // A game object field for the first button 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("First Button", GUILayout.MaxWidth(126));
                 interact.firstButton = EditorGUILayout.ObjectField(interact.firstButton, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
@@ -269,13 +287,15 @@ public class Interact : MonoBehaviour
 
             }
 
+            // If interaction type is set to item then these fields will show on the editor
             if(interact.interactionType == InteractionType.item)
             {
-              // ClearPanels();
-
+              
+                // A header named Item Interaction
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Item Interaction", EditorStyles.boldLabel);
 
+                // A Item field fot the Item thats picked up on interaction
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Item", GUILayout.MaxWidth(126));
                 interact.itemToPickup = EditorGUILayout.ObjectField(interact.itemToPickup, typeof(Item), true, GUILayout.MaxWidth(220)) as Item;
@@ -289,18 +309,20 @@ public class Interact : MonoBehaviour
                 */
             }
            
+            // If interaction type is dialogue then these fields will be shown in the inspector
             if(interact.interactionType == InteractionType.dialogue)
             {
-                //ClearPanels();
-
+                // A header named Dialogue Interaction
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Dialogue Interaction", EditorStyles.boldLabel);
 
+                // A game object field for the questions UI
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Questions UI", GUILayout.MaxWidth(126));
                 interact.questionUI = EditorGUILayout.ObjectField(interact.questionUI, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
 
+                // A game object field for the first button
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("First Button", GUILayout.MaxWidth(126));
                 interact.firstButton= EditorGUILayout.ObjectField(interact.firstButton, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
@@ -308,9 +330,11 @@ public class Interact : MonoBehaviour
 
                 EditorGUILayout.Space();
 
+                // An integer field fot the number of questions
                 List<DialogueWithName> list = interact.dialogueBranches;
                 int size = Mathf.Max(0, EditorGUILayout.IntField("Number of Questions", list.Count));
 
+                // Checks the int in the int field and shows that many DialogueWithName fields in the inspector
                 while (size > list.Count)
                 {
                     list.Add(null);
@@ -326,8 +350,10 @@ public class Interact : MonoBehaviour
                 }
             }
 
+            // If need item is set to true then these fields will show in the inspector
             if (interact.needItem)
             {
+                // A header named Need Item
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Need Item", EditorStyles.boldLabel);
 
@@ -337,11 +363,14 @@ public class Interact : MonoBehaviour
                 interact.inventory = EditorGUILayout.ObjectField(interact.inventory, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
                 EditorGUILayout.EndHorizontal();
                 */
+
+                // A Item field for the item needed
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Item Needed", GUILayout.MaxWidth(126));
                 interact.itemNeeded = EditorGUILayout.ObjectField(interact.itemNeeded, typeof(Item), true, GUILayout.MaxWidth(220)) as Item;
                 EditorGUILayout.EndHorizontal();
 
+                // A DialogueWithName field for the no item dialogue
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("No Item Dialogue", GUILayout.MaxWidth(126));
                 interact.itemNotObtained = EditorGUILayout.ObjectField(interact.itemNotObtained, typeof(DialogueWithName), false, GUILayout.MaxWidth(220)) as DialogueWithName;
@@ -357,6 +386,8 @@ public class Interact : MonoBehaviour
             */
         }
 
+        // A function that will clear the panels upon enum switch
+        // Currecntly not working
         public void ClearPanels()
         {
             //Cursor.lockState = CursorLockMode.Locked;
