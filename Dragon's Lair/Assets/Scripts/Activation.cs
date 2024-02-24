@@ -5,16 +5,16 @@ public class Activation : MonoBehaviour
 {
     //public float damage;
 
-    private Animator anim;
+    private Animator anim; //animator variable
 
-    public float waitTime;
+    public float waitTime; //wait time between actiations so you dont get hit over and over
 
-    private IEnumerator coroutine;
+    private IEnumerator coroutine; //couroutine is used to add wait time between actavation
 
     void Start()
     {
-
-        anim = GetComponent<Animator>();
+        //initalization of animator and setup of couroutine with wait time
+        anim = GetComponent<Animator>(); 
         coroutine = WaitTime(waitTime);
         StartCoroutine(coroutine);
     }
@@ -24,7 +24,7 @@ public class Activation : MonoBehaviour
         
     }
 
-
+    //if player enters collider play animation then wait before playing again
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -37,6 +37,7 @@ public class Activation : MonoBehaviour
         }
     }
 
+    //if player exits collider stop animation playback
     public void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -45,6 +46,7 @@ public class Activation : MonoBehaviour
         }
     }
 
+    //wait time function
     private IEnumerator WaitTime(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
