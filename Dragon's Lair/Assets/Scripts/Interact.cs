@@ -95,7 +95,7 @@ public class Interact : MonoBehaviour
                 dialogueToDisplay = interactDialogue;
                 correctTrigger = true;
                 hasItemNeeded = true;
-                Debug.Log("1");
+                
             }
             // If the interact needs a story event and an item
             else if(storyEventNeeded && needItem)
@@ -124,7 +124,7 @@ public class Interact : MonoBehaviour
             // if only a story event is needed
             else if(storyEventNeeded)
             {
-                Debug.Log("2");
+                
                 // if the state needed is the current state of the game
                 if (!(state == gameState.GetComponent<GameState>().storyState.ToString()))
                 {
@@ -135,7 +135,7 @@ public class Interact : MonoBehaviour
                 // else the dialogue is set to the normal interact
                 else
                 {
-                    Debug.Log("2");
+                   
                     correctTrigger = true;
                     dialogueToDisplay = interactDialogue;
                 }

@@ -15,14 +15,20 @@ public class GameState : MonoBehaviour
 {
     private Vector3 playerPosition; // A variable to hold the position of the player
     private bool firstTimeLoad = true; // A bool to determine if the irl scene has been loaded before or not
+    [HideInInspector]
     public enum state {newGame, Level1Complete, Level2Complete} // An enem that holds values that represent the current state of the game
-    public List<string> nonRespawnable;
-    public state storyState;
+    [HideInInspector]
+    public List<string> nonRespawnable; // A list of object names that wont load when scene is loaded once they are added
+    [HideInInspector]
+    public state storyState; // An instance of the state enum
+    [HideInInspector]
+    public string objective; // a string that reresents the text for the objective UI
 
 
     // Start is called before the first frame update
     void Start()
     {
+        objective = "Talk to the Manager";
         storyState = state.newGame;
     }
 

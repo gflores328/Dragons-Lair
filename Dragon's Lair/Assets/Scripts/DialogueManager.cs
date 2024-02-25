@@ -21,7 +21,16 @@ public class DialogueManager : MonoBehaviour
     public GameObject nameBox;
     [Tooltip("The text UI to show the name")]
     public TextMeshProUGUI nameText;
-    
+    [Tooltip("The UI for the objective")]
+    public TextMeshProUGUI objectiveUI;
+
+    private GameObject gameState;
+    private void Start()
+    {
+        gameState = GameObject.Find("GameState");
+        objectiveUI.text = gameState.GetComponent<GameState>().objective;
+        Debug.Log(objectiveUI.text);
+    }
 
     // This function will take a string variable and start the dialogue by showing the UI
     public void StartDialogue(DialogueAndName dialogueAndName)
@@ -73,4 +82,9 @@ public class DialogueManager : MonoBehaviour
         StartDialogue(dialogue.dialogueArray[0]);
     }
     */
+
+    public void ObjectiveChange(string objective)
+    {
+        objectiveUI.text = objective;
+    }
 }
