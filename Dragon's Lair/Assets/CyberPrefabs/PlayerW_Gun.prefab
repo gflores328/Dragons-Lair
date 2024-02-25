@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 545156521681365858}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5, y: -0.277, z: 0.025}
+  m_LocalPosition: {x: -0.06, y: -0.087, z: 0.025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -113,7 +113,7 @@ MonoBehaviour:
   fireAction: {fileID: -7405401969529671698, guid: ee89979ffb1c10d49a0c463a6c04ce8e,
     type: 3}
   bullet: {fileID: 6913680418803533796}
-  fireRate: 5
+  fireRate: 3
   fireRateCounter: 0
   accuracy: 100
 --- !u!1 &3754955895694577188
@@ -3909,7 +3909,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 1663
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -5019,7 +5019,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5453006537471203003}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ef0326a1dd8b1204e8c84b71904fc09a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5031,10 +5031,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.6267319
+  m_Radius: 0.27936602
+  m_Height: 1.6058321
   m_Direction: 1
-  m_Center: {x: 0, y: -0.18663406, z: 0}
+  m_Center: {x: -0.02000001, y: -0.19708395, z: 0}
 --- !u!114 &2216240655436234287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5131,7 +5131,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 120
   m_CollisionDetection: 1
 --- !u!114 &4646314587350214425
 MonoBehaviour:
@@ -5147,7 +5147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeedMultiplier: 5
   maxForce: 2
-  jumpForce: 13
+  jumpForce: 15
   gravityForce: 9.81
   groundLayer:
     serializedVersion: 2
@@ -5206,8 +5206,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5318055, y: 0.27625275, z: 1}
-  m_Center: {x: 0.052802324, y: 1.2708664, z: 0}
+  m_Size: {x: 0.75225115, y: 0.6639166, z: 1}
+  m_Center: {x: -0.04261899, y: 0.28948927, z: 0}
 --- !u!1001 &925599452917115864
 PrefabInstance:
   m_ObjectHideFlags: 0
