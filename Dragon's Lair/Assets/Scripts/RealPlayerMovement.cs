@@ -11,28 +11,38 @@ public class RealPlayerMovement : MonoBehaviour
 {
     [Header("Player Movement Settings")]
     public float playerSpeedMultiplier; // A float variable that will deteremine how fast the player is moving, The max force that can be applied to the movement, how powerful the jump is, how strong the gravity is.
+
     public float raycastLength;
     
     
     public bool inRealLife = true; // A public bool to determine if the player is in real life or the arcade chibi world used to restrict movement
 
+
     private PlayerInput playerInput; // A private variable that is meant to grab the PlayerInput component that is attached to the player.
+
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
+
     private InputAction interactAction; // A private variable that is meant to hold the interact action
+
     private InputAction pauseAction; // A private variable that holds the pause action
+
     private CharacterController characterController; // A Character Controller object which will hold the player's character controller
+
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
-//    private DialougeInteraction dialougeInteraction;
-   // private MenuInteraction menuInteraction;
+
+    //private DialougeInteraction dialougeInteraction;
+    //private MenuInteraction menuInteraction;
 
     //GABE ADDED
-   // private ItemInteraction itemInteraction;
+    //private ItemInteraction itemInteraction;
     //private DialogueTree dialogueTree;
     private Interact interact;
 
-    //
+    
     private GameObject gameManagerObj;
+
     private GameManager gameManager;
+
     private GameObject currentInteractable;
     
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
@@ -51,7 +61,7 @@ public class RealPlayerMovement : MonoBehaviour
         pauseAction.performed += Pause;
         gameManagerObj =  GameObject.Find("GameManager");
         gameManager = gameManagerObj.GetComponent<GameManager>();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     
@@ -76,19 +86,20 @@ public class RealPlayerMovement : MonoBehaviour
         Vector2 direction = walkAction.ReadValue<Vector2>();
         Vector3 targetVelocity = new Vector3(direction.x, 0, direction.y);
         
-        // Get the camera's forward direction
-        Vector3 cameraForward = Camera.main.transform.forward;
-        cameraForward.y = 0f; // Ensure no vertical component
+        // Get the character's forward direction
+        Vector3 characterForward = transform.forward;
+        characterForward.y = 0f; // Ensure no vertical component
         
-        // Transform the movement direction based on the camera's forward direction
-        targetVelocity = Quaternion.LookRotation(cameraForward) * targetVelocity;
+        // Transform the movement direction based on the character's forward direction
+        targetVelocity = Quaternion.LookRotation(characterForward) * targetVelocity;
         
         targetVelocity *= playerSpeedMultiplier;
+
         if (targetVelocity.magnitude >= 0.1f)
-    {
-        Quaternion targetRotation = Quaternion.LookRotation(targetVelocity.normalized);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
-    }
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(targetVelocity.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 3f);
+        }
         
         characterController.Move(targetVelocity * Time.deltaTime);
 
