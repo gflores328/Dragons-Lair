@@ -17,11 +17,13 @@ public class GameState : MonoBehaviour
     private bool firstTimeLoad = true; // A bool to determine if the irl scene has been loaded before or not
     public enum state {newGame, Level1Complete, Level2Complete} // An enem that holds values that represent the current state of the game
     public List<string> nonRespawnable;
+    public state storyState;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        storyState = state.newGame;
     }
 
     // Update is called once per frame

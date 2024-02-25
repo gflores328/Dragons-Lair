@@ -53,8 +53,8 @@ public class Interact : MonoBehaviour
     private GameObject inventory;
 
     // Variables for dialogue type interact
-    [HideInInspector, SerializeField]
-    private List<DialogueWithName> dialogueBranches;
+    //[HideInInspector, SerializeField]
+    //private List<DialogueWithName> dialogueBranches;
     [HideInInspector, SerializeField]
     private GameObject questionUI;
     [SerializeField, HideInInspector] 
@@ -66,10 +66,20 @@ public class Interact : MonoBehaviour
     [HideInInspector, SerializeField]
     private DialogueWithName itemNotObtained;
 
+    // Variables for if a story trigger is needed to interact
+    public bool storyEventNeeded;
+    [HideInInspector, SerializeField]
+    private string state;
+    [HideInInspector, SerializeField]
+    private DialogueWithName cantInteractYetDialogue;
+    private GameObject gameState;
+    private bool correctTrigger = false;
+
     private void Start()
     {
         dialogueToDisplay = interactDialogue;
         inventory = GameObject.Find("Inventory");
+        gameState = GameObject.Find("GameState");
     }
 
     // When player steps onto the trigger then the prompt to interact is shown
@@ -79,26 +89,71 @@ public class Interact : MonoBehaviour
         {
             dialogueManager.GetComponent<DialogueManager>().StartDialogue("Press Interact Button");
 
-            // If the player needs an item to interact then Inventory.Contains is called to check if it it in the inventory
-            if (needItem)
+            // If the interact does not need a story event or an item
+            if (!storyEventNeeded && !needItem)
             {
-                // If it is then dialogueToDisplay is set to interactDialogue and hasItemNeeded is set to true
-                if (inventory.GetComponent<Inventory>().Contains(itemNeeded))
+                dialogueToDisplay = interactDialogue;
+                correctTrigger = true;
+                hasItemNeeded = true;
+                Debug.Log("1");
+            }
+            // If the interact needs a story event and an item
+            else if(storyEventNeeded && needItem)
+            {
+                // if the current story state is not the same as the one needed then the dialog is set to cant interact yet
+                if (!(state == gameState.GetComponent<GameState>().storyState.ToString()))
                 {
-                    dialogueToDisplay = interactDialogue;
-                    hasItemNeeded = true;
+                    dialogueToDisplay = cantInteractYetDialogue;
+                    correctTrigger = false;
                 }
-                // If it is not there then the dialogueToDisplay is set ti the itemNotObtained dialogue and hasItemNeeded is set to false
+                // if the state is correct but the item is not obtained then the dialogue is set to item not obtained
+                else if(state == gameState.GetComponent<GameState>().storyState.ToString() && !inventory.GetComponent<Inventory>().Contains(itemNeeded))
+                {
+                    dialogueToDisplay = itemNotObtained;
+                    hasItemNeeded = false;
+                    correctTrigger = true;
+                }
+                // else the dialogue is set to interact
                 else
+                {
+                    correctTrigger = true;
+                    hasItemNeeded = true;
+                    dialogueToDisplay = interactDialogue;
+                }
+            }
+            // if only a story event is needed
+            else if(storyEventNeeded)
+            {
+                Debug.Log("2");
+                // if the state needed is the current state of the game
+                if (!(state == gameState.GetComponent<GameState>().storyState.ToString()))
+                {
+                    correctTrigger = false;
+                    dialogueToDisplay = cantInteractYetDialogue;
+
+                }
+                // else the dialogue is set to the normal interact
+                else
+                {
+                    Debug.Log("2");
+                    correctTrigger = true;
+                    dialogueToDisplay = interactDialogue;
+                }
+            }
+            // if only an item is needed
+            else if (needItem)
+            {
+                // if the item is not in the inventory then dialogue is set to the no item dialogue
+                if (!inventory.GetComponent<Inventory>().Contains(itemNeeded))
                 {
                     dialogueToDisplay = itemNotObtained;
                     hasItemNeeded = false;
                 }
-            }
-            // If the player does not need an item then dialogueToDisplay is set to interactDialogue
-            else
-            {
-                dialogueToDisplay = interactDialogue;
+                else
+                {
+                    hasItemNeeded = true;
+                    dialogueToDisplay = interactDialogue;
+                }
             }
         }
     }
@@ -123,7 +178,7 @@ public class Interact : MonoBehaviour
     {
         //Cursor.lockState = CursorLockMode.None;
         // This if is multi purpose and will run if interaction type is inspect or if hasItemNeeded is false 
-        if (interactionType == InteractionType.inspect || !hasItemNeeded)
+        if (interactionType == InteractionType.inspect || !hasItemNeeded || !correctTrigger)
         {
             // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
@@ -170,7 +225,7 @@ public class Interact : MonoBehaviour
         }
 
         // If interaction type is item and hasItemNeeded is true
-        if (interactionType == InteractionType.item && hasItemNeeded)
+        if (interactionType == InteractionType.item && hasItemNeeded && correctTrigger)
         {
             // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
@@ -194,7 +249,7 @@ public class Interact : MonoBehaviour
         }
 
         // If interaction type is dialogue and hasItemNeeded is true
-        if (interactionType == InteractionType.dialogue && !menuOpen && hasItemNeeded)
+        if (interactionType == InteractionType.dialogue && !menuOpen && hasItemNeeded && correctTrigger)
         {
             // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
@@ -220,10 +275,10 @@ public class Interact : MonoBehaviour
     }
 
     // This function is for a button click event
-    public void QuestionSelected(int questionNumber)
+    public void QuestionSelected(DialogueWithName dialogue)
     {
         // It takes and int and will set dialogueToDisplay to the index of it in dialogueBranches - 1
-        dialogueToDisplay =  dialogueBranches[questionNumber - 1];
+        dialogueToDisplay = dialogue;
         dialogueManager.GetComponent<DialogueManager>().StartDialogue(dialogueToDisplay.dialogueArray[currentLine]);
         currentLine++;
         questionUI.SetActive(false);
@@ -330,7 +385,7 @@ public class Interact : MonoBehaviour
 
                 EditorGUILayout.Space();
 
-                // An integer field fot the number of questions
+               /* // An integer field fot the number of questions
                 List<DialogueWithName> list = interact.dialogueBranches;
                 int size = Mathf.Max(0, EditorGUILayout.IntField("Number of Questions", list.Count));
 
@@ -348,6 +403,7 @@ public class Interact : MonoBehaviour
                 {
                     list[i] = EditorGUILayout.ObjectField("Question " + (i + 1), list[i], typeof(DialogueWithName), false) as DialogueWithName;
                 }
+               */
             }
 
             // If need item is set to true then these fields will show in the inspector
@@ -376,6 +432,25 @@ public class Interact : MonoBehaviour
                 interact.itemNotObtained = EditorGUILayout.ObjectField(interact.itemNotObtained, typeof(DialogueWithName), false, GUILayout.MaxWidth(220)) as DialogueWithName;
                 EditorGUILayout.EndHorizontal();
 
+            }
+
+            // If need a need a story trigger is true
+            if (interact.storyEventNeeded)
+            {
+                // A header called Need Story State
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Need Story State", EditorStyles.boldLabel);
+                EditorGUILayout.BeginHorizontal();
+
+                // A game object field for the string that represents the enem type that the interaction needs
+                EditorGUILayout.LabelField("Story State", GUILayout.MaxWidth(126));
+                interact.state = EditorGUILayout.TextField(interact.state, GUILayout.MaxWidth(220)) as string;
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Not State Dialogue", GUILayout.MaxWidth(126));
+                interact.cantInteractYetDialogue = EditorGUILayout.ObjectField(interact.cantInteractYetDialogue, typeof(DialogueWithName), false, GUILayout.MaxWidth(220)) as DialogueWithName;
+                EditorGUILayout.EndHorizontal();
             }
             /*
             if (!interact.needItem)

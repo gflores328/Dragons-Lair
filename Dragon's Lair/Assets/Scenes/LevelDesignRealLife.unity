@@ -17802,11 +17802,13 @@ MonoBehaviour:
   menuUI: {fileID: 1715070011}
   itemToPickup: {fileID: 0}
   inventory: {fileID: 0}
-  dialogueBranches: []
   questionUI: {fileID: 0}
   firstButton: {fileID: 916281855}
   itemNeeded: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
   itemNotObtained: {fileID: 11400000, guid: 1a1dafe343a1f6544be74d28240992ad, type: 2}
+  storyEventNeeded: 0
+  state: 
+  cantInteractYetDialogue: {fileID: 0}
 --- !u!1 &527572350
 GameObject:
   m_ObjectHideFlags: 0
@@ -29331,7 +29333,7 @@ GameObject:
   - component: {fileID: 903787054}
   - component: {fileID: 903787053}
   m_Layer: 5
-  m_Name: Questions
+  m_Name: ManagerQuestions1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35605,10 +35607,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1520475201}
         m_TargetAssemblyTypeName: Interact, Assembly-CSharp
         m_MethodName: QuestionSelected
-        m_Mode: 3
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 736e93ec341e16041819f208210cbba4,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: DialogueWithName, Assembly-CSharp
           m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
@@ -38824,11 +38827,13 @@ MonoBehaviour:
   menuUI: {fileID: 0}
   itemToPickup: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
   inventory: {fileID: 0}
-  dialogueBranches: []
   questionUI: {fileID: 0}
   firstButton: {fileID: 0}
   itemNeeded: {fileID: 0}
   itemNotObtained: {fileID: 0}
+  storyEventNeeded: 0
+  state: 
+  cantInteractYetDialogue: {fileID: 0}
 --- !u!114 &1216211002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46183,10 +46188,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1520475201}
         m_TargetAssemblyTypeName: Interact, Assembly-CSharp
         m_MethodName: QuestionSelected
-        m_Mode: 3
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 13d80ec39c05f9d4da86fe8921157666,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: DialogueWithName, Assembly-CSharp
           m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
@@ -47217,14 +47223,14 @@ MonoBehaviour:
   menuUI: {fileID: 0}
   itemToPickup: {fileID: 0}
   inventory: {fileID: 0}
-  dialogueBranches:
-  - {fileID: 11400000, guid: 21e3fc63acb406f489068888d3e6713c, type: 2}
-  - {fileID: 11400000, guid: 13d80ec39c05f9d4da86fe8921157666, type: 2}
-  - {fileID: 11400000, guid: 736e93ec341e16041819f208210cbba4, type: 2}
   questionUI: {fileID: 903787052}
   firstButton: {fileID: 1690060557}
-  itemNeeded: {fileID: 0}
-  itemNotObtained: {fileID: 0}
+  itemNeeded: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
+  itemNotObtained: {fileID: 11400000, guid: 1a1dafe343a1f6544be74d28240992ad, type: 2}
+  storyEventNeeded: 0
+  state: h
+  cantInteractYetDialogue: {fileID: 11400000, guid: 8a1298739c9f59d419b056652e25d47c,
+    type: 2}
 --- !u!1 &1526374886
 GameObject:
   m_ObjectHideFlags: 0
@@ -49712,11 +49718,13 @@ MonoBehaviour:
   menuUI: {fileID: 0}
   itemToPickup: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
   inventory: {fileID: 0}
-  dialogueBranches: []
   questionUI: {fileID: 0}
   firstButton: {fileID: 0}
   itemNeeded: {fileID: 0}
   itemNotObtained: {fileID: 0}
+  storyEventNeeded: 0
+  state: 
+  cantInteractYetDialogue: {fileID: 0}
 --- !u!65 &1636155924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50555,10 +50563,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1520475201}
         m_TargetAssemblyTypeName: Interact, Assembly-CSharp
         m_MethodName: QuestionSelected
-        m_Mode: 3
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 21e3fc63acb406f489068888d3e6713c,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: DialogueWithName, Assembly-CSharp
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
@@ -55694,11 +55703,13 @@ MonoBehaviour:
   menuUI: {fileID: 45691382}
   itemToPickup: {fileID: 0}
   inventory: {fileID: 0}
-  dialogueBranches: []
   questionUI: {fileID: 0}
   firstButton: {fileID: 1751216850}
   itemNeeded: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
   itemNotObtained: {fileID: 11400000, guid: 1a1dafe343a1f6544be74d28240992ad, type: 2}
+  storyEventNeeded: 0
+  state: 
+  cantInteractYetDialogue: {fileID: 0}
 --- !u!1 &2009851160
 GameObject:
   m_ObjectHideFlags: 0
