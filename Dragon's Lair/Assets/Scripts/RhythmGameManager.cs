@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 21, 2024 at 10:25 PM
+ * LAST MODIFIED ON: Feb 25, 2024 at 5:51 PM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
  *                    How To Make a Rhythm Game #3 - Score and Multipliers https://www.youtube.com/watch?v=dV9rdTlMHxs
@@ -21,6 +21,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;   //Used to access text objects
+using UnityEngine.InputSystem;  //Used to get the input to start the game
 
 public class RhythmGameManager : MonoBehaviour
 {
@@ -76,6 +77,9 @@ public class RhythmGameManager : MonoBehaviour
     //The instance of the Rhythm Game Manager
     public static RhythmGameManager instance;
 
+    //Input action from the attached player input component
+    //This is grabbed from the manager in the start function
+    private InputAction startInput;
     
     // Start is called before the first frame update
     void Start()
@@ -98,6 +102,9 @@ public class RhythmGameManager : MonoBehaviour
 
         //Initialize multiplier thresholds
         multiplierThresholds = new int[] { 4, 8, 12 };
+
+        //Get the input action that will start the game
+        startInput = GetComponent<PlayerInput>().actions.FindAction("Start");
     }
 
     // Update is called once per frame
@@ -106,7 +113,7 @@ public class RhythmGameManager : MonoBehaviour
         //If the game has not started begin the game once any key has been pressed
         if (!startPlaying)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (startInput.IsPressed())
             {
                 startPlaying = true;
                 //Remove the intro screen

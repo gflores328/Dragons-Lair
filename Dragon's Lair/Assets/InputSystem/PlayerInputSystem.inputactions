@@ -541,7 +541,7 @@
             "id": "e790d286-df25-4c2a-9334-253376a25787",
             "actions": [
                 {
-                    "name": "UPArrow",
+                    "name": "Up Arrow",
                     "type": "Button",
                     "id": "88fda1a5-6e4f-494f-97bc-c0601bebdcbb",
                     "expectedControlType": "Button",
@@ -550,7 +550,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DownArrow",
+                    "name": "Down Arrow",
                     "type": "Button",
                     "id": "5e98e248-4005-4d52-80f1-0851ab43d371",
                     "expectedControlType": "Button",
@@ -559,7 +559,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightArrow",
+                    "name": "Right Arrow",
                     "type": "Button",
                     "id": "d42d42e0-7da6-43d0-a1ae-59371d501f61",
                     "expectedControlType": "Button",
@@ -568,9 +568,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LeftArrow",
+                    "name": "Left Arrow",
                     "type": "Button",
                     "id": "750aa41d-2ad5-4e52-bc1a-3f405e737fbe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "719c142d-7676-4bba-9381-4fbc4718dba1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -585,7 +594,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "UPArrow",
+                    "action": "Up Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -596,7 +605,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "UPArrow",
+                    "action": "Up Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -607,7 +616,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "UPArrow",
+                    "action": "Up Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -618,7 +627,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "UPArrow",
+                    "action": "Up Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -629,7 +638,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DownArrow",
+                    "action": "Down Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -640,7 +649,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DownArrow",
+                    "action": "Down Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -651,7 +660,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DownArrow",
+                    "action": "Down Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -662,7 +671,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DownArrow",
+                    "action": "Down Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -673,7 +682,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightArrow",
+                    "action": "Right Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -684,7 +693,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightArrow",
+                    "action": "Right Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -695,7 +704,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightArrow",
+                    "action": "Right Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -706,7 +715,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightArrow",
+                    "action": "Right Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -717,7 +726,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftArrow",
+                    "action": "Left Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -728,7 +737,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftArrow",
+                    "action": "Left Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -739,7 +748,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftArrow",
+                    "action": "Left Arrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -750,7 +759,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftArrow",
+                    "action": "Left Arrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "930565f0-1788-4121-89fb-5ce1896af388",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ce5970ce-fc20-46df-8cd5-46d677d854a3",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

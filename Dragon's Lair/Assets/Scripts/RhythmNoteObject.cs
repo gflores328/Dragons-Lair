@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 21, 2024 at 3:03 PM
+ * LAST MODIFIED ON: Feb 25, 2024 at 5:52 PM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #1 - Hitting Notes https://www.youtube.com/watch?v=cZzf1FQQFA0
  *                    How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
@@ -15,6 +15,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;  //Used to get player input
 
 public class RhythmNoteObject : MonoBehaviour
 {
@@ -28,14 +29,36 @@ public class RhythmNoteObject : MonoBehaviour
     [Tooltip("Effects to be played for various note hit/miss conditions")]
     public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
 
+    //Input action from the attached player input component
+    //This is grabbed from the note in the start function
+    private InputAction playerInput;
+
+    void Start()
+    {
+        //Set the player input to the specified direction
+        switch (direction)
+        {
+            case RhythmGameManager.Direction.Up:
+                playerInput = GetComponent<PlayerInput>().actions.FindAction("Up Arrow");
+                break;
+            case RhythmGameManager.Direction.Down:
+                playerInput = GetComponent<PlayerInput>().actions.FindAction("Down Arrow");
+                break;
+            case RhythmGameManager.Direction.Left:
+                playerInput = GetComponent<PlayerInput>().actions.FindAction("Left Arrow");
+                break;
+            case RhythmGameManager.Direction.Right:
+                playerInput = GetComponent<PlayerInput>().actions.FindAction("Right Arrow");
+                break;
+            default: break;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         //If the specified key has been pressed and the note is able to be hit...
-        if (direction == RhythmGameManager.Direction.Up     && Input.GetAxis("Vertical") > 0.1f ||
-            direction == RhythmGameManager.Direction.Down   && Input.GetAxis("Vertical") < -0.1f ||
-            direction == RhythmGameManager.Direction.Left   && Input.GetAxis("Horizontal") < -0.1f ||
-            direction == RhythmGameManager.Direction.Right  && Input.GetAxis("Horizontal") > 0.1f)
+        if (playerInput.IsPressed())
         {
             if (canBePressed)
             {
