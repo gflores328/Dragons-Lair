@@ -313,7 +313,8 @@ public class Interact : MonoBehaviour
         //inDialogue = false;
         menuOpen = false;
         questionUI.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        //
+        
     }
 
     // For on on click event that will close the UI that the menu type interact pops up
@@ -322,7 +323,7 @@ public class Interact : MonoBehaviour
         Time.timeScale = 1;
         menuOpen = false;
         menuUI.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     #region Editor
