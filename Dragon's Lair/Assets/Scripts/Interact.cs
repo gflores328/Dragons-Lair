@@ -69,7 +69,7 @@ public class Interact : MonoBehaviour
     // Variables for if a story trigger is needed to interact
     public bool storyEventNeeded;
     [HideInInspector, SerializeField]
-    private string state;
+    private GameState.state state;
     [HideInInspector, SerializeField]
     private DialogueWithName cantInteractYetDialogue;
     private GameObject gameState;
@@ -101,13 +101,13 @@ public class Interact : MonoBehaviour
             else if(storyEventNeeded && needItem)
             {
                 // if the current story state is not the same as the one needed then the dialog is set to cant interact yet
-                if (!(state == gameState.GetComponent<GameState>().storyState.ToString()))
+                if (!(state == gameState.GetComponent<GameState>().storyState))
                 {
                     dialogueToDisplay = cantInteractYetDialogue;
                     correctTrigger = false;
                 }
                 // if the state is correct but the item is not obtained then the dialogue is set to item not obtained
-                else if(state == gameState.GetComponent<GameState>().storyState.ToString() && !inventory.GetComponent<Inventory>().Contains(itemNeeded))
+                else if(state == gameState.GetComponent<GameState>().storyState && !inventory.GetComponent<Inventory>().Contains(itemNeeded))
                 {
                     dialogueToDisplay = itemNotObtained;
                     hasItemNeeded = false;
@@ -126,7 +126,7 @@ public class Interact : MonoBehaviour
             {
                 
                 // if the state needed is the current state of the game
-                if (!(state == gameState.GetComponent<GameState>().storyState.ToString()))
+                if (!(state == gameState.GetComponent<GameState>().storyState))
                 {
                     correctTrigger = false;
                     dialogueToDisplay = cantInteractYetDialogue;
@@ -135,7 +135,7 @@ public class Interact : MonoBehaviour
                 // else the dialogue is set to the normal interact
                 else
                 {
-                   
+                    hasItemNeeded = true; 
                     correctTrigger = true;
                     dialogueToDisplay = interactDialogue;
                 }
@@ -143,16 +143,20 @@ public class Interact : MonoBehaviour
             // if only an item is needed
             else if (needItem)
             {
+                
                 // if the item is not in the inventory then dialogue is set to the no item dialogue
                 if (!inventory.GetComponent<Inventory>().Contains(itemNeeded))
                 {
                     dialogueToDisplay = itemNotObtained;
                     hasItemNeeded = false;
+                    
                 }
                 else
                 {
+                    correctTrigger = true;
                     hasItemNeeded = true;
                     dialogueToDisplay = interactDialogue;
+                    
                 }
             }
         }
@@ -200,7 +204,7 @@ public class Interact : MonoBehaviour
         }
 
         // If interaction type is menu and hasItemNeeded is true
-        if (interactionType == InteractionType.menu && !menuOpen && hasItemNeeded)
+        if (interactionType == InteractionType.menu && !menuOpen && hasItemNeeded && correctTrigger)
         {
             // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
@@ -444,7 +448,7 @@ public class Interact : MonoBehaviour
 
                 // A game object field for the string that represents the enem type that the interaction needs
                 EditorGUILayout.LabelField("Story State", GUILayout.MaxWidth(126));
-                interact.state = EditorGUILayout.TextField(interact.state, GUILayout.MaxWidth(220)) as string;
+                interact.state = (GameState.state)EditorGUILayout.EnumPopup(interact.state, GUILayout.MaxWidth(220));
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.BeginHorizontal();
