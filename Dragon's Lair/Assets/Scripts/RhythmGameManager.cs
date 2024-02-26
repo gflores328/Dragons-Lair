@@ -185,6 +185,7 @@ public class RhythmGameManager : MonoBehaviour
                 if (currentScore > 20000)
                 {
                     gameState.GetComponent<GameState>().storyState = GameState.state.DDRComplete;
+                    gameState.GetComponent<GameState>().objective = "Get information from David";
                 }
             }
         }
