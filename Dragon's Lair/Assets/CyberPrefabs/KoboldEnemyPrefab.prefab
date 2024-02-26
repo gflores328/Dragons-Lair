@@ -32,6 +32,7 @@ Transform:
   - {fileID: 1936100459387208206}
   - {fileID: 563925345003143029}
   - {fileID: 4665135201026872678}
+  - {fileID: 4398358005594522681}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1349919292793224759
@@ -45,7 +46,7 @@ PrefabInstance:
     - target: {fileID: 1953665173572665272, guid: 536d0a2536059024182fe3756b6ecf1a,
         type: 3}
       propertyPath: m_Name
-      value: KoboldWaypoint (1)
+      value: KoboldWaypoint 2
       objectReference: {fileID: 0}
     - target: {fileID: 5910415745409510225, guid: 536d0a2536059024182fe3756b6ecf1a,
         type: 3}
@@ -107,6 +108,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5910415745409510225, guid: 536d0a2536059024182fe3756b6ecf1a,
     type: 3}
   m_PrefabInstance: {fileID: 1349919292793224759}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4215547578408264658
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6603033181933326579}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.77
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.129
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ebdc245d70662a64cadf711e345df3ea,
+        type: 3}
+      propertyPath: m_Name
+      value: Kobold_Alan
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ebdc245d70662a64cadf711e345df3ea, type: 3}
+--- !u!4 &4398358005594522681 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ebdc245d70662a64cadf711e345df3ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 4215547578408264658}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6184978114070844452
 PrefabInstance:
@@ -194,6 +269,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Kobold
+      objectReference: {fileID: 0}
+    - target: {fileID: 773976501956589181, guid: 68328a889942a2a409e620ca20d607ca,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3673435240749847181, guid: 68328a889942a2a409e620ca20d607ca,
         type: 3}
