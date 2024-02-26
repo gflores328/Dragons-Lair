@@ -19,7 +19,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class KoboldController : MonoBehaviour
+public class KoboldController : Enemy
 {
     // Variables
     public NavMeshAgent navAgent; // Nav Mesh Agent
