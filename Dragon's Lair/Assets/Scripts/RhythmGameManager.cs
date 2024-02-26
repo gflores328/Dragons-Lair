@@ -105,6 +105,9 @@ public class RhythmGameManager : MonoBehaviour
 
         //Get the input action that will start the game
         startInput = GetComponent<PlayerInput>().actions.FindAction("Start");
+
+        //Enable the intro screen
+        introScreen.SetActive(true);
     }
 
     // Update is called once per frame

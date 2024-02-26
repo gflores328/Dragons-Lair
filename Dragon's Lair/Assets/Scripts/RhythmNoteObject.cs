@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 25, 2024 at 5:52 PM
+ * LAST MODIFIED ON: Feb 25, 2024 at 6:07 PM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #1 - Hitting Notes https://www.youtube.com/watch?v=cZzf1FQQFA0
  *                    How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
@@ -36,19 +36,24 @@ public class RhythmNoteObject : MonoBehaviour
     void Start()
     {
         //Set the player input to the specified direction
+        //Set the rotation to match the direction
         switch (direction)
         {
             case RhythmGameManager.Direction.Up:
                 playerInput = GetComponent<PlayerInput>().actions.FindAction("Up Arrow");
+                transform.rotation = Quaternion.Euler(0, 0, 90);
                 break;
             case RhythmGameManager.Direction.Down:
                 playerInput = GetComponent<PlayerInput>().actions.FindAction("Down Arrow");
+                transform.rotation = Quaternion.Euler(0, 0, 270);
                 break;
             case RhythmGameManager.Direction.Left:
                 playerInput = GetComponent<PlayerInput>().actions.FindAction("Left Arrow");
+                transform.rotation = Quaternion.Euler(0, 0, 180);
                 break;
             case RhythmGameManager.Direction.Right:
                 playerInput = GetComponent<PlayerInput>().actions.FindAction("Right Arrow");
+                transform.rotation = Quaternion.Euler(0, 0, 0);
                 break;
             default: break;
         }
