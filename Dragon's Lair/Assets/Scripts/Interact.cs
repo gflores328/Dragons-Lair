@@ -106,13 +106,13 @@ public class Interact : MonoBehaviour
             else if(storyEventNeeded && needItem)
             {
                 // if the current story state is not the same as the one needed then the dialog is set to cant interact yet
-                if (!(state == gameState.GetComponent<GameState>().storyState))
+                if (!((int)state <= ((int)gameState.GetComponent<GameState>().storyState)))
                 {
                     dialogueToDisplay = cantInteractYetDialogue;
                     correctTrigger = false;
                 }
                 // if the state is correct but the item is not obtained then the dialogue is set to item not obtained
-                else if(state == gameState.GetComponent<GameState>().storyState && !inventory.GetComponent<Inventory>().Contains(itemNeeded))
+                else if(((int)state) <= ((int)gameState.GetComponent<GameState>().storyState) && !inventory.GetComponent<Inventory>().Contains(itemNeeded))
                 {
                     dialogueToDisplay = itemNotObtained;
                     hasItemNeeded = false;
@@ -131,7 +131,7 @@ public class Interact : MonoBehaviour
             {
                 
                 // if the state needed is the current state of the game
-                if (!(state == gameState.GetComponent<GameState>().storyState))
+                if (!(((int)state) <= ((int)gameState.GetComponent<GameState>().storyState)))
                 {
                     correctTrigger = false;
                     dialogueToDisplay = cantInteractYetDialogue;
@@ -313,7 +313,8 @@ public class Interact : MonoBehaviour
         //inDialogue = false;
         menuOpen = false;
         questionUI.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        //
+        
     }
 
     // For on on click event that will close the UI that the menu type interact pops up
@@ -322,7 +323,7 @@ public class Interact : MonoBehaviour
         Time.timeScale = 1;
         menuOpen = false;
         menuUI.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     #region Editor
