@@ -24,6 +24,7 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("The UI for the objective")]
     public TextMeshProUGUI objectiveUI;
 
+
     private GameObject gameState;
     private void Start()
     {
@@ -83,8 +84,11 @@ public class DialogueManager : MonoBehaviour
     }
     */
 
+    // This is a function that will change the objective text to the inputted string
     public void ObjectiveChange(string objective)
     {
         objectiveUI.text = objective;
+        gameState.GetComponent<GameState>().objective = objective;
     }
+
 }

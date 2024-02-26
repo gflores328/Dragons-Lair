@@ -149,6 +149,11 @@ public class RealPlayerMovement : MonoBehaviour
         {
             interact.Interacted();
         }
+
+        if (GetComponent<DetectiveThoughts>().lostInThought)
+        {
+            GetComponent<DetectiveThoughts>().Interact();
+        }
         
        if(currentInteractable != null && currentInteractable.tag == "DialogueTree")
         {
