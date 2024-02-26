@@ -88,7 +88,7 @@ public class DialogueManager : MonoBehaviour
     public void ObjectiveChange(string objective)
     {
         objectiveUI.text = objective;
-        gameState.GetComponent<GameState>().objective = objective;
+        gameState.GetComponent<GameState>().UpdateObjective(objective);
     }
 
 }

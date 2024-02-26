@@ -80,6 +80,9 @@ public class RhythmGameManager : MonoBehaviour
     //Input action from the attached player input component
     //This is grabbed from the manager in the start function
     private InputAction startInput;
+
+    // GABE ADDED
+    private GameObject gameState;
     
     // Start is called before the first frame update
     void Start()
@@ -108,6 +111,9 @@ public class RhythmGameManager : MonoBehaviour
 
         //Enable the intro screen
         introScreen.SetActive(true);
+
+        //GABE ADDED
+        gameState = GameObject.Find("GameState");
     }
 
     // Update is called once per frame
@@ -174,6 +180,12 @@ public class RhythmGameManager : MonoBehaviour
 
                 //Display the results screen
                 resultsScreen.SetActive(true);
+
+                // GABE ADDED
+                if (currentScore > 20000)
+                {
+                    gameState.GetComponent<GameState>().storyState = GameState.state.DDRComplete;
+                }
             }
         }
     }

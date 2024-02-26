@@ -48,7 +48,7 @@ public class Interact : MonoBehaviour
 
     // Variables for item type interact
     [HideInInspector, SerializeField]
-    private Item itemToPickup;
+    public Item itemToPickup;
     [HideInInspector, SerializeField]
     private GameObject inventory;
 
@@ -74,6 +74,11 @@ public class Interact : MonoBehaviour
     private DialogueWithName cantInteractYetDialogue;
     private GameObject gameState;
     private bool correctTrigger = false;
+
+    // Variables for if an interact updates the objective list
+    public bool updateObjective;
+    [HideInInspector, SerializeField]
+    string newObjective;
 
     private void Start()
     {
@@ -199,6 +204,11 @@ public class Interact : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 currentLine = 0;
                 Time.timeScale = 1;
+
+                if (updateObjective && hasItemNeeded && correctTrigger)
+                {
+                    dialogueManager.GetComponent<DialogueManager>().ObjectiveChange(newObjective);
+                }
                           
             }
         }
@@ -249,6 +259,11 @@ public class Interact : MonoBehaviour
                 Time.timeScale = 1;
                 GameObject.Find("GameState").GetComponent<GameState>().AddNonRespawnable(gameObject.name);
                 Destroy(gameObject);
+
+                if (updateObjective)
+                {
+                    dialogueManager.GetComponent<DialogueManager>().ObjectiveChange(newObjective);
+                }
             }
         }
 
@@ -446,16 +461,32 @@ public class Interact : MonoBehaviour
                 EditorGUILayout.LabelField("Need Story State", EditorStyles.boldLabel);
                 EditorGUILayout.BeginHorizontal();
 
-                // A game object field for the string that represents the enem type that the interaction needs
+                // An enum field that represents the game state
                 EditorGUILayout.LabelField("Story State", GUILayout.MaxWidth(126));
                 interact.state = (GameState.state)EditorGUILayout.EnumPopup(interact.state, GUILayout.MaxWidth(220));
                 EditorGUILayout.EndHorizontal();
 
+                // A DialogueWithName field for incorrect state dialogue
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Not State Dialogue", GUILayout.MaxWidth(126));
                 interact.cantInteractYetDialogue = EditorGUILayout.ObjectField(interact.cantInteractYetDialogue, typeof(DialogueWithName), false, GUILayout.MaxWidth(220)) as DialogueWithName;
                 EditorGUILayout.EndHorizontal();
             }
+
+            // If the objective should be updated after the interaction
+            if (interact.updateObjective)
+            {
+                // A header called Update Objective
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Update Objective", EditorStyles.boldLabel);
+                EditorGUILayout.BeginHorizontal();
+
+                // A string field that represents the new objective
+                EditorGUILayout.LabelField("New Objective", GUILayout.MaxWidth(126));
+                interact.newObjective = EditorGUILayout.TextField(interact.newObjective, GUILayout.MaxWidth(220));
+                EditorGUILayout.EndHorizontal();
+            }
+
             /*
             if (!interact.needItem)
             {

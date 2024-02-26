@@ -23,6 +23,7 @@ public class DetectiveThoughts : MonoBehaviour
 
     private void Start()
     {
+        
         gameState = GameObject.Find("GameState");
         if (gameState.GetComponent<GameState>().storyState == GameState.state.newGame)
         {

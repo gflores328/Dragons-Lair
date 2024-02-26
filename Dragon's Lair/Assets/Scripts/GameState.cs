@@ -16,7 +16,19 @@ public class GameState : MonoBehaviour
     private Vector3 playerPosition; // A variable to hold the position of the player
     private bool firstTimeLoad = true; // A bool to determine if the irl scene has been loaded before or not
     [HideInInspector]
-    public enum state {newGame, Level1Complete, Level2Complete} // An enem that holds values that represent the current state of the game
+    // An enem that holds values that represent the current state of the game
+    public enum state 
+    {
+        newGame,
+        talkToDavid,
+        PlayDDR,
+        DDRComplete,
+        PlayVR,
+        Level1Complete,
+        Level2Complete
+    } 
+
+
     [HideInInspector]
     public List<string> nonRespawnable; // A list of object names that wont load when scene is loaded once they are added
     [HideInInspector]
@@ -35,7 +47,7 @@ public class GameState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     // Set function for playerPosition
@@ -66,5 +78,22 @@ public class GameState : MonoBehaviour
     public void AddNonRespawnable(string dontRespawn)
     {
         nonRespawnable.Add(dontRespawn);
+    }
+
+    public void UpdateObjective(string newObjective)
+    {
+        objective = newObjective;
+
+        if (objective == "Talk to David")
+        {
+            Debug.Log("Updating objective");
+            storyState = state.talkToDavid;
+        }
+
+        if (objective == "Score over 20,000 points in BBB")
+        {
+            storyState = state.PlayDDR;
+        }
+
     }
 }
