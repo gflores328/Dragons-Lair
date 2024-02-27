@@ -114,6 +114,6 @@ public class SettingsMenu : MonoBehaviour
     //Sets the volume of a specific chanel in the attached audio mixer equal to the given float value
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("masterVolume", volume);
+        audioMixer.SetFloat("Master", volume);
     }
 }
