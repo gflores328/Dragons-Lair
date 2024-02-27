@@ -28,6 +28,10 @@ public class InteractionState : MonoBehaviour
 
             gameObject.SetActive(true);
         }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -40,5 +44,6 @@ public class InteractionState : MonoBehaviour
             makeActive.SetActive(true);
             Destroy(gameObject);
         }
+        
     }
 }

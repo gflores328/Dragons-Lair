@@ -258,11 +258,15 @@ public class Interact : MonoBehaviour
                 inventory.GetComponent<Inventory>().AddItem(itemToPickup);
                 Time.timeScale = 1;
                 GameObject.Find("GameState").GetComponent<GameState>().AddNonRespawnable(gameObject.name);
-                Destroy(gameObject);
-
+               
                 if (updateObjective)
                 {
                     dialogueManager.GetComponent<DialogueManager>().ObjectiveChange(newObjective);
+                }
+
+                if (!gameObject.TryGetComponent(out InteractionState interactionState))
+                {
+                    Destroy(gameObject);
                 }
             }
         }
