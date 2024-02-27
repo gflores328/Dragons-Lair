@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 25, 2024 at 6:07 PM
+ * LAST MODIFIED ON: Feb 27, 2024 at 12:01 AM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #1 - Hitting Notes https://www.youtube.com/watch?v=cZzf1FQQFA0
  *                    How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
@@ -94,6 +94,12 @@ public class RhythmNoteObject : MonoBehaviour
                 //Deactivate the note
                 gameObject.SetActive(false);
             }
+        }
+
+        //Deactivate the note if it has passed below the buttons
+        if (transform.position.y < -2f)
+        {
+            gameObject.SetActive(false);
         }
     }
 
