@@ -1,6 +1,9 @@
 /*
  * CREATED BY: Trevor Minarik
  * 
+ * LAST MODIFIED BY: Trevor Minarik
+ * LAST MODIFIED ON: Feb 26, 2024 at 11:46 PM
+ * 
  * TUTORIAL FOLLOWED: "SETTINGS MENU in Unity" https://www.youtube.com/watch?v=YOaYQrN1oYQ
  * 
  * Handles functions of all the buttons, drop down boxes, and sliders seen in the options menu
@@ -76,7 +79,7 @@ public class SettingsMenu : MonoBehaviour
         //A float for storing the volume
         float volume;
         //Get the current audio volume from the audio mixer
-        audioMixer.GetFloat("masterVolume", out volume);
+        audioMixer.GetFloat("Master", out volume);
         //Set the default slider value to the saved volume value
         volumeSlider.value = volume;
 
@@ -114,6 +117,6 @@ public class SettingsMenu : MonoBehaviour
     //Sets the volume of a specific chanel in the attached audio mixer equal to the given float value
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("masterVolume", volume);
+        audioMixer.SetFloat("Master", volume);
     }
 }

@@ -86,7 +86,7 @@ public class GameState : MonoBehaviour
 
         if (objective == "Talk to David")
         {
-            Debug.Log("Updating objective");
+            
             storyState = state.talkToDavid;
         }
 
@@ -95,5 +95,9 @@ public class GameState : MonoBehaviour
             storyState = state.PlayDDR;
         }
 
+        if (objective == "Play VR Game")
+        {
+            storyState = state.PlayVR;
+        }
     }
 }

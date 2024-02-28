@@ -87,11 +87,14 @@ public class RealPlayerMovement : MonoBehaviour
         Vector3 targetVelocity = new Vector3(direction.x, 0, direction.y);
         
         // Get the character's forward direction
-        Vector3 characterForward = transform.forward;
-        characterForward.y = 0f; // Ensure no vertical component
+        //Vector3 characterForward = transform.forward;
+
+        // Get Camera direction
+        Vector3 cameraForward = Camera.main.transform.forward;
+        cameraForward.y = 0f; // Ensure no vertical component
         
         // Transform the movement direction based on the character's forward direction
-        targetVelocity = Quaternion.LookRotation(characterForward) * targetVelocity;
+        targetVelocity = Quaternion.LookRotation(cameraForward) * targetVelocity;
         
         targetVelocity *= playerSpeedMultiplier;
 
