@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //Created by Aaron Torres
 //Script Title: Chibi PlayerMovement
@@ -10,12 +11,13 @@ using UnityEngine.SceneManagement;
 
 public class ChibiPlayerMovement : MonoBehaviour
 {
+    
     [Header("Player Movement Settings")]
-    public float playerSpeedMultiplier,maxForce,jumpForce,gravityForce; // A float variable that will deteremine how fast the player is moving, The max force that can be applied to the movement, how powerful the jump is, how strong the gravity is.
-    //public float jumpBufferDuration = 0.1f;
-    //private float jumpBufferTimer = 0f;
+    public float playerSpeedMultiplier;
+    public float maxForce;
+    public float jumpForce;
+    public float gravityForce; // A float variable that will deteremine how fast the player is moving, The max force that can be applied to the movement, how powerful the jump is, how strong the gravity is.
 
-    //private bool inRealLife = true; // A public bool to determine if the player is in real life or the arcade chibi world used to restrict movement
     public LayerMask groundLayer; // A layermask that holds the ground layer
     public float groundRayLength = 1f; // the length of the ray that will check if the player is grounded
     
@@ -28,18 +30,21 @@ public class ChibiPlayerMovement : MonoBehaviour
     
     
     
+   
 
     // Jumping variables
-    private float jumpTimer = 0f; // Timer to track how long the jump button has been held
     
+   
     
-    public float initialJumpVelocity;
-    public float maxJumpHeight =1.0f;
+    [Header("Player Jump Settings")]
+    public float initialJumpVelocity; // The inital velocity of the Jump
+    public float maxJumpHeight =1.0f; // The max height that the jump will go
     public float maxJumpTime = 0.5f; // Maximum time the jump button can be held to reach maximum jump height
-    private float coyoteTime = 0.2f;
-    private float coyoteTimeCounter;
-    private bool isJumping;
-    private bool isJumpingPressed = false;
+    private float coyoteTime = 0.2f; // How long the player will be able to jump after leaving the ground
+    private float jumpTimer = 0f; // Timer to track how long the jump button has been held
+    private float coyoteTimeCounter; // The counter that will hold the coyote time current time
+    private bool isJumping; // a bool to know if the player is jumping currently
+    private bool isJumpingPressed = false; // a bool to know if the player has pressed the jump button
 
 
 
@@ -47,8 +52,26 @@ public class ChibiPlayerMovement : MonoBehaviour
     private Rigidbody playerRB; // A rigid body object which will hold the player's rigid body
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
     private bool isGrounded; // A bool to know if the player is grounded
+
+  
+    //PlayerUI and Information Section
+    [Header("Player Health Settings")]
+    public float maxHealth =  10f; // The float the determines how much health the player starts with
+    static float playerHealth = 10f; // A float that holds the players health
+    public int numOfHearts; // an int that determines how many UI hearts are there
+
+    public Image[] hearts; // The image array that will hold the 10 heart ui and access them
+    public Sprite fullHeart; // The sprite for the full heart
+    public Sprite emptyHeart; // The sprite for the empty heart
+
+    public float invincibilityLength;
+    private float invincibilityCounter;
+    public Renderer playerRenderer;
+    private float flashCounter;
+    public float flashLength = 0.1f;
     
-    static float playerHealth = 100f; // A float that holds the players health
+    
+
     
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
     {
@@ -59,6 +82,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     void Awake()
 
     {
+        playerHealth = maxHealth;
         playerRB = GetComponent<Rigidbody>(); // Gets the rigid body of the player
         playerInput = GetComponent<PlayerInput>(); // Gets the playerinput component
         walkAction = playerInput.actions.FindAction("Walk"); // binds the walk action to the walk action that holds the inputs
@@ -73,15 +97,64 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     }
    
+    void Update()
 
-   void FixedUpdate() 
     {
-        ChibiMovePlayer(); // Calls the chibiMovePlayer function
-        isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
-        ApplyGravity();
-        UpdateJumpState();
-        handleJump();
+        if(playerHealth > numOfHearts)
+        {
+            playerHealth = numOfHearts;
+
+        }
+
+        for(int i = 0; i < hearts.Length; i++) {
+
+            if( i < playerHealth) {
+                hearts[i].sprite = fullHeart;
+            }
+
+            else 
+            {
+                hearts[i].sprite = emptyHeart;
+            }
+
+            if( i < maxHealth) 
+            {
+                hearts[i].enabled = true;
+            }
+            else 
+            {
+                hearts[i].enabled = false;
+            }
+
+
+        }
+        if(invincibilityCounter > 0)
+        {
+            invincibilityCounter -= Time.deltaTime;
+
+            flashCounter -= Time.deltaTime;
+            if(flashCounter <= 0)
+
+            {
+                playerRenderer.enabled = !playerRenderer.enabled;
+                flashCounter = flashLength;
+            }
+
+            if(invincibilityCounter <= 0)
+            {
+                playerRenderer.enabled = true;
+            }      
+        }
     }
+
+    void FixedUpdate() 
+        {
+            ChibiMovePlayer(); // Calls the chibiMovePlayer function
+            isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
+            ApplyGravity(); // calls the apply gravity function so the player is affected by gravity
+            UpdateJumpState(); // update the jump state for jump buffer and coyote time
+            handleJump(); // The function that handles the jumping of the player
+        }
 
     void ChibiMovePlayer() // Chibi move player function that moves and flips the player
     {
@@ -209,13 +282,25 @@ public class ChibiPlayerMovement : MonoBehaviour
     }
     public void takeDamage(float dmgAmount) // The amount put in here will be subtracted 
     {
-        
-        playerHealth -= dmgAmount;
-        if(playerHealth <= 0f)
+        if(invincibilityCounter <= 0)
+        {
+            playerHealth -= dmgAmount; // Substract the damage amount from the players health
+
+            if(playerHealth <= 0f)
+
             {
-                die();
-            } // Substract the damage amount from the players health
-        Debug.Log($"I have been Hit! Health: {playerHealth}");
+
+                    die();
+
+            } 
+
+            invincibilityCounter = invincibilityLength;
+
+            playerRenderer.enabled = false;
+
+            flashCounter = flashLength;
+        }
+        //Debug.Log($"I have been Hit! Health: {playerHealth}");
     }
 
     private void die() // Checks to see if the player needs to die
