@@ -1,8 +1,8 @@
 /*
  * Created By: Gabriel Flores
  * 
- * This script will hold all of the game objects that wont be destroyed on load
- * This includes itself
+ * This script will check to see if it already exists in the current scene and if it does it destroys itself
+ * If it doesnt then it is set to dont destroy on load
  * 
  */
 
@@ -13,18 +13,31 @@ using UnityEngine;
 
 public class DontDestroy : MonoBehaviour
 {
-    public List<GameObject> dontDestroy; // List of objects to not destroy
+   // public bool inactiveAfter; // A bool to set the object inactive after it is set to dont destroy
+    public GameObject[] dontDestroy;
 
     // Start is called before the first frame update
     void Start()
     {
-        // For each game object in the list dont destroy
-        foreach(GameObject i in dontDestroy)
+        GameObject duplicate = GameObject.Find(gameObject.name);
+
+        if (duplicate != gameObject)
         {
-            DontDestroyOnLoad(i);
+            foreach(GameObject i in dontDestroy)
+            {
+                Destroy(i);
+            }
+            Destroy(gameObject);
         }
-        // Dont destroy this game object
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            foreach (GameObject i in dontDestroy)
+            {
+                DontDestroyOnLoad(i);
+            }
+            DontDestroyOnLoad(gameObject);
+        }
+        
     }
 
     // Update is called once per frame
