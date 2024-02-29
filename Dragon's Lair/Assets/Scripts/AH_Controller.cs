@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AH_Controller : MonoBehaviour
 {
@@ -8,25 +8,37 @@ public class AH_Controller : MonoBehaviour
     public float minDist = 0;
     public float maxDist = 10;
     public LayerMask layers;
+    public Rigidbody myRigidBody;
     
     [SerializeField] private Camera mainCamera;
-
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //rb = GetComponent<Rigidbody>();
+        myRigidBody.GetComponent<Rigidbody>();
+    }
+
+    private void Awake()
+    {
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit))
+        if (Physics.Raycast(ray, out RaycastHit hit,layers))
         {
-            transform.position = raycastHit.point;
+            transform.position = hit.point;
+            myRigidBody.AddRelativeForce(Vector3.up * speed * Time.deltaTime);
+
+            
         }
 
     }
+
 }
