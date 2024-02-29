@@ -15,7 +15,7 @@ public class DeathBounds : MonoBehaviour
         if(other.tag == "Player")
         {
             gameManager.LoadLevelbyName(levelToLoad);
-            Destroy(other);
+            
         }
         
     }
