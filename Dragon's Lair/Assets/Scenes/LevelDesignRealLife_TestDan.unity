@@ -14266,6 +14266,135 @@ Transform:
   m_Children: []
   m_Father: {fileID: 812471821}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &428080021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 428080023}
+  - component: {fileID: 428080022}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &428080022
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428080021}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 0b52ae06208f12e4bb9013acc51b4412,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 5976922c6adf57044b93269219891665, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &428080023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428080021}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.64151, y: -0.33276987, z: 38.013943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &429148801
 GameObject:
   m_ObjectHideFlags: 0
@@ -17810,6 +17939,8 @@ MonoBehaviour:
   storyEventNeeded: 0
   state: 0
   cantInteractYetDialogue: {fileID: 0}
+  updateObjective: 0
+  newObjective: 
 --- !u!1 &527572350
 GameObject:
   m_ObjectHideFlags: 0
@@ -38938,6 +39069,8 @@ MonoBehaviour:
   storyEventNeeded: 0
   state: 0
   cantInteractYetDialogue: {fileID: 0}
+  updateObjective: 0
+  newObjective: 
 --- !u!114 &1216211002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47335,6 +47468,8 @@ MonoBehaviour:
   state: 0
   cantInteractYetDialogue: {fileID: 11400000, guid: 8a1298739c9f59d419b056652e25d47c,
     type: 2}
+  updateObjective: 0
+  newObjective: 
 --- !u!1 &1526374886
 GameObject:
   m_ObjectHideFlags: 0
@@ -49829,6 +49964,8 @@ MonoBehaviour:
   storyEventNeeded: 0
   state: 0
   cantInteractYetDialogue: {fileID: 0}
+  updateObjective: 0
+  newObjective: 
 --- !u!65 &1636155924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56072,6 +56209,8 @@ MonoBehaviour:
   storyEventNeeded: 0
   state: 0
   cantInteractYetDialogue: {fileID: 0}
+  updateObjective: 0
+  newObjective: 
 --- !u!1 &2009851160
 GameObject:
   m_ObjectHideFlags: 0
@@ -59699,3 +59838,4 @@ SceneRoots:
   - {fileID: 939605939}
   - {fileID: 731999143}
   - {fileID: 1868268100}
+  - {fileID: 428080023}
