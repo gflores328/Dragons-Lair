@@ -67,7 +67,7 @@ public class Interact : MonoBehaviour
     private DialogueWithName itemNotObtained;
 
     // Variables for if a story trigger is needed to interact
-    public bool storyEventNeeded;
+    public bool storyStateNeeded;
     [HideInInspector, SerializeField]
     private GameState.state state;
     [HideInInspector, SerializeField]
@@ -95,7 +95,7 @@ public class Interact : MonoBehaviour
             dialogueManager.GetComponent<DialogueManager>().StartDialogue("Press Interact Button");
 
             // If the interact does not need a story event or an item
-            if (!storyEventNeeded && !needItem)
+            if (!storyStateNeeded && !needItem)
             {
                 dialogueToDisplay = interactDialogue;
                 correctTrigger = true;
@@ -103,7 +103,7 @@ public class Interact : MonoBehaviour
                 
             }
             // If the interact needs a story event and an item
-            else if(storyEventNeeded && needItem)
+            else if(storyStateNeeded && needItem)
             {
                 // if the current story state is not the same as the one needed then the dialog is set to cant interact yet
                 if (!((int)state <= ((int)gameState.GetComponent<GameState>().storyState)))
@@ -127,7 +127,7 @@ public class Interact : MonoBehaviour
                 }
             }
             // if only a story event is needed
-            else if(storyEventNeeded)
+            else if(storyStateNeeded)
             {
                 
                 // if the state needed is the current state of the game
@@ -459,7 +459,7 @@ public class Interact : MonoBehaviour
             }
 
             // If need a need a story trigger is true
-            if (interact.storyEventNeeded)
+            if (interact.storyStateNeeded)
             {
                 // A header called Need Story State
                 EditorGUILayout.Space();
