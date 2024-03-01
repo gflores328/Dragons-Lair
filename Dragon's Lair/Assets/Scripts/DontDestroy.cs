@@ -13,22 +13,26 @@ using UnityEngine;
 
 public class DontDestroy : MonoBehaviour
 {
-   // public bool inactiveAfter; // A bool to set the object inactive after it is set to dont destroy
-    public GameObject[] dontDestroy;
+   
+    public GameObject[] dontDestroy; // An array to hold other do not destry objects
 
     // Start is called before the first frame update
     void Start()
     {
+        // Finds a game object with the same name as this game object
         GameObject duplicate = GameObject.Find(gameObject.name);
 
+        // if duplicate is not this game object
         if (duplicate != gameObject)
         {
+            // destroy everything in the dontDestroy array and this game object
             foreach(GameObject i in dontDestroy)
             {
                 Destroy(i);
             }
             Destroy(gameObject);
         }
+        // Else set all to dont destroy on load
         else
         {
             foreach (GameObject i in dontDestroy)

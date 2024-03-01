@@ -5117,6 +5117,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 750aa41d-2ad5-4e52-bc1a-3f405e737fbe
     m_ActionName: DDR/LeftArrow[/Keyboard/a,/Keyboard/leftArrow,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/dpad/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 719c142d-7676-4bba-9381-4fbc4718dba1
+    m_ActionName: DDR/Start[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: ChibiMovement
@@ -5168,7 +5172,18 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  groundRayLength: 1
+  groundRayLength: 0.5
+  initialJumpVelocity: 16
+  maxJumpHeight: 1
+  maxJumpTime: 0.5
+  maxHealth: 10
+  numOfHearts: 10
+  hearts: []
+  fullHeart: {fileID: 0}
+  emptyHeart: {fileID: 0}
+  invincibilityLength: 2
+  playerRenderer: {fileID: 1952862864436442972}
+  flashLength: 0.1
 --- !u!114 &7112737368637150450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5315,6 +5330,12 @@ PrefabInstance:
 --- !u!4 &815954936752163891 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 397c432ece7d2a7488ae07d2e07fadea,
+    type: 3}
+  m_PrefabInstance: {fileID: 925599452917115864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1952862864436442972 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 397c432ece7d2a7488ae07d2e07fadea,
     type: 3}
   m_PrefabInstance: {fileID: 925599452917115864}
   m_PrefabAsset: {fileID: 0}

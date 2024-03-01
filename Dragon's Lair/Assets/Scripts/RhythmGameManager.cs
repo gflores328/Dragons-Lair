@@ -109,6 +109,22 @@ public class RhythmGameManager : MonoBehaviour
         //Get the input action that will start the game
         startInput = GetComponent<PlayerInput>().actions.FindAction("Start");
 
+        //Set text in intro screen
+        if (Gamepad.current == null && Joystick.current == null)
+        {
+            introScreen.transform.GetChild(0).GetComponent<Text>().text =
+                "Use [WASD] or [Arrow Keys] to hit notes\n\n" +
+                "Hit the notes closer to the center\nof the button to get more points\n\n" +
+                "Press [Space] to play";
+        }
+        else
+        {
+            introScreen.transform.GetChild(0).GetComponent<Text>().text =
+                "Use [Left Stick] or [D-Pad] to hit notes\n\n" +
+                "Hit the notes closer to the center\nof the button to get more points\n\n" +
+                "Press [A] to play";
+        }
+
         //Enable the intro screen
         introScreen.SetActive(true);
 
