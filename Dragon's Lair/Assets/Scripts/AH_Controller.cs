@@ -8,7 +8,7 @@ public class AH_Controller : MonoBehaviour
     public float minDist = 0; //minimum distance
     public float maxDist = 10; //max distance
     public LayerMask layers;  //layerMask to have raycast go directly to ground
-    public Rigidbody myRigidBody; //rigidbody of player object
+   
     
     [SerializeField] private Camera mainCamera;  //main camera object
 
@@ -16,7 +16,7 @@ public class AH_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myRigidBody.GetComponent<Rigidbody>();
+        
     }
 
     private void Awake()
@@ -31,10 +31,11 @@ public class AH_Controller : MonoBehaviour
 
         //casts a ray to the location of the mouse
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit,layers))
+
+        if (Physics.Raycast(ray, out RaycastHit hit,maxDist, layers))
         {
             transform.position = hit.point;
-            myRigidBody.AddRelativeForce(Vector3.up * speed * Time.deltaTime);
+            
 
             
         }
