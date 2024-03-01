@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Activation : MonoBehaviour
+public class Spikes : MonoBehaviour
 {
     //public float damage;
 
@@ -27,13 +27,14 @@ public class Activation : MonoBehaviour
     //if player enters collider play animation then wait before playing again
     public void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag("Player"))
         {
             
             anim.SetTrigger("onActive");
             coroutine = WaitTime(waitTime);
             StartCoroutine(coroutine);
-
+            
         }
     }
 
@@ -46,6 +47,20 @@ public class Activation : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+            ChibiPlayerMovement player = collision.gameObject.GetComponent<ChibiPlayerMovement>();
+            if (player != null)
+            {
+                // Call the player's takeDamage function and pass the damage amount
+                player.takeDamage(1);
+
+                
+            }
+
+        
+    }
     //wait time function
     private IEnumerator WaitTime(float waitTime)
     {
