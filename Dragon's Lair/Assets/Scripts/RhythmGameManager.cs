@@ -63,6 +63,14 @@ public class RhythmGameManager : MonoBehaviour
     public RhythmBeatScroller beatScroller;
     [Tooltip("Object that holds the beatScroller")]
     public GameObject beatScrollerObject;
+
+    [Tooltip("Object that holds the Chibi Poses ")]
+    public GameObject chibiHolder;
+
+    [Tooltip("Object that holds the arrows Poses ")]
+    public GameObject buttonHolder;
+
+
     [Tooltip("Introduction / Tutorial screen")]
     public GameObject introScreen;
 
@@ -129,8 +137,9 @@ public class RhythmGameManager : MonoBehaviour
 
         //Enable the intro screen
         introScreen.SetActive(true);
-        //disable the notes until the start button is pressed
+        //disable the notes until the start button is pressed and also chibi holder
         beatScrollerObject.SetActive(false);
+        chibiHolder.SetActive(false);
         //GABE ADDED
         gameState = GameObject.Find("GameState");
     }
@@ -143,6 +152,7 @@ public class RhythmGameManager : MonoBehaviour
         {
             if (startInput.IsPressed())
             {
+                chibiHolder.SetActive(true);
                 beatScrollerObject.SetActive(true);
                 startPlaying = true;
                 //Remove the intro screen
@@ -200,6 +210,8 @@ public class RhythmGameManager : MonoBehaviour
 
                 //Display the results screen
                 resultsScreen.SetActive(true);
+                chibiHolder.SetActive(false);
+                buttonHolder.SetActive(false);
 
                 // GABE ADDED
                 if (currentScore > 20000)
