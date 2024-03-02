@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum side { left, right, none};
+
 [System.Serializable]
 public struct DialogueAndName
 {
@@ -12,6 +15,8 @@ public struct DialogueAndName
     public string name;
     [Tooltip("The bust for the charachter speaking")]
     public Sprite bust;
+    [Tooltip("The side of the textbox that the bust will be on")]
+    public side bustSide;
 }
 
 [CreateAssetMenu]

@@ -24,8 +24,10 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     [Tooltip("The UI for the objective")]
     public TextMeshProUGUI objectiveUI;
-    [Tooltip("The image that holds the character bust of who is talking")]
-    public GameObject bustUI;
+    [Tooltip("The image that holds the character bust of who is talking on the left")]
+    public GameObject bustUILeft;
+    [Tooltip("The image that holds the character bust of who is talking on the right")]
+    public GameObject bustUIRight;
 
 
     private GameObject gameState;
@@ -44,8 +46,19 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = dialogueAndName.dialogue;
         nameBox.SetActive(true);
         nameText.text = dialogueAndName.name;
-        bustUI.SetActive(true);
-        bustUI.GetComponent<Image>().sprite = dialogueAndName.bust;
+
+        if (dialogueAndName.bustSide == side.left)
+        {
+            bustUILeft.SetActive(true);
+            bustUILeft.GetComponent<Image>().sprite = dialogueAndName.bust;
+        }
+        else if (dialogueAndName.bustSide == side.right)
+        {
+            bustUIRight.SetActive(true);
+            bustUIRight.GetComponent<Image>().sprite = dialogueAndName.bust;
+        }
+
+        
     }
 
     public void StartDialogue(string dialogue)
@@ -62,8 +75,11 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = null;
         nameBox.SetActive(false);
         nameText.text = null;
-        bustUI.SetActive(false);
-        bustUI.GetComponent<Image>().sprite = null;
+        bustUILeft.SetActive(false);
+        bustUILeft.GetComponent<Image>().sprite = null;
+        bustUIRight.SetActive(false);
+        bustUIRight.GetComponent<Image>().sprite = null;
+
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -78,14 +94,35 @@ public class DialogueManager : MonoBehaviour
         {
             textBox.SetActive(true);
         }
-        if (!bustUI.activeInHierarchy)
+
+        if (!bustUILeft.activeInHierarchy && dialogueAndName.bustSide == side.left)
         {
-            bustUI.SetActive(true);
+            bustUILeft.SetActive(true);
+            bustUIRight.SetActive(false);
+        }
+        else if (!bustUIRight.activeInHierarchy && dialogueAndName.bustSide == side.right)
+        {
+            bustUIRight.SetActive(true);
+            bustUILeft.SetActive(false);
+        }
+        else if (dialogueAndName.bustSide == side.none)
+        {
+            bustUIRight.SetActive(false);
+            bustUILeft.SetActive(false);
         }
 
         dialogueText.text = dialogueAndName.dialogue;
         nameText.text = dialogueAndName.name;
-        bustUI.GetComponent<Image>().sprite = dialogueAndName.bust;
+
+        if (dialogueAndName.bustSide == side.left)
+        {
+            bustUILeft.GetComponent<Image>().sprite = dialogueAndName.bust;
+        }
+        else if (dialogueAndName.bustSide == side.right)
+        {
+            bustUIRight.GetComponent<Image>().sprite = dialogueAndName.bust;
+        }
+        
     }
 
     /*
