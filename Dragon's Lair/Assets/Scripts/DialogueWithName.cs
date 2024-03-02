@@ -10,6 +10,8 @@ public struct DialogueAndName
     public string dialogue;
     [Tooltip("The name of who or what said the dialogue line")]
     public string name;
+    [Tooltip("The bust for the charachter speaking")]
+    public Sprite bust;
 }
 
 [CreateAssetMenu]
