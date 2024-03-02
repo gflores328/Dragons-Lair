@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     [Tooltip("The UI for the objective")]
     public TextMeshProUGUI objectiveUI;
+    [Tooltip("The image that holds the character bust of who is talking")]
+    public GameObject bustUI;
 
 
     private GameObject gameState;
@@ -41,6 +44,8 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = dialogueAndName.dialogue;
         nameBox.SetActive(true);
         nameText.text = dialogueAndName.name;
+        bustUI.SetActive(true);
+        bustUI.GetComponent<Image>().sprite = dialogueAndName.bust;
     }
 
     public void StartDialogue(string dialogue)
@@ -57,6 +62,8 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = null;
         nameBox.SetActive(false);
         nameText.text = null;
+        bustUI.SetActive(false);
+        bustUI.GetComponent<Image>().sprite = null;
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -71,9 +78,14 @@ public class DialogueManager : MonoBehaviour
         {
             textBox.SetActive(true);
         }
+        if (!bustUI.activeInHierarchy)
+        {
+            bustUI.SetActive(true);
+        }
 
         dialogueText.text = dialogueAndName.dialogue;
         nameText.text = dialogueAndName.name;
+        bustUI.GetComponent<Image>().sprite = dialogueAndName.bust;
     }
 
     /*
