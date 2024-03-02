@@ -61,6 +61,8 @@ public class RhythmGameManager : MonoBehaviour
     public Text multiplierText;
     [Tooltip("Object that controlls how fast the notes move.")]    
     public RhythmBeatScroller beatScroller;
+    [Tooltip("Object that holds the beatScroller")]
+    public GameObject beatScrollerObject;
     [Tooltip("Introduction / Tutorial screen")]
     public GameObject introScreen;
 
@@ -127,7 +129,8 @@ public class RhythmGameManager : MonoBehaviour
 
         //Enable the intro screen
         introScreen.SetActive(true);
-
+        //disable the notes until the start button is pressed
+        beatScrollerObject.SetActive(false);
         //GABE ADDED
         gameState = GameObject.Find("GameState");
     }
@@ -140,6 +143,7 @@ public class RhythmGameManager : MonoBehaviour
         {
             if (startInput.IsPressed())
             {
+                beatScrollerObject.SetActive(true);
                 startPlaying = true;
                 //Remove the intro screen
                 introScreen.SetActive(false);

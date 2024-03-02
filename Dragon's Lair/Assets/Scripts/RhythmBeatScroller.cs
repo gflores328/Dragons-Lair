@@ -25,6 +25,7 @@ public class RhythmBeatScroller : MonoBehaviour
     {
         //Convert tempo to beats per second
         beatTempo /= 60f;
+        
     }
 
     // Update is called once per frame
@@ -33,7 +34,11 @@ public class RhythmBeatScroller : MonoBehaviour
         //If the game has started begin moving the notes down
         if (hasStarted)
         {
+            
             transform.position -= new Vector3(0f, beatTempo * Time.deltaTime, 0f);
         }
     }
+
+    
+    
 }

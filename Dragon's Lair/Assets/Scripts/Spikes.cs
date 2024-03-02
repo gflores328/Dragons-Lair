@@ -50,7 +50,7 @@ public class Spikes : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         
-            ChibiPlayerMovement player = collision.gameObject.GetComponent<ChibiPlayerMovement>();
+            ChibiPlayerMovement player = collision.gameObject.GetComponent<ChibiPlayerMovement>(); 
             if (player != null)
             {
                 // Call the player's takeDamage function and pass the damage amount
