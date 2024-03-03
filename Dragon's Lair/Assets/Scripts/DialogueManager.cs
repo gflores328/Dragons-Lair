@@ -24,6 +24,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     [Tooltip("The UI for the objective")]
     public TextMeshProUGUI objectiveUI;
+    public GameObject objectiveBox;
     [Tooltip("The image that holds the character bust of who is talking on the left")]
     public GameObject bustUILeft;
     [Tooltip("The image that holds the character bust of who is talking on the right")]
@@ -46,6 +47,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = dialogueAndName.dialogue;
         nameBox.SetActive(true);
         nameText.text = dialogueAndName.name;
+        
 
         if (dialogueAndName.bustSide == side.left)
         {
@@ -65,6 +67,7 @@ public class DialogueManager : MonoBehaviour
     {
         textBox.SetActive(true);
         dialogueText.text = dialogue;
+        
         //Cursor.lockState = CursorLockMode.None;
     }
 
@@ -79,6 +82,8 @@ public class DialogueManager : MonoBehaviour
         bustUILeft.GetComponent<Image>().sprite = null;
         bustUIRight.SetActive(false);
         bustUIRight.GetComponent<Image>().sprite = null;
+
+        
 
         //Cursor.lockState = CursorLockMode.Locked;
     }

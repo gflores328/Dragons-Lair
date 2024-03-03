@@ -22,7 +22,7 @@ using UnityEditor;
 public class Interact : MonoBehaviour
 {
     // Variables for all uses
-    enum InteractionType {inspect, menu, item, dialogue} // An enem to determine the interaction type
+    enum InteractionType {inspect, menu, item, dialogue, zoom} // An enem to determine the interaction type
 
     [Tooltip("The type of interaction that the script will be")]
     [SerializeField]
@@ -79,6 +79,12 @@ public class Interact : MonoBehaviour
     public bool updateObjective;
     [HideInInspector, SerializeField]
     string newObjective;
+
+    // Variables for a zoom type interaction
+    [HideInInspector, SerializeField]
+    private GameObject UIPopUp;
+    [HideInInspector, SerializeField]
+    private GameObject closeUIObject;
 
     private void Start()
     {
@@ -304,6 +310,31 @@ public class Interact : MonoBehaviour
                  
             }
         }
+
+        // If interaction type is zoom
+        if (interactionType == InteractionType.zoom && !menuOpen)
+        {
+            UIPopUp.SetActive(true);
+            // While the currentLine is less than the dialogueToDisplays array legnth then the text is changed to the currentLine of the array
+            if (currentLine < dialogueToDisplay.dialogueArray.Length)
+            {
+                // Time scale is set to 0 when interact is run
+                Time.timeScale = 0;
+
+                dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
+                currentLine++;
+            }
+            // If currentLine is not less than then EndDialogue is run and timeScale is set back to 1;
+            else
+            {
+                closeUIObject.SetActive(true);
+                dialogueManager.GetComponent<DialogueManager>().EndDialogue();
+                currentLine = 0;
+                menuOpen = true;
+
+                
+            }
+        }
     }
 
     // This function is for a button click event
@@ -328,6 +359,16 @@ public class Interact : MonoBehaviour
         questionUI.SetActive(false);
         //
         
+    }
+
+    // A button function that closes the image set up by zoom type interaction
+    public void PopupClose()
+    {
+        Time.timeScale = 1;
+        currentLine = 0;
+        menuOpen = false;
+        UIPopUp.SetActive(false);
+        closeUIObject.SetActive(false);
     }
 
     // For on on click event that will close the UI that the menu type interact pops up
@@ -437,6 +478,27 @@ public class Interact : MonoBehaviour
                     list[i] = EditorGUILayout.ObjectField("Question " + (i + 1), list[i], typeof(DialogueWithName), false) as DialogueWithName;
                 }
                */
+            }
+
+            // If interaction type is zoom
+            if(interact.interactionType == InteractionType.zoom)
+            {
+                // A header named Zoom Interaction
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Zoom Interaction", EditorStyles.boldLabel);
+
+                // A game object field for the zoom popup UI
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Popup UI", GUILayout.MaxWidth(126));
+                interact.UIPopUp = EditorGUILayout.ObjectField(interact.UIPopUp, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
+                EditorGUILayout.EndHorizontal();
+
+                // A game object field for the popup UI close object
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Popup Close", GUILayout.MaxWidth(126));
+                interact.closeUIObject = EditorGUILayout.ObjectField(interact.closeUIObject, typeof(GameObject), true, GUILayout.MaxWidth(220)) as GameObject;
+                EditorGUILayout.EndHorizontal();
+
             }
 
             // If need item is set to true then these fields will show in the inspector
