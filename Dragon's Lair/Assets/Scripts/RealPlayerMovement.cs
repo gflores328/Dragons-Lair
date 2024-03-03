@@ -37,6 +37,10 @@ public class RealPlayerMovement : MonoBehaviour
     //private ItemInteraction itemInteraction;
     //private DialogueTree dialogueTree;
     private Interact interact;
+    private bool inventoryOpen = false;
+    private InputAction inventoryAction;
+    private InventoryUI inventoryUIArray;
+    private GameObject inventoryUI;
 
     
     private GameObject gameManagerObj;
@@ -62,6 +66,21 @@ public class RealPlayerMovement : MonoBehaviour
         gameManagerObj =  GameObject.Find("GameManager");
         gameManager = gameManagerObj.GetComponent<GameManager>();
         //Cursor.lockState = CursorLockMode.Locked;
+        inventoryAction = playerInput.actions.FindAction("Inventory");
+        inventoryAction.performed += OpenInventory;
+        inventoryUIArray = FindObjectOfType<InventoryUI>(true);
+        inventoryUI = inventoryUIArray.gameObject;
+
+        if (inventoryUI != null && !inventoryUI.activeSelf)
+        {
+            // Do something with the inactive object
+            Debug.Log("Found inactive object: " + inventoryUI.name);
+        }
+        else
+        {
+            // Handle the case when the inactive object is not found or is active
+            Debug.LogWarning("Inactive object not found or is active.");
+        }
     }
 
     
@@ -213,5 +232,23 @@ public class RealPlayerMovement : MonoBehaviour
         }
     }
 
+    private void OpenInventory(InputAction.CallbackContext value)
+    {
+        if (!inventoryOpen)
+        {
+            Time.timeScale = 0;
+            inventoryUI.SetActive(true);
+           
+            inventoryOpen = true;
+        }
+        else if (inventoryOpen)
+        {
+            Time.timeScale = 1;
+            inventoryUI.SetActive(false);
+            inventoryOpen = false;
+           
+        }
+
+    }
 
 }
