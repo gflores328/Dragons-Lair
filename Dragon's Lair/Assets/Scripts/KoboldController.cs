@@ -36,6 +36,8 @@ public class KoboldController : Enemy
     public int edgeIterations = 4;
     public float edgeDistance = 0.5f;
 
+    public Animator animator;
+
     public Transform[] waypoints; // Waypoints
     int m_CurrentWaypointIndex;
 
@@ -121,6 +123,7 @@ public class KoboldController : Enemy
     // Patrol Mode
     private void Patrolling()
     {
+        
         if (m_PlayerNear) // If the kobold is near the player
         {
             if (m_TimeToRotate <= 0) // After turning around...
@@ -159,6 +162,7 @@ public class KoboldController : Enemy
     // Sets the kobold's movement speed
     void Move(float speed)
     {
+        animator.SetBool("Walking_Kobold", true);
         navAgent.isStopped = false;
         navAgent.speed = speed;
     }
@@ -166,6 +170,7 @@ public class KoboldController : Enemy
     // Stops the kobold's movement
     void Stop()
     {
+        animator.SetBool("Walking_Kobold",false);
         // The kobold stops moving
         navAgent.isStopped = true;
         navAgent.speed = 0;
