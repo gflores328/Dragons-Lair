@@ -92,7 +92,16 @@ public class Interact : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            dialogueManager.GetComponent<DialogueManager>().StartDialogue("Press Interact Button");
+
+            if (Input.GetJoystickNames().Length > 0)
+            {
+                dialogueManager.GetComponent<DialogueManager>().StartDialogue("Press X to Interact");
+            }
+            else
+            {
+                dialogueManager.GetComponent<DialogueManager>().StartDialogue("Press E to Interact");
+            }
+            
 
             // If the interact does not need a story event or an item
             if (!storyStateNeeded && !needItem)
