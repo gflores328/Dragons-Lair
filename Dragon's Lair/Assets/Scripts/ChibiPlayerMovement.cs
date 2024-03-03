@@ -57,7 +57,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     //PlayerUI and Information Section
     [Header("Player Health Settings")]
     public float maxHealth =  10f; // The float the determines how much health the player starts with
-    static float playerHealth = 10f; // A float that holds the players health
+    public static float playerHealth = 10f; // A float that holds the players health
     public int numOfHearts; // an int that determines how many UI hearts are there
 
     public Image[] hearts; // The image array that will hold the 10 heart ui and access them
@@ -308,6 +308,19 @@ public class ChibiPlayerMovement : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         gameManager.LoadSceneAsync(currentSceneName);
         
+    }
+
+    public void AddHealth(float health)
+    
+    {
+        float endHealth = health + playerHealth;
+        if(endHealth > maxHealth)
+        {
+            playerHealth = maxHealth;
+        }
+        else{
+            playerHealth = endHealth;
+        }
     }
     
   
