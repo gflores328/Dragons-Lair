@@ -23,6 +23,7 @@ public class GameState : MonoBehaviour
         talkToDavid,
         PlayDDR,
         DDRComplete,
+        getIntoBasement,
         PlayVR,
         Level1Complete,
         Level2Complete
@@ -95,9 +96,16 @@ public class GameState : MonoBehaviour
             storyState = state.PlayDDR;
         }
 
+        if (objective == "Get into the basement")
+        {
+            storyState = state.getIntoBasement;
+        }
+
         if (objective == "Play VR Game")
         {
             storyState = state.PlayVR;
         }
+
+        Debug.Log(storyState);
     }
 }
