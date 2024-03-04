@@ -36,6 +36,9 @@ public class KoboldController : Enemy
     public int edgeIterations = 4;
     public float edgeDistance = 0.5f;
 
+
+    private bool isDead = false;
+
     public Animator animator;
 
     public Transform[] waypoints; // Waypoints
@@ -74,15 +77,27 @@ public class KoboldController : Enemy
     // Update is called once per frame
     void Update()
     {
-        EnvironmentView(); // 
+        if(!isDead)
 
-        if (!m_IsPatrol) // If the kobold is not patrolling
         {
-            Chasing();  // The kobold chases the player
-        }
-        else
-        {
-            Patrolling(); // The kobold patrols when the player is not in range
+
+            EnvironmentView(); // 
+
+            if (!m_IsPatrol) // If the kobold is not patrolling
+
+            {
+
+                Chasing();  // The kobold chases the player
+
+            }
+
+            else
+
+            {
+
+                Patrolling(); // The kobold patrols when the player is not in range
+
+            }
         }
     }
 
@@ -244,5 +259,28 @@ public class KoboldController : Enemy
                 m_PlayerPosition = player.transform.position; // Saves player position
             }
         }
+    }
+
+    protected override void Die()
+
+    {
+        Stop();
+        isDead = true;
+        animator.SetTrigger("IS_Dead");
+
+        // Disable the Capsule Collider
+        CapsuleCollider collider = GetComponent<CapsuleCollider>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+        }
+        
+
+        float deathDuration = 2f;
+
+        Destroy(gameObject, deathDuration);
+
+
+
     }
 } 

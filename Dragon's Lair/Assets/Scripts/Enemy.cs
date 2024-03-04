@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public virtual void TakeDamage(float dmgAmount) // The function that children of the class will be able to access and change
     {
         health -= dmgAmount; // Subtract damage amount from the health
-        Debug.Log($"Enemy took {dmgAmount} damage. Current health: {health}");
+        //Debug.Log($"Enemy took {dmgAmount} damage. Current health: {health}");
         if (health <= 0) // if health hits zero
         {
             Die(); // Kill enemy
@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Die() // The function that will kill the enemy 
 
     {
-        Debug.Log("Enemy Dead");
+        //Debug.Log("Enemy Dead");
         Destroy(gameObject); // Destroy enemy object
     }
 }
