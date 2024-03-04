@@ -32,7 +32,7 @@ public class SolarBulletController : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             // Get the Enemy component from the collided GameObject
-            Enemy enemy = other.GetComponent<Enemy>();
+            Alien enemy = other.GetComponent<Alien>();
 
             // Check if the enemy component exists
             if (enemy != null)
