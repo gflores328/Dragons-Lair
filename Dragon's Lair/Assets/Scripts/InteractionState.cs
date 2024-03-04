@@ -41,7 +41,10 @@ public class InteractionState : MonoBehaviour
         if (((int)gameState.GetComponent<GameState>().storyState) >= ((int)despawn))
         {
             Debug.Log("Destoryed " + gameObject);
-            makeActive.SetActive(true);
+            if (!(makeActive == null))
+            {
+                makeActive.SetActive(true);
+            }
             Destroy(gameObject);
         }
         

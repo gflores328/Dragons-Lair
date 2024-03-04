@@ -30526,7 +30526,6 @@ GameObject:
   - component: {fileID: 752796505}
   - component: {fileID: 752796508}
   - component: {fileID: 752796507}
-  - component: {fileID: 752796506}
   m_Layer: 0
   m_Name: BasementDoorTrigger
   m_TagString: InteractItem
@@ -30549,21 +30548,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1402110043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &752796506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752796504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8db14ed52b5c2e5408b9d83c452d9022, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: 0
-  despawn: 5
-  makeActive: {fileID: 0}
 --- !u!114 &752796507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33377,7 +33361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawn: 4
-  despawn: 6
+  despawn: 7
   makeActive: {fileID: 0}
 --- !u!114 &867201267
 MonoBehaviour:
@@ -62100,7 +62084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawn: 0
-  despawn: 5
+  despawn: 6
   makeActive: {fileID: 0}
 --- !u!1001 &1403163912
 PrefabInstance:
@@ -78929,7 +78913,7 @@ MonoBehaviour:
   cantInteractYetDialogue: {fileID: 11400000, guid: 8a1298739c9f59d419b056652e25d47c,
     type: 2}
   updateObjective: 1
-  newObjective: Play VR Game
+  newObjective: Unlock basement door
   UIPopUp: {fileID: 0}
   closeUIObject: {fileID: 0}
 --- !u!65 &1859388717
@@ -89939,7 +89923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawn: 5
-  despawn: 6
+  despawn: 8
   makeActive: {fileID: 0}
 --- !u!114 &2132449533
 MonoBehaviour:

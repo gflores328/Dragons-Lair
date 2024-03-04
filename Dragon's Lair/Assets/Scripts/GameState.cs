@@ -24,6 +24,7 @@ public class GameState : MonoBehaviour
         PlayDDR,
         DDRComplete,
         getIntoBasement,
+        unlockDoor,
         PlayVR,
         Level1Complete,
         Level2Complete
@@ -99,6 +100,11 @@ public class GameState : MonoBehaviour
         if (objective == "Get into the basement")
         {
             storyState = state.getIntoBasement;
+        }
+
+        if (objective == "Unlock basement door")
+        {
+            storyState = state.unlockDoor;
         }
 
         if (objective == "Play VR Game")
