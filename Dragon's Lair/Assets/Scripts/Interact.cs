@@ -209,9 +209,10 @@ public class Interact : MonoBehaviour
             {
                 // Time scale is set to 0 when interact is run
                 Time.timeScale = 0;
-
+                dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
+                
             }
             // If currentLine is not less than then EndDialogue is run and timeScale is set back to 1;
             else
@@ -219,6 +220,7 @@ public class Interact : MonoBehaviour
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 currentLine = 0;
                 Time.timeScale = 1;
+                dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
 
                 if (updateObjective && hasItemNeeded && correctTrigger)
                 {
@@ -236,9 +238,10 @@ public class Interact : MonoBehaviour
             { 
                 // Time scale is set to 0 when interact is run
                 Time.timeScale = 0;
-
+                dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
+                
 
             }
             // When dialogue is over then the menuUI will be set active
@@ -250,6 +253,7 @@ public class Interact : MonoBehaviour
                 menuUI.SetActive(true);
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);
                 Cursor.lockState = CursorLockMode.None;
+                
             }
         }
 
@@ -261,7 +265,7 @@ public class Interact : MonoBehaviour
             {
                 // Time scale is set to 0 when interact is run
                 Time.timeScale = 0;
-
+                dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
@@ -273,7 +277,8 @@ public class Interact : MonoBehaviour
                 inventory.GetComponent<Inventory>().AddItem(itemToPickup);
                 Time.timeScale = 1;
                 GameObject.Find("GameState").GetComponent<GameState>().AddNonRespawnable(gameObject.name);
-               
+                dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
+
                 if (updateObjective)
                 {
                     dialogueManager.GetComponent<DialogueManager>().ObjectiveChange(newObjective);
@@ -294,7 +299,7 @@ public class Interact : MonoBehaviour
             {
                 // Time scale is set to 0 when interact is run
                 Time.timeScale = 0;
-
+                dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
@@ -320,7 +325,7 @@ public class Interact : MonoBehaviour
             {
                 // Time scale is set to 0 when interact is run
                 Time.timeScale = 0;
-
+                dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
             }
@@ -357,8 +362,9 @@ public class Interact : MonoBehaviour
         //inDialogue = false;
         menuOpen = false;
         questionUI.SetActive(false);
+        dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
         //
-        
+
     }
 
     // A button function that closes the image set up by zoom type interaction
@@ -369,6 +375,7 @@ public class Interact : MonoBehaviour
         menuOpen = false;
         UIPopUp.SetActive(false);
         closeUIObject.SetActive(false);
+        dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
     }
 
     // For on on click event that will close the UI that the menu type interact pops up
@@ -378,6 +385,7 @@ public class Interact : MonoBehaviour
         menuOpen = false;
         menuUI.SetActive(false);
         //Cursor.lockState = CursorLockMode.Locked;
+        dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
     }
 
     #region Editor

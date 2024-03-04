@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("The text UI to show the name")]
     public TextMeshProUGUI nameText;
     [Tooltip("The UI for the objective")]
-    public TextMeshProUGUI objectiveUI;
+    public TextMeshProUGUI objectiveText;
     public GameObject objectiveBox;
     [Tooltip("The image that holds the character bust of who is talking on the left")]
     public GameObject bustUILeft;
@@ -31,12 +31,14 @@ public class DialogueManager : MonoBehaviour
     public GameObject bustUIRight;
 
 
+
+
     private GameObject gameState;
     private void Start()
     {
         gameState = GameObject.Find("GameState");
-        objectiveUI.text = gameState.GetComponent<GameState>().objective;
-        Debug.Log(objectiveUI.text);
+        objectiveText.text = gameState.GetComponent<GameState>().objective;
+        Debug.Log(objectiveText.text);
     }
 
     // This function will take a string variable and start the dialogue by showing the UI
@@ -47,6 +49,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = dialogueAndName.dialogue;
         nameBox.SetActive(true);
         nameText.text = dialogueAndName.name;
+        
         
 
         if (dialogueAndName.bustSide == side.left)
@@ -83,7 +86,6 @@ public class DialogueManager : MonoBehaviour
         bustUIRight.SetActive(false);
         bustUIRight.GetComponent<Image>().sprite = null;
 
-        
 
         //Cursor.lockState = CursorLockMode.Locked;
     }
@@ -127,7 +129,8 @@ public class DialogueManager : MonoBehaviour
         {
             bustUIRight.GetComponent<Image>().sprite = dialogueAndName.bust;
         }
-        
+
+       
     }
 
     /*
@@ -141,8 +144,19 @@ public class DialogueManager : MonoBehaviour
     // This is a function that will change the objective text to the inputted string
     public void ObjectiveChange(string objective)
     {
-        objectiveUI.text = objective;
+        objectiveText.text = objective;
         gameState.GetComponent<GameState>().UpdateObjective(objective);
     }
 
+    public void ObjectiveActive()
+    {
+        objectiveBox.SetActive(true);
+        objectiveText.gameObject.SetActive(true);
+    }
+
+    public void ObjectiveDeactive()
+    {
+        objectiveBox.SetActive(false);
+        objectiveText.gameObject.SetActive(false);
+    }
 }
