@@ -17,9 +17,12 @@ public class AsyncLoader : MonoBehaviour
     private Slider sliderBar; //slider for progress
     public GameObject loadingScreen;
     // Start is called before the first frame update
+    
 
     private GameObject gameState; // The game object that will hold the GameState object
     private Scene scene; // A variable to hold the current scene
+
+    
     void Start()
     {
         
@@ -64,7 +67,7 @@ public class AsyncLoader : MonoBehaviour
             float progress = Mathf.Clamp01(async.progress / 0.9f); //fancy math to get your progress in a nice number
             sliderBar.value = progress; //apply it to your slider
             loadingText.text = "Loading: " + (progress * 100f) + "%"; //print it to your text
-
+            
             if (async.progress >= 0.9f) //if scene is "fully" loaded
             {
                 spaceText.enabled = true; //enable space text
