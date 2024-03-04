@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Feb 25, 2024 at 5:51 PM
+ * LAST MODIFIED ON: Mar 4, 2024 at 4:08 PM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
  *                    How To Make a Rhythm Game #3 - Score and Multipliers https://www.youtube.com/watch?v=dV9rdTlMHxs
@@ -27,6 +27,8 @@ public class RhythmGameManager : MonoBehaviour
 {
     [Tooltip("Keeps track of if the game has started or not.")]
     public bool startPlaying;
+    [Tooltip("Keeps track of the center of the buttons. This affects note position and the quality of note hits. It is grabbed from the button holder in the start function.")]
+    public float buttonCenter;
 
     [Header("Score Variables")]
 
@@ -100,6 +102,10 @@ public class RhythmGameManager : MonoBehaviour
         //Set the instance of the Rhythm Game Manager to itself
         //This, along with its static typing, ensures that only one Rhythm Game Manager exists
         instance = this;
+
+        //Align the notes with the center of the buttons. This helps the notes stay on beat.
+        buttonCenter = buttonHolder.transform.position.y;
+        beatScrollerObject.transform.position = new Vector3(0, buttonCenter, 0);
 
         //Initialize score and multiplier values
         currentScore = 0;
