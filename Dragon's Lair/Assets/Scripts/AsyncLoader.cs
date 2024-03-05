@@ -45,15 +45,23 @@ public class AsyncLoader : MonoBehaviour
         {
             loadingScreen.SetActive(true);
             sceneLoaded = true;
-            StartCoroutine(LoadNewScene(sceneToLoad));
 
-            // If the current scene is LevelDesignRealLife
             if (scene.name == "LevelDesignRealLife")
             {
                 // First time load is set to false and the position of Player is stored
                 gameState.GetComponent<GameState>().SetFirstTimeLoad(false);
                 gameState.GetComponent<GameState>().SetPlayerPosition(GameObject.Find("Player").transform.position);
             }
+
+            if (scene.name == "LevelDesignCyber" && sceneToLoad == "LevelDesignRealLife")
+            {
+                gameState.GetComponent<GameState>().storyState = GameState.state.Level1Complete;
+            }
+
+            StartCoroutine(LoadNewScene(sceneToLoad));
+
+            // If the current scene is LevelDesignRealLife
+            
         }
     }
     IEnumerator LoadNewScene(string sceneName)

@@ -27,6 +27,11 @@ public class GameState : MonoBehaviour
         unlockDoor,
         PlayVR,
         Level1Complete,
+        talkToMicheal,
+        playSpaceGame,
+        SpaceGameDone,
+        givePrize,
+        playLevel2,
         Level2Complete
     } 
 
@@ -110,6 +115,21 @@ public class GameState : MonoBehaviour
         if (objective == "Play VR Game")
         {
             storyState = state.PlayVR;
+        }
+
+        if (objective == "Talk to Michael")
+        {
+            storyState = state.talkToMicheal;
+        }
+
+        if (objective == "Earn tickets in Mobile Fighter Axiom")
+        {
+            storyState = state.playSpaceGame;
+        }
+
+        if (objective == "Give the prize to Micheal")
+        {
+            storyState = state.givePrize;
         }
 
         Debug.Log(storyState);
