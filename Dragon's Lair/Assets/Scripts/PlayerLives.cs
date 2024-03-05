@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerLives : MonoBehaviour
 {
-    public int lives = 3;
+    public static int lives = 3;
+    public static event Action OnPlayerDeath;
     
     // Start is called before the first frame update
     void Start()
@@ -20,17 +23,20 @@ public class PlayerLives : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.collider.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            Destroy(collision.collider.gameObject);
             lives -= 1;
-            if (lives <= 0) { 
-                Destroy(gameObject);
+            Destroy(gameObject);
+            if(lives > 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
-            // If Player has Lives over 0
-                // Insert Code for Level Reset Here
-            // Else
-                // Trigger Game Over Screen
+
+            else if(lives <= 0)
+            {
+                OnPlayerDeath?.Invoke();
+            }
         }
     }
 }
