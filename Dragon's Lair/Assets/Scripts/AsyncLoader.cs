@@ -56,6 +56,7 @@ public class AsyncLoader : MonoBehaviour
             if (scene.name == "LevelDesignCyber" && sceneToLoad == "LevelDesignRealLife")
             {
                 gameState.GetComponent<GameState>().storyState = GameState.state.Level1Complete;
+                gameState.GetComponent<GameState>().objective = "Talk to the manager about the machine";
             }
 
             StartCoroutine(LoadNewScene(sceneToLoad));
