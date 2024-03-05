@@ -29,6 +29,11 @@ public class DetectiveThoughts : MonoBehaviour
         {
             StartThinking(thoughtList[0]);
         }
+
+        if (gameState.GetComponent<GameState>().storyState == GameState.state.Level1Complete)
+        {
+            StartThinking(thoughtList[1]);
+        }
     }
 
     // A function that starts the dialogue when called
