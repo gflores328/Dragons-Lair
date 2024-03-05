@@ -132,6 +132,11 @@ public class GameState : MonoBehaviour
             storyState = state.givePrize;
         }
 
+        if (objective == "Play VR Level 2")
+        {
+            storyState = state.playLevel2;
+        }
+
         Debug.Log(storyState);
     }
 }
