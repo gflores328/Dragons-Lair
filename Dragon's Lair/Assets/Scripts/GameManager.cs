@@ -136,8 +136,9 @@ public class GameManager : MonoBehaviour
 
     public void Quit() //Function to call to quit the game
     {
-       
+        Application.OpenURL("https://forms.gle/oxiWQY4zmdjgEtv89");
         Application.Quit();
+        
         
     }
 
