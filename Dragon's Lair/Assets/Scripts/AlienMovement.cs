@@ -22,7 +22,7 @@ public class AlienMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Boundary")
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z); // y - 1
             moveSpeed *= -1;
         }
     }

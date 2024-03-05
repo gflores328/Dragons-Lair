@@ -30,6 +30,6 @@ public class Alien : MonoBehaviour
     {
         Debug.Log("Enemy Dead");
         ScoreSystem.scoreValue += 100;
-        Destroy(gameObject); // Destroy enemy object
+        Destroy(gameObject.transform.parent.gameObject); // Destroy enemy object
     }
 }
