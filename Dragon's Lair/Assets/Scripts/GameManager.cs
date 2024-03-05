@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour
     {
        
         Application.Quit();
+        Application.OpenURL("https://forms.gle/oxiWQY4zmdjgEtv89");
         
     }
 
