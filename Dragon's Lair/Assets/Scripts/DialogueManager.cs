@@ -38,7 +38,7 @@ public class DialogueManager : MonoBehaviour
     {
         gameState = GameObject.Find("GameState");
         objectiveText.text = gameState.GetComponent<GameState>().objective;
-        Debug.Log(objectiveText.text);
+        //Debug.Log(objectiveText.text);
     }
 
     // This function will take a string variable and start the dialogue by showing the UI
@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour
         // textBox is set active and dialogueText is set to the string value that was passed
         textBox.SetActive(true);
         dialogueText.text = dialogueAndName.dialogue;
-        nameBox.SetActive(true);
+        //nameBox.SetActive(true);
         nameText.text = dialogueAndName.name;
         
         
@@ -56,11 +56,13 @@ public class DialogueManager : MonoBehaviour
         {
             bustUILeft.SetActive(true);
             bustUILeft.GetComponent<Image>().sprite = dialogueAndName.bust;
+            bustUILeft.GetComponent<Image>().preserveAspect = true;
         }
         else if (dialogueAndName.bustSide == side.right)
         {
             bustUIRight.SetActive(true);
             bustUIRight.GetComponent<Image>().sprite = dialogueAndName.bust;
+            bustUIRight.GetComponent<Image>().preserveAspect = true;
         }
 
         
@@ -79,7 +81,7 @@ public class DialogueManager : MonoBehaviour
     {
         textBox.SetActive(false);
         dialogueText.text = null;
-        nameBox.SetActive(false);
+        //nameBox.SetActive(false);
         nameText.text = null;
         bustUILeft.SetActive(false);
         bustUILeft.GetComponent<Image>().sprite = null;
@@ -95,7 +97,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (!nameBox.activeInHierarchy)
         {
-            nameBox.SetActive(true);
+            //nameBox.SetActive(true);
         }
         if (!textBox.activeInHierarchy)
         {
@@ -124,10 +126,12 @@ public class DialogueManager : MonoBehaviour
         if (dialogueAndName.bustSide == side.left)
         {
             bustUILeft.GetComponent<Image>().sprite = dialogueAndName.bust;
+            bustUILeft.GetComponent<Image>().preserveAspect = true;
         }
         else if (dialogueAndName.bustSide == side.right)
         {
             bustUIRight.GetComponent<Image>().sprite = dialogueAndName.bust;
+            bustUIRight.GetComponent<Image>().preserveAspect = true;
         }
 
        
