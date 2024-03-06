@@ -34,7 +34,7 @@ public class AH_Controller : MonoBehaviour
         //casts a ray to the location of the mouse
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit,maxDist, layers))
+        if (Physics.Raycast(ray, out RaycastHit hit,maxDist,layers))
         {
 
             rb.MovePosition(Vector3.MoveTowards(transform.position, hit.point, speed * Time.deltaTime));
