@@ -15,13 +15,14 @@ public class setCursor : MonoBehaviour
         //set the cursor origin to its centre. (default is upper left corner)
         Vector2 cursorOffset = new Vector2(CustomCursor.width / 2, CustomCursor.height / 2);
 
-        //Sets the cursor to the Crosshair sprite with given offset 
+        //Sets the cursor to the custom cusor with given offset 
         //and automatic switching to hardware default if necessary
         Cursor.SetCursor(CustomCursor, cursorOffset, CursorMode.Auto);
     }
 
     void OnMouseOver()
     {
+        //switches to alternate click cursor when mouse is clicked
         Cursor.SetCursor(ClickCursor, Vector2.zero, CursorMode.Auto);
     }
 }
