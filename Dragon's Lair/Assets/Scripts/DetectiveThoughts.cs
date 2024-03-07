@@ -27,12 +27,12 @@ public class DetectiveThoughts : MonoBehaviour
         gameState = GameObject.Find("GameState");
         if (gameState.GetComponent<GameState>().storyState == GameState.state.newGame)
         {
-            StartThinking(thoughtList[0]);
+            StartCoroutine(ThoughtDelay(thoughtList[0]));
         }
 
         if (gameState.GetComponent<GameState>().storyState == GameState.state.Level1Complete)
         {
-            StartThinking(thoughtList[1]);
+            StartCoroutine(ThoughtDelay(thoughtList[1]));
         }
     }
 
@@ -66,5 +66,11 @@ public class DetectiveThoughts : MonoBehaviour
             lostInThought = false;
 
         }
+    }
+
+    IEnumerator ThoughtDelay(DialogueWithName dialogue)
+    {
+        yield return new WaitForSeconds(0.1f);
+        StartThinking(dialogue);
     }
 }

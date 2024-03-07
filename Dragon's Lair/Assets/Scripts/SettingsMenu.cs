@@ -117,6 +117,14 @@ public class SettingsMenu : MonoBehaviour
     //Sets the volume of a specific chanel in the attached audio mixer equal to the given float value
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("Master", volume);
+        //If the volume slider is at its minimum value, set the audio mixer to -80 db to properly mute the volume
+        if (volume == volumeSlider.minValue)
+        {
+            audioMixer.SetFloat("Master", -80);
+        }
+        else
+        {
+            audioMixer.SetFloat("Master", volume);
+        }
     }
 }
