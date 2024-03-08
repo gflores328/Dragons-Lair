@@ -6,23 +6,31 @@ using UnityEngine;
 public class setCursor : MonoBehaviour
 {
     // You must set the cursor in the inspector.
-    public Texture2D CustomCursor;
-    public Texture2D ClickCursor;
+    public Sprite CustomCursor;
+    public Sprite ClickCursor;
 
     void Start()
     {
 
-        //set the cursor origin to its centre. (default is upper left corner)
-        Vector2 cursorOffset = new Vector2(CustomCursor.width / 2, CustomCursor.height / 2);
+        Vector2 center = default;
+        SetCursor(CustomCursor, center);
+    }
 
-        //Sets the cursor to the custom cusor with given offset 
-        //and automatic switching to hardware default if necessary
-        Cursor.SetCursor(CustomCursor, cursorOffset, CursorMode.Auto);
+    void Update()
+    {
+        
+
+    }
+
+    void SetCursor(Sprite sprite, Vector2 center)
+    {
+        Cursor.SetCursor(CustomCursor.texture, center, CursorMode.Auto);
     }
 
     void OnMouseOver()
     {
         //switches to alternate click cursor when mouse is clicked
-        Cursor.SetCursor(ClickCursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(ClickCursor.texture, Vector2.zero, CursorMode.Auto);
     }
+
 }
