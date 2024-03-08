@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Mar 4, 2024 at 4:08 PM
+ * LAST MODIFIED ON: Mar 8, 2024 at 9:14 AM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
  *                    How To Make a Rhythm Game #3 - Score and Multipliers https://www.youtube.com/watch?v=dV9rdTlMHxs
@@ -29,6 +29,8 @@ public class RhythmGameManager : MonoBehaviour
     public bool startPlaying;
     [Tooltip("Keeps track of the center of the buttons. This affects note position and the quality of note hits. It is grabbed from the button holder in the start function.")]
     public float buttonCenter;
+    [Tooltip("Keep track of when the game is paused")]
+    public bool isPaused;
 
     [Header("Score Variables")]
 
@@ -75,6 +77,8 @@ public class RhythmGameManager : MonoBehaviour
 
     [Tooltip("Introduction / Tutorial screen")]
     public GameObject introScreen;
+    [Tooltip("A reference to the game manager")]
+    public GameManager gameManager;
 
     [Header("Results Screen Objects")]
 
@@ -92,6 +96,7 @@ public class RhythmGameManager : MonoBehaviour
     //Input action from the attached player input component
     //This is grabbed from the manager in the start function
     private InputAction startInput;
+    private InputAction pauseInput;
 
     // GABE ADDED
     private GameObject gameState;
@@ -122,22 +127,25 @@ public class RhythmGameManager : MonoBehaviour
         //Initialize multiplier thresholds
         multiplierThresholds = new int[] { 4, 8, 12 };
 
-        //Get the input action that will start the game
+        //Get the input action that will start and pause the game
         startInput = GetComponent<PlayerInput>().actions.FindAction("Start");
+        pauseInput = GetComponent<PlayerInput>().actions.FindAction("Pause");
+        pauseInput.performed += Pause;
+        isPaused = false;
 
         //Set text in intro screen
         if (Gamepad.current == null && Joystick.current == null)
         {
             introScreen.transform.GetChild(0).GetComponent<Text>().text =
                 "Use [WASD] or [Arrow Keys] to hit notes\n\n" +
-                "Hit the notes closer to the center\nof the button to get more points\n\n" +
+                "Hit the notes closer to the center of the button to get more points\n\n" +
                 "Press [Space] to play";
         }
         else
         {
             introScreen.transform.GetChild(0).GetComponent<Text>().text =
                 "Use [Left Stick] or [D-Pad] to hit notes\n\n" +
-                "Hit the notes closer to the center\nof the button to get more points\n\n" +
+                "Hit the notes closer to the center of the button to get more points\n\n" +
                 "Press [A] to play";
         }
 
@@ -169,11 +177,11 @@ public class RhythmGameManager : MonoBehaviour
                 music.Play();
             }
         }
-        //If the game has already started, the music has stopped playing, AND the results screen isn't active yet...
+        //If the game has already started, the music has stopped playing (but isn't paused), AND the results screen isn't active yet...
         //Update the text in the results screen and display the results screen
         else
         {
-            if (!music.isPlaying && !resultsScreen.activeInHierarchy)
+            if (!isPaused && !music.isPlaying && !resultsScreen.activeInHierarchy)
             {
                 //Update the results text
                 normalsText.text = normalHits.ToString();
@@ -295,5 +303,27 @@ public class RhythmGameManager : MonoBehaviour
         multiplierTracker = 0;
         //Reset the multiplier text
         multiplierText.text = "Multiplier: x" + currentMultiplier;
+    }
+
+    //Tell the game manager to pause the game
+    public void Pause(InputAction.CallbackContext value)
+    {
+        PauseMusic();
+        gameManager.PauseGame();
+    }
+
+    //Pause and unpause the music player
+    public void PauseMusic()
+    {
+        if (isPaused)
+        {
+            isPaused = false;
+            music.Play();
+        }
+        else
+        {
+            isPaused = true;
+            music.Pause();
+        }
     }
 }
