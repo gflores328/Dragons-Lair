@@ -2,7 +2,7 @@
  * Created by Carlos Martinez
  * 
  * This script contains code for the Player Ship in the arcade
- * minigame, Mobile Fighter Axiom. - WIP
+ * minigame, Mobile Fighter Axiom.
  */
 using System.Collections;
 using System.Collections.Generic;

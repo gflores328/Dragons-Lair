@@ -1,3 +1,9 @@
+/*
+ * Created by Carlos Martinez
+ * 
+ * This script contains the life system for Mobile Fighter Axiom.
+ */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,36 +12,25 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLives : MonoBehaviour
 {
-    public static int lives = 3;
+    public static int lives = 3; // Default: 3 Lives
     public static event Action OnPlayerDeath;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
+        // If Player Makes Contact with the Enemy
         if (collision.collider.gameObject.tag == "Enemy")
         {
-            Destroy(collision.collider.gameObject);
-            lives -= 1;
-            Destroy(gameObject);
-            if(lives > 0)
+            Destroy(collision.collider.gameObject); // Alien is Destroyed
+            lives -= 1; // Remove 1 Life
+            Destroy(gameObject); // Player is Destroyed
+            if(lives > 0) // If Player has Extra Lives
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Level Reset
             }
 
-            else if(lives <= 0)
+            else if(lives <= 0) // If Player Runs Out of Lives
             {
-                OnPlayerDeath?.Invoke();
+                OnPlayerDeath?.Invoke(); // Trigger Game Over
             }
         }
     }

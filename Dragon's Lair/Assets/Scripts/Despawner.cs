@@ -1,3 +1,10 @@
+/*
+ * Created by Carlos Martinez
+ * 
+ * This script contains a despawner for Mobile Fighter Axiom.
+ * Enemies disappear when making contact with the despawner
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,23 +13,11 @@ using UnityEngine.SceneManagement;
 
 public class Despawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.tag == "Enemy")
+        if (collision.collider.gameObject.tag == "Enemy") // If Despawner Boundary Makes Contact with the Enemy
         {
-            Destroy(collision.collider.gameObject);
+            Destroy(collision.collider.gameObject); // Enemy Disappears
         }
     }
 }
