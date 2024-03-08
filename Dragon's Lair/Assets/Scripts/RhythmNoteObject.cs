@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Mar 4, 2024 at 4:08 PM
+ * LAST MODIFIED ON: Mar 8, 2024 at 10:13 AM
  * 
  * TUTORIAL FOLLOWED: How To Make a Rhythm Game #1 - Hitting Notes https://www.youtube.com/watch?v=cZzf1FQQFA0
  *                    How To Make a Rhythm Game #2 - Playing Music & Missing Notes https://www.youtube.com/watch?v=PMfhS-kEvc0
@@ -70,13 +70,13 @@ public class RhythmNoteObject : MonoBehaviour
                 //Check the position of the note to determine the quality of the hit
                 //Tell the game manager that the note has been hit
                 //Instantiate the appropriate particle effect
-                if (Mathf.Abs(transform.position.y) > 0.25f + RhythmGameManager.instance.buttonCenter)
+                if (Mathf.Abs(transform.position.y - RhythmGameManager.instance.buttonCenter) > 0.25f)
                 {
                     //Debug.Log("Hit");
                     RhythmGameManager.instance.NormalHit();
                     Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
                 }
-                else if (Mathf.Abs(transform.position.y) > 0.05f + RhythmGameManager.instance.buttonCenter)
+                else if (Mathf.Abs(transform.position.y - RhythmGameManager.instance.buttonCenter) > 0.05f)
                 {
                     //Debug.Log("Good Hit");
                     RhythmGameManager.instance.GoodHit();
