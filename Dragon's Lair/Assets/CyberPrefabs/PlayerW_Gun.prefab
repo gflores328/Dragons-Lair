@@ -340,7 +340,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.994102, b: 1, a: 1}
+      maxColor: {r: 0.9339623, g: 0.4618577, b: 0.17181383, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4914,7 +4914,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4961,7 +4961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   damageAmount: 50
-  gun: {fileID: 0}
+  gun: {fileID: 8388912552336796836}
 --- !u!1 &5453006537471203003
 GameObject:
   m_ObjectHideFlags: 0
@@ -4971,14 +4971,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4438592923607954676}
-  - component: {fileID: 9147381145552173188}
-  - component: {fileID: 2587964116773383494}
   - component: {fileID: 2216240655436234287}
   - component: {fileID: 4452075940523032472}
   - component: {fileID: 4646314587350214425}
   - component: {fileID: 7112737368637150450}
   - component: {fileID: 84233016656146126}
   - component: {fileID: 3673441571437299980}
+  - component: {fileID: 2318388559178036849}
   m_Layer: 8
   m_Name: PlayerW_Gun
   m_TagString: Player
@@ -5004,37 +5003,6 @@ Transform:
   - {fileID: 815954936752163891}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &9147381145552173188
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5453006537471203003}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!136 &2587964116773383494
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5453006537471203003}
-  m_Material: {fileID: 13400000, guid: ef0326a1dd8b1204e8c84b71904fc09a, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.27936602
-  m_Height: 1.6058321
-  m_Direction: 1
-  m_Center: {x: -0.02000001, y: -0.19708395, z: 0}
 --- !u!114 &2216240655436234287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5127,6 +5095,18 @@ MonoBehaviour:
     m_ActionName: RealLifeMovement/Inventory[/Keyboard/q]
   - m_PersistentCalls:
       m_Calls: []
+    m_ActionId: 9528eeb0-fa07-488b-94c1-16bf91bfc47c
+    m_ActionName: ChibiMovement/Crouch[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5c218303-205e-456f-9127-b5ea5af0ca5a
+    m_ActionName: ChibiMovement/AimUPDiag[/Keyboard/d,/Keyboard/w,/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4b1fb75a-0985-4b1b-a457-670ea655d9a8
+    m_ActionName: ChibiMovement/AimUp[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
     m_ActionId: b4bab392-3a9a-41ef-becb-1bc480b8798c
     m_ActionName: DDR/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
@@ -5143,8 +5123,8 @@ Rigidbody:
   m_GameObject: {fileID: 5453006537471203003}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0.05
-  m_AngularDrag: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5173,23 +5153,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab7005808ff83042bb82c1bb4903e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeedMultiplier: 5
+  playerSpeedMultiplier: 7
   maxForce: 2
   jumpForce: 15
-  gravityForce: 9.81
+  gravityForce: -9.81
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
   groundRayLength: 0.5
-  initialJumpVelocity: 16
+  initialJumpVelocity: 10
   maxJumpHeight: 1
   maxJumpTime: 0.5
   maxHealth: 10
   numOfHearts: 10
-  hearts: []
-  fullHeart: {fileID: 0}
-  emptyHeart: {fileID: 0}
-  invincibilityLength: 2
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fullHeart: {fileID: 21300000, guid: 79e8c8d29b446c14d91ddc384d976a94, type: 3}
+  emptyHeart: {fileID: 21300000, guid: cd5ee58a2029d7a4eb959606ce8069a1, type: 3}
+  invincibilityLength: 1.5
   playerRenderer: {fileID: 1952862864436442972}
   flashLength: 0.1
 --- !u!114 &7112737368637150450
@@ -5204,8 +5194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa60e8cf6339a9443841382430e2ac02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimAction: {fileID: 5979198381072014160, guid: ee89979ffb1c10d49a0c463a6c04ce8e,
-    type: 3}
   armPivot: {fileID: 5593056612105285791}
   rotationSpeed: 5
   maxRotationAngle: 45
@@ -5224,7 +5212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downAction: {fileID: -7938134971223447537, guid: ee89979ffb1c10d49a0c463a6c04ce8e,
     type: 3}
-  playerCollider: {fileID: 2587964116773383494}
+  playerCollider: {fileID: 3673441571437299980}
   isMovingDown: 0
 --- !u!65 &3673441571437299980
 BoxCollider:
@@ -5247,6 +5235,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.75225115, y: 0.74502563, z: 1}
   m_Center: {x: -0.04261899, y: 0.3300438, z: 0}
+--- !u!65 &2318388559178036849
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453006537471203003}
+  m_Material: {fileID: 13400000, guid: ef0326a1dd8b1204e8c84b71904fc09a, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5087563, y: 1.4521008, z: 1}
+  m_Center: {x: -0.010866702, y: -0.22605038, z: 0}
 --- !u!1001 &925599452917115864
 PrefabInstance:
   m_ObjectHideFlags: 0

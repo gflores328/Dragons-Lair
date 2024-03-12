@@ -25,9 +25,12 @@ public class ChibiPlayerMovement : MonoBehaviour
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
     private InputAction jumpAction; // A private variable that is meant to hold the jump action 
     private InputAction pauseAction; // A private variable that holds the pause action
+
+    private InputAction freeAimAction; // A private variable that holds the free aim action 
     private GameObject gameManagerObj; // A gameObject variable that will hold the game manager game object
     private GameManager gameManager; // A GameManger object that will hold the instance of the script of GameManger
     
+    private bool isFreeAiming = false;
     
     
    
@@ -93,6 +96,10 @@ public class ChibiPlayerMovement : MonoBehaviour
         pauseAction = playerInput.actions.FindAction("Pause"); // Assigns the pause action to the pause action from the chibi movement
         pauseAction.performed += Pause; // Assigns the on performed pause action to the pause function 
         gameManager = FindObjectOfType<GameManager>(); // Finds the game manger in the scene
+        freeAimAction = playerInput.actions.FindAction("FreeAim");
+
+        freeAimAction.performed += OnFreeAimPerformed;
+        freeAimAction.canceled += OnFreeAimCanceled;
         //setupJumpVariables();
 
     }
@@ -149,7 +156,10 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     void FixedUpdate() 
         {
-            ChibiMovePlayer(); // Calls the chibiMovePlayer function
+            if(!isFreeAiming)
+            {
+                ChibiMovePlayer(); // Calls the chibiMovePlayer function
+            }
             isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
             ApplyGravity(); // calls the apply gravity function so the player is affected by gravity
             UpdateJumpState(); // update the jump state for jump buffer and coyote time
@@ -258,6 +268,7 @@ public class ChibiPlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime; // Decrement coyote time counter if not grounded
         }
     }
+
     bool IsGrounded() // A function that returns a bool if the raycast hits the ground
     {
         
@@ -323,5 +334,14 @@ public class ChibiPlayerMovement : MonoBehaviour
         }
     }
     
+    private void OnFreeAimPerformed(InputAction.CallbackContext value) // The pause function that is called when the button is pressed
+    {
+        isFreeAiming = true;
+    }
+
+     private void OnFreeAimCanceled(InputAction.CallbackContext value) // The pause function that is called when the button is pressed
+    {
+        isFreeAiming = false;
+    }
   
 }
