@@ -1791,8 +1791,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d1a4dd0ac10546aa9c6dd49e24e7635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
-  puckSpeed: 1
+  rb: {fileID: 1748312887}
+  speed: 5
+  minDist: 0
+  maxDist: 5
+  layers:
+    serializedVersion: 2
+    m_Bits: 128
+  mainCamera: {fileID: 1762125090}
 --- !u!54 &1748312887
 Rigidbody:
   m_ObjectHideFlags: 0
