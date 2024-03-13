@@ -17,7 +17,7 @@ public class Despawner : MonoBehaviour
     {
         if (collision.collider.gameObject.tag == "Enemy") // If Despawner Boundary Makes Contact with the Enemy
         {
-            Destroy(collision.collider.gameObject); // Enemy Disappears
+            Destroy(collision.transform.parent.gameObject); // Enemy Disappears
         }
     }
 }

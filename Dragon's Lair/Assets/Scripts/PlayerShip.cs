@@ -18,12 +18,12 @@ public class PlayerShip : MonoBehaviour
     private void Update()
     {
         // Player Movement (Left and Right)
-        if (Input.GetKey(KeyCode.LeftArrow)) // Left
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) // Left
         {
             this.transform.position += Vector3.left * this.speed * Time.deltaTime;
         }
 
-        else if (Input.GetKey(KeyCode.RightArrow)) // Right
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) // Right
         {
             this.transform.position += Vector3.right * this.speed * Time.deltaTime;
         }
