@@ -10,13 +10,16 @@ using UnityEngine;
 
 public class MimicBehavior : Enemy
 {
-    public bool start = true;
-    private bool takingAction = false;
+    public bool start = true; // A bool to determine wheter or not the object should be doing stuff
+    private bool takingAction = false; // A bool to check if the object is currently in an action
+    private int actionNumber = 1; // An int that represents the action the enemy should take 
 
-    public GameObject player;
-    public float movementSpeed;
-    public float jumpSpeed;
-    public float slamSpeed;
+    public GameObject player; // A reference to the player character
+
+    [Header("Speeds")]
+    public float movementSpeed; // The speed that the enemy moves
+    public float jumpSpeed; // The speed of the enemy jump
+    public float slamSpeed; // The speed of the enemy slam
 
     [Header("Borders")]
     [Tooltip("The game objects that represent the borders that constrain this game object")]
@@ -28,54 +31,142 @@ public class MimicBehavior : Enemy
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(start && !takingAction)
+        Debug.Log(actionNumber);
+
+        if (start)
         {
-            StartCoroutine(JumpAbovePlayer());
-            
+            if (actionNumber > 2)
+            {
+                actionNumber = 1;
+            }
+
+            switch (actionNumber)
+            {
+                case 1:
+                    if (!takingAction)
+                    {
+                        Debug.Log("Starting jump on player");
+                        StartCoroutine(JumpAbovePlayer());
+                    }
+                    break;
+
+                case 2:
+                    if (!takingAction)
+                    {
+                        Debug.Log("Starting move to corner");
+                        StartCoroutine(MoveToCorner());
+                    }
+                    break;
+
+            }
         }
     }
 
-    // This function will take a vector3 variable
-    // When this function is called the game object will jump up and land on the vector 3 spot
-    IEnumerator Jump(Vector3 landingSpot)
-    {
-
-        takingAction = true;
-
-        
-
-        yield return new WaitForSeconds(1f);
-        takingAction = false;
-    }
-
-    // This function when called will make this game object jump
+    // This function when called will make this game object jump above the player and slam down on that spot
     IEnumerator JumpAbovePlayer()
     {
+        // Taking action is set to true
         takingAction = true;
-        float yTarget = transform.position.y + 10;
 
-        while (transform.position.y < yTarget)
+        // The x position of the player and the y position of the jump are stored in variables
+        float yTarget = transform.position.y + 5;
+        float xTarget = player.transform.position.x;
+
+        // A vector 3 is created with the x and y targer
+        Vector3 targetPosition = new Vector3(xTarget, yTarget, transform.position.z);
+        
+
+        // Object Jumps
+        // While the distance from the objcts current position and the targetPosition are greater than 0.01
+        while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y + 10f, transform.position.z), jumpSpeed * Time.deltaTime);
+            // The object moves towards the target position at the speed of the jumpSpeed
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, jumpSpeed * Time.deltaTime);
+            
+            // Wait for next frame
+            yield return null;
         }
+
+        // Waits for .5 seconds before running the code to slam down
         yield return new WaitForSeconds(.5f);
 
-        yTarget = transform.position.y - 10;
-        while (transform.position.y > yTarget)
+        // A new target position is set
+        yTarget = transform.position.y - 5;
+        targetPosition = new Vector3(xTarget, yTarget, transform.position.z);
+
+        // Object Slams
+        // While the distance from the objcts current position and the targetPosition are greater than 0.01
+        while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
-            transform.position += Vector3.down * slamSpeed * Time.deltaTime;
+            // The object moves towards the target position at the speed of the slamSpeed
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, slamSpeed * Time.deltaTime);
+
+            // Waits for next frame
+            yield return null;
+
         }
 
+        // Waits for 1 second
         yield return new WaitForSeconds(1f);
 
+        // takingAction is set to false
+        actionNumber++;
         takingAction = false;
     }
 
+    // This function will move the object to whichever border it is closest to
+    IEnumerator MoveToCorner()
+    {
+        takingAction = true;
+        bool goLeft;
+        if(Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
+        {
+            goLeft = true;
+        }
+        else
+        {
+            goLeft = false;
+        }
+        
+        while ((transform.position.x != leftBorder.transform.position.x) && (transform.position.x != rightBorder.transform.position.x))
+        {
+            
+            if (goLeft)
+            {
+                Vector3 targetPosition = new Vector3(leftBorder.transform.position.x, transform.position.y, transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+                yield return null;
+            }
+            else
+            {
+                Vector3 targetPosition = new Vector3(rightBorder.transform.position.x, transform.position.y, transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
 
+        yield return new WaitForSeconds(1);
+        actionNumber++;
+        takingAction = false;
+       
+    }
+
+    IEnumerator JumpToCorner()
+    {
+        takingAction = true;
+
+        if (Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
+        {
+
+        }
+
+        yield return new WaitForSeconds(1);
+        takingAction = false;
+    }
 }
