@@ -33,10 +33,13 @@ public class InventoryUI : MonoBehaviour
             Debug.Log(slotNumber);
             // Get the next item from the inventory
             Item item = inventory[slotNumber];
+
             // Store the item's image in the appropriate slot
-            transform.GetChild(slotNumber).GetComponent<Image>().sprite = item.image;
+            transform.GetChild(0).GetChild(slotNumber).GetChild(0).GetComponent<Image>().sprite = item.image;
+            transform.GetChild(0).GetChild(slotNumber).GetChild(0).gameObject.SetActive(true);
+
             // Store the item's name in the appropriate slot
-            transform.GetChild(slotNumber).GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetName() + " x" + item.GetQuantity();
+            transform.GetChild(0).GetChild(slotNumber).GetChild(1).GetComponent<TextMeshProUGUI>().text = item.GetName() + " x" + item.GetQuantity();
         }
 
     }
