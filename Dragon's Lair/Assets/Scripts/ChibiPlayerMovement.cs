@@ -17,7 +17,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     public float maxForce;
     public float jumpForce;
     public float gravityForce; // A float variable that will deteremine how fast the player is moving, The max force that can be applied to the movement, how powerful the jump is, how strong the gravity is.
-
+    public static int jumpsCounter;
     public LayerMask groundLayer; // A layermask that holds the ground layer
     public float groundRayLength = 1f; // the length of the ray that will check if the player is grounded
     
@@ -78,6 +78,9 @@ public class ChibiPlayerMovement : MonoBehaviour
     private float flashCounter;
     public float flashLength = 0.1f;
     
+    public int maxExtraJumps = 1;
+
+    private int currExtraJumps;
     
 
     
@@ -110,6 +113,8 @@ public class ChibiPlayerMovement : MonoBehaviour
         freeAimAction.canceled += OnFreeAimCanceled;
         freeAimLeftAction.performed += OnFreeAimLeft;
         freeAimRightAction.performed += OnFreeAimRight;
+        
+        currExtraJumps = maxExtraJumps;
         //setupJumpVariables();
 
     }
@@ -225,12 +230,11 @@ public class ChibiPlayerMovement : MonoBehaviour
     void handleJump()
     {
 
-        if(!isJumping && coyoteTimeCounter > 0 && isJumpingPressed && !playerOneWay.IsDownActionActive())
+        if(!isJumping && coyoteTimeCounter > 0 && isJumpingPressed && !playerOneWay.IsDownActionActive() && currExtraJumps > 0)
         {
             isJumping = true;
             playerRB.velocity = new Vector3(playerRB.velocity.x, initialJumpVelocity, 0);
         }
-
         else if( !isJumpingPressed && isJumping && isGrounded)
         {
             isJumping = false;
