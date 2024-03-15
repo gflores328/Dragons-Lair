@@ -74,13 +74,67 @@ public class MimicBehavior : Enemy
         // Taking action is set to true
         takingAction = true;
 
-        // The x position of the player and the y position of the jump are stored in variables
+        yield return StartCoroutine(Jump(player.transform.position.x));
+       
+        // Waits for 1 second
+        yield return new WaitForSeconds(1f);
+
+        // takingAction is set to false
+        actionNumber++;
+        takingAction = false;
+    }
+
+    // This function will move the object to whichever border it is closest to
+    IEnumerator MoveToCorner()
+    {
+        takingAction = true;
+        bool goLeft;
+
+        // If the object is farther from the left border than goLeft is set to true and if not it is false 
+        if(Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
+        {
+            goLeft = true;
+        }
+        else
+        {
+            goLeft = false;
+        }
+        
+        // While the objects position is not at either borders position
+        while ((transform.position.x != leftBorder.transform.position.x) && (transform.position.x != rightBorder.transform.position.x))
+        {
+            
+            // If go left is true then the object moves towards the left border
+            if (goLeft)
+            {
+                Vector3 targetPosition = new Vector3(leftBorder.transform.position.x, transform.position.y, transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+                yield return null;
+            }
+            // else it moves towards the right border
+            else
+            {
+                Vector3 targetPosition = new Vector3(rightBorder.transform.position.x, transform.position.y, transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
+
+        yield return new WaitForSeconds(1);
+        actionNumber++;
+        takingAction = false;
+       
+    }
+
+    // This function contains the action for the object to jump
+    // It takes a float and the value will be the x position that the object will jump to
+    IEnumerator Jump (float xTarget)
+    {
         float yTarget = transform.position.y + 5;
-        float xTarget = player.transform.position.x;
 
         // A vector 3 is created with the x and y targer
         Vector3 targetPosition = new Vector3(xTarget, yTarget, transform.position.z);
-        
+
 
         // Object Jumps
         // While the distance from the objcts current position and the targetPosition are greater than 0.01
@@ -88,7 +142,7 @@ public class MimicBehavior : Enemy
         {
             // The object moves towards the target position at the speed of the jumpSpeed
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, jumpSpeed * Time.deltaTime);
-            
+
             // Wait for next frame
             yield return null;
         }
@@ -109,61 +163,21 @@ public class MimicBehavior : Enemy
 
             // Waits for next frame
             yield return null;
-
         }
-
-        // Waits for 1 second
-        yield return new WaitForSeconds(1f);
-
-        // takingAction is set to false
-        actionNumber++;
-        takingAction = false;
     }
 
-    // This function will move the object to whichever border it is closest to
-    IEnumerator MoveToCorner()
-    {
-        takingAction = true;
-        bool goLeft;
-        if(Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
-        {
-            goLeft = true;
-        }
-        else
-        {
-            goLeft = false;
-        }
-        
-        while ((transform.position.x != leftBorder.transform.position.x) && (transform.position.x != rightBorder.transform.position.x))
-        {
-            
-            if (goLeft)
-            {
-                Vector3 targetPosition = new Vector3(leftBorder.transform.position.x, transform.position.y, transform.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
-                yield return null;
-            }
-            else
-            {
-                Vector3 targetPosition = new Vector3(rightBorder.transform.position.x, transform.position.y, transform.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
-                yield return null;
-            }
-        }
-
-        yield return new WaitForSeconds(1);
-        actionNumber++;
-        takingAction = false;
-       
-    }
-
+    // This function when run will check for whichever border it is closest to and will jump to that position
     IEnumerator JumpToCorner()
     {
         takingAction = true;
 
         if (Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
         {
-
+            yield return StartCoroutine(Jump(leftBorder.transform.position.x));
+        }
+        else
+        {
+            yield return StartCoroutine(Jump(rightBorder.transform.position.x));
         }
 
         yield return new WaitForSeconds(1);

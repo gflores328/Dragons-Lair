@@ -2,7 +2,7 @@
  * CREATED BY: Trevor Minarik
  * 
  * LAST MODIFIED BY: Trevor Minarik
- * LAST MODIFIED ON: Mar 13, 2024 at 3:25 PM
+ * LAST MODIFIED ON: Mar 14, 2024 at 9:24 PM
  * 
  * Controls the Pixie's movment, speed, and ability to attack the player
  * Player detection can be found in the 'PixieRange' script
@@ -19,16 +19,11 @@ public class PixieController : Enemy
     [Tooltip("A reference to the player. Used as a target for the pixie to move towards.")]
     public GameObject playerToChase;
 
-    //Records the pixie's speed before it is modified.
-    private float originalSpeed;
-
     // Start is called before the first frame update
     void Start()
     {
         //Set the player reference to null so the pixie has nothing to track
         playerToChase = null;
-        //Record the original speed of the pixie
-        originalSpeed = speed;
     }
 
     // Update is called once per frame
@@ -37,7 +32,11 @@ public class PixieController : Enemy
         //If there is a player to track, begin moving towards the player
         if (playerToChase != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, playerToChase.transform.position, speed * Time.deltaTime);
+            //Stay a certain distance away from the player and begin firing projectiles
+            if (Vector3.Distance(transform.position, playerToChase.transform.position) > 3f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, playerToChase.transform.position, speed * Time.deltaTime);
+            }
         }
     }
 
@@ -48,16 +47,6 @@ public class PixieController : Enemy
         if (other.gameObject.CompareTag("Player"))
         {
             playerToChase.GetComponent<ChibiPlayerMovement>().takeDamage(1);
-            speed = 0f;
-        }
-    }
-
-    //When the player moves away from the pixie return the speed to normal to begin chasing again
-    private void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            speed = originalSpeed;
         }
     }
 }

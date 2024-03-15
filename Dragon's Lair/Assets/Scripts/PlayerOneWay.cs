@@ -29,6 +29,7 @@ public class PlayerOneWay : MonoBehaviour
         downAction.action.performed += OnDownPerformed; // Assigns the function to the action
 
     }
+    
     private void OnDisable() // When disabled disables the down action
 
     {
@@ -36,6 +37,7 @@ public class PlayerOneWay : MonoBehaviour
         downAction.action.performed -= OnDownPerformed; // Designs the function to the action
 
     }
+
     private void OnCollisionEnter(Collision collision) // When the player enters a collision 
     {
         if ( collision.gameObject.CompareTag("OneWayPlatform")) // Checks if it is a one way platform
@@ -44,6 +46,7 @@ public class PlayerOneWay : MonoBehaviour
             //Debug.Log("Grabbed this");
         }
     }
+
     private void OnCollisionExit(Collision collision) // WHen the player is no longer colliding 
     {
         if ( collision.gameObject.CompareTag("OneWayPlatform")) // if it is leaving a one way platform
@@ -51,6 +54,7 @@ public class PlayerOneWay : MonoBehaviour
             currentOneWayPlatform = null; // Assign the current one way platform to null
         }
     }
+
     private void OnTriggerEnter(Collider other) // There is a trigger for checking under a platform at the top of the player's head
     {
         if(other.gameObject.CompareTag("OneWayPlatform")) // if the trigger hits a one way platform 
@@ -80,7 +84,7 @@ public class PlayerOneWay : MonoBehaviour
         {
             StartCoroutine(DisableCollision()); // Runs the coroutine to disable collision and allow the player to fall through
         }
-        
+        Debug.Log("Down Performed");
     }
 
     
@@ -89,7 +93,7 @@ public class PlayerOneWay : MonoBehaviour
         Collider platformCollider = currentOneWayPlatform.GetComponent<Collider>(); // A collider object created to get the collider of the platform
 
         Physics.IgnoreCollision(playerCollider, platformCollider); // ignores the collision between player and platform 
-        yield return new WaitForSeconds(1f); // Waits a set amount of time
+        yield return new WaitForSeconds(2f); // Waits a set amount of time
         Physics.IgnoreCollision(playerCollider, platformCollider,false); // Turn the ignore collision back on 
         isMovingDown = false; // Turns is moving down down
     }
