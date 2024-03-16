@@ -29,7 +29,6 @@ public class AH_PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        GameObject.Find("Cursor").GetComponent<setCursor>();
         Vector2 center = default;
         SetCursor(CustomCursor, center); //starts as open hand cursor
     }
