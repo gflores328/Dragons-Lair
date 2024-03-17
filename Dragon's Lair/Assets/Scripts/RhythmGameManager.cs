@@ -228,7 +228,7 @@ public class RhythmGameManager : MonoBehaviour
                 buttonHolder.SetActive(false);
 
                 // GABE ADDED
-                if (currentScore > 20000)
+                if (currentScore > 20000 && ((int)gameState.GetComponent<GameState>().storyState) < ((int)GameState.state.SpaceGameDone))
                 {
                     gameState.GetComponent<GameState>().storyState = GameState.state.DDRComplete;
                     gameState.GetComponent<GameState>().objective = "Get information from David";

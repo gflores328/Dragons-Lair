@@ -54,7 +54,20 @@ public class GameState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Button presses to change the story state on command
+
+        if (Input.GetKeyDown("1"))
+        {
+            storyState = state.DDRComplete;
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            storyState = state.Level1Complete;
+        }
+        if (Input.GetKeyDown("3"))
+        {
+            storyState = state.SpaceGameDone;
+        }
     }
 
     // Set function for playerPosition
