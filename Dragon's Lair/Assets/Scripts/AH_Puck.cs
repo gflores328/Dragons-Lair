@@ -9,7 +9,9 @@ public class AH_Puck : MonoBehaviour
 
     public float speed;
 
-    private Vector3 direction;
+    public float minDir = 0.5f;
+
+    public Vector3 direction;
 
     private Rigidbody rb;
 
@@ -28,15 +30,18 @@ public class AH_Puck : MonoBehaviour
     public IEnumerator Launch()
     {
         Restart();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
+
+        float signX = Mathf.Sign(Random.Range(-1f, 1f));
+        float signZ = Mathf.Sign(Random.Range(-1f, 1f));
 
         if (playerStart == true)
         {
-            this.direction = new Vector3(0.5f, 0f, 0.5f);
+            this.direction = new Vector3(0.5f * signX, 0f, 0.5f);
         }
         else
         {
-            this.direction = new Vector3(-0.5f, 0f, -0.5f);
+            this.direction = new Vector3(0.5f * signZ, 0f, -0.5f);
         }
     }
 
@@ -58,7 +63,7 @@ public class AH_Puck : MonoBehaviour
         this.rb.MovePosition(this.rb.position + speed * Time.fixedDeltaTime * direction);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("AH_Wall"))
         {
@@ -70,14 +75,26 @@ public class AH_Puck : MonoBehaviour
             direction.z = -direction.z;
         }
 
-        if (other.CompareTag("AH_AI"))
-        { 
-            direction.z = -direction.z;
-        }
-
         if (other.CompareTag("AH_Player"))
         {
-            direction.z = -direction.z;
+            //direction.z = -direction.z;
+            Vector3 newDirection = (transform.position - other.transform.position).normalized;
+
+            newDirection.x = Mathf.Sign(newDirection.x) * Mathf.Max(Mathf.Abs(newDirection.x), this.minDir);
+            newDirection.z = Mathf.Sign(newDirection.z) * Mathf.Max(Mathf.Abs(newDirection.z), this.minDir);
+
+            direction = newDirection;
+        }
+
+        if (other.CompareTag("AH_AI"))
+        {
+            //direction.z = -direction.z;
+            Vector3 newDirection = (transform.position - other.transform.position).normalized;
+
+            newDirection.x = Mathf.Sign(newDirection.x) * Mathf.Max(Mathf.Abs(newDirection.x), this.minDir);
+            newDirection.z = Mathf.Sign(newDirection.z) * Mathf.Max(Mathf.Abs(newDirection.z), this.minDir);
+
+            direction = newDirection;
         }
 
         if (other.CompareTag("AH_PlayerGoal"))
@@ -94,4 +111,5 @@ public class AH_Puck : MonoBehaviour
             StartCoroutine(Launch());
         }
     }
+
 }
