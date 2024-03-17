@@ -21,7 +21,7 @@ public class SpaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (score.text == "Score: 2500")
+        if (score.text == "Score: 2500" && ((int)gameState.GetComponent<GameState>().storyState) < ((int)GameState.state.SpaceGameDone))
         {
             gameState.GetComponent<GameState>().storyState = GameState.state.SpaceGameDone;
             gameState.GetComponent<GameState>().objective = "Turn in tickets for the prize";
