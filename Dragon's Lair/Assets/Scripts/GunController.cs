@@ -78,4 +78,10 @@ public class GunController : MonoBehaviour
             yield return null;
         }
     }
+
+    public void setFireRate(float newFireRate)
+
+    {
+        fireRate = newFireRate;
+    }
 }
