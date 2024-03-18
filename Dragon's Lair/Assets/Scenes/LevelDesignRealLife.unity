@@ -13691,15 +13691,15 @@ MonoBehaviour:
   interactionType: 1
   interactDialogue: {fileID: 11400000, guid: df2a64f1dfcda584c986fd135f0b2d44, type: 2}
   dialogueManager: {fileID: 27366408}
-  needItem: 0
+  needItem: 1
   menuUI: {fileID: 1367922138}
   itemToPickup: {fileID: 0}
   inventory: {fileID: 0}
   questionUI: {fileID: 0}
   firstButton: {fileID: 65014968}
-  itemNeeded: {fileID: 11400000, guid: ad80cc97541112049b02a33ed5995259, type: 2}
-  itemNotObtained: {fileID: 11400000, guid: 0f38684b56d8855438bf31113b194712, type: 2}
-  storyStateNeeded: 1
+  itemNeeded: {fileID: 11400000, guid: b58923d6c47bccb4e820f0b0c819fc48, type: 2}
+  itemNotObtained: {fileID: 11400000, guid: f6a56a8cff05eb44ca80cf78933bd1ac, type: 2}
+  storyStateNeeded: 0
   state: 12
   cantInteractYetDialogue: {fileID: 11400000, guid: f6a56a8cff05eb44ca80cf78933bd1ac,
     type: 2}
@@ -52671,18 +52671,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a97a959c363fb4daaff5f70dc57fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionType: 0
+  interactionType: 2
   interactDialogue: {fileID: 11400000, guid: 70b2ec5b31e071146a474a6ded3f1cdc, type: 2}
   dialogueManager: {fileID: 27366408}
-  needItem: 0
+  needItem: 1
   menuUI: {fileID: 0}
-  itemToPickup: {fileID: 0}
+  itemToPickup: {fileID: 11400000, guid: b58923d6c47bccb4e820f0b0c819fc48, type: 2}
   inventory: {fileID: 0}
   questionUI: {fileID: 903787052}
   firstButton: {fileID: 1690060557}
-  itemNeeded: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
-  itemNotObtained: {fileID: 11400000, guid: 1a1dafe343a1f6544be74d28240992ad, type: 2}
-  storyStateNeeded: 1
+  itemNeeded: {fileID: 11400000, guid: cf7de555503e4244992803b6c6d77e51, type: 2}
+  itemNotObtained: {fileID: 11400000, guid: 18d46dfdcaa8b954285e86371c18d26e, type: 2}
+  storyStateNeeded: 0
   state: 11
   cantInteractYetDialogue: {fileID: 11400000, guid: 18d46dfdcaa8b954285e86371c18d26e,
     type: 2}
@@ -58155,7 +58155,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0256c8876e5e7694fa1be601879843d0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0256c8876e5e7694fa1be601879843d0,
         type: 3}
@@ -70053,23 +70053,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a97a959c363fb4daaff5f70dc57fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionType: 0
+  interactionType: 2
   interactDialogue: {fileID: 11400000, guid: 171f174011fac6a47ab8624a3044da47, type: 2}
   dialogueManager: {fileID: 27366408}
-  needItem: 0
+  needItem: 1
   menuUI: {fileID: 0}
-  itemToPickup: {fileID: 11400000, guid: 2a7e3322328241f4f8193a081c9e2fc6, type: 2}
+  itemToPickup: {fileID: 11400000, guid: cf7de555503e4244992803b6c6d77e51, type: 2}
   inventory: {fileID: 0}
   questionUI: {fileID: 903787052}
   firstButton: {fileID: 1690060557}
   itemNeeded: {fileID: 11400000, guid: 2a7e3322328241f4f8193a081c9e2fc6, type: 2}
   itemNotObtained: {fileID: 11400000, guid: 24892e65fb8d71c49a07b09331318b0c, type: 2}
-  storyStateNeeded: 1
+  storyStateNeeded: 0
   state: 10
   cantInteractYetDialogue: {fileID: 11400000, guid: 24892e65fb8d71c49a07b09331318b0c,
     type: 2}
   updateObjective: 1
-  newObjective: Give the prize to Micheal
+  newObjective: Give the prize to Michael
   UIPopUp: {fileID: 0}
   closeUIObject: {fileID: 0}
 --- !u!65 &1493442625
@@ -96884,7 +96884,9 @@ MonoBehaviour:
   lostInThought: 0
   thoughtList:
   - {fileID: 11400000, guid: dea5260150eebdd4395dc755b73dcd29, type: 2}
+  - {fileID: 11400000, guid: d3b0d6979c8986b4da56dd0ed2c58edc, type: 2}
   - {fileID: 11400000, guid: bf1a66d7ea3643247aee9455b882b49f, type: 2}
+  - {fileID: 11400000, guid: 9bdbba8204edbf04e82ebb65ea7592f7, type: 2}
 --- !u!4 &6511973123366555257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8508082483087293862, guid: 4b2d3a1fa6dd2834599390fb95d58a9f,
