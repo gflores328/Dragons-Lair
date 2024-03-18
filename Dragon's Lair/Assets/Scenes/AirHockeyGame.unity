@@ -150,7 +150,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80168367}
   serializedVersion: 4
-  m_Mass: 10
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -178,7 +178,7 @@ Transform:
   m_GameObject: {fileID: 80168367}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.15, y: 0.09, z: -2.478}
+  m_LocalPosition: {x: -0.06, y: 0.09, z: 1.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -204,8 +204,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.30669522, y: 0.25073498, z: 0.36206818}
-  m_Center: {x: 1.4940861, y: 0.0011780113, z: 4.693901}
+  m_Size: {x: 0.32108086, y: 0.26709107, z: 0.37847614}
+  m_Center: {x: 0.014794737, y: 0.00850375, z: -0.0048435926}
 --- !u!114 &80168373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,13 +222,13 @@ MonoBehaviour:
   CustomCursor: {fileID: 21300000, guid: 61c55a8dc58344b4fb498e5cc2d71c0a, type: 3}
   ClickCursor: {fileID: 21300000, guid: f3bf4f316b3074c2f83313def6edfe8e, type: 3}
   direction: {x: 0, y: 0, z: 0}
-  difficulty: 0.25
-  speed: 5
-  pusherSpeed: 2
+  difficulty: 0.5
+  speed: 1
+  pusherSpeed: 1
   puckC: {fileID: 1948487595}
   pusherR: {fileID: 1206367448}
-  rb: {fileID: 80168369}
-  rbR: {fileID: 1854140698}
+  rb: {fileID: 1854140698}
+  rbR: {fileID: 80168369}
   isPlayer: 0
   layers:
     serializedVersion: 2
@@ -1470,7 +1470,7 @@ Transform:
   m_GameObject: {fileID: 1708088311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.24, z: 0}
+  m_LocalPosition: {x: 0, y: -3.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1848,9 +1848,9 @@ MonoBehaviour:
   CustomCursor: {fileID: 21300000, guid: 61c55a8dc58344b4fb498e5cc2d71c0a, type: 3}
   ClickCursor: {fileID: 21300000, guid: f3bf4f316b3074c2f83313def6edfe8e, type: 3}
   direction: {x: 0, y: 0, z: 0}
-  difficulty: 0.245
-  speed: 5
-  pusherSpeed: 2
+  difficulty: 0.5
+  speed: 1
+  pusherSpeed: 1
   puckC: {fileID: 1948487595}
   pusherR: {fileID: 1206367448}
   rb: {fileID: 1748312894}
@@ -2635,7 +2635,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f1ed295c47de6a845b8bb356b490eb90,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.486
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1ed295c47de6a845b8bb356b490eb90,
         type: 3}
@@ -2645,7 +2645,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f1ed295c47de6a845b8bb356b490eb90,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.6956
+      value: -0.005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1ed295c47de6a845b8bb356b490eb90,
         type: 3}
@@ -2700,7 +2700,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f1ed295c47de6a845b8bb356b490eb90,
         type: 3}
       propertyPath: m_TagString
-      value: AH_Player
+      value: AH_AI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
