@@ -39,6 +39,9 @@ public class InventoryUI : MonoBehaviour
             transform.GetChild(0).GetChild(slotNumber).GetChild(0).gameObject.SetActive(true);
 
             // Store the item's name in the appropriate slot
+            
+              
+            
             transform.GetChild(0).GetChild(slotNumber).GetChild(1).GetComponent<TextMeshProUGUI>().text = item.GetName() + " x" + item.GetQuantity();
         }
 
