@@ -8,6 +8,7 @@ public class SpaceManager : MonoBehaviour
 
     public TextMeshProUGUI score;
     public GameObject winScreen;
+    public Item prize;
 
     private GameObject gameState;
 
@@ -25,6 +26,8 @@ public class SpaceManager : MonoBehaviour
         {
             gameState.GetComponent<GameState>().storyState = GameState.state.SpaceGameDone;
             gameState.GetComponent<GameState>().objective = "Turn in tickets for the prize";
+            GameObject.Find("Inventory").GetComponent<Inventory>().AddItem(prize);
+            
             winScreen.SetActive(true);
             Time.timeScale = 0;
         }
