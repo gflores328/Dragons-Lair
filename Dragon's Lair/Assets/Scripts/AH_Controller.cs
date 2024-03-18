@@ -2,36 +2,51 @@
 using UnityEngine.AI;
 using System.Collections;
 using System;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class AH_PlayerController : MonoBehaviour
 {
-    public AH_Puck puckC;
 
-    private Transform puck;
-
-    public AH_AI ai;
+    [SerializeField] private Camera mainCamera; //main camera variable
 
     // You must set the cursor in the inspector.
     public Sprite CustomCursor;
     public Sprite ClickCursor;
 
-    public Rigidbody rb;
-
-    public bool isPlayer = true;
-
-    public float speed = 5;
-
-    public LayerMask layers;
-
-    public Vector3 direction;
-
-    [SerializeField] private Camera mainCamera;
-
+    // Direction variables
     private Vector2 center;
     private float minDir;
+    Vector3 basePoint;
+    public Vector3 direction;
 
-    public float offset = 0.6f;
+    [Range(0, 1)]
+    public float difficulty; //level difficulty 
 
+    [Range(0, 5)]
+    public float speed = 5; //puck speed
+
+    [Range(0, 5)]
+    public float pusherSpeed; //ai & player speed
+
+    public AH_Puck puckC; // puck script to control puck movements
+
+    private Transform puck; //puck object
+
+    public  Transform pusherR; // ai object
+
+    public Rigidbody rb; //player rb
+
+    public Rigidbody rbR; // ai rb
+
+    public bool isPlayer = true; //used to determine if it is player or ai
+
+    public LayerMask layers; // layer mask for table
+
+
+    private void Awake()
+    {
+        difficulty = PlayerPrefs.GetFloat("Difficulty");
+    }
 
     public void SetCursor(Sprite sprite, Vector2 center)
     {
@@ -40,10 +55,36 @@ public class AH_PlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GameObject.FindGameObjectWithTag("AH_Player").GetComponent<Rigidbody>();
+        rbR = GameObject.FindGameObjectWithTag("AH_AI").GetComponent<Rigidbody>();
         puck = GameObject.FindGameObjectWithTag("AH_Puck").transform;
+        pusherR = GameObject.FindGameObjectWithTag("AH_AI").transform;
         Vector2 center = default;
         SetCursor(CustomCursor, center); //starts as open hand cursor
+
+
+        //sets difficulty (will be done later via UI choices rather than haard coded)
+
+        //If easy selected on UI choice do the following
+        if (difficulty < 0.05f)
+        {
+            basePoint = new Vector3(0.6f, transform.position.y, 0.6f);
+            difficulty = 0.04f;
+        }
+
+        //If intermediate selected on UI choice do the following
+        if ((difficulty >= 0.05f) && (difficulty < 1f))
+        {
+            basePoint = new Vector3(0.6f, transform.position.y, 3f);
+            difficulty = 0.07f;
+        }
+
+        //If hard selected on UI choice do the following
+        if (difficulty == 1f)
+        {
+            basePoint = new Vector3(0.6f, transform.position.y, 6f);
+            difficulty = 1f;
+        }
     }
 
     void FixedUpdate()
@@ -84,23 +125,15 @@ public class AH_PlayerController : MonoBehaviour
 
     public void MoveByComputer()
     {
-        /*if (puck.position.z < transform.position.z + offset)
-        {
-            rb.velocity = Vector3.right * speed;
 
-        }
+        Vector3 newPos = transform.position;
+        newPos.x = Mathf.Lerp(transform.position.x, puck.position.x, difficulty);
+        //newPos.z = Mathf.Lerp(transform.position.z, puck.position.z, difficulty);
 
+        transform.position = newPos;
 
-        else if (puck.position.z > transform.position.z - offset)
-        {
-            rb.velocity = Vector3.left * speed;
-
-        }
-        else
-        {
-            rb.velocity = Vector3.zero;
-        }*/
     }
+
 
     public void OnTriggerEnter(Collider other)
     {
