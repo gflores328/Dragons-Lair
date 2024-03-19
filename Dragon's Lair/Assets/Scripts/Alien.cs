@@ -8,12 +8,13 @@ using UnityEngine;
 
 // Modified by Carlos Martinez
 // Additions: Score Value
-// The Alien script uses Aaron's Enemy script as a base and is tailored for
-// the evil aliens in Mobile Fighter Axiom.
+// The Alien script uses Aaron's Enemy script as a base and is tailored for the evil aliens in Mobile Fighter Axiom.
 public class Alien : MonoBehaviour
 {
     
     [SerializeField] protected float health; // a float that can only be accessed by children of this class
+
+    //public AudioSource deathAudio;
 
     public virtual void TakeDamage(float dmgAmount) // The function that children of the class will be able to access and change
     {
@@ -21,6 +22,7 @@ public class Alien : MonoBehaviour
         Debug.Log($"Enemy took {dmgAmount} damage. Current health: {health}");
         if (health <= 0) // if health hits zero
         {
+            //deathAudio.Play(); // Plays sound when enemy dies
             Die(); // Kill enemy
         }
     }
@@ -29,7 +31,9 @@ public class Alien : MonoBehaviour
 
     {
         Debug.Log("Enemy Dead");
+        //deathAudio.Play();
         ScoreSystem.scoreValue += 100;
+        //deathAudio.Play();
         Destroy(gameObject.transform.parent.gameObject); // Destroy enemy object
     }
 }

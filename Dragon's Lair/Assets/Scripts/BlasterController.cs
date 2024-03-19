@@ -16,6 +16,7 @@ public class BlasterController : MonoBehaviour
     public int shotsFired; // Counter for how many shots fired
 
     public SolarBulletController bullet; // Bullet Controller
+    public AudioSource bulletAudio; // Audio Source
 
     public float fireRate; // Affects the firing rate of the gun
     public float fireRateCounter; // Counter for firing rate
@@ -39,6 +40,8 @@ public class BlasterController : MonoBehaviour
             // Shoots if time passed is greater than or equal to the fire rate counter
             if (Time.time >= fireRateCounter)
             {
+                bulletAudio.Play(); // Plays sound when fired
+
                 bullet.Fire(shots); // Shoots a bullet
 
                 fireRateCounter = Time.time + 1 / fireRate; // Affects fire rate counter
