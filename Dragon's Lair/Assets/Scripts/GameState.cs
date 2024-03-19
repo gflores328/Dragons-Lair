@@ -140,7 +140,7 @@ public class GameState : MonoBehaviour
             storyState = state.playSpaceGame;
         }
 
-        if (objective == "Give the prize to Micheal")
+        if (objective == "Give the prize to Michael")
         {
             storyState = state.givePrize;
         }

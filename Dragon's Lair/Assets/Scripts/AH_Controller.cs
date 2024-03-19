@@ -2,7 +2,6 @@
 using UnityEngine.AI;
 using System.Collections;
 using System;
-//using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class AH_PlayerController : MonoBehaviour
 {
@@ -69,7 +68,9 @@ public class AH_PlayerController : MonoBehaviour
         if (difficulty < 0.05f)
         {
             basePoint = new Vector3(0.6f, transform.position.y, 0.6f);
-            difficulty = 0.04f;
+            difficulty = 0.05f;
+            speed = 1;
+            pusherSpeed = 1;
         }
 
         //If intermediate selected on UI choice do the following
@@ -77,6 +78,8 @@ public class AH_PlayerController : MonoBehaviour
         {
             basePoint = new Vector3(0.6f, transform.position.y, 3f);
             difficulty = 0.07f;
+            speed = 3;
+            pusherSpeed = 3;
         }
 
         //If hard selected on UI choice do the following
@@ -84,6 +87,8 @@ public class AH_PlayerController : MonoBehaviour
         {
             basePoint = new Vector3(0.6f, transform.position.y, 6f);
             difficulty = 1f;
+            speed = 5;
+            pusherSpeed = 5;
         }
     }
 
