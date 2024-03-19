@@ -100,6 +100,7 @@ public class AH_Puck : MonoBehaviour
         if (other.CompareTag("AH_PlayerGoal"))
         {
             scoreManager.PlayerGoal();
+            
             playerStart = false;
             StartCoroutine(Launch());
         }
@@ -107,7 +108,9 @@ public class AH_Puck : MonoBehaviour
         if (other.CompareTag("AH_AIGoal"))
         {
             scoreManager.AIGoal();
+            
             playerStart = true;
+
             StartCoroutine(Launch());
         }
     }

@@ -7,7 +7,7 @@ public class AH_ScoreManager : MonoBehaviour
 {
     public AH_PlayerController playerController;
 
-    public GameManager gm;
+    public GameManager gameManager;
 
     private int playerScore = 0;
     private int aiScore = 0;
@@ -17,7 +17,7 @@ public class AH_ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        gm = GetComponent<GameManager>();
+        
     }
 
 
@@ -26,24 +26,22 @@ public class AH_ScoreManager : MonoBehaviour
         playerScore++;
         playerScoreText.text = "Owen: " + playerScore.ToString();
 
-        int newPlayerScore = Convert.ToInt32(playerScoreText);
 
-
-        if ((newPlayerScore == 7) && (playerController.difficulty == 0.5))
+        if ((playerScore == 7) && (playerController.mode == "easy"))
         { 
-            gm.LoadLevelbyName("WinScene");
+            gameManager.LoadLevelbyName("WinScene");
         }
 
 
-        else if ((newPlayerScore == 5) && (playerController.difficulty == 0.7))
+        else if ((playerScore == 5) && (playerController.mode == "intermidate"))
         {
-            gm.LoadLevelbyName("WinScene");
+            gameManager.LoadLevelbyName("WinScene");
         }
 
 
-        else if ((newPlayerScore == 3) && (playerController.difficulty == 1))
+        else if ((playerScore == 3) && (playerController.mode == "hard"))
         {
-            gm.LoadLevelbyName("WinScreen");
+            gameManager.LoadLevelbyName("WinScreen");
         }
     }
 
@@ -56,19 +54,19 @@ public class AH_ScoreManager : MonoBehaviour
 
         if ((newAiScore == 7) && (playerController.difficulty == 0.5))
         {
-            gm.LoadLevelbyName("LoseScene");
+            gameManager.LoadLevelbyName("LoseScene");
         }
 
 
         else if ((newAiScore == 5) && (playerController.difficulty == 0.7))
         {
-            gm.LoadLevelbyName("Losecene");
+            gameManager.LoadLevelbyName("Losecene");
         }
 
 
         else if ((newAiScore == 3) && (playerController.difficulty == 1))
         {
-            gm.LoadLevelbyName("LoseScreen");
+            gameManager.LoadLevelbyName("LoseScreen");
         }
     }
 }

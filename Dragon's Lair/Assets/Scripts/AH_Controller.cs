@@ -27,6 +27,8 @@ public class AH_PlayerController : MonoBehaviour
     [Range(0, 5)]
     public float pusherSpeed; //ai & player speed
 
+    public string mode;
+
     public AH_Puck puckC; // puck script to control puck movements
 
     private Transform puck; //puck object
@@ -71,6 +73,7 @@ public class AH_PlayerController : MonoBehaviour
             difficulty = 0.05f;
             speed = 1;
             pusherSpeed = 1;
+            mode = "easy";
         }
 
         //If intermediate selected on UI choice do the following
@@ -80,6 +83,7 @@ public class AH_PlayerController : MonoBehaviour
             difficulty = 0.07f;
             speed = 3;
             pusherSpeed = 3;
+            mode = "intermidate";
         }
 
         //If hard selected on UI choice do the following
@@ -89,6 +93,7 @@ public class AH_PlayerController : MonoBehaviour
             difficulty = 1f;
             speed = 5;
             pusherSpeed = 5;
+            mode = "hard";
         }
     }
 
