@@ -48,7 +48,7 @@ public class AH_ScoreManager : MonoBehaviour
     public void AIGoal()
     {
         aiScore++;
-        aiScoreText.text = "Npc AI: : " + aiScore.ToString();
+        aiScoreText.text = "Npc AI: " + aiScore.ToString();
 
         int newAiScore = Convert.ToInt32(playerScoreText);
 
