@@ -6,6 +6,7 @@ public class FireRatePowerup : MonoBehaviour
 {
     public float fireRateSetter; 
     public GameObject powerUpDesc; 
+    
     private GunController gunController; 
     private bool showDesc = false;
     private float waitTime = 5f;
