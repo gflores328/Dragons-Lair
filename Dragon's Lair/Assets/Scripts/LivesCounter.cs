@@ -14,6 +14,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class LivesCounter : MonoBehaviour
 {
     public TextMeshProUGUI livesText; // Lives Text
+    public GameObject playerLives;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,6 @@ public class LivesCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        livesText.text = "Lives: " + PlayerLives.lives; // Displays Life Counter
+        livesText.text = "Lives: " + playerLives.GetComponent<PlayerLives>().lives; // Displays Life Counter
     }
 }
