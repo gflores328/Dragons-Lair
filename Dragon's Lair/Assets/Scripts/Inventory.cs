@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour
         //Update the Inventory UI
         inventoryUI.UpdateUI(GetInventory());
 
-        Debug.Log("Item added");
+        //Debug.Log("Item added");
     }
 
     //Removes the last instance of a given item

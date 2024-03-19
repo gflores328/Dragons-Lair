@@ -28,22 +28,26 @@ public class InventoryUI : MonoBehaviour
         this.inventory = inventory;
         int offset = 0;
 
+        //Debug.Log("Length: " + inventory.Length);
+
         // Itterate through the inventory until we've used all the slots in the UI or until we've reached the end of the inventory, whichever comes first
         for (int slotNumber = 0; slotNumber < numberOfSlots && slotNumber + offset < inventory.Length; slotNumber++)
         {
             int quantity = 1;
-            Debug.Log(slotNumber);
+            //Debug.Log(slotNumber);
             // Get the next item from the inventory
             Item item = inventory[slotNumber + offset];
 
             // Get the quantity of items and set the offset
             // While the next inventory slot has the same item as the current slot...
-            while (inventory[slotNumber + offset + 1].name.Equals(inventory[slotNumber + offset].name))
+            while (slotNumber + offset < inventory.Length - 1 && inventory[slotNumber + offset + 1].name.Equals(inventory[slotNumber + offset].name))
             {
                 // Increase the quantity of the current item
                 quantity++;
                 // Move the offset for the inventory index
                 offset++;
+
+                //Debug.Log("Q" + quantity + " O" + offset);
             }
 
             // Store the item's image in the appropriate slot
