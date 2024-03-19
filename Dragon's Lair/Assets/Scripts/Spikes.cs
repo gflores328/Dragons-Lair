@@ -15,37 +15,35 @@ public class Spikes : MonoBehaviour
     {
         //initalization of animator and setup of couroutine with wait time
         anim = GetComponent<Animator>(); 
-        coroutine = WaitTime(waitTime);
-        StartCoroutine(coroutine);
+        anim.SetTrigger("onActive");
+        // coroutine = WaitTime(waitTime);
+        // StartCoroutine(coroutine);
     }
 
-    void Update()
-    {
-        
-    }
+    
 
     //if player enters collider play animation then wait before playing again
-    public void OnTriggerEnter(Collider other)
-    {
+    // public void OnTriggerEnter(Collider other)
+    // {
 
-        if (other.CompareTag("Player"))
-        {
+    //     if (other.CompareTag("Player"))
+    //     {
             
-            anim.SetTrigger("onActive");
-            coroutine = WaitTime(waitTime);
-            StartCoroutine(coroutine);
+    //         anim.SetTrigger("onActive");
+    //         coroutine = WaitTime(waitTime);
+    //         StartCoroutine(coroutine);
             
-        }
-    }
+    //     }
+    // }
 
-    //if player exits collider stop animation playback
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            anim.StopPlayback();
-        }
-    }
+    // //if player exits collider stop animation playback
+    // public void OnTriggerExit(Collider other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         anim.StopPlayback();
+    //     }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
