@@ -12,7 +12,7 @@ using TMPro;
 
 public class ScoreSystem : MonoBehaviour
 {
-    public static int scoreValue = 0; // Score is set to 0
+    public int scoreValue = 0; // Score is set to 0
     public TextMeshProUGUI score; // Score Text
 
     // Start is called before the first frame update

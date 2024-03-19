@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLives : MonoBehaviour
 {
-    public static int lives = 3; // Default: 3 Lives
+    public int lives = 3; // Default: 3 Lives
     public static event Action OnPlayerDeath;
 
     public AudioSource playerDeathAudio; // Audio Source

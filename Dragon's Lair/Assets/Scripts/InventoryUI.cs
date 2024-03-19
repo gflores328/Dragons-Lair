@@ -7,7 +7,7 @@
  * Updates the Inventory UI to match the information in the inventory script. 
  */
 
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,13 +26,25 @@ public class InventoryUI : MonoBehaviour
     {
         // Get the new inventory information
         this.inventory = inventory;
+        int offset = 0;
 
         // Itterate through the inventory until we've used all the slots in the UI or until we've reached the end of the inventory, whichever comes first
-        for (int slotNumber = 0; slotNumber < numberOfSlots &&  slotNumber < inventory.Length; slotNumber++)
+        for (int slotNumber = 0; slotNumber < numberOfSlots && slotNumber + offset < inventory.Length; slotNumber++)
         {
+            int quantity = 1;
             Debug.Log(slotNumber);
             // Get the next item from the inventory
-            Item item = inventory[slotNumber];
+            Item item = inventory[slotNumber + offset];
+
+            // Get the quantity of items and set the offset
+            // While the next inventory slot has the same item as the current slot...
+            while (inventory[slotNumber + offset + 1].name.Equals(inventory[slotNumber + offset].name))
+            {
+                // Increase the quantity of the current item
+                quantity++;
+                // Move the offset for the inventory index
+                offset++;
+            }
 
             // Store the item's image in the appropriate slot
             transform.GetChild(0).GetChild(slotNumber).GetChild(0).GetComponent<Image>().sprite = item.image;
@@ -40,10 +52,7 @@ public class InventoryUI : MonoBehaviour
             transform.GetChild(0).GetChild(slotNumber).GetChild(0).gameObject.SetActive(true);
 
             // Store the item's name in the appropriate slot
-            
-              
-            
-            transform.GetChild(0).GetChild(slotNumber).GetChild(1).GetComponent<TextMeshProUGUI>().text = item.GetName() + " x" + item.GetQuantity();
+            transform.GetChild(0).GetChild(slotNumber).GetChild(1).GetComponent<TextMeshProUGUI>().text = item.GetName() + " x" + quantity;
         }
 
     }

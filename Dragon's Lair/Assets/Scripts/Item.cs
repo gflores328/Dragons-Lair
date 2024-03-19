@@ -21,8 +21,6 @@ public class Item : ScriptableObject
     private string itemName;    //The name of the item
     [SerializeField]
     private string description; //The description of the item
-    [SerializeField]
-    private int quantity;       //The quantity of the ite
     
     public Sprite image;       //The sprite image of the item
     private int slotNumber; // The slot number the item takes in the inventory UI
@@ -50,49 +48,6 @@ public class Item : ScriptableObject
     public string GetDescription()
     {
         return description;
-    }
-
-    //Increases the quantity of the item by a specified amount
-    //The provided amount must be greater than 0 (it wouldn't make sense to add 0 additional items or add a negative amount of items).
-    public void IncreaseQuantity(int amount)
-    {
-        if (amount > 0)
-        {
-            quantity += amount;
-        }
-    }
-
-    //Increases the quantity of the item by one
-    public void IncreaseQuantity()
-    {
-        IncreaseQuantity(1);
-    }
-
-    //Decrease the quantity of the item by the specified amount (represented by a POSITIVE integer)
-    //If the item count drops below zero, set it back to zero
-    public void DecreaseQuantity(int amount)
-    {
-        if (amount > 0)
-        {
-            quantity -= amount;
-
-            if (quantity > 0)
-            {
-                quantity = 0;
-            }
-        }
-    }
-
-    //Decrease the quantity of the item by one
-    public void DecreaseQuantity()
-    {
-        DecreaseQuantity(1);
-    }
-
-    //Return the quantity of the item as an int
-    public int GetQuantity()
-    {
-        return quantity;
     }
 
     //GABE ADDED
