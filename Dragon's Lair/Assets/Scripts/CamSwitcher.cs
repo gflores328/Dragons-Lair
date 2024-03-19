@@ -19,6 +19,15 @@ public class CamSwitcher : MonoBehaviour
         }
     }
 
+
+    private void OnTriggerStay(Collider other)
+
+    {
+        if(other.CompareTag("Player"))
+        {
+            activeCam.Priority = 1;
+        }
+    }
     private void OnTriggerExit(Collider other) 
     {
         if(other.CompareTag("Player")) // check if he collider is the player
