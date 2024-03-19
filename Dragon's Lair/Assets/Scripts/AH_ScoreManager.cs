@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows;
@@ -18,6 +15,11 @@ public class AH_ScoreManager : MonoBehaviour
     public Text playerScoreText;
     public Text aiScoreText;
 
+    private void Start()
+    {
+        gm = GetComponent<GameManager>();
+    }
+
 
     public void PlayerGoal()
     {
@@ -27,19 +29,19 @@ public class AH_ScoreManager : MonoBehaviour
         int newPlayerScore = Convert.ToInt32(playerScoreText);
 
 
-        if ((newPlayerScore == 7) && (playerController.difficulty <= 1))
+        if ((newPlayerScore == 7) && (playerController.difficulty == 0.5))
         { 
             gm.LoadLevelbyName("WinScene");
         }
 
 
-        else if ((newPlayerScore == 5) && (playerController.difficulty == 3))
+        else if ((newPlayerScore == 5) && (playerController.difficulty == 0.7))
         {
             gm.LoadLevelbyName("WinScene");
         }
 
 
-        else if ((newPlayerScore == 3) && (playerController.difficulty == 5))
+        else if ((newPlayerScore == 3) && (playerController.difficulty == 1))
         {
             gm.LoadLevelbyName("WinScreen");
         }
@@ -49,5 +51,24 @@ public class AH_ScoreManager : MonoBehaviour
     {
         aiScore++;
         aiScoreText.text = "Npc AI: : " + aiScore.ToString();
+
+        int newAiScore = Convert.ToInt32(playerScoreText);
+
+        if ((newAiScore == 7) && (playerController.difficulty == 0.5))
+        {
+            gm.LoadLevelbyName("LoseScene");
+        }
+
+
+        else if ((newAiScore == 5) && (playerController.difficulty == 0.7))
+        {
+            gm.LoadLevelbyName("Losecene");
+        }
+
+
+        else if ((newAiScore == 3) && (playerController.difficulty == 1))
+        {
+            gm.LoadLevelbyName("LoseScreen");
+        }
     }
 }
