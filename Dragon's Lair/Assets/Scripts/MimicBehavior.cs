@@ -26,6 +26,11 @@ public class MimicBehavior : Enemy
     public GameObject leftBorder;
     public GameObject rightBorder;
 
+    [Header("Debris")]
+    public GameObject fallingDebris;
+    public GameObject splashDebris;
+
+    
     
 
     // Start is called before the first frame update
@@ -182,5 +187,15 @@ public class MimicBehavior : Enemy
 
         yield return new WaitForSeconds(1);
         takingAction = false;
+    }
+
+    private void FallingDebris()
+    {
+
+    }
+
+    private void SplashDebris()
+    {
+
     }
 }
