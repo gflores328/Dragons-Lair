@@ -16,6 +16,7 @@ public class SolarBulletController : MonoBehaviour
 
     private ParticleSystem part; // Particle System
     public AudioSource deathAudio; // Audio Source
+    public GameObject score;
     private List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>(); // For particle collision
 
     public BlasterController blast; // Blaster Controller
@@ -40,6 +41,7 @@ public class SolarBulletController : MonoBehaviour
             {
                 // Call the TakeDamage function of the enemy with the specified damage amount
                 deathAudio.Play();
+                score.GetComponent<ScoreSystem>().scoreValue += 100;
                 enemy.TakeDamage(damageAmount);
             }
             else
