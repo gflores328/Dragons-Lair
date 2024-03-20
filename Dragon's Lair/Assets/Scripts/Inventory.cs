@@ -102,10 +102,10 @@ public class Inventory : MonoBehaviour
     private Item FindItem(string itemName)
     {
         //Search through the inventory
-        for (int i = inventory.Count; i > 0; i--)
+        for (int i = inventory.Count - 1; i >= 0; i--)
         {
             //Compare the current item's name to the given name
-            if (inventory[i].GetName().Equals(itemName))
+            if (inventory[i].GetName() == itemName)
             {
                 //If the item name matches, return the reference to the item
                 return inventory[i];
