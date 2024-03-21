@@ -66,7 +66,7 @@ public class GameState : MonoBehaviour
         }
         if (Input.GetKeyDown("3"))
         {
-            storyState = state.SpaceGameDone;
+            storyState = state.playSpaceGame;
         }
     }
 

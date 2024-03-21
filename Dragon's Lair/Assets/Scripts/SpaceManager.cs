@@ -22,14 +22,24 @@ public class SpaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (score.text == "Score: 2500" && ((int)gameState.GetComponent<GameState>().storyState) < ((int)GameState.state.SpaceGameDone))
+        if (score.text == "Score: 2500")
         {
-            gameState.GetComponent<GameState>().storyState = GameState.state.SpaceGameDone;
-            gameState.GetComponent<GameState>().objective = "Turn in tickets for the prize";
-            GameObject.Find("Inventory").GetComponent<Inventory>().AddItem(prize);
-            
+
             winScreen.SetActive(true);
             Time.timeScale = 0;
+
+            Debug.Log("Here");
+
+            if (((int)gameState.GetComponent<GameState>().storyState) < ((int)GameState.state.SpaceGameDone))
+            {
+                gameState.GetComponent<GameState>().storyState = GameState.state.SpaceGameDone;
+                gameState.GetComponent<GameState>().objective = "Turn in tickets for the prize";
+                Debug.Log("Here2");
+                GameObject.Find("Inventory").GetComponent<Inventory>().AddItem(prize);
+                Debug.Log("Didnt break");
+            }
+            
+            
         }
     }
 }
