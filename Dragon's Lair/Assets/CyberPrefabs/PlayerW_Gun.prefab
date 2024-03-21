@@ -4960,7 +4960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  damageAmount: 50
+  damageAmount: 1
   gun: {fileID: 8388912552336796836}
 --- !u!1 &5453006537471203003
 GameObject:
@@ -5182,6 +5182,7 @@ MonoBehaviour:
   invincibilityLength: 1.5
   playerRenderer: {fileID: 1952862864436442972}
   flashLength: 0.1
+  maxExtraJumps: 1
 --- !u!114 &7112737368637150450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5198,6 +5199,7 @@ MonoBehaviour:
   rotationSpeed: 5
   maxRotationAngle: 45
   targetYRotation: 90
+  gunRotationWithMouse: 1
 --- !u!114 &84233016656146126
 MonoBehaviour:
   m_ObjectHideFlags: 0
