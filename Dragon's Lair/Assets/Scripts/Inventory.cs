@@ -92,7 +92,7 @@ public class Inventory : MonoBehaviour
     //Returns the inventory as an array of items
     public Item[] GetInventory()
     {
-        inventory.Sort();
+        inventory.Sort((a, b) => a.GetName().CompareTo(b.GetName()));
         //Return the inventory
         return inventory.ToArray();
     }
