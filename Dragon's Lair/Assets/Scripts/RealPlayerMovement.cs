@@ -47,7 +47,7 @@ public class RealPlayerMovement : MonoBehaviour
 
     private GameManager gameManager;
 
-    private GameObject currentInteractable;
+    public GameObject currentInteractable;
     
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
     {
@@ -89,6 +89,8 @@ public class RealPlayerMovement : MonoBehaviour
        
         RealLifeMovePlayer(); // Calls the RealLifeMovePlayer function
         AdjustForSlope(); // Calls the Adjust for slope
+
+       
 
     }
 

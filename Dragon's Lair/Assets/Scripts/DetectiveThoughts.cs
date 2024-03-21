@@ -20,28 +20,33 @@ public class DetectiveThoughts : MonoBehaviour
     private int currentLine = 0; // Represents the current index of the dialogue array
     public List<DialogueWithName> thoughtList; // A list to hold all of the detectives thought dialogues
     private GameObject gameState; // A reference to the game state
+    
 
     private void Start()
     {
-        
+
         gameState = GameObject.Find("GameState");
         if (gameState.GetComponent<GameState>().storyState == GameState.state.newGame)
         {
+      
             StartCoroutine(ThoughtDelay(thoughtList[0]));
         }
 
         if (gameState.GetComponent<GameState>().storyState == GameState.state.DDRComplete)
         {
+            
             StartCoroutine(ThoughtDelay(thoughtList[1]));
         }
 
         if (gameState.GetComponent<GameState>().storyState == GameState.state.Level1Complete)
         {
+            
             StartCoroutine(ThoughtDelay(thoughtList[2]));
         }
 
         if (gameState.GetComponent<GameState>().storyState == GameState.state.SpaceGameDone)
         {
+            
             StartCoroutine(ThoughtDelay(thoughtList[3]));
         }
     }
@@ -81,6 +86,7 @@ public class DetectiveThoughts : MonoBehaviour
     IEnumerator ThoughtDelay(DialogueWithName dialogue)
     {
         yield return new WaitForSeconds(0.1f);
+        gameObject.GetComponent<RealPlayerMovement>().currentInteractable = null;
         StartThinking(dialogue);
     }
 }
