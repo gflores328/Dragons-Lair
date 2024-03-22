@@ -304,7 +304,7 @@ MonoBehaviour:
   mode: 
   puckC: {fileID: 1948487595}
   pusherR: {fileID: 1206367448}
-  StartMenu: {fileID: 0}
+  StartMenu: {fileID: 1386009446}
   rb: {fileID: 1854140698}
   rbR: {fileID: 80168369}
   isPlayer: 0
@@ -910,6 +910,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadSceneAsync
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856737303767180486, guid: c9106c9a011ea4cdb8bc57cfc99ef88e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d960c0d708f496940afbe8d849baa5d8,
+        type: 3}
+    - target: {fileID: 6856737303767180486, guid: c9106c9a011ea4cdb8bc57cfc99ef88e,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.49803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856737303767180486, guid: c9106c9a011ea4cdb8bc57cfc99ef88e,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856737303767180486, guid: c9106c9a011ea4cdb8bc57cfc99ef88e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856737303767180486, guid: c9106c9a011ea4cdb8bc57cfc99ef88e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8784314
       objectReference: {fileID: 0}
     - target: {fileID: 7750939099309654365, guid: c9106c9a011ea4cdb8bc57cfc99ef88e,
         type: 3}
@@ -1635,7 +1661,7 @@ MonoBehaviour:
   playerController: {fileID: 1854140697}
   gameManager: {fileID: 1432133922}
   WinScreen: {fileID: 2035161113}
-  LoseScreen: {fileID: 1859789026}
+  LossScreen: {fileID: 0}
   PauseMenu: {fileID: 406790211}
   StartMenu: {fileID: 1386009446}
   playerScoreText: {fileID: 1903300075}
@@ -1912,6 +1938,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -60.786266
       objectReference: {fileID: 0}
+    - target: {fileID: 457530158261023176, guid: ec3222cc764cb42948e91a914b19bc15,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.846858
+      objectReference: {fileID: 0}
+    - target: {fileID: 457530158261023176, guid: ec3222cc764cb42948e91a914b19bc15,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 1563780031857042559, guid: ec3222cc764cb42948e91a914b19bc15,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -2021,6 +2057,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadSceneAsync
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889382324710303315, guid: ec3222cc764cb42948e91a914b19bc15,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d960c0d708f496940afbe8d849baa5d8,
+        type: 3}
+    - target: {fileID: 3889382324710303315, guid: ec3222cc764cb42948e91a914b19bc15,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.49803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889382324710303315, guid: ec3222cc764cb42948e91a914b19bc15,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889382324710303315, guid: ec3222cc764cb42948e91a914b19bc15,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889382324710303315, guid: ec3222cc764cb42948e91a914b19bc15,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8784314
       objectReference: {fileID: 0}
     - target: {fileID: 3909984886164659231, guid: ec3222cc764cb42948e91a914b19bc15,
         type: 3}
@@ -3087,7 +3149,7 @@ Transform:
   m_GameObject: {fileID: 1762125088}
   serializedVersion: 2
   m_LocalRotation: {x: 0.29323125, y: 0.00000002849226, z: -0.000000008738967, w: 0.9560416}
-  m_LocalPosition: {x: -0.113, y: 2.548, z: -4.836}
+  m_LocalPosition: {x: -0.112999916, y: 2.5480003, z: -4.8360004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3179,7 +3241,7 @@ MonoBehaviour:
   mode: 
   puckC: {fileID: 1948487595}
   pusherR: {fileID: 1206367448}
-  StartMenu: {fileID: 0}
+  StartMenu: {fileID: 1386009446}
   rb: {fileID: 1748312894}
   rbR: {fileID: 80168369}
   isPlayer: 1
@@ -3250,12 +3312,6 @@ Transform:
   - {fileID: 1748312891}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1859789026 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5947424690645101118, guid: c9106c9a011ea4cdb8bc57cfc99ef88e,
-    type: 3}
-  m_PrefabInstance: {fileID: 666837714}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1860309329
 GameObject:
   m_ObjectHideFlags: 0
@@ -4093,6 +4149,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817259756968170543, guid: 2f96e1fb8f37f47a59e0cf9867b9ad25,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d960c0d708f496940afbe8d849baa5d8,
+        type: 3}
+    - target: {fileID: 2817259756968170543, guid: 2f96e1fb8f37f47a59e0cf9867b9ad25,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.49803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817259756968170543, guid: 2f96e1fb8f37f47a59e0cf9867b9ad25,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817259756968170543, guid: 2f96e1fb8f37f47a59e0cf9867b9ad25,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817259756968170543, guid: 2f96e1fb8f37f47a59e0cf9867b9ad25,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.87755775
       objectReference: {fileID: 0}
     - target: {fileID: 3743197934819111493, guid: 2f96e1fb8f37f47a59e0cf9867b9ad25,
         type: 3}

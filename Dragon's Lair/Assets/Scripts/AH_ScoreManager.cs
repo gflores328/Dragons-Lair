@@ -11,7 +11,7 @@ public class AH_ScoreManager : MonoBehaviour
 
     public GameObject WinScreen;
 
-    public GameObject LoseScreen;
+    public GameObject LossScreen;
 
     public GameObject PauseMenu;
 
@@ -53,23 +53,23 @@ public class AH_ScoreManager : MonoBehaviour
         aiScore++;
         aiScoreText.text = "Npc AI: " + aiScore.ToString();
 
-        int newAiScore = Convert.ToInt32(playerScoreText);
+        
 
-        if ((newAiScore == 7) && (playerController.difficulty == 0.5))
+        if ((aiScore == 7) && (playerController.mode == "easy"))
         {
-            LoseScreen.SetActive(true);
+            LossScreen.SetActive(true);
         }
 
 
-        else if ((newAiScore == 5) && (playerController.difficulty == 0.7))
+        else if ((aiScore == 5) && (playerController.mode == "intermidate"))
         {
-            LoseScreen.SetActive(true);
+            LossScreen.SetActive(true);
         }
 
 
-        else if ((newAiScore == 3) && (playerController.difficulty == 1))
+        else if ((aiScore == 3) && (playerController.mode == "hard"))
         {
-            LoseScreen.SetActive(true);
+            LossScreen.SetActive(true);
         }
     }
 }

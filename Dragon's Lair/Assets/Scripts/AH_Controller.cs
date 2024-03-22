@@ -114,7 +114,7 @@ public class AH_PlayerController : MonoBehaviour
         }
 
 
-        if (StartMenu.activeSelf)
+        /*if (StartMenu.activeSelf)
         {
             gameManager.PauseGame();
             Time.timeScale = 0;
@@ -123,7 +123,7 @@ public class AH_PlayerController : MonoBehaviour
         {
             gameManager.PauseGame();
             Time.timeScale = 1;
-        }
+        }*/
 
     }
 
