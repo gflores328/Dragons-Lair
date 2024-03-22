@@ -41,8 +41,10 @@ public class RealPlayerMovement : MonoBehaviour
     private InputAction inventoryAction;
     private InventoryUI inventoryUIArray;
     private GameObject inventoryUI;
+    private bool gamePaused = false;
 
-    
+
+
     private GameObject gameManagerObj;
 
     private GameManager gameManager;
@@ -71,16 +73,7 @@ public class RealPlayerMovement : MonoBehaviour
         inventoryUIArray = FindObjectOfType<InventoryUI>(true);
         inventoryUI = inventoryUIArray.gameObject;
 
-        if (inventoryUI != null && !inventoryUI.activeSelf)
-        {
-            // Do something with the inactive object
-            Debug.Log("Found inactive object: " + inventoryUI.name);
-        }
-        else
-        {
-            // Handle the case when the inactive object is not found or is active
-            Debug.LogWarning("Inactive object not found or is active.");
-        }
+        
     }
 
     
@@ -218,11 +211,22 @@ public class RealPlayerMovement : MonoBehaviour
    
     private void Pause(InputAction.CallbackContext value)
     {
-        Debug.Log("Paused");
-    
-        gameManager.PauseGame();
-        
 
+        if (!gamePaused)
+        {
+            inventoryAction.Disable();
+            interactAction.Disable();
+
+            GameObject.Find("DialogueManager").GetComponent<DialogueManager>().EndDialogue();
+
+            gameManager.PauseGame();
+        }
+        if (gamePaused)
+        {
+            inventoryAction.Enable();
+            interactAction.Enable();
+            gameManager.PauseGame();
+        }
     }
 
     // GABE ADDED:
@@ -238,6 +242,11 @@ public class RealPlayerMovement : MonoBehaviour
     {
         if (!inventoryOpen)
         {
+            pauseAction.Disable();
+            interactAction.Disable();
+
+            GameObject.Find("DialogueManager").GetComponent<DialogueManager>().EndDialogue();
+
             Time.timeScale = 0;
             inventoryUI.SetActive(true);
            
@@ -248,9 +257,10 @@ public class RealPlayerMovement : MonoBehaviour
             Time.timeScale = 1;
             inventoryUI.SetActive(false);
             inventoryOpen = false;
-           
+
+            pauseAction.Enable();
+            interactAction.Enable();
+
         }
-
     }
-
 }

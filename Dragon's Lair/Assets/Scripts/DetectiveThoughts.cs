@@ -10,6 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DetectiveThoughts : MonoBehaviour
 {
@@ -20,11 +21,12 @@ public class DetectiveThoughts : MonoBehaviour
     private int currentLine = 0; // Represents the current index of the dialogue array
     public List<DialogueWithName> thoughtList; // A list to hold all of the detectives thought dialogues
     private GameObject gameState; // A reference to the game state
-    
 
+    private PlayerInput playerInput;
     private void Start()
     {
 
+        playerInput = GameObject.Find("Player").GetComponent<PlayerInput>();
         gameState = GameObject.Find("GameState");
         if (gameState.GetComponent<GameState>().storyState == GameState.state.newGame)
         {
@@ -79,6 +81,8 @@ public class DetectiveThoughts : MonoBehaviour
             currentLine = 0;
             Time.timeScale = 1;
             lostInThought = false;
+            playerInput.actions.FindAction("Pause").Enable();
+            playerInput.actions.FindAction("Inventory").Enable();
 
         }
     }

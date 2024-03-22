@@ -16,6 +16,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 
 using UnityEditor;
+using UnityEngine.InputSystem;
 
 #endif
 
@@ -86,11 +87,14 @@ public class Interact : MonoBehaviour
     [HideInInspector, SerializeField]
     private GameObject closeUIObject;
 
+    private PlayerInput playerInput;
     private void Start()
     {
         dialogueToDisplay = interactDialogue;
         inventory = GameObject.Find("Inventory");
         gameState = GameObject.Find("GameState");
+
+        playerInput = GameObject.Find("Player").GetComponent<PlayerInput>();
     }
 
     // When player steps onto the trigger then the prompt to interact is shown
@@ -222,6 +226,9 @@ public class Interact : MonoBehaviour
                 Time.timeScale = 1;
                 dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
 
+                playerInput.actions.FindAction("Pause").Enable();
+                playerInput.actions.FindAction("Inventory").Enable();
+
                 if (updateObjective && hasItemNeeded && correctTrigger)
                 {
                     dialogueManager.GetComponent<DialogueManager>().ObjectiveChange(newObjective);
@@ -278,6 +285,9 @@ public class Interact : MonoBehaviour
                 Time.timeScale = 1;
                 GameObject.Find("GameState").GetComponent<GameState>().AddNonRespawnable(gameObject.name);
                 dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
+
+                playerInput.actions.FindAction("Pause").Enable();
+                playerInput.actions.FindAction("Inventory").Enable();
 
                 if (updateObjective)
                 {
@@ -363,8 +373,10 @@ public class Interact : MonoBehaviour
         menuOpen = false;
         questionUI.SetActive(false);
         dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
-        //
 
+
+        playerInput.actions.FindAction("Pause").Enable();
+        playerInput.actions.FindAction("Inventory").Enable();
     }
 
     // A button function that closes the image set up by zoom type interaction
@@ -376,6 +388,9 @@ public class Interact : MonoBehaviour
         UIPopUp.SetActive(false);
         closeUIObject.SetActive(false);
         dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
+
+        playerInput.actions.FindAction("Pause").Enable();
+        playerInput.actions.FindAction("Inventory").Enable();
     }
 
     // For on on click event that will close the UI that the menu type interact pops up
@@ -386,6 +401,9 @@ public class Interact : MonoBehaviour
         menuUI.SetActive(false);
         //Cursor.lockState = CursorLockMode.Locked;
         dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
+
+        playerInput.actions.FindAction("Pause").Enable();
+        playerInput.actions.FindAction("Inventory").Enable();
     }
 
     #region Editor
