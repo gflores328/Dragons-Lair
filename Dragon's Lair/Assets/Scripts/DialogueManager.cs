@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -30,15 +31,18 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("The image that holds the character bust of who is talking on the right")]
     public GameObject bustUIRight;
 
+    private PlayerInput playerInput;
+    public GameObject player;
 
-
-
+    private bool actionsDisabled = false;
     private GameObject gameState;
     private void Start()
     {
         gameState = GameObject.Find("GameState");
         objectiveText.text = gameState.GetComponent<GameState>().objective;
         //Debug.Log(objectiveText.text);
+
+        playerInput = player.GetComponent<PlayerInput>();
     }
 
     // This function will take a string variable and start the dialogue by showing the UI
@@ -49,8 +53,11 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = dialogueAndName.dialogue;
         //nameBox.SetActive(true);
         nameText.text = dialogueAndName.name;
-        
-        
+
+        playerInput.actions.FindAction("Pause").Disable();
+        playerInput.actions.FindAction("Inventory").Disable();
+
+        actionsDisabled = true;
 
         if (dialogueAndName.bustSide == side.left)
         {
@@ -72,7 +79,10 @@ public class DialogueManager : MonoBehaviour
     {
         textBox.SetActive(true);
         dialogueText.text = dialogue;
-        
+
+        //playerInput.actions.FindAction("Pause").Disable();
+        //playerInput.actions.FindAction("Inventory").Disable();
+
         //Cursor.lockState = CursorLockMode.None;
     }
 
@@ -88,6 +98,8 @@ public class DialogueManager : MonoBehaviour
         bustUIRight.SetActive(false);
         bustUIRight.GetComponent<Image>().sprite = null;
 
+        actionsDisabled = false;
+
 
         //Cursor.lockState = CursorLockMode.Locked;
     }
@@ -95,6 +107,13 @@ public class DialogueManager : MonoBehaviour
     // This function will be used to change the text using a string that was passed through
     public void TextChange(DialogueAndName dialogueAndName)
     {
+        if (!actionsDisabled)
+        {
+            playerInput.actions.FindAction("Pause").Disable();
+            playerInput.actions.FindAction("Inventory").Disable();
+            actionsDisabled = true;
+        }
+
         if (!nameBox.activeInHierarchy)
         {
             //nameBox.SetActive(true);
@@ -162,5 +181,10 @@ public class DialogueManager : MonoBehaviour
     {
         objectiveBox.SetActive(false);
         objectiveText.gameObject.SetActive(false);
+    }
+
+    IEnumerator Wait(float i)
+    {
+        yield return new WaitForSeconds(i);
     }
 }
