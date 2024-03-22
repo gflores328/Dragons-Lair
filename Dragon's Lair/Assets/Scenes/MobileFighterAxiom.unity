@@ -351,7 +351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit Game
+  m_text: Return to Arcade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 363e988e24db3b046abea31684354962, type: 2}
   m_sharedMaterial: {fileID: -2422459021632054479, guid: 363e988e24db3b046abea31684354962,
@@ -379,8 +379,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6589,8 +6589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760ec8f579302434b988bf694c43f90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lives: 3
   playerDeathAudio: {fileID: 424881974}
+  livesText: {fileID: 1157896415}
 --- !u!82 &1023393641
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6598,7 +6598,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023393633}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 19694cf82c14dc340ada427604def3fc, type: 3}
@@ -8192,7 +8192,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit Game
+  m_text: Return to Arcade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 363e988e24db3b046abea31684354962, type: 2}
   m_sharedMaterial: {fileID: -2422459021632054479, guid: 363e988e24db3b046abea31684354962,
@@ -8220,8 +8220,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8304,7 +8304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 99.2}
+  m_AnchoredPosition: {x: 0, y: 118}
   m_SizeDelta: {x: 387.0957, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2012572800
@@ -8327,9 +8327,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You Saved the Galaxy!
+  m_text: 'You Saved the Space Colony From Alien Terrorists!
 
-    You Win!'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 363e988e24db3b046abea31684354962, type: 2}
   m_sharedMaterial: {fileID: -2422459021632054479, guid: 363e988e24db3b046abea31684354962,

@@ -25,6 +25,7 @@ public class LivesCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        livesText.text = "Lives: " + playerLives.GetComponent<PlayerLives>().lives; // Displays Life Counter
+        livesText.text = "Lives: " + PlayerLives.lives; // Displays Life Counter
+        //livesText.text = "Lives: " + playerLives.GetComponent<PlayerLives>().lives; // Displays Life Counter
     }
 }

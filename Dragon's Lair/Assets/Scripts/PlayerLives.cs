@@ -13,7 +13,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLives : MonoBehaviour
 {
-    public int lives = 3; // Default: 3 Lives
+    public static int lives = 3;
+    //public int lives = 3; // Default: 3 Lives
     public static event Action OnPlayerDeath;
 
     public AudioSource playerDeathAudio; // Audio Source
@@ -37,7 +38,9 @@ public class PlayerLives : MonoBehaviour
             else if(lives <= 0) // If Player Runs Out of Lives
             {
                 OnPlayerDeath?.Invoke(); // Trigger Game Over
+                lives = 3;
             }
         }
     }
+
 }
