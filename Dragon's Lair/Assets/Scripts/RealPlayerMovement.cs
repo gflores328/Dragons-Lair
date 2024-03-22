@@ -220,12 +220,17 @@ public class RealPlayerMovement : MonoBehaviour
             GameObject.Find("DialogueManager").GetComponent<DialogueManager>().EndDialogue();
 
             gameManager.PauseGame();
+
+            gamePaused = true;
         }
-        if (gamePaused)
+        else if (gamePaused)
         {
             inventoryAction.Enable();
             interactAction.Enable();
+
             gameManager.PauseGame();
+
+            gamePaused = false;
         }
     }
 
