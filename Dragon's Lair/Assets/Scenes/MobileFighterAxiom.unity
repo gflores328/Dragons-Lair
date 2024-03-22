@@ -6590,7 +6590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDeathAudio: {fileID: 424881974}
-  livesText: {fileID: 1157896415}
 --- !u!82 &1023393641
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6720,6 +6719,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 315606639}
+  - {fileID: 1921212695}
   m_Father: {fileID: 1023393638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1138237091
@@ -6879,7 +6879,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.2
+  m_fontSize: 51.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7845,6 +7845,89 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1828620698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1138237090}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7260405
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0001358
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6082971
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.012620911
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.402
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.8852465
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9999552
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.009470478
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+        type: 3}
+      propertyPath: m_Name
+      value: ROCKEHIP1_PV
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 23416b96a610ca143bb4e4bd9c6c6230, type: 3}
 --- !u!1 &1862769248
 GameObject:
   m_ObjectHideFlags: 0
@@ -7990,6 +8073,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1862769248}
   m_CullTransparentMesh: 1
+--- !u!4 &1921212695 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 23416b96a610ca143bb4e4bd9c6c6230,
+    type: 3}
+  m_PrefabInstance: {fileID: 1828620698}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1953236783
 GameObject:
   m_ObjectHideFlags: 0
