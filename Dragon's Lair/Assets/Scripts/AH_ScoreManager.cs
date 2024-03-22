@@ -9,16 +9,19 @@ public class AH_ScoreManager : MonoBehaviour
 
     public GameManager gameManager;
 
+    public GameObject WinScreen;
+
+    public GameObject LoseScreen;
+
+    public GameObject PauseMenu;
+
+    public GameObject StartMenu;
+
     private int playerScore = 0;
     private int aiScore = 0;
 
     public Text playerScoreText;
     public Text aiScoreText;
-
-    private void Start()
-    {
-        
-    }
 
 
     public void PlayerGoal()
@@ -28,20 +31,20 @@ public class AH_ScoreManager : MonoBehaviour
 
 
         if ((playerScore == 7) && (playerController.mode == "easy"))
-        { 
-            gameManager.LoadLevelbyName("WinScene");
+        {
+            WinScreen.SetActive(true);
         }
 
 
         else if ((playerScore == 5) && (playerController.mode == "intermidate"))
         {
-            gameManager.LoadLevelbyName("WinScene");
+            WinScreen.SetActive(true);
         }
 
 
         else if ((playerScore == 3) && (playerController.mode == "hard"))
         {
-            gameManager.LoadLevelbyName("WinScreen");
+            WinScreen.SetActive(true);
         }
     }
 
@@ -54,19 +57,19 @@ public class AH_ScoreManager : MonoBehaviour
 
         if ((newAiScore == 7) && (playerController.difficulty == 0.5))
         {
-            gameManager.LoadLevelbyName("LoseScene");
+            LoseScreen.SetActive(true);
         }
 
 
         else if ((newAiScore == 5) && (playerController.difficulty == 0.7))
         {
-            gameManager.LoadLevelbyName("Losecene");
+            LoseScreen.SetActive(true);
         }
 
 
         else if ((newAiScore == 3) && (playerController.difficulty == 1))
         {
-            gameManager.LoadLevelbyName("LoseScreen");
+            LoseScreen.SetActive(true);
         }
     }
 }

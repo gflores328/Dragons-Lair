@@ -5,6 +5,8 @@ using System;
 
 public class AH_PlayerController : MonoBehaviour
 {
+    public GameManager gameManager;
+
 
     [SerializeField] private Camera mainCamera; //main camera variable
 
@@ -34,6 +36,8 @@ public class AH_PlayerController : MonoBehaviour
     private Transform puck; //puck object
 
     public  Transform pusherR; // ai object
+
+    public GameObject StartMenu;
 
     public Rigidbody rb; //player rb
 
@@ -95,7 +99,8 @@ public class AH_PlayerController : MonoBehaviour
             pusherSpeed = 5;
             mode = "hard";
         }
-    }
+
+}
 
     void FixedUpdate()
     {
@@ -106,6 +111,18 @@ public class AH_PlayerController : MonoBehaviour
         else
         {
             MoveByComputer();
+        }
+
+
+        if (StartMenu.activeSelf)
+        {
+            gameManager.PauseGame();
+            Time.timeScale = 0;
+        }
+        else
+        {
+            gameManager.PauseGame();
+            Time.timeScale = 1;
         }
 
     }
