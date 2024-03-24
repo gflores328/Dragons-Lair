@@ -31,6 +31,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     private GameObject gameManagerObj; // A gameObject variable that will hold the game manager game object
     private GameManager gameManager; // A GameManger object that will hold the instance of the script of GameManger
     
+    private ArmRotation armRotation; 
     private bool isFreeAiming = false;
     
     
@@ -105,6 +106,7 @@ public class ChibiPlayerMovement : MonoBehaviour
         jumpAction.canceled += OnJump; // When action is stop it is assigned to the on jumpfunction
         playerOneWay = GetComponent<PlayerOneWay>(); // Gets the player one way script from the player
         cyberMouseHandler = GetComponent<CyberMouseHandler>(); // Gets the cyber mouse handler 
+        armRotation = FindObjectOfType<ArmRotation>();
         pauseAction = playerInput.actions.FindAction("Pause"); // Assigns the pause action to the pause action from the chibi movement
         pauseAction.performed += Pause; // Assigns the on performed pause action to the pause function 
         gameManager = FindObjectOfType<GameManager>(); // Finds the game manger in the scene
@@ -202,16 +204,41 @@ public class ChibiPlayerMovement : MonoBehaviour
 
         // Apply the movement
         playerRB.MovePosition(transform.position + moveDirection * Time.deltaTime * playerSpeedMultiplier);
-
-        // Flip the character based on the isAimingRight variable
-        if (cyberMouseHandler.isAimingRight)
+        if(armRotation.gunRotationWithMouse)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0); // Not flipped
+            if (cyberMouseHandler.isAimingRight)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0); // Not flipped
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
+            }
         }
+
         else
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
+            if (direction.x > 0) // Moving right
+            {
+                isFacingRight = true;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+
+            }
+
+            else if (direction.x < 0) // Moving left
+            {
+                isFacingRight = false;
+                transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
+                
+            }
+            if (direction.x < 0) // If moving left
+            {
+                // Flip the x component to make sure the player moves left
+                moveDirection.x *= -1;
+            }
         }
+        // Flip the character based on the isAimingRight variable
+        
     }
 
 

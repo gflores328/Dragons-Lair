@@ -23,6 +23,7 @@ public class FireRatePowerup : MonoBehaviour
         if (showDesc)
         {
             powerUpDesc.SetActive(true);
+            StartCoroutine(coroutine);
         }
     }
 
@@ -32,7 +33,7 @@ public class FireRatePowerup : MonoBehaviour
         {   
             showDesc = true;
             gunController.setFireRate(fireRateSetter);
-            StartCoroutine(coroutine);
+            
         }
     }
 

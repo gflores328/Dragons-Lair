@@ -14,29 +14,29 @@ public class AsyncLoader : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI spaceText; //press spacebar text
     [SerializeField]
+    private TextMeshProUGUI controllerText; //press spacebar text
+    [SerializeField]
     private Slider sliderBar; //slider for progress
     public GameObject loadingScreen;
     // Start is called before the first frame update
     
-
     private GameObject gameState; // The game object that will hold the GameState object
     private Scene scene; // A variable to hold the current scene
+
+    private GameManager gameManager;
 
     
     void Start()
     {
         
         spaceText.enabled = false; //hide the spacebar text 
-
+        controllerText.enabled = false;
         scene = SceneManager.GetActiveScene(); // scene is set to the active scene
+        gameManager = GetComponent<GameManager>(); // Gets the gamemanger script
         gameState = GameObject.Find("GameState"); // gameState is set to find GameState
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
 
     public void runAsync()
@@ -79,7 +79,14 @@ public class AsyncLoader : MonoBehaviour
             
             if (async.progress >= 0.9f) //if scene is "fully" loaded
             {
-                spaceText.enabled = true; //enable space text
+                if(!gameManager.GetIsMouse())
+                {
+                    controllerText.enabled = true;
+                }
+                else
+                {
+                    spaceText.enabled = true;
+                }
                 if (Input.GetButtonDown("Jump")) //if space is pressed
                 {
                     async.allowSceneActivation = true; //allow scene transition

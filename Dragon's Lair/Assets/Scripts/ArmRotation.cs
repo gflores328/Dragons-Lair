@@ -53,6 +53,11 @@ public class ArmRotation : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>(); // Find and store a refernce to the GameManager
     }
 
+    private void Update()
+    {
+        gunRotationWithMouse = gameManager.GetusingMouseRotation();
+    }
+
     private void OnEnable()
     {
         aimAction.Enable(); // Enable the aim action

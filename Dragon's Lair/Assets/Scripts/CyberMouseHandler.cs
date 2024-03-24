@@ -22,14 +22,14 @@ public class CyberMouseHandler : MonoBehaviour
             {
                 // Do something specific when mouse is over the left collider
                 isAimingRight = false;
-                Debug.Log("Mouse entered left collider");
+                //Debug.Log("Mouse entered left collider");
             }
             // Check if the collider hit has the name of the right mouse collider
             else if (hit.collider.gameObject.name == rightMouseCollider)
             {
                 // Do something specific when mouse is over the right collider
                 isAimingRight = true;
-                Debug.Log("Mouse entered right collider");
+                //Debug.Log("Mouse entered right collider");
             }
         }
     }

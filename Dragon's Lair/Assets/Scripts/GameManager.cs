@@ -21,12 +21,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject resumeButton; // Grabs the resume button so when paused the event system knows to select it first for the controller;
 
-    public AsyncLoader asyncLoader;
+    private AsyncLoader asyncLoader;
     
     public bool mainMenu = false;
 
     private bool isMouse = true; // A bool variable to see if the mouse is connected or the controller
 
+    private bool usingMouseRotation = true; // A bool variable that is changed in the game manager that informs the chibi arm movement if the player is using keyboard or mouse so you can toggle it on and off in settings
     [HideInInspector] public pauseState currentState; // A variable that is type of the enum created pause state
     
     public enum pauseState // pauseState Enum that has paused or unpaused states
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
        
 
-    
+        asyncLoader = GetComponent<AsyncLoader>();
         Time.timeScale = 1;
 
 
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentState = pauseState.Unpaused; // The Game should not start paused when loaded in
+
 
     }
 
@@ -184,5 +186,13 @@ public class GameManager : MonoBehaviour
     public bool GetIsMouse()
     {
         return isMouse;
+    }
+    public bool GetusingMouseRotation()
+    {
+        return usingMouseRotation;
+    }
+    public void SetusingMouseRotation(bool isUsing)
+    {
+        usingMouseRotation = isUsing;
     }
 }
