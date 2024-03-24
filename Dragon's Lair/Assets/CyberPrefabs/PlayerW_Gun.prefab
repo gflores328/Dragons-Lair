@@ -4978,6 +4978,7 @@ GameObject:
   - component: {fileID: 84233016656146126}
   - component: {fileID: 3673441571437299980}
   - component: {fileID: 2318388559178036849}
+  - component: {fileID: 1154473490572307068}
   m_Layer: 8
   m_Name: PlayerW_Gun
   m_TagString: Player
@@ -5109,6 +5110,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b4bab392-3a9a-41ef-becb-1bc480b8798c
     m_ActionName: DDR/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 521595b1-82f3-4554-ab95-8dd9581360f4
+    m_ActionName: ChibiMovement/FreeAim[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 626f18ee-256b-441d-8e83-f5a9fa0761e7
+    m_ActionName: ChibiMovement/FreeAimRight[/Keyboard/shift,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ccab532b-5384-41f9-a1e1-da82fe8aff4c
+    m_ActionName: ChibiMovement/FreeAimLeft[/Keyboard/shift,/Keyboard/a]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: ChibiMovement
@@ -5154,8 +5167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeedMultiplier: 7
-  maxForce: 2
-  jumpForce: 15
   gravityForce: -9.81
   groundLayer:
     serializedVersion: 2
@@ -5258,6 +5269,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5087563, y: 1.4521008, z: 1}
   m_Center: {x: -0.010866702, y: -0.22605038, z: 0}
+--- !u!114 &1154473490572307068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453006537471203003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7089d8a6f2b464dae518ba1f1ced18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAimingRight: 1
 --- !u!1001 &925599452917115864
 PrefabInstance:
   m_ObjectHideFlags: 0

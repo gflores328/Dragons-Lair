@@ -14,10 +14,8 @@ public class ChibiPlayerMovement : MonoBehaviour
     
     [Header("Player Movement Settings")]
     public float playerSpeedMultiplier;
-    public float maxForce;
-    public float jumpForce;
     public float gravityForce; // A float variable that will deteremine how fast the player is moving, The max force that can be applied to the movement, how powerful the jump is, how strong the gravity is.
-    public static int jumpsCounter;
+    public static int jumpsCounter; // A int variable that will hold how many jumps the player currently has
     public LayerMask groundLayer; // A layermask that holds the ground layer
     public float groundRayLength = 1f; // the length of the ray that will check if the player is grounded
     
@@ -55,6 +53,8 @@ public class ChibiPlayerMovement : MonoBehaviour
 
 
     private PlayerOneWay playerOneWay; // Grabs the Player oneway script to access the isMOving down
+
+    private CyberMouseHandler cyberMouseHandler; // Grabs the player cybermousehandler from the player
     private Rigidbody playerRB; // A rigid body object which will hold the player's rigid body
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
     private bool isGrounded; // A bool to know if the player is grounded
@@ -72,18 +72,21 @@ public class ChibiPlayerMovement : MonoBehaviour
     public Sprite fullHeart; // The sprite for the full heart
     public Sprite emptyHeart; // The sprite for the empty heart
 
-    public float invincibilityLength;
-    private float invincibilityCounter;
-    public Renderer playerRenderer;
-    private float flashCounter;
-    public float flashLength = 0.1f;
+    public float invincibilityLength; // a float that will say how long invibility last
+    private float invincibilityCounter; // The float that will act as the timer and decrease with time
+    public Renderer playerRenderer; // Grabs the player renderer so we can make the character blink
+    private float flashCounter; // How many flashes
+    public float flashLength = 0.1f; // How long we should turn the renderer off for
     
-    public int maxExtraJumps = 1;
+    public int maxExtraJumps = 1; // The max amount times the player can jump after jumping from the ground
 
-    private int currExtraJumps;
+    private int currExtraJumps; // The counter to see if they have used up all of their max jumps
     
 
-    
+    // [Header("Mouse Colliders")]
+    // public LeftMouseCollisionHandler leftMouseCollider;
+    // public RightMouseCollisionHandler rightMouseCollider;
+
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
     {
         RealLife,
@@ -93,19 +96,20 @@ public class ChibiPlayerMovement : MonoBehaviour
     void Awake()
 
     {
-        playerHealth = maxHealth;
+        playerHealth = maxHealth; // Set the player's health to the max health at the start
         playerRB = GetComponent<Rigidbody>(); // Gets the rigid body of the player
         playerInput = GetComponent<PlayerInput>(); // Gets the playerinput component
         walkAction = playerInput.actions.FindAction("Walk"); // binds the walk action to the walk action that holds the inputs
         jumpAction = playerInput.actions.FindAction("Jump"); // binds the jump to the jump buttons
         jumpAction.started += OnJump; // When action is performed it is assigned to the onJump function
-        jumpAction.canceled += OnJump;
+        jumpAction.canceled += OnJump; // When action is stop it is assigned to the on jumpfunction
         playerOneWay = GetComponent<PlayerOneWay>(); // Gets the player one way script from the player
+        cyberMouseHandler = GetComponent<CyberMouseHandler>(); // Gets the cyber mouse handler 
         pauseAction = playerInput.actions.FindAction("Pause"); // Assigns the pause action to the pause action from the chibi movement
         pauseAction.performed += Pause; // Assigns the on performed pause action to the pause function 
         gameManager = FindObjectOfType<GameManager>(); // Finds the game manger in the scene
-        freeAimAction = playerInput.actions.FindAction("FreeAim");
-        freeAimLeftAction = playerInput.actions.FindAction("FreeAimLeft");
+        freeAimAction = playerInput.actions.FindAction("FreeAim"); // Finds the freeaim action
+        freeAimLeftAction = playerInput.actions.FindAction("FreeAimLeft"); // 
         freeAimRightAction = playerInput.actions.FindAction("FreeAimRight");
 
 
@@ -122,6 +126,8 @@ public class ChibiPlayerMovement : MonoBehaviour
     void Update()
 
     {
+       
+        
         if(playerHealth > numOfHearts)
         {
             playerHealth = numOfHearts;
@@ -183,43 +189,39 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     void ChibiMovePlayer() // Chibi move player function that moves and flips the player
     {
-
         Vector2 direction = walkAction.ReadValue<Vector2>(); // gets the value of the walk action and assigns it to the direction
-        if (direction.x > 0) // Moving right
 
+        // Determine movement direction based on the isAimingRight variable
+        float horizontalInput = direction.x;
+
+        // Move the player left or right depending on the movement of the move action assigns it to a vector 3
+        Vector3 moveDirection = new Vector3(horizontalInput, 0, direction.y);
+
+        // Ensure movement direction is relative to the world axes
+        moveDirection = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * moveDirection;
+
+        // Apply the movement
+        playerRB.MovePosition(transform.position + moveDirection * Time.deltaTime * playerSpeedMultiplier);
+
+        // Flip the character based on the isAimingRight variable
+        if (cyberMouseHandler.isAimingRight)
         {
-            isFacingRight = true;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-
+            transform.rotation = Quaternion.Euler(0, 0, 0); // Not flipped
         }
-
-        else if (direction.x < 0) // Moving left
-
+        else
         {
-            isFacingRight = false;
             transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
-            
         }
-        Vector3 moveDirection = new Vector3(direction.x, 0, direction.y); // Move the player left or right depending on the movement of the move action assigns it to a vector 3
-       
-
-        if (direction.x < 0) // If moving left
-        {
-            // Flip the x component to make sure the player moves left
-            moveDirection.x *= -1;
-        }
-
-        moveDirection = transform.TransformDirection(moveDirection); // the move direction is the transform direction that is needed to go the direction
-        playerRB.MovePosition(transform.position + moveDirection * Time.deltaTime * playerSpeedMultiplier); // THis is the function that moves the player by using time move direction and the player current position
     }
 
 
-    // void setupJumpVariables()
-    // {
-    //     float timeToApex = maxJumpTime / 2;
-    //     gravityForce = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex,2);
-    //     initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-    // }
+
+    void setupJumpVariables()
+    {
+        float timeToApex = maxJumpTime / 2;
+        gravityForce = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex,2);
+        initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+    }
 
     void OnJump(InputAction.CallbackContext context) // THe on jump that is called when the jump button is pressed
     {
@@ -229,13 +231,19 @@ public class ChibiPlayerMovement : MonoBehaviour
     
     void handleJump()
     {
-
-        if(!isJumping && coyoteTimeCounter > 0 && isJumpingPressed && !playerOneWay.IsDownActionActive() && currExtraJumps > 0)
+        if (!isJumping && isJumpingPressed && !playerOneWay.IsDownActionActive())
         {
-            isJumping = true;
-            playerRB.velocity = new Vector3(playerRB.velocity.x, initialJumpVelocity, 0);
+            if (isGrounded || currExtraJumps > 0)
+            {
+                isJumping = true;
+                playerRB.velocity = new Vector3(playerRB.velocity.x, initialJumpVelocity, 0);
+                Debug.Log(currExtraJumps);
+                currExtraJumps--; // Decrement extra jumps if not grounded
+                Debug.Log(currExtraJumps);
+                
+            }
         }
-        else if( !isJumpingPressed && isJumping && isGrounded)
+        else if (!isJumpingPressed && isJumping && isGrounded)
         {
             isJumping = false;
         }
@@ -251,6 +259,7 @@ public class ChibiPlayerMovement : MonoBehaviour
         {
             playerRB.AddForce(Vector3.down * gravityForce); // Push the player in the down direction by adding force down
             StopPlayerMovement();
+            currExtraJumps = maxExtraJumps;
         }
 
         else if(isFalling)
@@ -277,6 +286,7 @@ public class ChibiPlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             coyoteTimeCounter = coyoteTime; // Reset coyote time counter if grounded
+            currExtraJumps = maxExtraJumps; // Reset extra jumps when grounded
         }
         else
         {
