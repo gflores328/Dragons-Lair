@@ -36,6 +36,8 @@ public class DialogueManager : MonoBehaviour
 
     private bool actionsDisabled = false;
     private GameObject gameState;
+    [HideInInspector]
+    public AudioSource audioSource;
     private void Start()
     {
         gameState = GameObject.Find("GameState");
@@ -43,6 +45,7 @@ public class DialogueManager : MonoBehaviour
         //Debug.Log(objectiveText.text);
 
         playerInput = player.GetComponent<PlayerInput>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // This function will take a string variable and start the dialogue by showing the UI
@@ -153,7 +156,10 @@ public class DialogueManager : MonoBehaviour
             bustUIRight.GetComponent<Image>().preserveAspect = true;
         }
 
-       
+        if (dialogueAndName.audioClip != null)
+        {
+            audioSource.PlayOneShot(dialogueAndName.audioClip);
+        }
     }
 
     /*

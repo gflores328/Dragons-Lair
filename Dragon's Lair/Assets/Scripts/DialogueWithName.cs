@@ -17,6 +17,8 @@ public struct DialogueAndName
     public Sprite bust;
     [Tooltip("The side of the textbox that the bust will be on")]
     public side bustSide;
+    [Tooltip("An optional clip that will play when the dialogue pops up")]
+    public AudioClip audioClip;
 }
 
 [CreateAssetMenu]
