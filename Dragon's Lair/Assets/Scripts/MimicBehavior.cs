@@ -28,6 +28,7 @@ public class MimicBehavior : Enemy
 
     [Header("Debris")]
     public GameObject fallingDebris;
+    public GameObject fallingDebrisHeight;
     public GameObject splashDebris;
 
     
@@ -80,7 +81,9 @@ public class MimicBehavior : Enemy
         takingAction = true;
 
         yield return StartCoroutine(Jump(player.transform.position.x));
-       
+
+        FallingDebris();
+
         // Waits for 1 second
         yield return new WaitForSeconds(1f);
 
@@ -169,6 +172,7 @@ public class MimicBehavior : Enemy
             // Waits for next frame
             yield return null;
         }
+
     }
 
     // This function when run will check for whichever border it is closest to and will jump to that position
@@ -191,6 +195,12 @@ public class MimicBehavior : Enemy
 
     private void FallingDebris()
     {
+
+        for(int i = 0; i <= 4; i++)
+        {
+            float xSpawn = Random.Range(leftBorder.transform.position.x, rightBorder.transform.position.x);
+            GameObject clone = Instantiate(fallingDebris, new Vector3(xSpawn, fallingDebrisHeight.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
+        }
 
     }
 

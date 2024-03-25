@@ -24,6 +24,12 @@ public class FallingDebris : MonoBehaviour
 
             Destroy(gameObject);
         }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            // Player take damage
+
+            Destroy(gameObject);
+        }
 
         if (collision.gameObject.layer == 7)
         {
