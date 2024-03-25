@@ -26,6 +26,8 @@ public class RealPlayerMovement : MonoBehaviour
 
     private InputAction pauseAction; // A private variable that holds the pause action
 
+    private AudioSource footStep; 
+
     private CharacterController characterController; // A Character Controller object which will hold the player's character controller
 
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
@@ -72,6 +74,7 @@ public class RealPlayerMovement : MonoBehaviour
         inventoryAction.performed += OpenInventory;
         inventoryUIArray = FindObjectOfType<InventoryUI>(true);
         inventoryUI = inventoryUIArray.gameObject;
+        footStep = GetComponent<AudioSource>();
 
         
     }
@@ -119,6 +122,8 @@ public class RealPlayerMovement : MonoBehaviour
         }
         
         characterController.Move(targetVelocity * Time.deltaTime);
+
+        footStep.enabled = true;
 
        
         
