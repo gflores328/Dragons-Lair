@@ -6,8 +6,9 @@ using UnityEngine;
 public class AH_Puck : MonoBehaviour
 {
     public AH_ScoreManager scoreManager;
+    public AH_PlayerController playerController;
 
-    public float speed;
+    public float pSpeed;
 
     public float minDir = 0.5f;
 
@@ -60,7 +61,7 @@ public class AH_Puck : MonoBehaviour
     // FixedUpdated is caled on every frame
     void FixedUpdate()
     {
-        this.rb.MovePosition(this.rb.position + speed * Time.fixedDeltaTime * direction);
+        this.rb.MovePosition(this.rb.position + pSpeed * Time.fixedDeltaTime * direction);
     }
 
     public void OnTriggerEnter(Collider other)

@@ -17,6 +17,12 @@ public class AH_ScoreManager : MonoBehaviour
 
     public GameObject StartMenu;
 
+    public Button easy;
+
+    public Button intm;
+
+    public Button hard;
+
     private int playerScore = 0;
     private int aiScore = 0;
 
@@ -30,19 +36,19 @@ public class AH_ScoreManager : MonoBehaviour
         playerScoreText.text = "Owen: " + playerScore.ToString();
 
 
-        if ((playerScore == 7) && (playerController.mode == "easy"))
+        if ((playerScore == 7) && (easy))
         {
             WinScreen.SetActive(true);
         }
 
 
-        else if ((playerScore == 5) && (playerController.mode == "intermidate"))
+        else if ((playerScore == 5) && (intm))
         {
             WinScreen.SetActive(true);
         }
 
 
-        else if ((playerScore == 3) && (playerController.mode == "hard"))
+        else if ((playerScore == 3) && (hard))
         {
             WinScreen.SetActive(true);
         }
@@ -55,19 +61,19 @@ public class AH_ScoreManager : MonoBehaviour
 
         
 
-        if ((aiScore == 7) && (playerController.mode == "easy"))
+        if ((aiScore == 7) && (easy))
         {
             LossScreen.SetActive(true);
         }
 
 
-        else if ((aiScore == 5) && (playerController.mode == "intermidate"))
+        else if ((aiScore == 5) && (intm))
         {
             LossScreen.SetActive(true);
         }
 
 
-        else if ((aiScore == 3) && (playerController.mode == "hard"))
+        else if ((aiScore == 3) && (hard))
         {
             LossScreen.SetActive(true);
         }

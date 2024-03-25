@@ -7,6 +7,7 @@ public class AH_PlayerController : MonoBehaviour
 {
     public GameManager gameManager;
 
+    public AH_ScoreManager scoreManager;
 
     [SerializeField] private Camera mainCamera; //main camera variable
 
@@ -20,13 +21,10 @@ public class AH_PlayerController : MonoBehaviour
     Vector3 basePoint;
     public Vector3 direction;
 
-    [Range(0, 1)]
     public float difficulty; //level difficulty 
 
-    [Range(0, 5)]
-    public float speed = 5; //puck speed
+    public float speed; //puck speed
 
-    [Range(0, 5)]
     public float pusherSpeed; //ai & player speed
 
     public string mode;
@@ -71,32 +69,32 @@ public class AH_PlayerController : MonoBehaviour
         //sets difficulty (will be done later via UI choices rather than haard coded)
 
         //If easy selected on UI choice do the following
-        if (difficulty < 0.05f)
+        if (scoreManager.easy)
         {
             basePoint = new Vector3(0.6f, transform.position.y, 0.6f);
             difficulty = 0.05f;
-            speed = 1;
-            pusherSpeed = 1;
+            speed = 0.5f;
+            pusherSpeed = 0.5f;
             mode = "easy";
         }
 
         //If intermediate selected on UI choice do the following
-        if ((difficulty >= 0.05f) && (difficulty < 1f))
+        if (scoreManager.intm)
         {
             basePoint = new Vector3(0.6f, transform.position.y, 3f);
             difficulty = 0.07f;
-            speed = 3;
-            pusherSpeed = 3;
+            speed = 1.5f;
+            pusherSpeed = 1.5f;
             mode = "intermidate";
         }
 
         //If hard selected on UI choice do the following
-        if (difficulty == 1f)
+        if (scoreManager.hard)
         {
             basePoint = new Vector3(0.6f, transform.position.y, 6f);
             difficulty = 1f;
-            speed = 5;
-            pusherSpeed = 5;
+            speed = 3f;
+            pusherSpeed = 3f;
             mode = "hard";
         }
 
@@ -112,18 +110,6 @@ public class AH_PlayerController : MonoBehaviour
         {
             MoveByComputer();
         }
-
-
-        /*if (StartMenu.activeSelf)
-        {
-            gameManager.PauseGame();
-            Time.timeScale = 0;
-        }
-        else
-        {
-            gameManager.PauseGame();
-            Time.timeScale = 1;
-        }*/
 
     }
 
