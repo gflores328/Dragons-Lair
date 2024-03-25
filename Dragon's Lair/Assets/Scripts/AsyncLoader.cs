@@ -46,10 +46,15 @@ public class AsyncLoader : MonoBehaviour
             loadingScreen.SetActive(true);
             sceneLoaded = true;
 
+            if (gameState.GetComponent<GameState>().GetFirstTimeLoad())
+            {
+                sceneToLoad = "IntroCutscene";
+                gameState.GetComponent<GameState>().SetFirstTimeLoad(false);
+            }
+
             if (scene.name == "LevelDesignRealLife")
             {
                 // First time load is set to false and the position of Player is stored
-                gameState.GetComponent<GameState>().SetFirstTimeLoad(false);
                 gameState.GetComponent<GameState>().SetPlayerPosition(GameObject.Find("Player").transform.position);
             }
 
