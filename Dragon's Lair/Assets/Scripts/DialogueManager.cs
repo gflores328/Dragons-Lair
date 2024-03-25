@@ -36,8 +36,7 @@ public class DialogueManager : MonoBehaviour
 
     private bool actionsDisabled = false;
     private GameObject gameState;
-    [HideInInspector]
-    public AudioSource audioSource;
+    private AudioSource audioSource;
     private void Start()
     {
         gameState = GameObject.Find("GameState");
@@ -75,7 +74,11 @@ public class DialogueManager : MonoBehaviour
             bustUIRight.GetComponent<Image>().preserveAspect = true;
         }
 
-        
+        if (dialogueAndName.audioClip != null)
+        {
+            audioSource.PlayOneShot(dialogueAndName.audioClip);
+        }
+
     }
 
     public void StartDialogue(string dialogue)
@@ -192,5 +195,11 @@ public class DialogueManager : MonoBehaviour
     IEnumerator Wait(float i)
     {
         yield return new WaitForSeconds(i);
+    }
+
+
+    public AudioSource GetAudioSource()
+    {
+        return audioSource;
     }
 }
