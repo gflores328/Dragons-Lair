@@ -5,7 +5,7 @@ public class Spikes : MonoBehaviour
 {
     //public float damage;
 
-    private Animator anim; //animator variable
+    public Animator anim; //animator variable
 
     public float waitTime; //wait time between actiations so you dont get hit over and over
 
@@ -14,7 +14,7 @@ public class Spikes : MonoBehaviour
     void Start()
     {
         //initalization of animator and setup of couroutine with wait time
-        anim = GetComponent<Animator>(); 
+        
         anim.SetTrigger("onActive");
         // coroutine = WaitTime(waitTime);
         // StartCoroutine(coroutine);
