@@ -18,6 +18,7 @@ public class PlayerPosition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         // gameState is set to find GameState
         gameState = GameObject.Find("GameState");
 
