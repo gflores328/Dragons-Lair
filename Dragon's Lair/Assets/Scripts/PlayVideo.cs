@@ -33,7 +33,7 @@ public class PlayVideo : MonoBehaviour
     {
         videoPlayer.Play();
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(5);
         checkForFinish = true;
 
     }
