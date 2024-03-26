@@ -6,24 +6,25 @@ public class FireRatePowerup : MonoBehaviour
 {
     public float fireRateSetter; 
     public GameObject powerUpDesc; 
-    
+    public Renderer powerUpRenderer; // Reference to the renderer component
+
     private GunController gunController; 
     private bool showDesc = false;
     private float waitTime = 5f;
-    private IEnumerator coroutine;
+    private Coroutine coroutine;
 
     void Awake()
     {
         gunController = FindObjectOfType<GunController>(); 
-        coroutine = WaitAndDisable(waitTime);
+        powerUpRenderer = GetComponent<Renderer>(); // Grab the renderer component
     }
 
     void Update()
     {
-        if (showDesc)
+        if (showDesc && coroutine == null)
         {
             powerUpDesc.SetActive(true);
-            StartCoroutine(coroutine);
+            coroutine = StartCoroutine(WaitAndDisable(waitTime));
         }
     }
 
@@ -33,7 +34,7 @@ public class FireRatePowerup : MonoBehaviour
         {   
             showDesc = true;
             gunController.setFireRate(fireRateSetter);
-            
+            powerUpRenderer.enabled = false; // Turn off the renderer when picked up
         }
     }
 
@@ -45,4 +46,3 @@ public class FireRatePowerup : MonoBehaviour
         Destroy(gameObject);
     }
 }
-
