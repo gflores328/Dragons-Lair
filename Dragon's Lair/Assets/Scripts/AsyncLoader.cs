@@ -46,7 +46,7 @@ public class AsyncLoader : MonoBehaviour
             loadingScreen.SetActive(true);
             sceneLoaded = true;
 
-            if (gameState.GetComponent<GameState>().GetFirstTimeLoad())
+            if (gameState.GetComponent<GameState>().GetFirstTimeLoad() && gameState != null) 
             {
                 sceneToLoad = "IntroCutscene";
                 gameState.GetComponent<GameState>().SetFirstTimeLoad(false);

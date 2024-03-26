@@ -31,6 +31,7 @@ public class MimicBehavior : Enemy
     public GameObject fallingDebrisHeight;
     public GameObject splashDebris;
 
+    public GameObject gameManager;
     
     
 
@@ -71,6 +72,14 @@ public class MimicBehavior : Enemy
                     break;
 
             }
+        }
+
+        if (health <= 1)
+        {
+            gameManager.GetComponent<AsyncLoader>().sceneToLoad = "WinScreen";
+            gameManager.GetComponent<AsyncLoader>().runAsync();
+            gameObject.SetActive(false);
+            
         }
     }
 
