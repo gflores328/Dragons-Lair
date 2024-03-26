@@ -9,6 +9,8 @@ public class AH_PlayerController : MonoBehaviour
 
     public AH_ScoreManager scoreManager;
 
+    public static AH_Puck puckScript; // puck script to control puck movements
+
     [SerializeField] private Camera mainCamera; //main camera variable
 
     // You must set the cursor in the inspector.
@@ -21,15 +23,13 @@ public class AH_PlayerController : MonoBehaviour
     Vector3 basePoint;
     public Vector3 direction;
 
-    public float difficulty; //level difficulty 
+    public float difficulty; //level difficulty float used to determine movement for puck and ai
 
     public float speed; //puck speed
 
     public float pusherSpeed; //ai & player speed
 
-    public string mode;
-
-    public AH_Puck puckC; // puck script to control puck movements
+    public string mode; // displays mode in inspector
 
     private Transform puck; //puck object
 
@@ -65,38 +65,7 @@ public class AH_PlayerController : MonoBehaviour
         Vector2 center = default;
         SetCursor(CustomCursor, center); //starts as open hand cursor
 
-
-        //sets difficulty (will be done later via UI choices rather than haard coded)
-
-        //If easy selected on UI choice do the following
-        if (scoreManager.easy)
-        {
-            basePoint = new Vector3(0.6f, transform.position.y, 0.6f);
-            difficulty = 0.05f;
-            speed = 0.5f;
-            pusherSpeed = 0.5f;
-            mode = "easy";
-        }
-
-        //If intermediate selected on UI choice do the following
-        if (scoreManager.intm)
-        {
-            basePoint = new Vector3(0.6f, transform.position.y, 3f);
-            difficulty = 0.07f;
-            speed = 1.5f;
-            pusherSpeed = 1.5f;
-            mode = "intermidate";
-        }
-
-        //If hard selected on UI choice do the following
-        if (scoreManager.hard)
-        {
-            basePoint = new Vector3(0.6f, transform.position.y, 6f);
-            difficulty = 1f;
-            speed = 3f;
-            pusherSpeed = 3f;
-            mode = "hard";
-        }
+        SetDifficulty(1);
 
 }
 
@@ -168,6 +137,43 @@ public class AH_PlayerController : MonoBehaviour
             newDirection.z = Mathf.Sign(newDirection.z) * Mathf.Max(Mathf.Abs(newDirection.z), this.minDir);
 
             direction = newDirection;
+        }
+    }
+
+    public void SetDifficulty(int n)
+    {
+
+        //sets difficulty (will be done later via UI choices rather than haard coded)
+
+        //If easy selected on UI choice do the following
+        if (n == 1)
+        {
+            basePoint = new Vector3(0.6f, transform.position.y, 0.6f);
+            difficulty = 0.05f;
+            speed = 3f;
+            pusherSpeed = 3f;
+            mode = "easy";
+           
+        }
+
+        //If intermediate selected on UI choice do the following
+        else if (n == 2)
+        {
+            basePoint = new Vector3(0.6f, transform.position.y, 3f);
+            difficulty = 0.07f;
+            speed = 5f;
+            pusherSpeed = 5f;
+            mode = "intermidate";
+        }
+
+        //If hard selected on UI choice do the following
+        else if (n == 3)
+        {
+            basePoint = new Vector3(0.6f, transform.position.y, 6f);
+            difficulty = 1f;
+            speed = 7f;
+            pusherSpeed = 7f;
+            mode = "hard";
         }
     }
 

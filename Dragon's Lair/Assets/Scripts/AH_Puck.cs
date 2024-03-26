@@ -8,7 +8,7 @@ public class AH_Puck : MonoBehaviour
     public AH_ScoreManager scoreManager;
     public AH_PlayerController playerController;
 
-    public float pSpeed;
+    public float speed;
 
     public float minDir = 0.5f;
 
@@ -23,6 +23,8 @@ public class AH_Puck : MonoBehaviour
     {
         this.rb = GetComponent<Rigidbody>();
         this.direction = new Vector3(0.5f, 0f, 0.5f);
+
+        speed = playerController.speed;
 
         StartCoroutine(Launch());
         
@@ -61,22 +63,23 @@ public class AH_Puck : MonoBehaviour
     // FixedUpdated is caled on every frame
     void FixedUpdate()
     {
-        this.rb.MovePosition(this.rb.position + pSpeed * Time.fixedDeltaTime * direction);
+        this.rb.MovePosition(this.rb.position + speed * Time.fixedDeltaTime * direction);
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("AH_Wall"))
         {
-            direction.x = -direction.x; 
+            direction.x = -direction.x;
+            //GetComponent<BoxCollider>.
         }
 
-        if (other.CompareTag("AH_Wall2"))
+        else if (other.CompareTag("AH_Wall2"))
         {
             direction.z = -direction.z;
         }
 
-        if (other.CompareTag("AH_Player"))
+        else if (other.CompareTag("AH_Player"))
         {
             //direction.z = -direction.z;
             Vector3 newDirection = (transform.position - other.transform.position).normalized;
@@ -87,7 +90,7 @@ public class AH_Puck : MonoBehaviour
             direction = newDirection;
         }
 
-        if (other.CompareTag("AH_AI"))
+        else if (other.CompareTag("AH_AI"))
         {
             //direction.z = -direction.z;
             Vector3 newDirection = (transform.position - other.transform.position).normalized;
@@ -98,7 +101,7 @@ public class AH_Puck : MonoBehaviour
             direction = newDirection;
         }
 
-        if (other.CompareTag("AH_PlayerGoal"))
+        else if (other.CompareTag("AH_PlayerGoal"))
         {
             scoreManager.PlayerGoal();
             
@@ -106,7 +109,7 @@ public class AH_Puck : MonoBehaviour
             StartCoroutine(Launch());
         }
 
-        if (other.CompareTag("AH_AIGoal"))
+        else if (other.CompareTag("AH_AIGoal"))
         {
             scoreManager.AIGoal();
             
