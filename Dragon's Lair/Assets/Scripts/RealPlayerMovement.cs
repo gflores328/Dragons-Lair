@@ -123,7 +123,7 @@ public class RealPlayerMovement : MonoBehaviour
         
         characterController.Move(targetVelocity * Time.deltaTime);
 
-        footStep.enabled = true;
+        //footStep.enabled = true;
 
        
         
