@@ -204,6 +204,10 @@ public class Interact : MonoBehaviour
     // Everytime this script is called it checks which enem type is selected and will run differently according to that
     public void Interacted()
     {
+
+        AudioClip audioClip = dialogueManager.GetComponent<DialogueManager>().GetAudioSource().clip;
+        dialogueManager.GetComponent<DialogueManager>().GetAudioSource().PlayOneShot(audioClip);
+
         //Cursor.lockState = CursorLockMode.None;
         // This if is multi purpose and will run if interaction type is inspect or if hasItemNeeded is false 
         if (interactionType == InteractionType.inspect || !hasItemNeeded || !correctTrigger)

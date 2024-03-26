@@ -59,14 +59,20 @@ public class GameState : MonoBehaviour
         if (Input.GetKeyDown("1"))
         {
             storyState = state.DDRComplete;
+            firstTimeLoad = false;
+            playerPosition = new Vector3(26.601f, 0.025f, 31.94f);
         }
         if (Input.GetKeyDown("2"))
         {
             storyState = state.Level1Complete;
+            firstTimeLoad = false;
+            playerPosition = new Vector3(26.601f, 0.025f, 31.94f);
         }
         if (Input.GetKeyDown("3"))
         {
             storyState = state.playSpaceGame;
+            firstTimeLoad = false;
+            playerPosition = new Vector3(26.601f, 0.025f, 31.94f);
         }
     }
 

@@ -18,8 +18,14 @@ public class PlayerPosition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         // gameState is set to find GameState
         gameState = GameObject.Find("GameState");
+
+        if (gameState.GetComponent<GameState>().storyState == GameState.state.newGame)
+        {
+            gameState.GetComponent<GameState>().SetPlayerPosition(gameObject.transform.position);
+        }
 
         // If firstTimeLoad is false
         if (!gameState.GetComponent<GameState>().GetFirstTimeLoad())
