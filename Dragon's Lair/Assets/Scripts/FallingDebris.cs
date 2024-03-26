@@ -20,13 +20,12 @@ public class FallingDebris : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            // Player take damage
+            collision.gameObject.GetComponent<ChibiPlayerMovement>().takeDamage(1);
 
             Destroy(gameObject);
         }
         if (collision.gameObject.tag == "Enemy")
         {
-            // Player take damage
 
             Destroy(gameObject);
         }

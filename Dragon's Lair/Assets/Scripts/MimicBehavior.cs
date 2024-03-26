@@ -208,4 +208,12 @@ public class MimicBehavior : Enemy
     {
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+        }
+    }
 }

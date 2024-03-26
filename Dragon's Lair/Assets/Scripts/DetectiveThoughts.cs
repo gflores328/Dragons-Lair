@@ -56,6 +56,9 @@ public class DetectiveThoughts : MonoBehaviour
     // A function that starts the dialogue when called
     public void StartThinking(DialogueWithName dialogue)
     {
+        AudioClip audioClip = dialogueManager.GetComponent<DialogueManager>().GetAudioSource().clip;
+        dialogueManager.GetComponent<DialogueManager>().GetAudioSource().PlayOneShot(audioClip);
+
         currentDialogue = dialogue;
         dialogueManager.GetComponent<DialogueManager>().StartDialogue(currentDialogue.dialogueArray[currentLine]);
         lostInThought = true;
@@ -66,6 +69,9 @@ public class DetectiveThoughts : MonoBehaviour
 
     public void Interact()
     {
+        AudioClip audioClip = dialogueManager.GetComponent<DialogueManager>().GetAudioSource().clip;
+        dialogueManager.GetComponent<DialogueManager>().GetAudioSource().PlayOneShot(audioClip);
+
         if (currentLine < currentDialogue.dialogueArray.Length)
         {
             // Time scale is set to 0 when interact is run
