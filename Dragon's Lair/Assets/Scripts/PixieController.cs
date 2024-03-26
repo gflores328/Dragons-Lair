@@ -19,11 +19,17 @@ public class PixieController : Enemy
     [Tooltip("A reference to the player. Used as a target for the pixie to move towards.")]
     public GameObject playerToChase;
 
+    private bool isHidden; //Keeps track of the pixie's visibility
+
     // Start is called before the first frame update
     void Start()
     {
         //Set the player reference to null so the pixie has nothing to track
         playerToChase = null;
+        //The pixie is invisible before it sees the player
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //Make the pixie invisible
+        isHidden = true;
     }
 
     // Update is called once per frame
@@ -32,6 +38,14 @@ public class PixieController : Enemy
         //If there is a player to track, begin moving towards the player
         if (playerToChase != null)
         {
+            //Make the pixie visible if not already
+            if (!isHidden)
+            {
+                gameObject.GetComponent<MeshRenderer>().enabled = true;
+                isHidden = false;
+                //Sparkle effect here?
+            }
+
             //Stay a certain distance away from the player and begin firing projectiles
             if (Vector3.Distance(transform.position, playerToChase.transform.position) > 3f)
             {
