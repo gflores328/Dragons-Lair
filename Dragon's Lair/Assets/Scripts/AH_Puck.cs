@@ -7,6 +7,7 @@ public class AH_Puck : MonoBehaviour
 {
     public AH_ScoreManager scoreManager;
     public AH_PlayerController playerController;
+    public AH_SFX sfx;
 
     public float speed;
 
@@ -57,7 +58,7 @@ public class AH_Puck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.position += direction * speed * Time.deltaTime; //alternate to movement in fixed update
+        
     }
 
     // FixedUpdated is caled on every frame
@@ -71,7 +72,7 @@ public class AH_Puck : MonoBehaviour
         if (other.CompareTag("AH_Wall"))
         {
             direction.x = -direction.x;
-            //GetComponent<BoxCollider>.
+            
         }
 
         else if (other.CompareTag("AH_Wall2"))
@@ -82,6 +83,7 @@ public class AH_Puck : MonoBehaviour
         else if (other.CompareTag("AH_Player"))
         {
             //direction.z = -direction.z;
+            sfx.PlaySmack();
             Vector3 newDirection = (transform.position - other.transform.position).normalized;
 
             newDirection.x = Mathf.Sign(newDirection.x) * Mathf.Max(Mathf.Abs(newDirection.x), this.minDir);
@@ -93,6 +95,7 @@ public class AH_Puck : MonoBehaviour
         else if (other.CompareTag("AH_AI"))
         {
             //direction.z = -direction.z;
+            sfx.PlaySmack();
             Vector3 newDirection = (transform.position - other.transform.position).normalized;
 
             newDirection.x = Mathf.Sign(newDirection.x) * Mathf.Max(Mathf.Abs(newDirection.x), this.minDir);
@@ -103,6 +106,7 @@ public class AH_Puck : MonoBehaviour
 
         else if (other.CompareTag("AH_PlayerGoal"))
         {
+            sfx.PlayGoalHorn();
             scoreManager.PlayerGoal();
             
             playerStart = false;
@@ -111,6 +115,7 @@ public class AH_Puck : MonoBehaviour
 
         else if (other.CompareTag("AH_AIGoal"))
         {
+            sfx.PlayGoalHorn();
             scoreManager.AIGoal();
             
             playerStart = true;

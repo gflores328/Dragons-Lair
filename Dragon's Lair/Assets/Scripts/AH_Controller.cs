@@ -9,6 +9,8 @@ public class AH_PlayerController : MonoBehaviour
 
     public AH_ScoreManager scoreManager;
 
+    public AH_SFX sfx;
+
     public static AH_Puck puckScript; // puck script to control puck movements
 
     [SerializeField] private Camera mainCamera; //main camera variable
@@ -110,7 +112,6 @@ public class AH_PlayerController : MonoBehaviour
 
         Vector3 newPos = transform.position;
         newPos.x = Mathf.Lerp(transform.position.x, puck.position.x, difficulty);
-        //newPos.z = Mathf.Lerp(transform.position.z, puck.position.z, difficulty);
 
         transform.position = newPos;
 
@@ -121,6 +122,7 @@ public class AH_PlayerController : MonoBehaviour
     {
         if (other.CompareTag("AH_Wall"))
         {
+           
             Vector3 newDirection = (transform.position - other.transform.position).normalized;
 
             newDirection.x = Mathf.Sign(newDirection.x) * Mathf.Max(Mathf.Abs(newDirection.x), this.minDir);
@@ -131,6 +133,7 @@ public class AH_PlayerController : MonoBehaviour
 
         if (other.CompareTag("AH_Wall2"))
         {
+           
             Vector3 newDirection = (transform.position - other.transform.position).normalized;
 
             newDirection.x = Mathf.Sign(newDirection.x) * Mathf.Max(Mathf.Abs(newDirection.x), this.minDir);
