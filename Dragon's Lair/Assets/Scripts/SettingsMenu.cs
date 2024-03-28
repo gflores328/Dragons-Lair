@@ -7,7 +7,6 @@
  * TUTORIAL FOLLOWED: "SETTINGS MENU in Unity" https://www.youtube.com/watch?v=YOaYQrN1oYQ
  * 
  * Handles functions of all the buttons, drop down boxes, and sliders seen in the options menu
-<<<<<<< HEAD
  * 
  * 
  * Updated by Jo Marie Leatherman on 3/27/2024
@@ -19,8 +18,6 @@
  * 
  * Used this tutorial:  https://www.youtube.com/watch?v=JRnNqQ2wbOU
  * 
-=======
->>>>>>> parent of 48c47f2 (Trying out a different way to do the resolution setting. Please test on yalls computers and see if it still has duplicated options or if it is filtering. Also check the full screen button and make sure sound works okay since I was moving some things around and want to make sure I didn't break any of the other parts of the settings menu - JML)
  */
 
 using System.Collections;
@@ -33,15 +30,15 @@ public class SettingsMenu : MonoBehaviour
 {
     //An audio mixer that recieves changes in volume
     public AudioMixer audioMixer;
+
     //A text mesh pro dropdown box.
     //Its options will be overwritten to match Unity's list based on the computer that is running the game
     public TMPro.TMP_Dropdown resolutionDropdown;
+
     //A slider that alters the master volume
     public Slider volumeSlider;
 
     public GameObject backButton; // The reference to the back button so the controller knows to be selected on it when it first loads in;
-
-
 
     //A float for storing the volume
     float volume;
@@ -59,17 +56,26 @@ public class SettingsMenu : MonoBehaviour
         
     }
 
+    //Controls if the screen is full screen or windowed mode
     public void GetFullScreen(bool _fullscreen)
     {
         Screen.fullScreen = _fullscreen;
     }
 
-public void SetQuality(int qualityIndex)
+    /*
+    * Controls the quality of the graphics based on the given quality index
+    * A list of quality options can be found at Edit > Project Settings > Quality
+    * 
+    * The list of quality options found on the dropdown box is NOT directly connected to the options found in the project settings
+    * Any adjustment to the options in project settings will have to be manually adjusted on the dropdown box
+    */
+
+    public void SetQuality(int qualityIndex)
     {
       QualitySettings.SetQualityLevel(qualityIndex);
     }
 
-    //Sets the volume of a specific chanel in the attached audio mixer equal to the given float value
+    //Sets the volume of a specific channel in the attached audio mixer equal to the given float value
     public void SetVolume(float volume)
     {
          //If the volume slider is at its minimum value, set the audio mixer to -80 db to properly mute the volume
@@ -98,6 +104,7 @@ public void SetQuality(int qualityIndex)
     {
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(backButton);
     }
+
     //This function is run when the scene starts
     //Initalizes the options in the 'resolutionDropdown' dropdown box and the position of the volume slider
     private void Start()
@@ -106,8 +113,10 @@ public void SetQuality(int qualityIndex)
 
         //Gets the list of resolutions supported by the current monitor
         resolutions = Screen.resolutions;
+
         //A list of screen resolution options saved as strings
         List<string> options = new List<string>();
+
         //Clears the placeholder options held by the attached dropdown box
         resolutionDropdown.ClearOptions();
 
@@ -147,9 +156,6 @@ public void SetQuality(int qualityIndex)
         audioMixer.GetFloat("Master", out volume);
         //Set the default slider value to the saved volume value
         volumeSlider.value = volume;
-
-
-
     }
 
     //Updates the current resolution of the game window based on the given resolution index
@@ -166,17 +172,7 @@ public void SetQuality(int qualityIndex)
     {
         Screen.fullScreen = isFullscreen;
     }
-
-    /*
-     * Controls the quality of the graphics based on the given quality index
-     * A list of quality options can be found at Edit > Project Settings > Quality
-     * 
-     * The list of quality options found on the dropdown box is NOT directly connected to the options found in the project settings
-     * Any adjustment to the options in project settings will have to be manually adjusted on the dropdown box
-     */
-
-    //Sets the volume of a specific chanel in the attached audio mixer equal to the given float value
-    
+      
 }
     
 
