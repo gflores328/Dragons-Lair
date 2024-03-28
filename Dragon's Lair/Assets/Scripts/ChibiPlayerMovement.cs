@@ -46,7 +46,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     public float maxJumpHeight =1.0f; // The max height that the jump will go
     public float maxJumpTime = 0.5f; // Maximum time the jump button can be held to reach maximum jump height
     private float coyoteTime = 0.2f; // How long the player will be able to jump after leaving the ground
-    private float jumpTimer = 0f; // Timer to track how long the jump button has been held
+    //private float jumpTimer = 0f; // Timer to track how long the jump button has been held
     private float coyoteTimeCounter; // The counter that will hold the coyote time current time
     private bool isJumping; // a bool to know if the player is jumping currently
     private bool isJumpingPressed = false; // a bool to know if the player has pressed the jump button

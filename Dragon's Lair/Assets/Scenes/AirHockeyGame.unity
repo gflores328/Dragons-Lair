@@ -387,12 +387,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31768364}
   m_CullTransparentMesh: 1
---- !u!1 &33646172 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 868244516429710629, guid: ec3222cc764cb42948e91a914b19bc15,
-    type: 3}
-  m_PrefabInstance: {fileID: 1359677540}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &79417741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,11 +3684,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Quit
       objectReference: {fileID: 0}
-    - target: {fileID: 1640889100600221601, guid: ec3222cc764cb42948e91a914b19bc15,
-        type: 3}
-      propertyPath: backButton
-      value: 
-      objectReference: {fileID: 33646172}
     - target: {fileID: 1727334834951108869, guid: ec3222cc764cb42948e91a914b19bc15,
         type: 3}
       propertyPath: m_IsActive
@@ -3803,7 +3792,7 @@ PrefabInstance:
     - target: {fileID: 3584572100275365977, guid: ec3222cc764cb42948e91a914b19bc15,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLevelbyName
+      value: LoadSceneAsync
       objectReference: {fileID: 0}
     - target: {fileID: 3889382324710303315, guid: ec3222cc764cb42948e91a914b19bc15,
         type: 3}
