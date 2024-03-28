@@ -18,7 +18,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     public static int jumpsCounter; // A int variable that will hold how many jumps the player currently has
     public LayerMask groundLayer; // A layermask that holds the ground layer
     public float groundRayLength = 1f; // the length of the ray that will check if the player is grounded
-    
+    public Animator animator;
     private PlayerInput playerInput; // A private variable that is meant to grab the PlayerInput component that is attached to the player.
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
     private InputAction jumpAction; // A private variable that is meant to hold the jump action 
@@ -189,8 +189,9 @@ public class ChibiPlayerMovement : MonoBehaviour
             handleJump(); // The function that handles the jumping of the player
         }
 
-    void ChibiMovePlayer() // Chibi move player function that moves and flips the player
+    void ChibiMovePlayer()
     {
+        
         Vector2 direction = walkAction.ReadValue<Vector2>(); // gets the value of the walk action and assigns it to the direction
 
         // Determine movement direction based on the isAimingRight variable
@@ -204,7 +205,19 @@ public class ChibiPlayerMovement : MonoBehaviour
 
         // Apply the movement
         playerRB.MovePosition(transform.position + moveDirection * Time.deltaTime * playerSpeedMultiplier);
-        if(armRotation.gunRotationWithMouse)
+
+        // Check if the player is not moving (velocity is zero)
+        if (Mathf.Approximately(direction.magnitude, 0f))
+        {
+            animator.SetBool("isWalking", false); // Set isWalking parameter to false
+        }
+        else
+        {
+            animator.SetBool("isWalking", true); // Set isWalking parameter to true
+        }
+
+
+        if (armRotation.gunRotationWithMouse)
         {
             if (cyberMouseHandler.isAimingRight)
             {
@@ -215,21 +228,17 @@ public class ChibiPlayerMovement : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
             }
         }
-
         else
         {
             if (direction.x > 0) // Moving right
             {
                 isFacingRight = true;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-
             }
-
             else if (direction.x < 0) // Moving left
             {
                 isFacingRight = false;
                 transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
-                
             }
             if (direction.x < 0) // If moving left
             {
@@ -238,8 +247,8 @@ public class ChibiPlayerMovement : MonoBehaviour
             }
         }
         // Flip the character based on the isAimingRight variable
-        
     }
+
 
 
 
