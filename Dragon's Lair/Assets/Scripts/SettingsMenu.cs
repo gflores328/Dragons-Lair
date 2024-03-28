@@ -41,7 +41,7 @@ public class SettingsMenu : MonoBehaviour
 
     public GameObject backButton; // The reference to the back button so the controller knows to be selected on it when it first loads in;
 
-<<<<<<< HEAD
+
 
     //A float for storing the volume
     float volume;
@@ -65,22 +65,22 @@ public class SettingsMenu : MonoBehaviour
     }
 
 public void SetQuality(int qualityIndex)
-{
+    {
       QualitySettings.SetQualityLevel(qualityIndex);
-}
+    }
 
-//Sets the volume of a specific chanel in the attached audio mixer equal to the given float value
-public void SetVolume(float volume)
-{
-//If the volume slider is at its minimum value, set the audio mixer to -80 db to properly mute the volume
-     if (volume == volumeSlider.minValue)
-     {
-          audioMixer.SetFloat("Master", -80);
-     }
-     else
-     {
-           audioMixer.SetFloat("Master", volume);
-     }
+    //Sets the volume of a specific chanel in the attached audio mixer equal to the given float value
+    public void SetVolume(float volume)
+    {
+         //If the volume slider is at its minimum value, set the audio mixer to -80 db to properly mute the volume
+        if (volume == volumeSlider.minValue)
+        {
+            audioMixer.SetFloat("Master", -80);
+        }
+        else
+        {
+            audioMixer.SetFloat("Master", volume);
+        }
 
       //Update the default slider position to match the current audio mixer volume
 
@@ -91,15 +91,7 @@ public void SetVolume(float volume)
            volumeSlider.value = volume;
       }
 
-    
-}
 
-
-    
-
-    
-
-=======
     //An array that stores a list of resolutions
     private Resolution[] resolutions;
     private void Awake()
@@ -118,7 +110,7 @@ public void SetVolume(float volume)
         List<string> options = new List<string>();
         //Clears the placeholder options held by the attached dropdown box
         resolutionDropdown.ClearOptions();
-        
+
         //Convert all of the supported screen resolutions to strings for displaying in the attached dropdown box
 
         //Used to automatically set dropdown box to the current screen resolution (once it's options have been populated)
@@ -156,8 +148,8 @@ public void SetVolume(float volume)
         //Set the default slider value to the saved volume value
         volumeSlider.value = volume;
 
-        
-        
+
+
     }
 
     //Updates the current resolution of the game window based on the given resolution index
@@ -182,23 +174,17 @@ public void SetVolume(float volume)
      * The list of quality options found on the dropdown box is NOT directly connected to the options found in the project settings
      * Any adjustment to the options in project settings will have to be manually adjusted on the dropdown box
      */
-    public void SetQuality(int qualityIndex)
-    {
-        QualitySettings.SetQualityLevel(qualityIndex);
-    }
 
     //Sets the volume of a specific chanel in the attached audio mixer equal to the given float value
-    public void SetVolume(float volume)
-    {
-        //If the volume slider is at its minimum value, set the audio mixer to -80 db to properly mute the volume
-        if (volume == volumeSlider.minValue)
-        {
-            audioMixer.SetFloat("Master", -80);
-        }
-        else
-        {
-            audioMixer.SetFloat("Master", volume);
-        }
-    }
+    
 }
->>>>>>> parent of 48c47f2 (Trying out a different way to do the resolution setting. Please test on yalls computers and see if it still has duplicated options or if it is filtering. Also check the full screen button and make sure sound works okay since I was moving some things around and want to make sure I didn't break any of the other parts of the settings menu - JML)
+    
+
+
+
+    
+
+    
+
+
+    
