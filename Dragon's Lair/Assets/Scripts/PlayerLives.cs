@@ -19,27 +19,46 @@ public class PlayerLives : MonoBehaviour
 
     public AudioSource playerDeathAudio; // Audio Source
 
+    [SerializeField] protected float health = 50; // a float that can only be accessed by children of this class
+
+    public virtual void TakeDamage(float dmgAmount) // The function that children of the class will be able to access and change
+    {
+        health -= dmgAmount; // Subtract damage amount from the health
+        Debug.Log($"Player took {dmgAmount} damage. Current health: {health}");
+        if (health <= 0) // if health hits zero
+        {
+            Die();
+
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         // If Player Makes Contact with the Enemy
         if (collision.collider.gameObject.tag == "Enemy")
         {
-            Destroy(collision.collider.gameObject); // Alien is Destroyed
-            playerDeathAudio.Play();
-            lives -= 1; // Remove 1 Life
-            Destroy(gameObject); // Player is Destroyed
-            
-            if (lives > 0) // If Player has Extra Lives
-            {
-                Debug.Log("Level Reset");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Level Reset
-            }
+            Die();
+        }
+    }
 
-            else if(lives <= 0) // If Player Runs Out of Lives
-            {
-                OnPlayerDeath?.Invoke(); // Trigger Game Over
-                lives = 3;
-            }
+    protected virtual void Die() // The function that will kill the enemy 
+
+    {
+        Debug.Log("Player Dead");
+        playerDeathAudio.Play();
+        lives -= 1; // Remove 1 Life
+        Destroy(gameObject); // Destroy player object
+
+        if (lives > 0) // If Player has Extra Lives
+        {
+            Debug.Log("Level Reset");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Level Reset
+        }
+
+        else if (lives <= 0) // If Player Runs Out of Lives
+        {
+            OnPlayerDeath?.Invoke(); // Trigger Game Over
+            lives = 3;
         }
     }
 

@@ -14,16 +14,12 @@ public class Alien : MonoBehaviour
     
     [SerializeField] protected float health; // a float that can only be accessed by children of this class
 
-    //public GameObject score;
-    //public AudioSource deathAudio;
-
     public virtual void TakeDamage(float dmgAmount) // The function that children of the class will be able to access and change
     {
         health -= dmgAmount; // Subtract damage amount from the health
         Debug.Log($"Enemy took {dmgAmount} damage. Current health: {health}");
         if (health <= 0) // if health hits zero
         {
-            //deathAudio.Play(); // Plays sound when enemy dies
             Die(); // Kill enemy
         }
     }
@@ -32,9 +28,6 @@ public class Alien : MonoBehaviour
 
     {
         Debug.Log("Enemy Dead");
-        //deathAudio.Play();
-        //score.GetComponent<ScoreSystem>().scoreValue += 100;
-        //deathAudio.Play();
         Destroy(gameObject.transform.parent.gameObject); // Destroy enemy object
     }
 }
