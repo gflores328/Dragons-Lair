@@ -46,7 +46,7 @@ public class AsyncLoader : MonoBehaviour
             loadingScreen.SetActive(true);
             sceneLoaded = true;
 
-            if (gameState.GetComponent<GameState>().GetFirstTimeLoad() && gameState != null) 
+            if (gameState != null && gameState.GetComponent<GameState>().GetFirstTimeLoad()) 
             {
                 sceneToLoad = "IntroCutscene";
                 gameState.GetComponent<GameState>().SetFirstTimeLoad(false);
@@ -59,6 +59,12 @@ public class AsyncLoader : MonoBehaviour
             }
 
             if (scene.name == "LevelDesignCyber" && sceneToLoad == "LevelDesignRealLife")
+            {
+                gameState.GetComponent<GameState>().storyState = GameState.state.Level1Complete;
+                gameState.GetComponent<GameState>().objective = "Talk to the manager about the machine";
+            }
+
+            if (scene.name == "LevelDesignForest2" && sceneToLoad == "LevelDesignRealLife")
             {
                 gameState.GetComponent<GameState>().storyState = GameState.state.Level1Complete;
                 gameState.GetComponent<GameState>().objective = "Talk to the manager about the machine";
