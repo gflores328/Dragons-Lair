@@ -97,19 +97,23 @@ public class ChibiPlayerMovement : MonoBehaviour
     void Awake()
 
     {
-        playerHealth = maxHealth; // Set the player's health to the max health at the start
+        
         playerRB = GetComponent<Rigidbody>(); // Gets the rigid body of the player
+        playerOneWay = GetComponent<PlayerOneWay>(); // Gets the player one way script from the player
+        cyberMouseHandler = GetComponent<CyberMouseHandler>(); // Gets the cyber mouse handler 
+        gameManager = FindObjectOfType<GameManager>(); // Finds the game manger in the scene
         playerInput = GetComponent<PlayerInput>(); // Gets the playerinput component
+        armRotation = FindObjectOfType<ArmRotation>();
+        playerHealth = maxHealth; // Set the player's health to the max health at the start
         walkAction = playerInput.actions.FindAction("Walk"); // binds the walk action to the walk action that holds the inputs
         jumpAction = playerInput.actions.FindAction("Jump"); // binds the jump to the jump buttons
         jumpAction.started += OnJump; // When action is performed it is assigned to the onJump function
         jumpAction.canceled += OnJump; // When action is stop it is assigned to the on jumpfunction
-        playerOneWay = GetComponent<PlayerOneWay>(); // Gets the player one way script from the player
-        cyberMouseHandler = GetComponent<CyberMouseHandler>(); // Gets the cyber mouse handler 
-        armRotation = FindObjectOfType<ArmRotation>();
+       
+        
         pauseAction = playerInput.actions.FindAction("Pause"); // Assigns the pause action to the pause action from the chibi movement
         pauseAction.performed += Pause; // Assigns the on performed pause action to the pause function 
-        gameManager = FindObjectOfType<GameManager>(); // Finds the game manger in the scene
+        
         freeAimAction = playerInput.actions.FindAction("FreeAim"); // Finds the freeaim action
         freeAimLeftAction = playerInput.actions.FindAction("FreeAimLeft"); // 
         freeAimRightAction = playerInput.actions.FindAction("FreeAimRight");
