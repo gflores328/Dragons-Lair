@@ -27,8 +27,8 @@ public class AH_UImgr : MonoBehaviour
     void Update()
     {
 
-        //uses the p button to pause and unpause the game
-        if (Input.GetKeyDown(KeyCode.P))
+        //uses the escape button to pause and unpause the game
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Time.timeScale == 1)
             {
