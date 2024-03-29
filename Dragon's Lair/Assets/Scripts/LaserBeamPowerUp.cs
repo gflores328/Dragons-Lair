@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class LaserBeamPowerUp : Powerup
 {
-   private GunController gunController;
+   private GunController gunController; // A private gun controller that will grab the gun controller from the player
    
    protected override void Awake()
    {
-        base.Awake(); 
-        gunController = FindObjectOfType<GunController>();
+        base.Awake(); // calles the power up base awake function
+        gunController = FindObjectOfType<GunController>(); //  find the guncontroller from player and assign it to this variable
 
    }
 
-   protected override void OnTriggerEnter(Collider other)
+   protected override void OnTriggerEnter(Collider other) // override base ontrigger enter 
    {
-        base.OnTriggerEnter(other);
+        base.OnTriggerEnter(other); // call power up ontrigger enter
         if(other.gameObject.CompareTag("Player"))
         {
-            gunController.setGunToLaser();
+            gunController.setGunToLaser(); // Calls the gun controller set gun to laser function which gives the player a laserbeam
         }
    }
 }

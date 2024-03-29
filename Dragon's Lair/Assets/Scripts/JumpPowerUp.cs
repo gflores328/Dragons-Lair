@@ -5,22 +5,22 @@ using UnityEngine;
 public class JumpPowerUp : Powerup
 {
 
-    public float initialJumpVelocitySetter = 15f;
+    public float initialJumpVelocitySetter = 15f; // what the new jump velocity should be set to
 
-    private ChibiPlayerMovement chibiPlayerMovement;
+    private ChibiPlayerMovement chibiPlayerMovement; // Grab the players movement script
 
     void Awake()
     {
-        base.Awake();
-        chibiPlayerMovement = FindObjectOfType<ChibiPlayerMovement>();
+        base.Awake(); // Call power up awake function 
+        chibiPlayerMovement = FindObjectOfType<ChibiPlayerMovement>(); // Find the players movement script in the scene
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
+        base.OnTriggerEnter(other); // call base ontrigger enter function
         if(other.gameObject.CompareTag("Player"))
         {
-            chibiPlayerMovement.setInitalJump(initialJumpVelocitySetter);
+            chibiPlayerMovement.setInitalJump(initialJumpVelocitySetter); // Call the set jump function from player and set jump to the setter in this script
         }
     }
 }

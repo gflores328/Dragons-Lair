@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class FireRatePowerup : Powerup
 {
-    public float fireRateSetter;
+    public float fireRateSetter; // Determines how fast the new fire rate will be 
 
-    private GunController gunController;
+    private GunController gunController; // Grabs the gun controller from the player
 
     protected override void Awake()
     {
