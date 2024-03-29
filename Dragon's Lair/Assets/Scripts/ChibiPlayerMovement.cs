@@ -434,4 +434,9 @@ public class ChibiPlayerMovement : MonoBehaviour
     {
         playerRB.velocity = Vector3.zero;
     }
+
+    public void setInitalJump(float jumpSetter)
+    {
+        initialJumpVelocity = jumpSetter;
+    }
 }

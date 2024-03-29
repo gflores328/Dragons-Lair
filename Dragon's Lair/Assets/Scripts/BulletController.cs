@@ -11,8 +11,9 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float speed = 15; // Movement speed of the bullet (Default = 15)
-    public float damageAmount = 50;
+    [SerializeField] protected float speed = 15; // Movement speed of the bullet (Default = 15)
+
+    [SerializeField] protected float damageAmount = 50;
 
     private ParticleSystem part; // Particle System
     private List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>(); // For particle collision
@@ -26,7 +27,7 @@ public class BulletController : MonoBehaviour
     }
     
     // For when particles collide
-    private void OnParticleCollision(GameObject other)
+    public virtual void OnParticleCollision(GameObject other)
     {
         // If particle hits an enemy
         if (other.CompareTag("Enemy"))
@@ -48,7 +49,7 @@ public class BulletController : MonoBehaviour
     }
 
     // Affects the firing of the bullet
-    public void Fire(int shots)
+    public virtual void Fire(int shots)
     {
         gun.shotsFired++; // Raises counter for shots fired
         part.Emit(shots); // Fires bullet

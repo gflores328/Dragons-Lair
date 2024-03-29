@@ -1,11 +1,3 @@
-/*
- * Created by Carlos Martinez
- * 
- * This script contains the controller for the gun.
- * Manipulates many variables such as number of shots fired at once,
- * fire rate, and accuracy.
- */
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +5,13 @@ using UnityEngine.InputSystem;
 
 public class GunController : MonoBehaviour
 {
+    public bool isUsingBullet = true; // Indicates whether the gun is currently using bullets or not
     public int shots = 1; // Fires a number of bullets at once (Default = 1)
     public int shotsFired; // Counter for how many shots fired
     public InputActionReference fireAction; // Input action for shooting
     public BulletController bullet; // Bullet Controller
-
+    public LaserBeamController laserBeam; // Laser Beam Controller
+    
     public float fireRate; // Affects the firing rate of the gun
     public float fireRateCounter; // Counter for firing rate
 
@@ -31,6 +25,10 @@ public class GunController : MonoBehaviour
         // Calls Bullet Controller
         if (!bullet) bullet = GetComponentInChildren<BulletController>(); 
         if (bullet) bullet.gun = this;
+
+        // Calls Laser Beam Controller
+        if (!laserBeam) laserBeam = GetComponentInChildren<LaserBeamController>();
+        if (laserBeam) laserBeam.gun = this;
 
         // Initialize isFiring to false
         isFiring = false;
@@ -70,18 +68,32 @@ public class GunController : MonoBehaviour
             // Shoots if time passed is greater than or equal to the fire rate counter
             if (Time.time >= fireRateCounter)
             {
-                bullet.Fire(shots); // Shoots a bullet
+                if (isUsingBullet && bullet != null)
+                {
+                    
+                    bullet.Fire(shots); // Shoots a bullet
+                }
+                else if (!isUsingBullet && laserBeam != null)
+                {
+                    fireRate = 100f;
+                    laserBeam.StartFiring(); // Start firing the laser beam
+                }
                 fireRateCounter = Time.time + 1 / fireRate; // Affects fire rate counter
             }
 
             // Wait for the next frame
             yield return null;
         }
+        laserBeam.StopFiring();
     }
 
     public void setFireRate(float newFireRate)
-
     {
         fireRate = newFireRate;
+    }
+
+    public void setGunToLaser()
+    {
+        isUsingBullet = false;
     }
 }

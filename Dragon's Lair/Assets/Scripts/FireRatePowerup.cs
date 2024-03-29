@@ -1,48 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FireRatePowerup : MonoBehaviour
+public class FireRatePowerup : Powerup
 {
-    public float fireRateSetter; 
-    public GameObject powerUpDesc; 
-    public Renderer powerUpRenderer; // Reference to the renderer component
+    public float fireRateSetter;
 
-    private GunController gunController; 
-    private bool showDesc = false;
-    private float waitTime = 5f;
-    private Coroutine coroutine;
+    private GunController gunController;
 
-    void Awake()
+    protected override void Awake()
     {
-        gunController = FindObjectOfType<GunController>(); 
-        powerUpRenderer = GetComponent<Renderer>(); // Grab the renderer component
+        base.Awake(); // Call the base class Awake method
+        gunController = FindObjectOfType<GunController>(); // Find the GunController in the scene
     }
 
-    void Update()
+    protected override void OnTriggerEnter(Collider other)
     {
-        if (showDesc && coroutine == null)
-        {
-            powerUpDesc.SetActive(true);
-            coroutine = StartCoroutine(WaitAndDisable(waitTime));
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
+        base.OnTriggerEnter(other); // Call the base class OnTriggerEnter method
         if (other.gameObject.CompareTag("Player"))
-        {   
-            showDesc = true;
-            gunController.setFireRate(fireRateSetter);
-            powerUpRenderer.enabled = false; // Turn off the renderer when picked up
+        {
+            gunController?.setFireRate(fireRateSetter); // Set the fire rate of the gun the "?" is a C# key and will check if the object if not null before attempting to attach and will skip 
         }
-    }
-
-    private IEnumerator WaitAndDisable(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        showDesc = false;
-        powerUpDesc.SetActive(false);
-        Destroy(gameObject);
     }
 }
