@@ -36,6 +36,8 @@ public class KoboldController : Enemy
     public int edgeIterations = 4;
     public float edgeDistance = 0.5f;
 
+    public Material dissolveMaterial; // Reference to the dissolving material
+    public Renderer renderer;
 
     private bool isDead = false;
 
@@ -267,6 +269,24 @@ public class KoboldController : Enemy
         Stop();
         isDead = true;
         animator.SetTrigger("IS_Dead");
+        if (dissolveMaterial != null)
+        {
+            // Apply the dissolve material to the renderer of the game object
+            
+            if (renderer != null)
+            {
+                renderer.material = dissolveMaterial;
+            }
+            else
+            {
+                Debug.LogWarning("Renderer not found on Newt object.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Dissolve material not assigned to Newt.");
+        }
+
 
         // Disable the Capsule Collider
         CapsuleCollider collider = GetComponent<CapsuleCollider>();

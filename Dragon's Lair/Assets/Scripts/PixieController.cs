@@ -19,6 +19,9 @@ public class PixieController : Enemy
     [Tooltip("A reference to the player. Used as a target for the pixie to move towards.")]
     public GameObject playerToChase;
 
+    public Material dissolveMaterial; // Reference to the dissolving material
+    public Renderer renderer;
+
     private bool isHidden; //Keeps track of the pixie's visibility
 
     // Start is called before the first frame update
@@ -62,5 +65,29 @@ public class PixieController : Enemy
         {
             playerToChase.GetComponent<ChibiPlayerMovement>().takeDamage(1);
         }
+    }
+
+
+    protected override void Die()
+    {
+        
+        if (dissolveMaterial != null)
+        {
+            // Apply the dissolve material to the renderer of the game object
+            
+            if (renderer != null)
+            {
+                renderer.material = dissolveMaterial;
+            }
+            else
+            {
+                Debug.LogWarning("Renderer not found on Newt object.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Dissolve material not assigned to Newt.");
+        }
+        Destroy(gameObject, 1.5f);
     }
 }

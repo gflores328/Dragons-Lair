@@ -9,7 +9,7 @@ public class JumpPowerUp : Powerup
 
     private ChibiPlayerMovement chibiPlayerMovement; // Grab the players movement script
 
-    void Awake()
+    protected override void Awake()
     {
         base.Awake(); // Call power up awake function 
         chibiPlayerMovement = FindObjectOfType<ChibiPlayerMovement>(); // Find the players movement script in the scene
