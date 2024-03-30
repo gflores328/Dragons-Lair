@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7717131805791064729
+--- !u!1 &2662812336172985056
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6839813537239487134}
-  - component: {fileID: 8374294985674437550}
-  - component: {fileID: 2895526672960378899}
-  - component: {fileID: 3767005688881691218}
-  - component: {fileID: 8001605467758304373}
+  - component: {fileID: 6328279855558639605}
+  - component: {fileID: 8649722171575947511}
+  - component: {fileID: 6993238319734868080}
+  - component: {fileID: 193576437176257908}
+  - component: {fileID: 8071972251367608390}
+  - component: {fileID: 2920206413717011787}
   m_Layer: 0
-  m_Name: Mimic
+  m_Name: MimicPhaseOne
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6839813537239487134
+--- !u!4 &6328279855558639605
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7717131805791064729}
+  m_GameObject: {fileID: 2662812336172985056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 300.73, y: 30.73, z: -0.64}
-  m_LocalScale: {x: 4, y: 4, z: 4}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 129.69, y: 10.3, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 3206512413963837533}
+  - {fileID: 7635674642547885854}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!33 &8374294985674437550
+--- !u!33 &8649722171575947511
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7717131805791064729}
+  m_GameObject: {fileID: 2662812336172985056}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2895526672960378899
+--- !u!23 &6993238319734868080
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7717131805791064729}
+  m_GameObject: {fileID: 2662812336172985056}
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,13 +87,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3767005688881691218
+--- !u!65 &193576437176257908
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7717131805791064729}
+  m_GameObject: {fileID: 2662812336172985056}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -102,43 +103,91 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8001605467758304373
+--- !u!114 &8071972251367608390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7717131805791064729}
+  m_GameObject: {fileID: 2662812336172985056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e51dd9a4e74e44641b30ff22e4c1d336, type: 3}
+  m_Script: {fileID: 11500000, guid: 992de4172e560514cae6431311cd3e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 51
+  health: 50
   start: 0
   player: {fileID: 0}
-  movementSpeed: 10
+  exit: {fileID: 0}
   jumpSpeed: 20
   slamSpeed: 30
   leftBorder: {fileID: 0}
   rightBorder: {fileID: 0}
-  fallingDebris: {fileID: 6344922784770290818, guid: 4b016b2d18a670144932fb82869ae6c4,
-    type: 3}
-  fallingDebrisHeight: {fileID: 0}
-  splashDebris: {fileID: 0}
-  gameManager: {fileID: 0}
---- !u!1001 &3167556042855581622
+--- !u!114 &2920206413717011787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2662812336172985056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 4
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!1001 &7961771353013166325
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6839813537239487134}
+    m_TransformParent: {fileID: 6328279855558639605}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b4aa74c1b7581da4389bfc9b8bdb720b,
         type: 3}
@@ -215,9 +264,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4aa74c1b7581da4389bfc9b8bdb720b, type: 3}
---- !u!4 &3206512413963837533 stripped
+--- !u!4 &7635674642547885854 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b4aa74c1b7581da4389bfc9b8bdb720b,
     type: 3}
-  m_PrefabInstance: {fileID: 3167556042855581622}
+  m_PrefabInstance: {fileID: 7961771353013166325}
   m_PrefabAsset: {fileID: 0}
