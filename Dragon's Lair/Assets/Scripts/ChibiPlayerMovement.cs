@@ -277,9 +277,9 @@ public class ChibiPlayerMovement : MonoBehaviour
             {
                 isJumping = true;
                 playerRB.velocity = new Vector3(playerRB.velocity.x, initialJumpVelocity, 0);
-                Debug.Log(currExtraJumps);
+                //Debug.Log(currExtraJumps);
                 currExtraJumps--; // Decrement extra jumps if not grounded
-                Debug.Log(currExtraJumps);
+                //Debug.Log(currExtraJumps);
                 
             }
         }
