@@ -84,7 +84,7 @@ public class MimicPhaseOne : Enemy
             yield return null;
         }
 
-        GetComponent<CinemachineImpulseSource>().GenerateImpulse();
+        GetComponent<CinemachineImpulseSource>().GenerateImpulse(0.5f);
 
     }
 
