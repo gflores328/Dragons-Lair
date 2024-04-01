@@ -10,7 +10,10 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     #region Fields
+    [Header("What game is this instance of Game Manager in")]
 
+    public bool inRealLife = false;
+    public bool inCyber = false;
     
 
     
@@ -30,6 +33,11 @@ public class GameManager : MonoBehaviour
     private bool usingMouseRotation = true; // A bool variable that is changed in the game manager that informs the chibi arm movement if the player is using keyboard or mouse so you can toggle it on and off in settings
     [HideInInspector] public pauseState currentState; // A variable that is type of the enum created pause state
     
+
+    [Header("Mouse Images")]
+
+    public Texture2D targetTexture;
+    public Texture2D magGlassTexture;
     public enum pauseState // pauseState Enum that has paused or unpaused states
     {
         Paused,
@@ -47,7 +55,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
        
-
+       
         asyncLoader = GetComponent<AsyncLoader>();
         Time.timeScale = 1;
 
@@ -58,7 +66,19 @@ public class GameManager : MonoBehaviour
     {
         currentState = pauseState.Unpaused; // The Game should not start paused when loaded in
 
+        if(inRealLife && inCyber)
+        {
+            Debug.Log("inRealLife and InCyber cannot both be true fix it");
+        }
 
+        if(inRealLife)
+        {
+            Cursor.SetCursor(magGlassTexture, Vector2.zero, CursorMode.Auto);
+        }
+        else if(inCyber)
+        {
+            Cursor.SetCursor(targetTexture, Vector2.zero, CursorMode.Auto);
+        }
     }
 
     void Update()

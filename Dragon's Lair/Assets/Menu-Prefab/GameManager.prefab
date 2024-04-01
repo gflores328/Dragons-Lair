@@ -45,9 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7febc7264353946b295d7ebc7d6ee670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inRealLife: 0
+  inCyber: 0
   pauseMenu: {fileID: 0}
   resumeButton: {fileID: 0}
-  asyncLoader: {fileID: 2107398402100189534}
+  mainMenu: 0
+  currentState: 0
+  targetTexture: {fileID: 2800000, guid: fe3615d4a29068f408d408e4304063ce, type: 3}
+  magGlassTexture: {fileID: 2800000, guid: b26ebfebd47e0be4583cd08a9523b385, type: 3}
 --- !u!114 &2107398402100189534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,5 +68,6 @@ MonoBehaviour:
   sceneToLoad: MainMenu
   loadingText: {fileID: 0}
   spaceText: {fileID: 0}
+  controllerText: {fileID: 0}
   sliderBar: {fileID: 0}
   loadingScreen: {fileID: 0}
