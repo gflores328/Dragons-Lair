@@ -71,11 +71,11 @@ public class MimicPhaseTwo : Enemy
                     break;
 
                 case 2:
-                    if (directionFacing == Direction.right && transform.position.x + 10 > rightBorder.transform.position.x)
+                    if (directionFacing == Direction.right && !(transform.position.x + 10 > rightBorder.transform.position.x))
                     {
                         StartCoroutine(Lunge());
                     }
-                    else if (directionFacing == Direction.left && transform.position.x - 10 < leftBorder.transform.position.x)
+                    else if (directionFacing == Direction.left && !(transform.position.x - 10 < leftBorder.transform.position.x))
                     {
                         StartCoroutine(Lunge());
                     }
@@ -181,33 +181,39 @@ public class MimicPhaseTwo : Enemy
     // It takes a float and the value will be the x position that the object will jump to
     IEnumerator Jump (float xTarget)
     {
-
-        float yTarget = transform.position.y + 5;
+        Debug.Log("Here");
+        float yTarget = gameObject.transform.position.y + 5;
 
         // A vector 3 is created with the x and y targer
-        Vector3 targetPosition = new Vector3(xTarget, yTarget, transform.position.z);
+        Vector3 targetPosition = new Vector3(xTarget, yTarget, gameObject.transform.position.z);
 
         // Object Jumps
         // While the distance from the objcts current position and the targetPosition are greater than 0.01
-        while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
+        while (Vector3.Distance(gameObject.transform.position, targetPosition) > 0.01f)
         {
             // The object moves towards the target position at the speed of the jumpSpeed
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, jumpSpeed * Time.deltaTime);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPosition, jumpSpeed * Time.deltaTime);
             
-
+            
             // Wait for next frame
             yield return null;
+
+            Debug.Log("Makes it");
         }
+
+
+
+        Debug.Log("Makes it 2");
         // Waits for .5 seconds before running the code to slam down
         yield return new WaitForSeconds(.5f);
 
         // A new target position is set
-        yTarget = transform.position.y - 5;
+        yTarget = gameObject.transform.position.y - 5;
         targetPosition = new Vector3(xTarget, yTarget, transform.position.z);
 
         // Object Slams
         // While the distance from the objcts current position and the targetPosition are greater than 0.01
-        while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
+        while (Vector3.Distance(gameObject.transform.position, targetPosition) > 0.01f)
         {
             // The object moves towards the target position at the speed of the slamSpeed
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, slamSpeed * Time.deltaTime);
@@ -216,7 +222,6 @@ public class MimicPhaseTwo : Enemy
             yield return null;
         }
         GetComponent<CinemachineImpulseSource>().GenerateImpulse(0.5f);
-
     }
 
     // This function when run will check for whichever border it is closest to and will jump to that position
@@ -253,23 +258,23 @@ public class MimicPhaseTwo : Enemy
     IEnumerator Lunge()
     {
         takingAction = true;
-        GetComponent<Animator>().SetTrigger("Lunge");
+        GetComponentInChildren<Animator>().SetTrigger("Lunge");
         float xTarget;
         Vector3 targetPosition;
 
         if (directionFacing == Direction.right)
         {
-            xTarget = transform.position.x + 8;
+            xTarget = transform.position.x + 10;
             targetPosition = new Vector3(xTarget, transform.position.y, transform.position.z);
         }
         else
         {
-            xTarget = transform.position.x - 8;
+            xTarget = transform.position.x - 10;
             targetPosition = new Vector3(xTarget, transform.position.y, transform.position.z);
         }
         
 
-        yield return new WaitUntil(() => startLunge);
+        //yield return new WaitUntil(() => startLunge);
 
         while (transform.position.x != xTarget)
         {
@@ -277,7 +282,7 @@ public class MimicPhaseTwo : Enemy
             yield return null;
         }
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
 
         startLunge = false;
@@ -303,7 +308,14 @@ public class MimicPhaseTwo : Enemy
             Vector3 spawn = new Vector3(splashDebrisSpawn.transform.position.x, splashDebrisSpawn.transform.position.y, transform.position.z);
             GameObject clone = Instantiate(splashDebris, spawn, Quaternion.identity);
 
-            clone.GetComponent<Rigidbody>().velocity = ((Vector3.right * (i * 3)) + (Vector3.up * 9));
+            if (directionFacing == Direction.right)
+            {
+                clone.GetComponent<Rigidbody>().velocity = ((Vector3.right * (i * 3)) + (Vector3.up * 9));
+            }
+            else if (directionFacing == Direction.left)
+            {
+                clone.GetComponent<Rigidbody>().velocity = ((Vector3.left * (i * 3)) + (Vector3.up * 9));
+            }
         }
     }
 
