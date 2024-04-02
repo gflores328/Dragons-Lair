@@ -22,7 +22,7 @@ public class SpaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (score.text == "Score: 2500")
+        if (score.text == "Score: 500")
         {
 
             winScreen.SetActive(true);
