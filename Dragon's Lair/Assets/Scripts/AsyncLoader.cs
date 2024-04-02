@@ -58,16 +58,21 @@ public class AsyncLoader : MonoBehaviour
                 gameState.GetComponent<GameState>().SetPlayerPosition(GameObject.Find("Player").transform.position);
             }
 
-            if (scene.name == "LevelDesignCyber" && sceneToLoad == "LevelDesignRealLife")
+            if (scene.name == "ForestTwo" && sceneToLoad == "LevelDesignRealLife")
             {
                 gameState.GetComponent<GameState>().storyState = GameState.state.Level1Complete;
                 gameState.GetComponent<GameState>().objective = "Talk to the manager about the machine";
             }
 
-            if (scene.name == "LevelDesignForest2" && sceneToLoad == "LevelDesignRealLife")
+            if (scene.name == "CaveTwo" && sceneToLoad == "LevelDesignRealLife")
             {
-                gameState.GetComponent<GameState>().storyState = GameState.state.Level1Complete;
-                gameState.GetComponent<GameState>().objective = "Talk to the manager about the machine";
+                gameState.GetComponent<GameState>().objective = "End of Demo";
+            }
+
+            if (sceneToLoad == "WinScreen")
+            {
+                gameState.GetComponent<GameState>().storyState = GameState.state.Level2Complete;
+                gameState.GetComponent<GameState>().objective = "End of Demo";
             }
 
             StartCoroutine(LoadNewScene(sceneToLoad));
