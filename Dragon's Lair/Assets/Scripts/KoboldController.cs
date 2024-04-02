@@ -7,7 +7,6 @@
  * It is currently WIP.
  * 
  * To be added:
- * - Health
  * - Attack
  * 
  */
@@ -35,6 +34,13 @@ public class KoboldController : Enemy
     public float meshResolution = 1f;
     public int edgeIterations = 4;
     public float edgeDistance = 0.5f;
+
+    public float attackRange = 2f; // Range within which the enemy can attack
+    public float attackDamage = 10f; // Damage inflicted by the enemy's attack
+    public float attackCooldown = 2f; // Cooldown between attacks
+
+    private bool isAttacking = false; // Flag to check if the enemy is currently attacking
+    private float nextAttackTime = 0f; // Time when the enemy can perform the next attack
 
     public Material dissolveMaterial; // Reference to the dissolving material
     public Renderer renderer;
@@ -83,7 +89,7 @@ public class KoboldController : Enemy
 
         {
 
-            EnvironmentView(); // 
+            EnvironmentView(); // The Kobold's line of sight
 
             if (!m_IsPatrol) // If the kobold is not patrolling
 
@@ -113,6 +119,13 @@ public class KoboldController : Enemy
         {
             Move(speedRun); // Kobold now runs
             navAgent.SetDestination(m_PlayerPosition); // Follows the player
+
+            // Check if the player is within attack range
+            if (Vector3.Distance(transform.position, m_PlayerPosition) <= attackRange)
+            {
+                // Attack the player
+                Attack();
+            }
         }
         if (navAgent.remainingDistance <= navAgent.stoppingDistance) // If 
         {
@@ -302,5 +315,55 @@ public class KoboldController : Enemy
 
 
 
+    }
+
+    void Attack()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            ChibiPlayerMovement playerMovement = player.GetComponent<ChibiPlayerMovement>();
+            if (playerMovement != null)
+            {
+                isAttacking = true; // Set attacking flag to true
+                animator.SetBool("Walking_Kobold", false);
+                animator.SetBool("Attack_Kobold", true); // Trigger attack animation
+
+                // Calculate the next attack time based on the attack cooldown
+                nextAttackTime = Time.time + attackCooldown;
+
+                // Apply damage to the player (you can replace this with your own damage mechanism)
+                // For example, you can use a health script attached to the player
+                playerMovement.takeDamage(attackDamage);
+
+                // Reset the attacking flag after the attack animation duration
+                Invoke("ResetAttack", animator.GetCurrentAnimatorStateInfo(0).length);
+            }
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found.");
+        }
+    }
+
+    void ResetAttack()
+    {
+        isAttacking = false;
+        animator.SetBool("Attack_Kobold", false);
+    }
+
+    bool IsPlayerInRange(float range)
+    {
+        // Check if the player is within the specified range
+        // For example, you can use a collider attached to the player to detect proximity
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Player"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 } 
