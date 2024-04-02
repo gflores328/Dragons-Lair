@@ -9,9 +9,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+public enum Direction { right, left };
+
 public class MimicPhaseTwo : Enemy
 {
-   public bool start = true; // A bool to determine wheter or not the object should be doing stuff
+    
+    public bool start = false; // A bool to determine wheter or not the object should be doing stuff
     private bool takingAction = false; // A bool to check if the object is currently in an action
     private int actionNumber = 1; // An int that represents the action the enemy should take 
     private bool startLunge = false;
@@ -33,10 +36,8 @@ public class MimicPhaseTwo : Enemy
     public GameObject fallingDebrisHeight;
     public GameObject splashDebris;
     public GameObject splashDebrisSpawn;
-
-    public GameObject gameManager;
     
-    
+    private Direction directionFacing = Direction.left;
 
     // Start is called before the first frame update
     void Start()
@@ -47,14 +48,64 @@ public class MimicPhaseTwo : Enemy
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(takingAction);
-
-        if (start)
+        if (directionFacing == Direction.left)
         {
-           if (!takingAction)
-           {
-                StartCoroutine(Lunge());
-           }
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+        else if (directionFacing == Direction.right)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+
+        Debug.Log(actionNumber);
+        Debug.Log(directionFacing);
+
+        if (start && !takingAction)
+        {
+            switch (actionNumber)
+            {
+                case 1:
+                    Debug.Log("Makes it");
+                    StartCoroutine(JumpAbovePlayer());
+                    actionNumber++;
+                    break;
+
+                case 2:
+                    if (directionFacing == Direction.right && transform.position.x + 10 > rightBorder.transform.position.x)
+                    {
+                        StartCoroutine(Lunge());
+                    }
+                    else if (directionFacing == Direction.left && transform.position.x - 10 < leftBorder.transform.position.x)
+                    {
+                        StartCoroutine(Lunge());
+                    }
+                    else
+                    {
+                        StartCoroutine(JumpAbovePlayer());
+                    }
+                    actionNumber++;
+                    break;
+
+                case 3:
+                    StartCoroutine(Meelee());
+                    actionNumber++;
+                    break;
+
+                case 4:
+                    StartCoroutine(JumpToCorner());
+                    actionNumber++;
+                    break;
+
+                case 5:
+                    StartCoroutine(Lunge());
+                    actionNumber++;
+                    break;
+
+                case 6:
+                    StartCoroutine(Meelee());
+                    actionNumber = 1;
+                    break;
+            }
         }
 
     }
@@ -66,14 +117,21 @@ public class MimicPhaseTwo : Enemy
         takingAction = true;
 
         yield return StartCoroutine(Jump(player.transform.position.x));
+        // FallingDebris();
 
-        FallingDebris();
+        if (player.transform.position.x > transform.position.x)
+        {
+            directionFacing = Direction.right;
+        }
+        else
+        {
+            directionFacing = Direction.left;
+        }
 
         // Waits for 1 second
         yield return new WaitForSeconds(1f);
 
         // takingAction is set to false
-        actionNumber++;
         takingAction = false;
     }
 
@@ -123,11 +181,11 @@ public class MimicPhaseTwo : Enemy
     // It takes a float and the value will be the x position that the object will jump to
     IEnumerator Jump (float xTarget)
     {
+
         float yTarget = transform.position.y + 5;
 
         // A vector 3 is created with the x and y targer
         Vector3 targetPosition = new Vector3(xTarget, yTarget, transform.position.z);
-
 
         // Object Jumps
         // While the distance from the objcts current position and the targetPosition are greater than 0.01
@@ -135,11 +193,11 @@ public class MimicPhaseTwo : Enemy
         {
             // The object moves towards the target position at the speed of the jumpSpeed
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, jumpSpeed * Time.deltaTime);
+            
 
             // Wait for next frame
             yield return null;
         }
-
         // Waits for .5 seconds before running the code to slam down
         yield return new WaitForSeconds(.5f);
 
@@ -169,10 +227,12 @@ public class MimicPhaseTwo : Enemy
         if (Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
         {
             yield return StartCoroutine(Jump(leftBorder.transform.position.x));
+            directionFacing = Direction.right;
         }
         else
         {
             yield return StartCoroutine(Jump(rightBorder.transform.position.x));
+            directionFacing = Direction.left;
         }
 
         SplashDebris();
@@ -193,10 +253,21 @@ public class MimicPhaseTwo : Enemy
     IEnumerator Lunge()
     {
         takingAction = true;
-        GetComponent<Animator>().SetTrigger("Lunge"); 
+        GetComponent<Animator>().SetTrigger("Lunge");
+        float xTarget;
+        Vector3 targetPosition;
 
-        float xTarget = transform.position.x + 8;
-        Vector3 targetPosition = new Vector3(xTarget, transform.position.y, transform.position.z);
+        if (directionFacing == Direction.right)
+        {
+            xTarget = transform.position.x + 8;
+            targetPosition = new Vector3(xTarget, transform.position.y, transform.position.z);
+        }
+        else
+        {
+            xTarget = transform.position.x - 8;
+            targetPosition = new Vector3(xTarget, transform.position.y, transform.position.z);
+        }
+        
 
         yield return new WaitUntil(() => startLunge);
 
@@ -206,10 +277,11 @@ public class MimicPhaseTwo : Enemy
             yield return null;
         }
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
 
+
+        startLunge = false;
         takingAction = false;
-
         
     }
 
@@ -246,7 +318,6 @@ public class MimicPhaseTwo : Enemy
     public void StartLunge()
     {
         startLunge = true;
-        Debug.Log("Makes it here");
     }
 
 }
