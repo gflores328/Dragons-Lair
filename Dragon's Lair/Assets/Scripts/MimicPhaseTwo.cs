@@ -39,6 +39,8 @@ public class MimicPhaseTwo : Enemy
     
     private Direction directionFacing = Direction.left;
 
+    public GameObject exit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -330,6 +332,12 @@ public class MimicPhaseTwo : Enemy
     public void StartLunge()
     {
         startLunge = true;
+    }
+
+    protected override void Die()
+    {
+        exit.SetActive(true);
+        Destroy(gameObject);
     }
 
 }
