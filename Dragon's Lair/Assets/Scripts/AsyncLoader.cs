@@ -69,6 +69,12 @@ public class AsyncLoader : MonoBehaviour
                 gameState.GetComponent<GameState>().objective = "End of Demo";
             }
 
+            if (sceneToLoad == "WinScreen")
+            {
+                gameState.GetComponent<GameState>().storyState = GameState.state.Level2Complete;
+                gameState.GetComponent<GameState>().objective = "End of Demo";
+            }
+
             StartCoroutine(LoadNewScene(sceneToLoad));
 
             // If the current scene is LevelDesignRealLife
