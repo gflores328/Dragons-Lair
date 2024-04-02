@@ -14,6 +14,7 @@ public class MimicPhaseTwo : Enemy
    public bool start = true; // A bool to determine wheter or not the object should be doing stuff
     private bool takingAction = false; // A bool to check if the object is currently in an action
     private int actionNumber = 1; // An int that represents the action the enemy should take 
+    private bool startLunge = false;
 
     public GameObject player; // A reference to the player character
 
@@ -46,7 +47,7 @@ public class MimicPhaseTwo : Enemy
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(actionNumber);
+        Debug.Log(takingAction);
 
         if (start)
         {
@@ -192,10 +193,24 @@ public class MimicPhaseTwo : Enemy
     IEnumerator Lunge()
     {
         takingAction = true;
-        GetComponentInChildren<Animator>().SetTrigger("Lunge");
+        GetComponent<Animator>().SetTrigger("Lunge"); 
 
-        yield return new WaitForSeconds(3);
+        float xTarget = transform.position.x + 8;
+        Vector3 targetPosition = new Vector3(xTarget, transform.position.y, transform.position.z);
+
+        yield return new WaitUntil(() => startLunge);
+
+        while (transform.position.x != xTarget)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(5);
+
         takingAction = false;
+
+        
     }
 
     private void FallingDebris()
@@ -227,5 +242,12 @@ public class MimicPhaseTwo : Enemy
             collision.gameObject.GetComponent<ChibiPlayerMovement>().takeDamage(1);
         }
     }
+
+    public void StartLunge()
+    {
+        startLunge = true;
+        Debug.Log("Makes it here");
+    }
+
 }
 
