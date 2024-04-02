@@ -71,6 +71,8 @@ public class RhythmGameManager : MonoBehaviour
     [Tooltip("Object that holds the Chibi Poses ")]
     public GameObject chibiHolder;
 
+    [Tooltip("Object that holds the Anime Girl Chibi Poses ")]
+    public GameObject girlChibiHolder;
     [Tooltip("Object that holds the arrows Poses ")]
     public GameObject buttonHolder;
 
@@ -154,6 +156,7 @@ public class RhythmGameManager : MonoBehaviour
         //disable the notes until the start button is pressed and also chibi holder
         beatScrollerObject.SetActive(false);
         chibiHolder.SetActive(false);
+        girlChibiHolder.SetActive(false);
         //GABE ADDED
         gameState = GameObject.Find("GameState");
     }
@@ -167,6 +170,7 @@ public class RhythmGameManager : MonoBehaviour
             if (startInput.IsPressed())
             {
                 chibiHolder.SetActive(true);
+                girlChibiHolder.SetActive(true);
                 beatScrollerObject.SetActive(true);
                 startPlaying = true;
                 //Remove the intro screen
@@ -225,6 +229,7 @@ public class RhythmGameManager : MonoBehaviour
                 //Display the results screen
                 resultsScreen.SetActive(true);
                 chibiHolder.SetActive(false);
+                girlChibiHolder.SetActive(false);
                 buttonHolder.SetActive(false);
 
                 // GABE ADDED

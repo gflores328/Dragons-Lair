@@ -25,6 +25,7 @@ public class PixieRange : MonoBehaviour
         {
             pixie.playerToChase = other.gameObject;
             player = other.transform;
+            pixie.isHidden = false;
         }
     }
 

@@ -22,7 +22,7 @@ public class PixieController : Enemy
     public Material dissolveMaterial; // Reference to the dissolving material
     public Renderer renderer;
 
-    private bool isHidden; //Keeps track of the pixie's visibility
+    public bool isHidden = true; //Keeps track of the pixie's visibility
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class PixieController : Enemy
         //Set the player reference to null so the pixie has nothing to track
         playerToChase = null;
         //The pixie is invisible before it sees the player
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        renderer.enabled = false;
         //Make the pixie invisible
         isHidden = true;
     }
@@ -44,7 +44,7 @@ public class PixieController : Enemy
             //Make the pixie visible if not already
             if (!isHidden)
             {
-                gameObject.GetComponent<MeshRenderer>().enabled = true;
+                renderer.enabled = true;
                 isHidden = false;
                 //Sparkle effect here?
             }
@@ -70,7 +70,7 @@ public class PixieController : Enemy
 
     protected override void Die()
     {
-        
+        playerToChase = null;
         if (dissolveMaterial != null)
         {
             // Apply the dissolve material to the renderer of the game object
