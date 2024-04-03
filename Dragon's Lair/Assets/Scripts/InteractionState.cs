@@ -22,31 +22,35 @@ public class InteractionState : MonoBehaviour
     {
         gameState = GameObject.Find("GameState");
 
-        if (((int)gameState.GetComponent<GameState>().storyState) >= ((int)spawn) && ((int)gameState.GetComponent<GameState>().storyState) < ((int)despawn))
+        if (gameState != null)
         {
-            Debug.Log("Spawned " + gameObject);
+            if (((int)gameState.GetComponent<GameState>().storyState) >= ((int)spawn) && ((int)gameState.GetComponent<GameState>().storyState) < ((int)despawn))
+            {
+                Debug.Log("Spawned " + gameObject);
 
-            gameObject.SetActive(true);
-        }
-        else
-        {
-            gameObject.SetActive(false);
+                gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (((int)gameState.GetComponent<GameState>().storyState) >= ((int)despawn))
+        if (gameState != null)
         {
-            Debug.Log("Destoryed " + gameObject);
-            if (!(makeActive == null))
+            if (((int)gameState.GetComponent<GameState>().storyState) >= ((int)despawn))
             {
-                makeActive.SetActive(true);
+                Debug.Log("Destoryed " + gameObject);
+                if (!(makeActive == null))
+                {
+                    makeActive.SetActive(true);
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
-        
     }
 }

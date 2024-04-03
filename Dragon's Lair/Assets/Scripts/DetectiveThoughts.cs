@@ -28,28 +28,31 @@ public class DetectiveThoughts : MonoBehaviour
 
         playerInput = GameObject.Find("Player").GetComponent<PlayerInput>();
         gameState = GameObject.Find("GameState");
-        if (gameState.GetComponent<GameState>().storyState == GameState.state.newGame)
+        if (gameState != null)
         {
-      
-            StartCoroutine(ThoughtDelay(thoughtList[0]));
-        }
+            if (gameState.GetComponent<GameState>().storyState == GameState.state.newGame)
+            {
 
-        if (gameState.GetComponent<GameState>().storyState == GameState.state.DDRComplete)
-        {
-            
-            StartCoroutine(ThoughtDelay(thoughtList[1]));
-        }
+                StartCoroutine(ThoughtDelay(thoughtList[0]));
+            }
 
-        if (gameState.GetComponent<GameState>().storyState == GameState.state.Level1Complete)
-        {
-            
-            StartCoroutine(ThoughtDelay(thoughtList[2]));
-        }
+            if (gameState.GetComponent<GameState>().storyState == GameState.state.DDRComplete)
+            {
 
-        if (gameState.GetComponent<GameState>().storyState == GameState.state.SpaceGameDone)
-        {
-            
-            StartCoroutine(ThoughtDelay(thoughtList[3]));
+                StartCoroutine(ThoughtDelay(thoughtList[1]));
+            }
+
+            if (gameState.GetComponent<GameState>().storyState == GameState.state.Level1Complete)
+            {
+
+                StartCoroutine(ThoughtDelay(thoughtList[2]));
+            }
+
+            if (gameState.GetComponent<GameState>().storyState == GameState.state.SpaceGameDone)
+            {
+
+                StartCoroutine(ThoughtDelay(thoughtList[3]));
+            }
         }
     }
 

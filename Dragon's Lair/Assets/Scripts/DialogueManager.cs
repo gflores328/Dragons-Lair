@@ -40,7 +40,10 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         gameState = GameObject.Find("GameState");
-        objectiveText.text = gameState.GetComponent<GameState>().objective;
+        if (gameState != null)
+        {
+            objectiveText.text = gameState.GetComponent<GameState>().objective;
+        }
         //Debug.Log(objectiveText.text);
 
         playerInput = player.GetComponent<PlayerInput>();

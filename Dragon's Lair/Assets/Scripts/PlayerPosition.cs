@@ -21,19 +21,21 @@ public class PlayerPosition : MonoBehaviour
 
         // gameState is set to find GameState
         gameState = GameObject.Find("GameState");
-
-        if (gameState.GetComponent<GameState>().storyState == GameState.state.newGame)
+        if (gameState != null)
         {
-            gameState.GetComponent<GameState>().SetPlayerPosition(gameObject.transform.position);
-        }
+            if (gameState.GetComponent<GameState>().storyState == GameState.state.newGame)
+            {
+                gameState.GetComponent<GameState>().SetPlayerPosition(gameObject.transform.position);
+            }
 
-        // If firstTimeLoad is false
-        if (!gameState.GetComponent<GameState>().GetFirstTimeLoad())
-        {
-            // This game objects position is set to the position stored in GameState
-            gameObject.GetComponent<CharacterController>().enabled = false;
-            gameObject.transform.position = gameState.GetComponent<GameState>().GetPlayerPosition();
-            gameObject.GetComponent<CharacterController>().enabled = true;
+            // If firstTimeLoad is false
+            if (!gameState.GetComponent<GameState>().GetFirstTimeLoad())
+            {
+                // This game objects position is set to the position stored in GameState
+                gameObject.GetComponent<CharacterController>().enabled = false;
+                gameObject.transform.position = gameState.GetComponent<GameState>().GetPlayerPosition();
+                gameObject.GetComponent<CharacterController>().enabled = true;
+            }
         }
     }
 

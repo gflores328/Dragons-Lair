@@ -73,7 +73,10 @@ public class RealPlayerMovement : MonoBehaviour
         inventoryAction = playerInput.actions.FindAction("Inventory");
         inventoryAction.performed += OpenInventory;
         inventoryUIArray = FindObjectOfType<InventoryUI>(true);
-        inventoryUI = inventoryUIArray.gameObject;
+        if (inventoryUIArray != null)
+        {
+            inventoryUI = inventoryUIArray.gameObject;
+        }
         footStep = GetComponent<AudioSource>();
 
         
@@ -217,7 +220,7 @@ public class RealPlayerMovement : MonoBehaviour
     private void Pause(InputAction.CallbackContext value)
     {
 
-        if (!gamePaused)
+        if (inventoryAction.enabled && interactAction.enabled)
         {
             inventoryAction.Disable();
             interactAction.Disable();
@@ -226,16 +229,13 @@ public class RealPlayerMovement : MonoBehaviour
 
             gameManager.PauseGame();
 
-            gamePaused = true;
         }
-        else if (gamePaused)
+        else
         {
             inventoryAction.Enable();
             interactAction.Enable();
 
             gameManager.PauseGame();
-
-            gamePaused = false;
         }
     }
 

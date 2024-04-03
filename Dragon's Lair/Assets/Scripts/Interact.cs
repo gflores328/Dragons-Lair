@@ -204,7 +204,7 @@ public class Interact : MonoBehaviour
     // Everytime this script is called it checks which enem type is selected and will run differently according to that
     public void Interacted()
     {
-        dialogueManager.GetComponent<DialogueManager>().GetAudioSource().Stop();
+        dialogueManager.GetComponent<DialogueManager>().GetComponent<AudioSource>().Stop(); 
 
         AudioClip audioClip = dialogueManager.GetComponent<DialogueManager>().GetAudioSource().clip;
         dialogueManager.GetComponent<DialogueManager>().GetAudioSource().PlayOneShot(audioClip);

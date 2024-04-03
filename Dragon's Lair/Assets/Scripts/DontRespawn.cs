@@ -22,12 +22,15 @@ public class DontRespawn : MonoBehaviour
         gameState = GameObject.Find("GameState");
 
         // Foreach string in the game states non respawnable list
-        foreach (string dontRespawn in gameState.GetComponent<GameState>().nonRespawnable)
+        if (gameState != null)
         {
-            // if the string is the name of the game obect then it destroys itself
-            if (dontRespawn == gameObject.name)
+            foreach (string dontRespawn in gameState.GetComponent<GameState>().nonRespawnable)
             {
-                Destroy(gameObject);
+                // if the string is the name of the game obect then it destroys itself
+                if (dontRespawn == gameObject.name)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
