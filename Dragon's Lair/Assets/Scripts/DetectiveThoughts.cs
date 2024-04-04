@@ -53,6 +53,12 @@ public class DetectiveThoughts : MonoBehaviour
 
                 StartCoroutine(ThoughtDelay(thoughtList[3]));
             }
+            if (gameState.GetComponent<GameState>().storyState == GameState.state.Level2Complete)
+            {
+
+                StartCoroutine(ThoughtDelay(thoughtList[4]));
+            }
+
         }
     }
 

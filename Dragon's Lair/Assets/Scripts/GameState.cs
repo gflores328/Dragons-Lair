@@ -34,8 +34,17 @@ public class GameState : MonoBehaviour
         playLevel2,
         Level2Complete,
         AskForScrewdriver,
-        End,
-        PostGame
+        LookForScrewdriver,
+        WinScrewdriver,
+        GiveScrewdriver,
+        TalkToSarah,
+        PlaySarah,
+        BeatSarah,
+        FindMicheal,
+        AskAboutMicheal,
+        PlayLevel3,
+        end,
+        postGame
     } 
 
 
@@ -157,6 +166,17 @@ public class GameState : MonoBehaviour
         if (objective == "Play VR Level 2")
         {
             storyState = state.playLevel2;
+        }
+
+        if (objective == "Ask the Manager for a screwdriver")
+        {
+
+            storyState = state.AskForScrewdriver;
+        }
+
+        if (objective == "Beat Sarah in Air Hockey")
+        {
+            storyState = state.PlaySarah;
         }
 
         Debug.Log(storyState);
