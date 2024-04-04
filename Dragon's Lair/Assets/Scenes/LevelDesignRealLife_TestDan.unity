@@ -1643,7 +1643,11 @@ MonoBehaviour:
   dialogueText: {fileID: 879283854}
   nameBox: {fileID: 2063776599}
   nameText: {fileID: 15632543}
-  objectiveUI: {fileID: 1710716120}
+  objectiveText: {fileID: 0}
+  objectiveBox: {fileID: 0}
+  bustUILeft: {fileID: 0}
+  bustUIRight: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &27366410
 Transform:
   m_ObjectHideFlags: 0
@@ -17936,11 +17940,13 @@ MonoBehaviour:
   firstButton: {fileID: 916281855}
   itemNeeded: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
   itemNotObtained: {fileID: 11400000, guid: 1a1dafe343a1f6544be74d28240992ad, type: 2}
-  storyEventNeeded: 0
+  storyStateNeeded: 0
   state: 0
   cantInteractYetDialogue: {fileID: 0}
   updateObjective: 0
   newObjective: 
+  UIPopUp: {fileID: 0}
+  closeUIObject: {fileID: 0}
 --- !u!1 &527572350
 GameObject:
   m_ObjectHideFlags: 0
@@ -39066,11 +39072,13 @@ MonoBehaviour:
   firstButton: {fileID: 0}
   itemNeeded: {fileID: 0}
   itemNotObtained: {fileID: 0}
-  storyEventNeeded: 0
+  storyStateNeeded: 0
   state: 0
   cantInteractYetDialogue: {fileID: 0}
   updateObjective: 0
   newObjective: 
+  UIPopUp: {fileID: 0}
+  closeUIObject: {fileID: 0}
 --- !u!114 &1216211002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47464,12 +47472,14 @@ MonoBehaviour:
   firstButton: {fileID: 1690060557}
   itemNeeded: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
   itemNotObtained: {fileID: 11400000, guid: 1a1dafe343a1f6544be74d28240992ad, type: 2}
-  storyEventNeeded: 0
+  storyStateNeeded: 0
   state: 0
   cantInteractYetDialogue: {fileID: 11400000, guid: 8a1298739c9f59d419b056652e25d47c,
     type: 2}
   updateObjective: 0
   newObjective: 
+  UIPopUp: {fileID: 0}
+  closeUIObject: {fileID: 0}
 --- !u!1 &1526374886
 GameObject:
   m_ObjectHideFlags: 0
@@ -49961,11 +49971,13 @@ MonoBehaviour:
   firstButton: {fileID: 0}
   itemNeeded: {fileID: 0}
   itemNotObtained: {fileID: 0}
-  storyEventNeeded: 0
+  storyStateNeeded: 0
   state: 0
   cantInteractYetDialogue: {fileID: 0}
   updateObjective: 0
   newObjective: 
+  UIPopUp: {fileID: 0}
+  closeUIObject: {fileID: 0}
 --- !u!65 &1636155924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56206,11 +56218,13 @@ MonoBehaviour:
   firstButton: {fileID: 1751216850}
   itemNeeded: {fileID: 11400000, guid: de4235891dbd11546851d1f3ef221ac7, type: 2}
   itemNotObtained: {fileID: 11400000, guid: 1a1dafe343a1f6544be74d28240992ad, type: 2}
-  storyEventNeeded: 0
+  storyStateNeeded: 0
   state: 0
   cantInteractYetDialogue: {fileID: 0}
   updateObjective: 0
   newObjective: 
+  UIPopUp: {fileID: 0}
+  closeUIObject: {fileID: 0}
 --- !u!1 &2009851160
 GameObject:
   m_ObjectHideFlags: 0
@@ -58057,8 +58071,8 @@ Transform:
   m_GameObject: {fileID: 2021583747}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.7018967, y: 0.053488016, z: 2.1318092}
-  m_LocalScale: {x: 1.106, y: 1, z: 0.8048}
+  m_LocalPosition: {x: 15.4, y: 4.4, z: -9.3}
+  m_LocalScale: {x: 8.904285, y: 8.050892, z: 6.4793572}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 812471821}
@@ -59781,6 +59795,7 @@ MonoBehaviour:
   sceneToLoad: MainMenu
   loadingText: {fileID: 229123450}
   spaceText: {fileID: 229123451}
+  controllerText: {fileID: 0}
   sliderBar: {fileID: 229123449}
   loadingScreen: {fileID: 229123448}
 --- !u!4 &6237817263275552045 stripped
