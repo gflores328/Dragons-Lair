@@ -32,7 +32,10 @@ public class GameState : MonoBehaviour
         SpaceGameDone,
         givePrize,
         playLevel2,
-        Level2Complete
+        Level2Complete,
+        AskForScrewdriver,
+        End,
+        PostGame
     } 
 
 

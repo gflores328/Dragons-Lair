@@ -20,6 +20,7 @@ public class Item : ScriptableObject
     [SerializeField]
     private string itemName;    //The name of the item
     [SerializeField]
+    [TextArea]
     private string description; //The description of the item
     
     public Sprite image;       //The sprite image of the item
