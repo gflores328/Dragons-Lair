@@ -66,7 +66,7 @@ public class ArmRotation : MonoBehaviour
         {
             gunRotationWithMouse = false;
         }
-        Debug.Log($"isusing rotation {gunRotationWithMouse}");
+        //Debug.Log($"isusing rotation {gunRotationWithMouse}");
         
     }
 
@@ -108,14 +108,15 @@ public class ArmRotation : MonoBehaviour
                 if(input.y <= 1.0f && input.y >= 0.9f) // If the joy stick is going to the top  these are the parameters
                 {
                     armPivot.localRotation = Quaternion.Euler(-90f, 90f, 0f); // rotate the gun all the way up
-                    chibiPlayerMovement.setAimingUpFloat(1f);
+                    chibiPlayerMovement.setAimingFloat(1f);
+                    Debug.Log("ControllerAimingUP");
 
                 }
                 else if(input.y < 0.9f && input.y >= 0.5f) // If the joy stick is going to the top right or left
                 { 
                     
                     armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f); // rotate the gun to the top right or left
-                    chibiPlayerMovement.setAimingUpFloat(0.5f); 
+                    chibiPlayerMovement.setAimingFloat(0.5f); 
                 }
                 
                 // else if(input.y >= -0.9f && input.y <= -0.5f) // if the joy stick is pointed to the bottom right or left 
@@ -126,7 +127,7 @@ public class ArmRotation : MonoBehaviour
                 {
                     
                     armPivot.localRotation = Quaternion.Euler(0f, 90f, 0f); // Set default rotation
-                    chibiPlayerMovement.setAimingUpFloat(0f);
+                    chibiPlayerMovement.setAimingFloat(0f);
                     
                 }
             }
@@ -156,7 +157,7 @@ public class ArmRotation : MonoBehaviour
         if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused && !gunRotationWithMouse)
         {
             armPivot.localRotation = Quaternion.Euler(-90f, 90f, 0f); // rotate the gun all the way up
-            chibiPlayerMovement.setAimingUpFloat(1f);
+            chibiPlayerMovement.setAimingFloat(1f);
         }
     }
     
@@ -167,7 +168,7 @@ public class ArmRotation : MonoBehaviour
         if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused && !gunRotationWithMouse)
         {
             armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f); // rotate the gun to the top right or left 
-            chibiPlayerMovement.setAimingUpFloat(0.5f);
+            chibiPlayerMovement.setAimingFloat(0.5f);
         }
     }
 
@@ -177,7 +178,7 @@ public class ArmRotation : MonoBehaviour
         if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused && !gunRotationWithMouse)
         {
            armPivot.localRotation = Quaternion.Euler(0f, 90f, 0f); // rotate the gun forward
-           chibiPlayerMovement.setAimingUpFloat(0f);
+           chibiPlayerMovement.setAimingFloat(0f);
         }
     }
     

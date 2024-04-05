@@ -83,7 +83,7 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     private int currExtraJumps; // The counter to see if they have used up all of their max jumps
     
-    private float aimingUpFloat = 0f;
+    private float aimingFloat = 0f;
     private float aimingDiagFloat = 0f;
     // [Header("Mouse Colliders")]
     // public LeftMouseCollisionHandler leftMouseCollider;
@@ -134,7 +134,7 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     {
        
-        
+        animator.SetFloat("Aiming", aimingFloat);
         if(playerHealth > numOfHearts)
         {
             playerHealth = numOfHearts;
@@ -181,9 +181,9 @@ public class ChibiPlayerMovement : MonoBehaviour
             }      
         }
 
-        animator.SetFloat("Aiming", aimingUpFloat);
-        animator.SetFloat("AimingDiag", aimingDiagFloat);
         
+        animator.SetFloat("AimingDiag", aimingDiagFloat);
+
     }
 
     void FixedUpdate() 
@@ -211,7 +211,14 @@ public class ChibiPlayerMovement : MonoBehaviour
 
         // Ensure movement direction is relative to the world axes
         moveDirection = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * moveDirection;
+          // Determine movement direction based on the isAimingRight variable
+    
 
+        // Calculate the magnitude of the movement input
+        float movementSpeed = Mathf.Abs(horizontalInput);
+
+        // Set the "velocity" parameter in the animator
+        animator.SetFloat("Velocity", movementSpeed);
         // Apply the movement
         playerRB.MovePosition(transform.position + moveDirection * Time.deltaTime * playerSpeedMultiplier);
 
@@ -413,6 +420,7 @@ public class ChibiPlayerMovement : MonoBehaviour
      private void OnFreeAimCanceled(InputAction.CallbackContext value) // The pause function that is called when the button is pressed
     {
         isFreeAiming = false;
+        animator.SetFloat("Aiming", 0f);
     }
     
 
@@ -422,6 +430,7 @@ public class ChibiPlayerMovement : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 180, 0); // Flip player to face left
             isFacingRight = false;
+
         }
     }
 
@@ -445,14 +454,15 @@ public class ChibiPlayerMovement : MonoBehaviour
         initialJumpVelocity = jumpSetter;
     }
 
-    public void setAimingUpFloat(float newUp)
+    
+    public void setAimingFloat(float newUp)
     {
-        aimingUpFloat = newUp;
+        aimingFloat = newUp;
     }
 
-    public float getAimingUpFloat()
+    public float getAimingFloat()
     {
-        return aimingUpFloat;
+        return aimingFloat;
 
     }
 }
