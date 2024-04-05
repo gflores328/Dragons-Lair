@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5453560291647754670}
-  - component: {fileID: 3410256397421223664}
   - component: {fileID: 3844034047023185405}
   - component: {fileID: 7793860677271074355}
   m_Layer: 1
@@ -35,25 +34,6 @@ Transform:
   - {fileID: 8152822778067358675}
   m_Father: {fileID: 4189565723425013057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3410256397421223664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2354518327688411045}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 929d42e473912c64fa84aa2311aada6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shots: 1
-  shotsFired: 0
-  bullet: {fileID: 4759820522953996723}
-  bulletAudio: {fileID: 3844034047023185405}
-  fireRate: 2
-  fireRateCounter: 0
-  accuracy: 100
 --- !u!82 &3844034047023185405
 AudioSource:
   m_ObjectHideFlags: 0
@@ -169,7 +149,7 @@ MonoBehaviour:
   fireRate: 2
   fireRateCounter: 0
   accuracy: 100
-  fireDelay: 1
+  fireDelay: 5
 --- !u!1 &6296694034782745055
 GameObject:
   m_ObjectHideFlags: 0

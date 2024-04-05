@@ -2,12 +2,6 @@
  * Created by Carlos Martinez
  * 
  * This script contains a controller for the Kobold-Type enemies.
- * References KoboldData.
- * 
- * It is currently WIP.
- * 
- * To be added:
- * - Attack
  * 
  */
 
@@ -62,7 +56,7 @@ public class KoboldController : Enemy
     bool m_IsPatrol; // Patrol Mode
     bool m_CaughtPlayer; // Caught Player
 
-    public KoboldData kData; // KoboldData
+    public KoboldData kData; // KoboldData - Unused
 
     // Start is called before the first frame update
     void Start()

@@ -37,9 +37,10 @@ public class AlienGunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Decrement the cooldown timer
         cooldownTimer -= Time.deltaTime;
 
-        // Fires gun when the "Space" button is pressed
+        // If the cooldown timer has elapsed, and the alien is not currently firing
         if (cooldownTimer <= 0)
         {
             // Shoots if time passed is greater than or equal to the fire rate counter
@@ -49,7 +50,11 @@ public class AlienGunController : MonoBehaviour
 
                 bullet.Fire(shots); // Shoots a bullet
 
-                fireRateCounter = Time.time + 1 / fireRate; // Affects fire rate counter
+                // Reset the fire rate counter
+                fireRateCounter = Time.time + 1 / fireRate;
+
+                // Set the cooldown timer to the fire delay
+                cooldownTimer = fireDelay;
             }
         }
     }
