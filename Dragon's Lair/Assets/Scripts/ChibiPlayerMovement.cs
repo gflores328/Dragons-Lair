@@ -83,7 +83,8 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     private int currExtraJumps; // The counter to see if they have used up all of their max jumps
     
-
+    private float aimingUpFloat = 0f;
+    private float aimingDiagFloat = 0f;
     // [Header("Mouse Colliders")]
     // public LeftMouseCollisionHandler leftMouseCollider;
     // public RightMouseCollisionHandler rightMouseCollider;
@@ -109,7 +110,7 @@ public class ChibiPlayerMovement : MonoBehaviour
         jumpAction = playerInput.actions.FindAction("Jump"); // binds the jump to the jump buttons
         jumpAction.started += OnJump; // When action is performed it is assigned to the onJump function
         jumpAction.canceled += OnJump; // When action is stop it is assigned to the on jumpfunction
-       
+
         
         pauseAction = playerInput.actions.FindAction("Pause"); // Assigns the pause action to the pause action from the chibi movement
         pauseAction.performed += Pause; // Assigns the on performed pause action to the pause function 
@@ -179,6 +180,10 @@ public class ChibiPlayerMovement : MonoBehaviour
                 playerRenderer.enabled = true;
             }      
         }
+
+        animator.SetFloat("Aiming", aimingUpFloat);
+        animator.SetFloat("AimingDiag", aimingDiagFloat);
+        
     }
 
     void FixedUpdate() 
@@ -438,5 +443,16 @@ public class ChibiPlayerMovement : MonoBehaviour
     public void setInitalJump(float jumpSetter)
     {
         initialJumpVelocity = jumpSetter;
+    }
+
+    public void setAimingUpFloat(float newUp)
+    {
+        aimingUpFloat = newUp;
+    }
+
+    public float getAimingUpFloat()
+    {
+        return aimingUpFloat;
+
     }
 }
