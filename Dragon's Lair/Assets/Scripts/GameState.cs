@@ -174,6 +174,16 @@ public class GameState : MonoBehaviour
             storyState = state.AskForScrewdriver;
         }
 
+        if (objective == "Play the claw machine for the screwdriver")
+        {
+            storyState = state.WinScrewdriver;
+        }
+
+        if (objective == "Talk to Sarah")
+        {
+            storyState = state.TalkToSarah;
+        }
+
         if (objective == "Beat Sarah in Air Hockey")
         {
             storyState = state.PlaySarah;
