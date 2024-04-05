@@ -55,7 +55,17 @@ public class ArmRotation : MonoBehaviour
 
     private void Update()
     {
-        gunRotationWithMouse = gameManager.GetusingMouseRotation();
+        if(gameManager.GetIsMouse())
+        {
+            gunRotationWithMouse = gameManager.GetusingMouseRotation();
+        }
+        //gunRotationWithMouse = gameManager.GetusingMouseRotation();
+        if(!gameManager.GetIsMouse())
+        {
+            gunRotationWithMouse = false;
+        }
+
+        
     }
 
     private void OnEnable()
@@ -100,6 +110,7 @@ public class ArmRotation : MonoBehaviour
                 }
                 else if(input.y < 0.9f && input.y >= 0.5f) // If the joy stick is going to the top right or left
                 { 
+                    
                     armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f); // rotate the gun to the top right or left 
                 }
                 
@@ -172,7 +183,7 @@ public class ArmRotation : MonoBehaviour
     {
         // Do Crounching things
     }
-    void RotateGun(Vector3 targetPosition)
+    private void RotateGun(Vector3 targetPosition)
     {
         // Calculate the direction to the target
         Vector3 lookDirection = targetPosition - armPivot.position;
@@ -199,5 +210,10 @@ public class ArmRotation : MonoBehaviour
 
 
         }
+    }
+
+    public void setGunRotationMouse(bool isMouse)
+    {
+        gunRotationWithMouse = isMouse;
     }
 }
