@@ -7,7 +7,7 @@ public class HealthPickup : Powerup
 {
     public float healthToGive;
 
-    public Renderer spriteRenderer;
+    
 
     protected virtual void Update()
     {
@@ -40,7 +40,7 @@ public class HealthPickup : Powerup
             {
                 // Call the player's takeDamage function and pass the damage amount
                 player.AddHealth(healthToGive);
-                spriteRenderer.enabled = false;
+                
 
                 
             }

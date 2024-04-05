@@ -5,16 +5,18 @@ using TMPro;
 public class Powerup : MonoBehaviour
 {
     public GameObject powerUpDesc; // A public game object that grabs the gameobject that will display the text
-    public Renderer powerUpRenderer; // Reference to the renderer component
+    //public Renderer powerUpRenderer; // Reference to the renderer component
+    public Renderer spriteRenderer; // Refence to the sprite renderer component
     public string powerUpName; // Public string to specify the power-up name
-
+    
+    protected bool hasPickedUp = false; // A bool so the object can only be picked up once
     protected bool showDesc = false; // A bool variable to determine if the powerup should be showing or not
-    protected float waitTime = 5f; // determines how long the text will be displayed for
+    protected float waitTime = 2f; // determines how long the text will be displayed for
     protected Coroutine coroutine; // a coroutine variable to hold the corutine script to be able to run the wait and disable function
 
     protected virtual void Awake()
     {
-        powerUpRenderer = GetComponent<Renderer>(); // Grab the renderer component
+        //powerUpRenderer = GetComponent<Renderer>(); // Grab the renderer component
     }
 
     protected virtual void Update()
@@ -40,10 +42,12 @@ public class Powerup : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other) // when it is collided with  check if it is the player
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !hasPickedUp)
         {
             showDesc = true; //  tell it to show the text
-            powerUpRenderer.enabled = false; // Turn off the renderer when picked up
+            //powerUpRenderer.enabled = false; // Turn off the renderer when picked up
+            spriteRenderer.enabled = false; // Turn off  sprite renderer when picked up
+            hasPickedUp = true;
         }
     }
 
@@ -51,7 +55,7 @@ public class Powerup : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime); // wait for x amount of time
         showDesc = false; // turn the showDesc off
-        powerUpDesc.SetActive(false); // Turn the text off
+        //powerUpDesc.SetActive(false); // Turn the text off
         Destroy(gameObject); // Destroy powerup powerup
     }
 }

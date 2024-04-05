@@ -64,7 +64,7 @@ public class ArmRotation : MonoBehaviour
         {
             gunRotationWithMouse = false;
         }
-
+        Debug.Log($"isusing rotation {gunRotationWithMouse}");
         
     }
 
