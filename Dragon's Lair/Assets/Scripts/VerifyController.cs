@@ -8,6 +8,8 @@ public class VerifyController : MonoBehaviour
 
     private bool connected = false;
 
+    public GameManager gm;
+
     IEnumerator CheckForController()
     {
         while (true)
@@ -19,13 +21,20 @@ public class VerifyController : MonoBehaviour
                 connected = true; //controller is connected
                 Debug.Log("Controlled connected successfully.");
                 Debug.Log(controllers);
-                
+                gm.controlsPanel.activeSelf.Equals(true);
+                gm.controlsKeyboard.activeSelf.Equals(true);
+                gm.controlsGamepad.activeSelf.Equals(false);
+
             }
             else if ((connected) && (controllers.Length == 0))
             {
                 connected = false; //controller is not connected
                 Debug.Log("Controller disconnected.");
                 Debug.Log(controllers);
+
+                gm.controlsPanel.activeSelf.Equals(true);
+                gm.controlsKeyboard.activeSelf.Equals(false);
+                gm.controlsGamepad.activeSelf.Equals(true);
 
             }
 

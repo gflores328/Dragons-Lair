@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
 
     public GameObject resumeButton; // Grabs the resume button so when paused the event system knows to select it first for the controller;
 
+    public GameObject controlsPanel;
+
+    public GameObject controlsKeyboard;
+
+    public GameObject controlsGamepad;
+
     private AsyncLoader asyncLoader;
     
     public bool mainMenu = false;
@@ -93,6 +99,7 @@ public class GameManager : MonoBehaviour
             if(mainMenu)
             {
                 SetButtonForController(resumeButton);
+   
             }
         }
         // If no controller is connected and it was previously using controller, switch to mouse
@@ -100,15 +107,17 @@ public class GameManager : MonoBehaviour
         {
             isMouse = true; // switch to mouse
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+  
         }
+
     }
 
-    
+
 
     #endregion
 
     #region Methods
-    
+
 
     public void hidePanel(GameObject currentPanel) //hides a panel from an active state
     {
@@ -207,10 +216,12 @@ public class GameManager : MonoBehaviour
     {
         return isMouse;
     }
+
     public bool GetusingMouseRotation()
     {
         return usingMouseRotation;
     }
+
     public void SetusingMouseRotation(bool isUsing)
     {
         usingMouseRotation = isUsing;
