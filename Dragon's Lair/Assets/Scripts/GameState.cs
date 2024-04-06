@@ -122,73 +122,63 @@ public class GameState : MonoBehaviour
     {
         objective = newObjective;
 
-        if (objective == "Talk to David")
+        switch (objective)
         {
-            
-            storyState = state.talkToDavid;
-        }
+            case "Talk to David":
+                storyState = state.talkToDavid;
+                break;
 
-        if (objective == "Score over 20,000 points in BBB")
-        {
-            storyState = state.PlayDDR;
-        }
+            case "Score over 20,000 points in BBB":
+                storyState = state.PlayDDR;
+                break;
 
-        if (objective == "Get into the basement")
-        {
-            storyState = state.getIntoBasement;
-        }
+            case "Get into the basement":
+                storyState = state.getIntoBasement;
+                break;
 
-        if (objective == "Unlock basement door")
-        {
-            storyState = state.unlockDoor;
-        }
+            case "Unlock basement door":
+                storyState = state.unlockDoor;
+                break;
 
-        if (objective == "Play VR Game")
-        {
-            storyState = state.PlayVR;
-        }
+            case "Play VR Game":
+                storyState = state.PlayVR;
+                break;
 
-        if (objective == "Talk to Michael")
-        {
-            storyState = state.talkToMicheal;
-        }
+            case "Talk to Michael":
+                storyState = state.talkToMicheal;
+                break;
 
-        if (objective == "Earn tickets in Mobile Fighter Axiom")
-        {
-            storyState = state.playSpaceGame;
-        }
+            case "Earn tickets in Mobile Fighter Axiom":
+                storyState = state.playSpaceGame;
+                break;
 
-        if (objective == "Give the prize to Michael")
-        {
-            storyState = state.givePrize;
-        }
+            case "Give the prize to Michael":
+                storyState = state.givePrize;
+                break;
 
-        if (objective == "Play VR Level 2")
-        {
-            storyState = state.playLevel2;
-        }
+            case "Play VR Level 2":
+                storyState = state.playLevel2;
+                break;
 
-        if (objective == "Ask the Manager for a screwdriver")
-        {
+            case "Ask the Manager for a screwdriver":
+                storyState = state.AskForScrewdriver;
+                break;
 
-            storyState = state.AskForScrewdriver;
-        }
+            case "Play the claw machine for the screwdriver":
+                storyState = state.WinScrewdriver;
+                break;
 
-        if (objective == "Play the claw machine for the screwdriver")
-        {
-            storyState = state.WinScrewdriver;
-        }
+            case "Talk to Sarah":
+                storyState = state.TalkToSarah;
+                break;
 
-        if (objective == "Talk to Sarah")
-        {
-            storyState = state.TalkToSarah;
-        }
+            case "Beat Sarah in Air Hockey":
+                storyState = state.PlaySarah;
+                break;
 
-        if (objective == "Beat Sarah in Air Hockey")
-        {
-            storyState = state.PlaySarah;
-        }
-
-        Debug.Log(storyState);
+            case "Ask the Manager about Michael":
+                storyState = state.AskAboutMicheal;
+                break;
+        }       
     }
 }
