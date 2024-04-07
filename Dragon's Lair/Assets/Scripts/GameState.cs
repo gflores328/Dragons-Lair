@@ -182,8 +182,16 @@ public class GameState : MonoBehaviour
                 storyState = state.AskForScrewdriver;
                 break;
 
+            case "Look for the screwdriver":
+                storyState = state.LookForScrewdriver;
+                break;
+
             case "Play the claw machine for the screwdriver":
                 storyState = state.WinScrewdriver;
+                break;
+
+            case "Give the screwdriver to Michael":
+                storyState = state.GiveScrewdriver;
                 break;
 
             case "Talk to Sarah":
@@ -194,8 +202,16 @@ public class GameState : MonoBehaviour
                 storyState = state.PlaySarah;
                 break;
 
+            case "See if Michael is done":
+                storyState = state.FindMicheal;
+                break;
+
             case "Ask the Manager about Michael":
                 storyState = state.AskAboutMicheal;
+                break;
+
+            case "Play VR Level 3":
+                storyState = state.PlayLevel3;
                 break;
         }       
     }

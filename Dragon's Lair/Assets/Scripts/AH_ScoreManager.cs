@@ -51,8 +51,8 @@ public class AH_ScoreManager : MonoBehaviour
 
             if (gameState != null && gameState.GetComponent<GameState>().storyState < GameState.state.BeatSarah)
             {
-                gameState.GetComponent<GameState>().storyState = GameState.state.FindMicheal;
-                gameState.GetComponent<GameState>().objective = "Ask Michael if the machine is fixed";
+                gameState.GetComponent<GameState>().storyState = GameState.state.BeatSarah;
+                gameState.GetComponent<GameState>().objective = "Get VR Coin from Sarah";
             }
         }
 
