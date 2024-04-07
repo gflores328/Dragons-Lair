@@ -22,7 +22,12 @@ public class PixieController : Enemy
     public Material dissolveMaterial; // Reference to the dissolving material
     public Renderer renderer;
 
+    public GameObject newtFire;
+
     public bool isHidden = true; //Keeps track of the pixie's visibility
+
+
+    private bool notDead = true;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +44,7 @@ public class PixieController : Enemy
     void FixedUpdate()
     {
         //If there is a player to track, begin moving towards the player
-        if (playerToChase != null)
+        if (playerToChase != null && notDead)
         {
             //Make the pixie visible if not already
             if (!isHidden)
@@ -71,6 +76,7 @@ public class PixieController : Enemy
     protected override void Die()
     {
         playerToChase = null;
+        notDead = false;
         if (dissolveMaterial != null)
         {
             // Apply the dissolve material to the renderer of the game object
@@ -88,6 +94,7 @@ public class PixieController : Enemy
         {
             Debug.LogWarning("Dissolve material not assigned to Newt.");
         }
+        Destroy(newtFire);
         Destroy(gameObject, 1.5f);
     }
 }
