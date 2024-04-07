@@ -86,6 +86,24 @@ public class GameState : MonoBehaviour
             firstTimeLoad = false;
             playerPosition = new Vector3(26.601f, 0.025f, 31.94f);
         }
+        if (Input.GetKeyDown("4"))
+        {
+            storyState = state.Level2Complete;
+            firstTimeLoad = false;
+            playerPosition = new Vector3(26.601f, 0.025f, 31.94f);
+        }
+        if (Input.GetKeyDown("5"))
+        {
+            storyState = state.WinScrewdriver;
+            firstTimeLoad = false;
+            playerPosition = new Vector3(26.601f, 0.025f, 31.94f);
+        }
+        if (Input.GetKeyDown("6"))
+        {
+            storyState = state.BeatSarah;
+            firstTimeLoad = false;
+            playerPosition = new Vector3(26.601f, 0.025f, 31.94f);
+        }
     }
 
     // Set function for playerPosition
