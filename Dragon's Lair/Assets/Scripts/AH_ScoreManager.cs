@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows;
+using TMPro;
 
 public class AH_ScoreManager : MonoBehaviour
 {
@@ -28,20 +29,31 @@ public class AH_ScoreManager : MonoBehaviour
     private int playerScore = 0;
     private int aiScore = 0;
 
-    public Text playerScoreText;
-    public Text aiScoreText;
+    public TextMeshProUGUI playerScoreText;
+    public TextMeshProUGUI aiScoreText;
 
+    private GameObject gameState;
 
+    private void Start()
+    {
+        gameState = GameObject.Find("GameState");
+    }
     public void PlayerGoal()
     {
         playerScore++;
-        playerScoreText.text = "Owen: " + playerScore;
+        playerScoreText.text = playerScore.ToString();
 
 
         if ((playerScore == 7) && (playerController.mode == "easy"))
         {
             sfx.PlayYouWin();
             WinScreen.SetActive(true);
+
+            if (gameState != null && gameState.GetComponent<GameState>().storyState < GameState.state.BeatSarah)
+            {
+                gameState.GetComponent<GameState>().storyState = GameState.state.FindMicheal;
+                gameState.GetComponent<GameState>().objective = "Ask Michael if the machine is fixed";
+            }
         }
 
 
@@ -62,7 +74,7 @@ public class AH_ScoreManager : MonoBehaviour
     public void AIGoal()
     {
         aiScore++;
-        aiScoreText.text = "Npc AI: " + aiScore;
+        aiScoreText.text = aiScore.ToString();
 
         
 
