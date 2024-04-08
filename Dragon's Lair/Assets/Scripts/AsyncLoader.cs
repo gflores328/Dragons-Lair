@@ -66,12 +66,15 @@ public class AsyncLoader : MonoBehaviour
 
             if (scene.name == "CaveTwo" && sceneToLoad == "LevelDesignRealLife")
             {
-                gameState.GetComponent<GameState>().objective = "End of Demo";
+                gameState.GetComponent<GameState>().storyState = GameState.state.Level2Complete;
+                gameState.GetComponent<GameState>().objective = "Talk to Michael";
             }
+
+            
 
             if (sceneToLoad == "WinScreen")
             {
-                gameState.GetComponent<GameState>().storyState = GameState.state.Level2Complete;
+                gameState.GetComponent<GameState>().storyState = GameState.state.end;
                 gameState.GetComponent<GameState>().objective = "End of Demo";
             }
 
