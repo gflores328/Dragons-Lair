@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class MimicPhaseOne : Enemy
 {
@@ -18,6 +19,7 @@ public class MimicPhaseOne : Enemy
 
     public GameObject player;
     public GameObject exit;
+    public GameObject healthBar;
 
     [Header("Speeds")]
     public float jumpSpeed; // The speed of the enemy jump
@@ -32,7 +34,8 @@ public class MimicPhaseOne : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthBar.GetComponent<Slider>().maxValue = health;
+        healthBar.GetComponent<Slider>().value = health;
     }
 
     // Update is called once per frame
@@ -123,5 +126,11 @@ public class MimicPhaseOne : Enemy
     {
         exit.SetActive(false);
         base.Die();
+    }
+
+    public override void TakeDamage(float amnt)
+    {
+        base.TakeDamage(amnt);
+        healthBar.GetComponent<Slider>().value = health;
     }
 }

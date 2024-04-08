@@ -1864,6 +1864,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4161388230779075640, guid: 5d4c3aeb96ecc1c4c8d199028498682a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374678476857447042, guid: 5d4c3aeb96ecc1c4c8d199028498682a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730569561230542705, guid: 5d4c3aeb96ecc1c4c8d199028498682a,
         type: 3}
       propertyPath: playerToChase
@@ -5769,6 +5779,7 @@ MonoBehaviour:
   start: 0
   player: {fileID: 1579124035}
   exit: {fileID: 540285098}
+  healthBar: {fileID: 890222170}
   jumpSpeed: 20
   slamSpeed: 30
   leftBorder: {fileID: 0}
@@ -8553,6 +8564,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885173053}
   m_CullTransparentMesh: 1
+--- !u!1 &890222170 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7864110326814341351, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6508939622206945613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &892363247
 GameObject:
   m_ObjectHideFlags: 0
@@ -15017,6 +15034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entrance: {fileID: 1179820525}
   mimic: {fileID: 521247197}
+  healthBar: {fileID: 890222170}
 --- !u!1001 &1523956382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25721,6 +25739,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4801091470151929316, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4936651274103571378, guid: 893c1ef923a79e1469687e6cb3c1d82c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -25780,6 +25803,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077677021688802324, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6224622018775486801, guid: 893c1ef923a79e1469687e6cb3c1d82c,
         type: 3}
@@ -25871,6 +25899,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7027667571162907395, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7133176191407312785, guid: 893c1ef923a79e1469687e6cb3c1d82c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -25959,6 +25992,11 @@ PrefabInstance:
     - target: {fileID: 7600040845546368965, guid: 893c1ef923a79e1469687e6cb3c1d82c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864110326814341351, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
