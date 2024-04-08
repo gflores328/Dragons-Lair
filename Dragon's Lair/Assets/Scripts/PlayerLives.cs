@@ -47,12 +47,20 @@ public class PlayerLives : MonoBehaviour
         Debug.Log("Player Dead");
         playerDeathAudio.Play();
         lives -= 1; // Remove 1 Life
-        Destroy(gameObject); // Destroy player object
+        //Destroy(gameObject); // Destroy player object
+
+        GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject i in Enemies)
+        {
+            Destroy(i.transform.parent.gameObject);
+        }
+
 
         if (lives > 0) // If Player has Extra Lives
         {
             Debug.Log("Level Reset");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Level Reset
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Level Reset
         }
 
         else if (lives <= 0) // If Player Runs Out of Lives
