@@ -65,6 +65,7 @@ public class PlayerLives : MonoBehaviour
 
         else if (lives <= 0) // If Player Runs Out of Lives
         {
+            Destroy(gameObject);
             OnPlayerDeath?.Invoke(); // Trigger Game Over
             lives = 3;
         }
