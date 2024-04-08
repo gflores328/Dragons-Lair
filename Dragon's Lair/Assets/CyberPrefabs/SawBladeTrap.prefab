@@ -44,7 +44,7 @@ PrefabInstance:
     - target: {fileID: 893671457588525176, guid: 672470b17bf7cc443b207ce5574e8076,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4721309214382664934, guid: 672470b17bf7cc443b207ce5574e8076,
         type: 3}
@@ -123,12 +123,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
         type: 3}
-      propertyPath: TrailModule.enabled
+      propertyPath: ColorModule.enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
         type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
+        type: 3}
+      propertyPath: TrailModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
+        type: 3}
       propertyPath: emitterVelocityMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
+        type: 3}
+      propertyPath: LightsModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
@@ -154,6 +169,16 @@ PrefabInstance:
     - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
         type: 3}
       propertyPath: SizeBySpeedModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
+        type: 3}
+      propertyPath: ClampVelocityModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
+        type: 3}
+      propertyPath: InheritVelocityModule.enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6822982048235058345, guid: 672470b17bf7cc443b207ce5574e8076,
