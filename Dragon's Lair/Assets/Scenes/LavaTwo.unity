@@ -4143,11 +4143,6 @@ PrefabInstance:
       propertyPath: powerUpDesc
       value: 
       objectReference: {fileID: 2005773537}
-    - target: {fileID: 7981247011444305562, guid: 2ed2e6a8eae59dc4fb457203f1d5f44f,
-        type: 3}
-      propertyPath: healthToGive
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5777,16 +5772,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.230083
-      objectReference: {fileID: 0}
-    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.4585
-      objectReference: {fileID: 0}
     - target: {fileID: 7362770887378940235, guid: b1fb692bcb2720644a1431fa1dc9f4e1,
         type: 3}
       propertyPath: timeToReappear
@@ -5851,6 +5836,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CaveDisappearingPlat (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.230083
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.4585
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7684,16 +7679,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.230083
-      objectReference: {fileID: 0}
-    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.4585
-      objectReference: {fileID: 0}
     - target: {fileID: 7362770887378940235, guid: b1fb692bcb2720644a1431fa1dc9f4e1,
         type: 3}
       propertyPath: timeToReappear
@@ -7758,6 +7743,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CaveDisappearingPlat (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.230083
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.4585
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7942,7 +7937,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.165
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -10313,16 +10308,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.230083
-      objectReference: {fileID: 0}
-    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.4585
-      objectReference: {fileID: 0}
     - target: {fileID: 7362770887378940235, guid: b1fb692bcb2720644a1431fa1dc9f4e1,
         type: 3}
       propertyPath: timeToReappear
@@ -10387,6 +10372,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CaveDisappearingPlat (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.230083
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.4585
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14484,6 +14479,37 @@ Transform:
   - {fileID: 1354548929}
   m_Father: {fileID: 2146388446}
   m_LocalEulerAnglesHint: {x: 4.176461, y: 7.986858, z: -5.5712857}
+--- !u!1 &1276896678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1276896679}
+  m_Layer: 0
+  m_Name: EndPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1276896679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276896678}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710635, y: -0, z: -0, w: 0.7071073}
+  m_LocalPosition: {x: 206.71, y: 10.55, z: 0.1}
+  m_LocalScale: {x: 0.5, y: 0.50000036, z: 0.50000036}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1281349638
 GameObject:
   m_ObjectHideFlags: 0
@@ -23166,16 +23192,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.230083
-      objectReference: {fileID: 0}
-    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.4585
-      objectReference: {fileID: 0}
     - target: {fileID: 7362770887378940235, guid: b1fb692bcb2720644a1431fa1dc9f4e1,
         type: 3}
       propertyPath: timeToReappear
@@ -23240,6 +23256,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CaveDisappearingPlat (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.230083
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686374515663248493, guid: d939f88307157b84eadab76dcd177e08,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.4585
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25272,6 +25298,84 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6088290678465a84b8951b161882e587, type: 3}
+--- !u!1001 &8234668819557329463
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.79993
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.710976
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.662431
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421145725676734371, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718106291051481509, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 275879816}
+    - target: {fileID: 6718106291051481509, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: endOfLevelPoint
+      value: 
+      objectReference: {fileID: 1276896678}
+    - target: {fileID: 6793257082004604838, guid: 4b06771f0d16ffd4a82aac502c57825f,
+        type: 3}
+      propertyPath: m_Name
+      value: CheatCodes
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4b06771f0d16ffd4a82aac502c57825f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -25347,3 +25451,5 @@ SceneRoots:
   - {fileID: 1477326922}
   - {fileID: 1753363089}
   - {fileID: 1260764437}
+  - {fileID: 1276896679}
+  - {fileID: 8234668819557329463}

@@ -194,12 +194,17 @@ public class ArmRotation : MonoBehaviour
     }
     private void RotateGun(Vector3 targetPosition)
     {
+        // Clamp the target position to be within the screen bounds
+        Vector3 clampedPosition = targetPosition;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, 0, Screen.width);
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, 0, Screen.height);
+
+        // Convert the clamped position back to world space
+        Vector3 clampedWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(clampedPosition.x, clampedPosition.y, transform.position.z - mainCamera.transform.position.z));
+        clampedWorldPosition.z = armPivot.position.z;
+
         // Calculate the direction to the target
         Vector3 lookDirection = targetPosition - armPivot.position;
-
-
-
-
 
         // Ignore the z-axis rotation
         lookDirection.z = 0f;
