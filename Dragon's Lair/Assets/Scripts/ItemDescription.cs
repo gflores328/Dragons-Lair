@@ -8,8 +8,9 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ItemDescription : MonoBehaviour
+public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Item item;
     public TextMeshProUGUI descriptionBox;
@@ -17,21 +18,22 @@ public class ItemDescription : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData pointerEventData)
     {
         descriptionBox.text = item.GetDescription();
+        Debug.Log("Mouse in image");
     }
 
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData pointerEventData)
     {
         descriptionBox.text = null;
     }

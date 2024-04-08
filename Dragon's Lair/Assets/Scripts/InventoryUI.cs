@@ -51,12 +51,15 @@ public class InventoryUI : MonoBehaviour
             }
 
             // Store the item's image in the appropriate slot
-            transform.GetChild(0).GetChild(slotNumber).GetChild(0).GetComponent<Image>().sprite = item.image;
-            transform.GetChild(0).GetChild(slotNumber).GetChild(0).GetComponent<Image>().preserveAspect = true;
-            transform.GetChild(0).GetChild(slotNumber).GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(0).GetChild(slotNumber).GetChild(1).GetComponent<Image>().sprite = item.image;
+            transform.GetChild(0).GetChild(slotNumber).GetChild(1).GetComponent<Image>().preserveAspect = true;
+            transform.GetChild(0).GetChild(slotNumber).GetChild(1).gameObject.SetActive(true);
 
             // Store the item's name in the appropriate slot
-            transform.GetChild(0).GetChild(slotNumber).GetChild(1).GetComponent<TextMeshProUGUI>().text = item.GetName() + " x" + quantity;
+            transform.GetChild(0).GetChild(slotNumber).GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetName() + " x" + quantity;
+
+            // Stores the item in it's Item Description script
+            transform.GetChild(0).GetChild(slotNumber).GetChild(1).GetComponent<ItemDescription>().SetItem(item);
         }
 
     }
