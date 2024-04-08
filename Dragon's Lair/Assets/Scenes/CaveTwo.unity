@@ -3953,6 +3953,7 @@ MonoBehaviour:
   health: 50
   start: 0
   player: {fileID: 1191947152}
+  healthBar: {fileID: 942214084}
   movementSpeed: 10
   jumpSpeed: 20
   slamSpeed: 30
@@ -7914,7 +7915,7 @@ PrefabInstance:
     - target: {fileID: 4801091470151929316, guid: 893c1ef923a79e1469687e6cb3c1d82c,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4936651274103571378, guid: 893c1ef923a79e1469687e6cb3c1d82c,
         type: 3}
@@ -7975,6 +7976,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077677021688802324, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6224622018775486801, guid: 893c1ef923a79e1469687e6cb3c1d82c,
         type: 3}
@@ -8161,11 +8167,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7864110326814341351, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893c1ef923a79e1469687e6cb3c1d82c, type: 3}
+--- !u!1 &942214084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7864110326814341351, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+    type: 3}
+  m_PrefabInstance: {fileID: 942214083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &973355183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5936028016705197992, guid: 62132f41866c5cd4b80a186e65d371a1,
@@ -8819,6 +8836,7 @@ MonoBehaviour:
   health: 100
   start: 0
   player: {fileID: 1191947152}
+  healthBar: {fileID: 0}
   movementSpeed: 10
   jumpSpeed: 20
   slamSpeed: 30
@@ -19480,6 +19498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entrance: {fileID: 0}
   mimic: {fileID: 7717131806374707113}
+  healthBar: {fileID: 942214084}
 --- !u!4 &8830442760588402225
 Transform:
   m_ObjectHideFlags: 0

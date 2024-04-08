@@ -15,11 +15,13 @@ public class MimicPhaseTwoTrigger : MonoBehaviour
 {
     public GameObject entrance;
     public GameObject mimic;
+    public GameObject healthBar;
 
     private void OnTriggerEnter(Collider other)
     {
         //entrance.SetActive(true);
         mimic.GetComponent<MimicPhaseTwo>().start = true;
+        healthBar.SetActive(true);
 
         Destroy(gameObject);
     }

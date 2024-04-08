@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 public enum Direction { right, left };
 
@@ -19,7 +20,9 @@ public class MimicPhaseTwo : Enemy
     private int actionNumber = 1; // An int that represents the action the enemy should take 
     private bool startLunge = false;
 
+
     public GameObject player; // A reference to the player character
+    public GameObject healthBar;
 
     [Header("Speeds")]
     public float movementSpeed; // The speed that the enemy moves
@@ -44,7 +47,8 @@ public class MimicPhaseTwo : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthBar.GetComponent<Slider>().maxValue = health;
+        healthBar.GetComponent<Slider>().value = health;
     }
 
     // Update is called once per frame
@@ -338,6 +342,12 @@ public class MimicPhaseTwo : Enemy
     {
         exit.SetActive(true);
         Destroy(gameObject);
+    }
+
+    public override void TakeDamage(float amnt)
+    {
+        base.TakeDamage(amnt);
+        healthBar.GetComponent<Slider>().value = health;
     }
 
 }
