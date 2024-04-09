@@ -55,7 +55,7 @@ public class Powerup : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime); // wait for x amount of time
         showDesc = false; // turn the showDesc off
-        //powerUpDesc.SetActive(false); // Turn the text off
+        powerUpDesc.SetActive(false); // Turn the text off
         Destroy(gameObject); // Destroy powerup powerup
     }
 }
