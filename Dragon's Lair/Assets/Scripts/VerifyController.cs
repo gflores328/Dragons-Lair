@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class VerifyController : MonoBehaviour
 {
@@ -10,40 +11,23 @@ public class VerifyController : MonoBehaviour
 
     public GameManager gm;
 
-    IEnumerator CheckForController()
+    public void OnJoin(InputAction.CallbackContext ctx)
     {
-        while (true)
+        if (ctx.control.device is Keyboard)
         {
-            var controllers = Input.GetJoystickNames();
+            // Do for keyboard...
+            gm.controlsPanel.SetActive(true);
+            gm.controlsKeyboard.SetActive(true);
+            gm.controlsGamepad.SetActive(false);
 
-            if ((!connected) && (controllers.Length > 0))
-            {
-                connected = true; //controller is connected
-                Debug.Log("Controlled connected successfully.");
-                Debug.Log(controllers);
-                gm.controlsPanel.activeSelf.Equals(true);
-                gm.controlsKeyboard.activeSelf.Equals(true);
-                gm.controlsGamepad.activeSelf.Equals(false);
-
-            }
-            else if ((connected) && (controllers.Length == 0))
-            {
-                connected = false; //controller is not connected
-                Debug.Log("Controller disconnected.");
-                Debug.Log(controllers);
-
-                gm.controlsPanel.activeSelf.Equals(true);
-                gm.controlsKeyboard.activeSelf.Equals(false);
-                gm.controlsGamepad.activeSelf.Equals(true);
-
-            }
-
-            yield return new WaitForSeconds(1f);
+        }
+        else if (ctx.control.device is Gamepad)
+        {
+            // Do for gamepad...
+            gm.controlsPanel.SetActive(true);
+            gm.controlsKeyboard.SetActive(false);
+            gm.controlsGamepad.SetActive(true);
         }
     }
 
-    void Awake()
-    {
-        StartCoroutine(CheckForController());
-    }
 }
