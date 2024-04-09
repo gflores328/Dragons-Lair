@@ -19,12 +19,12 @@ public class CyberCheatCodes : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) // if the number 1 is pressed
+        if (Input.GetKeyDown(KeyCode.Alpha8)) // if the number 1 is pressed
         {
             infiniteHealth = !infiniteHealth; // toggle infite health on or off
         }
         
-        if(Input.GetKeyDown(KeyCode.Alpha2)) // if the number 2 is pressed
+        if(Input.GetKeyDown(KeyCode.Alpha9)) // if the number 2 is pressed
         {
             if (endOfLevelPoint != null) // Check if endOfLevelPoint is not null
             {
