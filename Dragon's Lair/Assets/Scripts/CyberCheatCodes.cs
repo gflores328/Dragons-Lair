@@ -4,37 +4,37 @@ using UnityEngine;
 
 public class CyberCheatCodes : MonoBehaviour
 {
-    public GameObject endOfLevelPoint;
+    public GameObject endOfLevelPoint; // A public gameObject to hold the spot where to teleport the player at the end of the level
     
-    private ChibiPlayerMovement chibiPlayerMovement;
-    private bool infiniteHealth = false;
+    private ChibiPlayerMovement chibiPlayerMovement; // A variable that will grab the chibi player movement script
+    private bool infiniteHealth = false; // A bool to activate infinite health
 
-    public GameObject player;
+    public GameObject player; // a game object that holds the player 
 
     void Start() 
     {
-        chibiPlayerMovement = FindObjectOfType<ChibiPlayerMovement>();
+        chibiPlayerMovement = FindObjectOfType<ChibiPlayerMovement>(); // Grab the players script
     }
     
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // if the number 1 is pressed
         {
-            infiniteHealth = !infiniteHealth;
+            infiniteHealth = !infiniteHealth; // toggle infite health on or off
         }
         
-        if(Input.GetKeyDown(KeyCode.Alpha2)) 
+        if(Input.GetKeyDown(KeyCode.Alpha2)) // if the number 2 is pressed
         {
             if (endOfLevelPoint != null) // Check if endOfLevelPoint is not null
             {
-                player.transform.position = endOfLevelPoint.transform.position; // 
+                player.transform.position = endOfLevelPoint.transform.position; // put the player at the end point
             }
         }
         
-        if(infiniteHealth)
+        if(infiniteHealth) // If infinite health bool is true
         {
-            ChibiPlayerMovement.playerHealth = chibiPlayerMovement.maxHealth;
+            ChibiPlayerMovement.playerHealth = chibiPlayerMovement.maxHealth; // Make the players health always maxed
         }
     }
 }
