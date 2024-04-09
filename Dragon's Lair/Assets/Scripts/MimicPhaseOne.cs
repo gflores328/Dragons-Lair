@@ -125,6 +125,7 @@ public class MimicPhaseOne : Enemy
     protected override void Die()
     {
         exit.SetActive(false);
+        healthBar.SetActive(false);
         base.Die();
     }
 

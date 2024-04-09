@@ -341,6 +341,7 @@ public class MimicPhaseTwo : Enemy
     protected override void Die()
     {
         exit.SetActive(true);
+        healthBar.SetActive(false);
         Destroy(gameObject);
     }
 
