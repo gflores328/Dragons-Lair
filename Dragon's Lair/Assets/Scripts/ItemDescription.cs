@@ -15,18 +15,6 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public Item item;
     public TextMeshProUGUI descriptionBox;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         descriptionBox.text = item.GetDescription();
