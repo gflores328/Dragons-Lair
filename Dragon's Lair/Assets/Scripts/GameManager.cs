@@ -91,13 +91,17 @@ public class GameManager : MonoBehaviour
     {
         // Check if any of the devices are Gamepads
         bool isControllerConnected = Gamepad.current != null;
-
+        
         // If a controller is connected and it was previously using mouse, switch to controller
         if (isControllerConnected && isMouse)
         {
+            var gamepad = Gamepad.current;
             isMouse = false; // Switch to controller
+
+            controlsPanel.SetActive(true);
             controlsKeyboard.SetActive(false);
             controlsGamepad.SetActive(true);
+
             if(mainMenu)
             {
                 SetButtonForController(resumeButton);
@@ -107,8 +111,12 @@ public class GameManager : MonoBehaviour
         // If no controller is connected and it was previously using controller, switch to mouse
         else if (!isControllerConnected && !isMouse)
         {
+            var keyboard = Keyboard.current;
+            var mouse = Mouse.current;
             isMouse = true; // switch to mouse
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
+            controlsPanel.SetActive(true);
             controlsKeyboard.SetActive(true);
             controlsGamepad.SetActive(false);
 

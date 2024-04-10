@@ -2,32 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputManagerEntry;
 
 public class VerifyController : MonoBehaviour
 {
     //this script verifies that the controller is connected and prints out details of it to the user
 
-    private bool connected = false;
+    //private bool connected = false;
 
     public GameManager gm;
 
-    public void OnJoin(InputAction.CallbackContext ctx)
+
+    public void OnJoinKeyboard()
     {
-        if (ctx.control.device is Keyboard)
+        // This works for other types of devices, too.
+
+
+        if (gm.GetIsMouse())
         {
             // Do for keyboard...
-            gm.controlsPanel.SetActive(true);
+           // gm.controlsPanel.SetActive(true);
             gm.controlsKeyboard.SetActive(true);
             gm.controlsGamepad.SetActive(false);
-
         }
-        else if (ctx.control.device is Gamepad)
+
+    }
+
+    public void OnJoinGamePad()
+    {
+
+
+        if (!gm.GetIsMouse())
         {
             // Do for gamepad...
-            gm.controlsPanel.SetActive(true);
+            //gm.controlsPanel.SetActive(true);
             gm.controlsKeyboard.SetActive(false);
             gm.controlsGamepad.SetActive(true);
         }
     }
-
 }
