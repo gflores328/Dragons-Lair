@@ -5779,7 +5779,7 @@ MonoBehaviour:
   start: 0
   player: {fileID: 1579124035}
   exit: {fileID: 540285098}
-  healthBar: {fileID: 890222170}
+  healthBar: {fileID: 6508939622206945614}
   jumpSpeed: 20
   slamSpeed: 30
   leftBorder: {fileID: 0}
@@ -8564,12 +8564,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885173053}
   m_CullTransparentMesh: 1
---- !u!1 &890222170 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7864110326814341351, guid: 893c1ef923a79e1469687e6cb3c1d82c,
-    type: 3}
-  m_PrefabInstance: {fileID: 6508939622206945613}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &892363247
 GameObject:
   m_ObjectHideFlags: 0
@@ -15112,7 +15106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entrance: {fileID: 1179820525}
   mimic: {fileID: 521247197}
-  healthBar: {fileID: 890222170}
+  healthBar: {fileID: 6508939622206945614}
 --- !u!1001 &1523956382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25848,6 +25842,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4739242636895750362, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739242636895750362, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4801091470151929316, guid: 893c1ef923a79e1469687e6cb3c1d82c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -25977,6 +25981,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523960857949460486, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6787440136848132349, guid: 893c1ef923a79e1469687e6cb3c1d82c,
         type: 3}
@@ -26118,6 +26127,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893c1ef923a79e1469687e6cb3c1d82c, type: 3}
+--- !u!1 &6508939622206945614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1471950901005964840, guid: 893c1ef923a79e1469687e6cb3c1d82c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6508939622206945613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6780730801767639798 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4356575142574248041, guid: 6088290678465a84b8951b161882e587,
@@ -26132,16 +26147,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
-        type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 206017505}
-    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
-        type: 3}
-      propertyPath: levelToLoad
-      value: ForestTwo
-      objectReference: {fileID: 0}
     - target: {fileID: 4488840170223106238, guid: 0c58ed1322913ee4eb81414ac1092f5b,
         type: 3}
       propertyPath: m_Size.x
@@ -26227,6 +26232,16 @@ PrefabInstance:
       propertyPath: respawnPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1180179564}
+    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 206017505}
+    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
+        type: 3}
+      propertyPath: levelToLoad
+      value: ForestTwo
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
