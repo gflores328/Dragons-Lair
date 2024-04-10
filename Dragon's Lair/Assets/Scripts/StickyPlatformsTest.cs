@@ -5,8 +5,21 @@ using UnityEngine;
 //helpds player stay on ledges when they jump to them
 public class StickyPlatformClass : MonoBehaviour
 {
-    public GameObject child;
-    public GameObject parent;
+    public GameObject child; //player
+    public GameObject parent; //ledge
+    private Transform _originalParent;
+
+
+    public void SetParent(Transform newParent)
+    {
+        _originalParent = transform.parent;
+        transform.parent = newParent;
+    }
+
+    public void ResetParent()
+    {
+        transform.parent = _originalParent;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -19,8 +32,14 @@ public class StickyPlatformClass : MonoBehaviour
         //keeps player from falling off the ledge > set worldPosistionStays to false
         //keeps local orientation instead of global orientation
 
-        child.transform.SetParent(parent.transform);
+        //child.transform.SetParent(parent.transform);
         //}
+
+        var platMovement = collision.collider.GetComponent<MovingLedgesTest>();
+        if (platMovement != null)
+        {
+            SetParent(transform);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -29,7 +48,14 @@ public class StickyPlatformClass : MonoBehaviour
         //void OnCollisionExit(Collision collision)
         //{
         //Setting parent to null unparents the objects
-        child.transform.SetParent(null);
+        //child.transform.SetParent(null);
         //
+
+        var platMovement = collision.collider.GetComponent<MovingLedgesTest>();
+        if (platMovement != null)
+        {
+            ResetParent();
+        }
     }
+
 }
