@@ -8,10 +8,14 @@ public class DisappearingLedges : MonoBehaviour
     [SerializeField] private float blinkInterval = .1f;
 
     private MeshRenderer meshRenderer;
+    private MeshCollider meshCollider;
+    private BoxCollider boxCollider;
 
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+        meshCollider = GetComponent<MeshCollider>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -26,21 +30,25 @@ public class DisappearingLedges : MonoBehaviour
     IEnumerator Vanish()
     {
         // Blink before disappearing
-        StartCoroutine(Blink());
+        //StartCoroutine(Blink());
 
         yield return new WaitForSeconds(timeToDisappear);
 
-        gameObject.SetActive(false);
+        // Stop the blinking
+        //StopCoroutine(Blink());
+
+        meshRenderer.enabled = false;
+        meshCollider.enabled = false;
+        boxCollider.enabled = false;
         
+
         yield return new WaitForSeconds(timeToReappear);
 
-        gameObject.SetActive(true);
-        
-        // Stop the blinking
-        StopCoroutine("Blink");
         
         // Ensure the mesh renderer is enabled when the platform reappears
         meshRenderer.enabled = true;
+        meshCollider.enabled = true;
+        boxCollider.enabled = true;
     }
 
     IEnumerator Blink()
