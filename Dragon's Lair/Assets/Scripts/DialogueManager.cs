@@ -61,6 +61,7 @@ public class DialogueManager : MonoBehaviour
 
         playerInput.actions.FindAction("Pause").Disable();
         playerInput.actions.FindAction("Inventory").Disable();
+        playerInput.actions.FindAction("Walk").Disable();
 
         actionsDisabled = true;
 
@@ -120,6 +121,7 @@ public class DialogueManager : MonoBehaviour
         {
             playerInput.actions.FindAction("Pause").Disable();
             playerInput.actions.FindAction("Inventory").Disable();
+            playerInput.actions.FindAction("Walk").Disable();
             actionsDisabled = true;
         }
 

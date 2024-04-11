@@ -220,10 +220,11 @@ public class RealPlayerMovement : MonoBehaviour
     private void Pause(InputAction.CallbackContext value)
     {
 
-        if (inventoryAction.enabled && interactAction.enabled)
+        if (inventoryAction.enabled && interactAction.enabled && walkAction.enabled)
         {
             inventoryAction.Disable();
             interactAction.Disable();
+            walkAction.Disable();
 
             GameObject.Find("DialogueManager").GetComponent<DialogueManager>().EndDialogue();
 
@@ -234,6 +235,7 @@ public class RealPlayerMovement : MonoBehaviour
         {
             inventoryAction.Enable();
             interactAction.Enable();
+            walkAction.Enable();
 
             gameManager.PauseGame();
         }
@@ -254,22 +256,22 @@ public class RealPlayerMovement : MonoBehaviour
         {
             pauseAction.Disable();
             interactAction.Disable();
+            walkAction.Disable();
 
             GameObject.Find("DialogueManager").GetComponent<DialogueManager>().EndDialogue();
 
-            Time.timeScale = 0;
             inventoryUI.SetActive(true);
            
             inventoryOpen = true;
         }
         else if (inventoryOpen)
         {
-            Time.timeScale = 1;
             inventoryUI.SetActive(false);
             inventoryOpen = false;
 
             pauseAction.Enable();
             interactAction.Enable();
+            walkAction.Enable();
 
         }
     }

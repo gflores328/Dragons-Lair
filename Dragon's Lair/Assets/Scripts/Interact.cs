@@ -217,7 +217,6 @@ public class Interact : MonoBehaviour
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
                 // Time scale is set to 0 when interact is run
-                Time.timeScale = 0;
                 dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
@@ -228,11 +227,11 @@ public class Interact : MonoBehaviour
             { 
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 currentLine = 0;
-                Time.timeScale = 1;
                 dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
 
                 playerInput.actions.FindAction("Pause").Enable();
                 playerInput.actions.FindAction("Inventory").Enable();
+                playerInput.actions.FindAction("Walk").Enable();
 
                 if (updateObjective && hasItemNeeded && correctTrigger)
                 {
@@ -249,7 +248,6 @@ public class Interact : MonoBehaviour
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             { 
                 // Time scale is set to 0 when interact is run
-                Time.timeScale = 0;
                 dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
@@ -276,7 +274,6 @@ public class Interact : MonoBehaviour
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
                 // Time scale is set to 0 when interact is run
-                Time.timeScale = 0;
                 dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
@@ -287,12 +284,12 @@ public class Interact : MonoBehaviour
             
                 dialogueManager.GetComponent<DialogueManager>().EndDialogue();
                 inventory.GetComponent<Inventory>().AddItem(itemToPickup);
-                Time.timeScale = 1;
                 GameObject.Find("GameState").GetComponent<GameState>().AddNonRespawnable(gameObject.name);
                 dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
 
                 playerInput.actions.FindAction("Pause").Enable();
                 playerInput.actions.FindAction("Inventory").Enable();
+                playerInput.actions.FindAction("Walk").Enable();
 
                 if (updateObjective)
                 {
@@ -313,7 +310,6 @@ public class Interact : MonoBehaviour
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
                 // Time scale is set to 0 when interact is run
-                Time.timeScale = 0;
                 dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
@@ -339,7 +335,6 @@ public class Interact : MonoBehaviour
             if (currentLine < dialogueToDisplay.dialogueArray.Length)
             {
                 // Time scale is set to 0 when interact is run
-                Time.timeScale = 0;
                 dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
                 dialogueManager.GetComponent<DialogueManager>().TextChange(dialogueToDisplay.dialogueArray[currentLine]);
                 currentLine++;
@@ -371,7 +366,6 @@ public class Interact : MonoBehaviour
     // For an on click event that will close menus and end dialogue also sets timeScale back to 1
     public void CloseButton()
     {
-        Time.timeScale = 1;
         currentLine = 0;
         dialogueToDisplay = interactDialogue;
         //inDialogue = false;
@@ -382,12 +376,12 @@ public class Interact : MonoBehaviour
 
         playerInput.actions.FindAction("Pause").Enable();
         playerInput.actions.FindAction("Inventory").Enable();
+        playerInput.actions.FindAction("Walk").Enable();
     }
 
     // A button function that closes the image set up by zoom type interaction
     public void PopupClose()
     {
-        Time.timeScale = 1;
         currentLine = 0;
         menuOpen = false;
         UIPopUp.SetActive(false);
@@ -396,12 +390,12 @@ public class Interact : MonoBehaviour
 
         playerInput.actions.FindAction("Pause").Enable();
         playerInput.actions.FindAction("Inventory").Enable();
+        playerInput.actions.FindAction("Walk").Enable();
     }
 
     // For on on click event that will close the UI that the menu type interact pops up
     public void MenuClose()
     {
-        Time.timeScale = 1;
         menuOpen = false;
         menuUI.SetActive(false);
         //Cursor.lockState = CursorLockMode.Locked;
@@ -409,6 +403,7 @@ public class Interact : MonoBehaviour
 
         playerInput.actions.FindAction("Pause").Enable();
         playerInput.actions.FindAction("Inventory").Enable();
+        playerInput.actions.FindAction("Walk").Enable();
     }
 
     #region Editor
