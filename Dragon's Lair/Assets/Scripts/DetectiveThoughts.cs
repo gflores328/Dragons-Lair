@@ -72,7 +72,6 @@ public class DetectiveThoughts : MonoBehaviour
         dialogueManager.GetComponent<DialogueManager>().StartDialogue(currentDialogue.dialogueArray[currentLine]);
         lostInThought = true;
         currentLine++;
-        Time.timeScale = 0;
         
     }
 
@@ -98,6 +97,7 @@ public class DetectiveThoughts : MonoBehaviour
             lostInThought = false;
             playerInput.actions.FindAction("Pause").Enable();
             playerInput.actions.FindAction("Inventory").Enable();
+            playerInput.actions.FindAction("Walk").Enable();
 
         }
     }
