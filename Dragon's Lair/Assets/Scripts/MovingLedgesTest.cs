@@ -14,6 +14,9 @@ public class MovingLedgesTest : MonoBehaviour
 
     private bool playerHasArrived = false;
 
+    private Vector3 velocity;
+    private bool moving;
+
 
     // Start is called before the first frame update
     void Start()
@@ -52,16 +55,39 @@ public class MovingLedgesTest : MonoBehaviour
                 }
 
                 transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
+                
             }
         }
 
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             playerHasArrived = true;
+            moving = true;
+            collision.collider.transform.SetParent(transform);
+            transform.position += (velocity * Time.deltaTime);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerHasArrived = false;
+            moving = false;
+            collision.collider.transform.SetParent(null);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+
+        if (moving)
+        {
+            transform.position += (velocity * Time.deltaTime);
         }
     }
 }

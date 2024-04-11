@@ -9,6 +9,9 @@ public class StickyPlatformClass : MonoBehaviour
     public GameObject parent; //ledge
     private Transform _originalParent;
 
+    private Vector3 velocity;
+    private bool moving;
+
 
     public void SetParent(Transform newParent)
     {
@@ -35,10 +38,16 @@ public class StickyPlatformClass : MonoBehaviour
         //child.transform.SetParent(parent.transform);
         //}
 
-        var platMovement = collision.collider.GetComponent<MovingLedgesTest>();
+        /*var platMovement = collision.collider.GetComponent<MovingLedgesTest>();
         if (platMovement != null)
         {
             SetParent(transform);
+        }*/
+        if (collision.gameObject.CompareTag("Player"))
+        { 
+            moving = true;
+            collision.collider.transform.SetParent(transform);
+            transform.position += (velocity * Time.deltaTime);
         }
     }
 
@@ -51,10 +60,25 @@ public class StickyPlatformClass : MonoBehaviour
         //child.transform.SetParent(null);
         //
 
-        var platMovement = collision.collider.GetComponent<MovingLedgesTest>();
+        /*var platMovement = collision.collider.GetComponent<MovingLedgesTest>();
         if (platMovement != null)
         {
             ResetParent();
+        }*/
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            moving = false;
+            collision.collider.transform.SetParent(null);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+
+        if (moving)
+        {
+            transform.position += (velocity * Time.deltaTime);
         }
     }
 
