@@ -54,6 +54,8 @@ public class GameState : MonoBehaviour
     public state storyState; // An instance of the state enum
     [HideInInspector]
     public string objective; // a string that reresents the text for the objective UI
+    [HideInInspector]
+    public List<string> interactedWith; // An array to hold the game objects that have already been interacted with
 
 
     // Start is called before the first frame update

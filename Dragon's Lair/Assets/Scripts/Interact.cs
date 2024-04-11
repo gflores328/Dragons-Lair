@@ -233,6 +233,13 @@ public class Interact : MonoBehaviour
                 playerInput.actions.FindAction("Inventory").Enable();
                 playerInput.actions.FindAction("Walk").Enable();
 
+                // If this is a regular interaction then the game object is added to the interacted with list and its icon is changed
+                if (hasItemNeeded && correctTrigger && (GetComponentInChildren<GrayOut>() != null))
+                {
+                    gameState.GetComponent<GameState>().interactedWith.Add(gameObject.name);
+                    GetComponentInChildren<GrayOut>().Change();
+                }
+
                 if (updateObjective && hasItemNeeded && correctTrigger)
                 {
                     dialogueManager.GetComponent<DialogueManager>().ObjectiveChange(newObjective);
@@ -323,7 +330,10 @@ public class Interact : MonoBehaviour
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstButton);
                 menuOpen = true;
                 Cursor.lockState = CursorLockMode.None;
-                 
+
+                gameState.GetComponent<GameState>().interactedWith.Add(gameObject.name);
+                GetComponentInChildren<GrayOut>().Change();
+
             }
         }
 
@@ -347,7 +357,9 @@ public class Interact : MonoBehaviour
                 currentLine = 0;
                 menuOpen = true;
 
-                
+                gameState.GetComponent<GameState>().interactedWith.Add(gameObject.name);
+                GetComponentInChildren<GrayOut>().Change();
+
             }
         }
     }
