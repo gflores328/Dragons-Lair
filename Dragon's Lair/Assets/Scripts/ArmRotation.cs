@@ -55,21 +55,6 @@ public class ArmRotation : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if(gameManager.GetIsMouse())
-        {
-            gunRotationWithMouse = gameManager.GetusingMouseRotation();
-        }
-        //gunRotationWithMouse = gameManager.GetusingMouseRotation();
-        if(!gameManager.GetIsMouse())
-        {
-            gunRotationWithMouse = false;
-        }
-        //Debug.Log($"isusing rotation {gunRotationWithMouse}");
-        
-    }
-
     private void OnEnable()
     {
         aimAction.Enable(); // Enable the aim action
@@ -95,6 +80,37 @@ public class ArmRotation : MonoBehaviour
         crouchAction.canceled -= OnCrouchCanceled; // Subscribe crouch action to crouch canceled
         
     }
+    
+    private void Update()
+    {
+        if(gameManager.GetIsMouse())
+        {
+            gunRotationWithMouse = gameManager.GetusingMouseRotation();
+        }
+        //gunRotationWithMouse = gameManager.GetusingMouseRotation();
+        if(!gameManager.GetIsMouse())
+        {
+            gunRotationWithMouse = false;
+        }
+        if(gunRotationWithMouse)
+        {
+            // Get the current mouse position
+            Vector3 mousePosition = Input.mousePosition;
+
+            // Convert the mouse position to a point in the game world
+            Vector3 targetPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, transform.position.z - mainCamera.transform.position.z));
+
+            // Set the Z-axis of the target position to the current Z position of the arm pivot
+            targetPosition.z = armPivot.position.z;
+
+            // Rotate the gun towards the cursor position
+            RotateGun(targetPosition);
+        }
+       
+        
+    }
+
+    
 
     private void OnAimPerformed(InputAction.CallbackContext context)
     {
@@ -203,31 +219,32 @@ public class ArmRotation : MonoBehaviour
         Vector3 clampedWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(clampedPosition.x, clampedPosition.y, transform.position.z - mainCamera.transform.position.z));
         clampedWorldPosition.z = armPivot.position.z;
 
-        // Calculate the direction to the target
+       // Calculate the direction to the target
         Vector3 lookDirection = targetPosition - armPivot.position;
 
-        // Ignore the z-axis rotation
-        lookDirection.z = 0f;
-
         if (lookDirection.magnitude > 0.001f)
-
         {
             // Calculate the angle to rotate the arm pivot around the X-axis
             float angleX = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-
+            
+            // Calculate the angle to rotate the arm pivot around the Z-axis
+            float angleZ = Mathf.Atan2(lookDirection.z, lookDirection.x) * Mathf.Rad2Deg;
 
             // Create the target rotation quaternion
-            Quaternion targetRotation = Quaternion.Euler(-angleX, 90f, 0f);
+            Quaternion targetRotation = Quaternion.Euler(-angleX, 90f, -angleZ); // Adjust as necessary based on your arm's initial orientation
 
             // Smoothly rotate the arm pivot to face the cursor position
             armPivot.rotation = Quaternion.Slerp(armPivot.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-
         }
     }
 
     public void setGunRotationMouse(bool isMouse)
     {
         gunRotationWithMouse = isMouse;
+    }
+
+    public bool GetGunRoationMouse()
+    {
+        return gunRotationWithMouse;
     }
 }
