@@ -44,6 +44,7 @@ public class ArmRotation : MonoBehaviour
 
     private InputAction crouchAction; // Input action for crounching
 
+    private bool isControllerConnected = false; // A bool to see if using keyboard or controller
     
 
 
@@ -127,11 +128,13 @@ public class ArmRotation : MonoBehaviour
             // Debug.Log(currentMousePosition);
             if (context.control.device is Gamepad)
             {
+                isControllerConnected = true; // set the is controller to true
                 Vector2 input = context.ReadValue<Vector2>(); // Read input value
                 if(input.y <= 1.0f && input.y >= 0.9f) // If the joy stick is going to the top  these are the parameters
                 {
                     armPivot.localRotation = Quaternion.Euler(-90f, 90f, 0f); // rotate the gun all the way up
                     chibiPlayerMovement.setAimingFloat(1f);
+                    armLookTarget.transform.position = armLookTargetUp.transform.position;
                     Debug.Log("ControllerAimingUP");
 
                 }
@@ -140,6 +143,7 @@ public class ArmRotation : MonoBehaviour
                     
                     armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f); // rotate the gun to the top right or left
                     chibiPlayerMovement.setAimingFloat(0.5f); 
+                    armLookTarget.transform.position = armLookTargetForwardDiag.transform.position;
                 }
                 
                 // else if(input.y >= -0.9f && input.y <= -0.5f) // if the joy stick is pointed to the bottom right or left 
@@ -151,24 +155,30 @@ public class ArmRotation : MonoBehaviour
                     
                     armPivot.localRotation = Quaternion.Euler(0f, 90f, 0f); // Set default rotation
                     chibiPlayerMovement.setAimingFloat(0f);
+                    armLookTarget.transform.position = armLookTargetForward.transform.position;
                     
                 }
             }
 
 
-            else if (context.control.device is Mouse && gunRotationWithMouse) // If not using a controller it must use the cursor
+            else if (context.control.device is Mouse) // If not using a controller it must use the cursor
             {
-                // Get the current mouse position
-                Vector3 mousePosition = Input.mousePosition;
+                isControllerConnected = false;
+                if( gunRotationWithMouse)
+                {
+                    // Get the current mouse position
+                    Vector3 mousePosition = Input.mousePosition;
 
-                // Convert the mouse position to a point in the game world
-                Vector3 targetPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, transform.position.z - mainCamera.transform.position.z));
+                    // Convert the mouse position to a point in the game world
+                    Vector3 targetPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, transform.position.z - mainCamera.transform.position.z));
 
-                // Set the Z-axis of the target position to the current Z position of the arm pivot
-                targetPosition.z = armPivot.position.z;
+                    // Set the Z-axis of the target position to the current Z position of the arm pivot
+                    targetPosition.z = armPivot.position.z;
 
-                // Rotate the gun towards the cursor position
-                RotateGun(targetPosition);
+                    // Rotate the gun towards the cursor position
+                    RotateGun(targetPosition);
+                }
+                
             
             }
         }
@@ -177,7 +187,7 @@ public class ArmRotation : MonoBehaviour
     
     private void OnAimUpPerformed(InputAction.CallbackContext context)
     {
-        if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused && !gunRotationWithMouse)
+        if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused && !gunRotationWithMouse && !isControllerConnected)
         {
             armPivot.localRotation = Quaternion.Euler(-90f, 90f, 0f); // rotate the gun all the way up
             chibiPlayerMovement.setAimingFloat(1f);
@@ -189,7 +199,7 @@ public class ArmRotation : MonoBehaviour
     private void OnAimUpDiagPerformed(InputAction.CallbackContext context)
 
     {
-        if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused && !gunRotationWithMouse)
+        if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused && !gunRotationWithMouse && isControllerConnected)
         {
             armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f); // rotate the gun to the top right or left 
             chibiPlayerMovement.setAimingFloat(0.5f);
@@ -200,7 +210,7 @@ public class ArmRotation : MonoBehaviour
     private void OnAimUpCanceled(InputAction.CallbackContext context)
 
     {
-        if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused && !gunRotationWithMouse)
+        if (gameManager != null && gameManager.currentState == GameManager.pauseState.Unpaused && !gunRotationWithMouse && !isControllerConnected)
         {
            armPivot.localRotation = Quaternion.Euler(0f, 90f, 0f); // rotate the gun forward
            chibiPlayerMovement.setAimingFloat(0f);

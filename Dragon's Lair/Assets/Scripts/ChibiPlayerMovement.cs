@@ -292,12 +292,14 @@ public class ChibiPlayerMovement : MonoBehaviour
                 //Debug.Log(currExtraJumps);
                 currExtraJumps--; // Decrement extra jumps if not grounded
                 //Debug.Log(currExtraJumps);
+                animator.SetBool("isJumping", true);
                 
             }
         }
         else if (!isJumpingPressed && isJumping && isGrounded)
         {
             isJumping = false;
+            animator.SetBool("isJumping", false);
         }
     }
 

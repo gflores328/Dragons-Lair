@@ -187,7 +187,8 @@ public class MimicPhaseTwo : Enemy
     // It takes a float and the value will be the x position that the object will jump to
     IEnumerator Jump (float xTarget)
     {
-        Debug.Log("Here");
+        GetComponentInChildren<Animator>().SetTrigger("jumpSlamAttack");
+
         float yTarget = gameObject.transform.position.y + 5;
 
         // A vector 3 is created with the x and y targer

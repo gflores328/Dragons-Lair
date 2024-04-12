@@ -10,14 +10,13 @@ public class AH_UImgr : MonoBehaviour
     public GameObject winObj;
     public GameObject lossObj;
 
+    public bool started = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (startMenu.activeSelf.Equals(true))
-        {
-            Time.timeScale = 0;
-        }
+        Time.timeScale = 0;
+        
 
         hidePaused();
 
@@ -26,6 +25,16 @@ public class AH_UImgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (!started)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                started = true;
+                startMenu.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
 
         //uses the escape button to pause and unpause the game
         if (Input.GetKeyDown(KeyCode.Escape))
