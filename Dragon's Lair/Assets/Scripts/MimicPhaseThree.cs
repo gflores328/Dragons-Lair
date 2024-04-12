@@ -10,11 +10,10 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
 
-public enum Direction { right, left };
 
-public class MimicPhaseTwo : Enemy
+public class MimicPhaseThree : Enemy
 {
-    
+
     public bool start = false; // A bool to determine wheter or not the object should be doing stuff
     private bool takingAction = false; // A bool to check if the object is currently in an action
     private int actionNumber = 1; // An int that represents the action the enemy should take 
@@ -39,10 +38,12 @@ public class MimicPhaseTwo : Enemy
     public GameObject fallingDebrisHeight;
     public GameObject splashDebris;
     public GameObject splashDebrisSpawn;
-    
+
     private Direction directionFacing = Direction.left;
 
     public GameObject exit;
+
+    public bool goLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +55,8 @@ public class MimicPhaseTwo : Enemy
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(takingAction);
+
         if (directionFacing == Direction.left)
         {
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
@@ -63,54 +66,24 @@ public class MimicPhaseTwo : Enemy
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
-        Debug.Log(actionNumber);
-        Debug.Log(directionFacing);
-
         if (start && !takingAction)
         {
             switch (actionNumber)
             {
                 case 1:
-                    Debug.Log("Makes it");
-                    StartCoroutine(JumpAbovePlayer());
+                    StartCoroutine(MoveToCorner());
                     actionNumber++;
                     break;
 
                 case 2:
-                    if (directionFacing == Direction.right && !(transform.position.x + 10 > rightBorder.transform.position.x))
-                    {
-                        StartCoroutine(Lunge());
-                    }
-                    else if (directionFacing == Direction.left && !(transform.position.x - 10 < leftBorder.transform.position.x))
-                    {
-                        StartCoroutine(Lunge());
-                    }
-                    else
-                    {
-                        StartCoroutine(JumpAbovePlayer());
-                    }
+                    StartCoroutine(MoveToCorner());
                     actionNumber++;
                     break;
-
                 case 3:
-                    StartCoroutine(Meelee());
-                    actionNumber++;
-                    break;
-
-                case 4:
                     StartCoroutine(JumpToCorner());
-                    actionNumber++;
-                    break;
-
-                case 5:
-                    StartCoroutine(Lunge());
-                    actionNumber++;
-                    break;
-
-                case 6:
-                    StartCoroutine(Meelee());
                     actionNumber = 1;
                     break;
+
             }
         }
 
@@ -144,11 +117,14 @@ public class MimicPhaseTwo : Enemy
     // This function will move the object to whichever border it is closest to
     IEnumerator MoveToCorner()
     {
+        GetComponentInChildren<Animator>().SetBool("isWalking", true);
+
         takingAction = true;
-        bool goLeft;
+        
+
 
         // If the object is farther from the left border than goLeft is set to true and if not it is false 
-        if(Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
+        if (Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
         {
             goLeft = true;
         }
@@ -156,38 +132,57 @@ public class MimicPhaseTwo : Enemy
         {
             goLeft = false;
         }
-        
+
         // While the objects position is not at either borders position
-        while ((transform.position.x != leftBorder.transform.position.x) && (transform.position.x != rightBorder.transform.position.x))
-        {
-            
+
             // If go left is true then the object moves towards the left border
             if (goLeft)
             {
-                Vector3 targetPosition = new Vector3(leftBorder.transform.position.x, transform.position.y, transform.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
-                yield return null;
+                while (transform.position.x != leftBorder.transform.position.x)
+                {
+                    Debug.Log("Left");
+                    directionFacing = Direction.left;
+                    Vector3 targetPosition = new Vector3(leftBorder.transform.position.x, transform.position.y, transform.position.z);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+                    yield return null;
+                }
             }
             // else it moves towards the right border
             else
             {
-                Vector3 targetPosition = new Vector3(rightBorder.transform.position.x, transform.position.y, transform.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
-                yield return null;
+                while (transform.position.x != rightBorder.transform.position.x)
+                {
+                    Debug.Log("Right");
+                    directionFacing = Direction.right;
+                    Vector3 targetPosition = new Vector3(rightBorder.transform.position.x, transform.position.y, transform.position.z);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+                    yield return null;
+                }
             }
+        
+
+        if (goLeft)
+        {
+            directionFacing = Direction.right;
         }
+        else
+        {
+            directionFacing = Direction.left;
+        }
+        GetComponentInChildren<Animator>().SetBool("isWalking", false);
 
         yield return new WaitForSeconds(1);
-        actionNumber++;
+
         takingAction = false;
-       
+
+
     }
 
     // This function contains the action for the object to jump
     // It takes a float and the value will be the x position that the object will jump to
-    IEnumerator Jump (float xTarget)
+    IEnumerator Jump(float xTarget)
     {
-        GetComponentInChildren<Animator>().SetTrigger("jumpSlamAttack");
+        GetComponentInChildren<Animator>().SetTrigger("jumpSlam");
 
         float yTarget = gameObject.transform.position.y + 5;
 
@@ -200,17 +195,15 @@ public class MimicPhaseTwo : Enemy
         {
             // The object moves towards the target position at the speed of the jumpSpeed
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPosition, jumpSpeed * Time.deltaTime);
-            
-            
+
+
             // Wait for next frame
             yield return null;
 
-            Debug.Log("Makes it");
         }
 
 
 
-        Debug.Log("Makes it 2");
         // Waits for .5 seconds before running the code to slam down
         yield return new WaitForSeconds(.5f);
 
@@ -247,7 +240,7 @@ public class MimicPhaseTwo : Enemy
             directionFacing = Direction.left;
         }
 
-        SplashDebris();
+        //SplashDebris();
 
         yield return new WaitForSeconds(1);
         takingAction = false;
@@ -279,7 +272,7 @@ public class MimicPhaseTwo : Enemy
             xTarget = transform.position.x - 10;
             targetPosition = new Vector3(xTarget, transform.position.y, transform.position.z);
         }
-        
+
 
         //yield return new WaitUntil(() => startLunge);
 
@@ -294,13 +287,13 @@ public class MimicPhaseTwo : Enemy
 
         startLunge = false;
         takingAction = false;
-        
+
     }
 
     private void FallingDebris()
     {
 
-        for(int i = 0; i <= 4; i++)
+        for (int i = 0; i <= 4; i++)
         {
             float xSpawn = Random.Range(leftBorder.transform.position.x, rightBorder.transform.position.x);
             GameObject clone = Instantiate(fallingDebris, new Vector3(xSpawn, fallingDebrisHeight.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
@@ -353,4 +346,3 @@ public class MimicPhaseTwo : Enemy
     }
 
 }
-
