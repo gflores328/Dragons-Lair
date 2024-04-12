@@ -9,6 +9,13 @@ public class ArmRotation : MonoBehaviour
 
     public Transform armPivot; // The pivot point of the arm
 
+    public Transform armLookTarget;
+
+    public Transform armLookTargetUp;
+
+    public Transform armLookTargetForward;
+
+    public Transform armLookTargetForwardDiag;
     public float rotationSpeed = 5f; // Speed of arm rotation
 
     public float maxRotationAngle = 45f; // Maximum rotation angle in degrees
@@ -174,6 +181,7 @@ public class ArmRotation : MonoBehaviour
         {
             armPivot.localRotation = Quaternion.Euler(-90f, 90f, 0f); // rotate the gun all the way up
             chibiPlayerMovement.setAimingFloat(1f);
+            armLookTarget.transform.position = armLookTargetUp.transform.position;
         }
     }
     
@@ -185,6 +193,7 @@ public class ArmRotation : MonoBehaviour
         {
             armPivot.localRotation = Quaternion.Euler(-45f, 90f, 0f); // rotate the gun to the top right or left 
             chibiPlayerMovement.setAimingFloat(0.5f);
+            armLookTarget.transform.position = armLookTargetForwardDiag.transform.position;
         }
     }
 
@@ -195,6 +204,7 @@ public class ArmRotation : MonoBehaviour
         {
            armPivot.localRotation = Quaternion.Euler(0f, 90f, 0f); // rotate the gun forward
            chibiPlayerMovement.setAimingFloat(0f);
+           armLookTarget.transform.position = armLookTargetForward.transform.position;
         }
     }
     
