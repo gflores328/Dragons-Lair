@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject resumeButton; // Grabs the resume button so when paused the event system knows to select it first for the controller;
 
-    public GameObject controlsPanel;
+    //public GameObject controlsPanel;
 
     public GameObject controlsKeyboard;
 
@@ -97,8 +97,8 @@ public class GameManager : MonoBehaviour
         {
             var gamepad = Gamepad.current;
             isMouse = false; // Switch to controller
-
-            controlsPanel.SetActive(true);
+            Cursor.visible = false; // Hide the cursor
+            //controlsPanel.SetActive(true);
             controlsKeyboard.SetActive(false);
             controlsGamepad.SetActive(true);
 
@@ -114,9 +114,10 @@ public class GameManager : MonoBehaviour
             var keyboard = Keyboard.current;
             var mouse = Mouse.current;
             isMouse = true; // switch to mouse
+            Cursor.visible = true; // Hide the cursor
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
 
-            controlsPanel.SetActive(true);
+            //controlsPanel.SetActive(true);
             controlsKeyboard.SetActive(true);
             controlsGamepad.SetActive(false);
 
