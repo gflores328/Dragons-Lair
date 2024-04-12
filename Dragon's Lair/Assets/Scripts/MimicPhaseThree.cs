@@ -43,7 +43,7 @@ public class MimicPhaseThree : Enemy
 
     public GameObject exit;
 
-    public bool goLeft;
+    private bool goLeft;
 
     // Start is called before the first frame update
     void Start()
