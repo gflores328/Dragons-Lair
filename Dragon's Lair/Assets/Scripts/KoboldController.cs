@@ -56,6 +56,7 @@ public class KoboldController : Enemy
     bool m_IsPatrol; // Patrol Mode
     bool m_CaughtPlayer; // Caught Player
 
+    public bool hitPlayer; // was player hit
     public KoboldData kData; // KoboldData - Unused
 
     // Start is called before the first frame update
@@ -77,7 +78,7 @@ public class KoboldController : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if(!isDead)
 
@@ -118,8 +119,13 @@ public class KoboldController : Enemy
             if (Vector3.Distance(transform.position, m_PlayerPosition) <= attackRange)
             {
                 // Attack the player
+                Debug.Log("Player in attack range");
+
+                Stop();
                 Attack();
+                Invoke("ResetAttack", animator.GetCurrentAnimatorStateInfo(0).length);
             }
+           
         }
         if (navAgent.remainingDistance <= navAgent.stoppingDistance) // If 
         {
@@ -280,9 +286,9 @@ public class KoboldController : Enemy
         {
             // Apply the dissolve material to the renderer of the game object
             
-            if (renderer != null)
+            if (renderer != null && renderer.materials.Length > 1)
             {
-                renderer.material = dissolveMaterial;
+                renderer.materials[1] = dissolveMaterial;
             }
             else
             {
@@ -313,6 +319,7 @@ public class KoboldController : Enemy
 
     void Attack()
     {
+        
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -320,18 +327,22 @@ public class KoboldController : Enemy
             if (playerMovement != null)
             {
                 isAttacking = true; // Set attacking flag to true
-                animator.SetBool("Walking_Kobold", false);
+                Stop();
+               
+                Debug.Log("Kobold is Attacking");
+                
                 animator.SetBool("Attack_Kobold", true); // Trigger attack animation
 
                 // Calculate the next attack time based on the attack cooldown
                 nextAttackTime = Time.time + attackCooldown;
-
-                // Apply damage to the player (you can replace this with your own damage mechanism)
-                // For example, you can use a health script attached to the player
-                playerMovement.takeDamage(attackDamage);
+                if(hitPlayer)
+                {
+                    playerMovement.takeDamage(attackDamage);
+                }
+                
 
                 // Reset the attacking flag after the attack animation duration
-                Invoke("ResetAttack", animator.GetCurrentAnimatorStateInfo(0).length);
+                //Invoke("ResetAttack", animator.GetCurrentAnimatorStateInfo(0).length);
             }
         }
         else
@@ -360,4 +371,11 @@ public class KoboldController : Enemy
         }
         return false;
     }
+
+    public void SetHitPlayer(bool success)
+    {
+        hitPlayer = success;
+    }
+
+
 } 

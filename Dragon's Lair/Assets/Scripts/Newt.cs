@@ -9,13 +9,22 @@ public class Newt : Enemy
     public Material dissolveMaterial; // Reference to the dissolving material
     public Renderer renderer;
 
+    private Collider collider;
+
+    public float dissolveSpeed = 1.5f; // Speed at which the material dissolves
+    private void Start()
+    {
+        
+        collider = GetComponent<Collider>();
+
+    }
+
     protected override void Die()
     {
-        // Check if the dissolve material is assigned
+        collider.enabled = false;
+
         if (dissolveMaterial != null)
         {
-            // Apply the dissolve material to the renderer of the game object
-            
             if (renderer != null)
             {
                 renderer.material = dissolveMaterial;
@@ -24,40 +33,13 @@ public class Newt : Enemy
             {
                 Debug.LogWarning("Renderer not found on Newt object.");
             }
+
+            // Gradually increase the dissolve amount
+            StartCoroutine(DissolveOverTime());
         }
         else
         {
             Debug.LogWarning("Dissolve material not assigned to Newt.");
-        }
-
-        // Find the collider component attached to the Newt enemy
-        Collider newtCollider = GetComponent<Collider>();
-        if (newtCollider != null)
-        {
-            // Find the player GameObject
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                // Find the collider component attached to the player
-                Collider playerCollider = player.GetComponent<Collider>();
-                if (playerCollider != null)
-                {
-                    // Ignore collision between the Newt and the player
-                    Physics.IgnoreCollision(newtCollider, playerCollider);
-                }
-                else
-                {
-                    Debug.LogWarning("Collider not found on Player object.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Player object not found.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Collider not found on Newt object.");
         }
 
         float deathDuration = 1.5f;
@@ -66,4 +48,17 @@ public class Newt : Enemy
         Destroy(gameObject, deathDuration);
     }
 
+    IEnumerator DissolveOverTime()
+    {
+        float dissolveAmount = 0f;
+        while (dissolveAmount < 30f)
+        {
+            dissolveAmount += dissolveSpeed * Time.deltaTime;
+            dissolveAmount = Mathf.Clamp01(dissolveAmount);
+
+            renderer.material.SetFloat("_DissolveAmount", dissolveAmount);
+
+            yield return null;
+        }
+    }
 }

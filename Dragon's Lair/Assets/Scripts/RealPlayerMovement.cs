@@ -17,7 +17,7 @@ public class RealPlayerMovement : MonoBehaviour
     
     public bool inRealLife = true; // A public bool to determine if the player is in real life or the arcade chibi world used to restrict movement
 
-
+    public Animator animator;
     private PlayerInput playerInput; // A private variable that is meant to grab the PlayerInput component that is attached to the player.
 
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
@@ -126,6 +126,16 @@ public class RealPlayerMovement : MonoBehaviour
         
         characterController.Move(targetVelocity * Time.deltaTime);
 
+        if (targetVelocity.magnitude > 0) 
+        {
+            // Set the animator bool "isWalking" to true
+            animator.SetBool("isWalking", true);
+        } 
+        else 
+        {
+            // Set the animator bool "isWalking" to false
+            animator.SetBool("isWalking", false);
+        }
         //footStep.enabled = true;
 
        

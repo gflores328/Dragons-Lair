@@ -7,9 +7,13 @@ public class DisappearingLedges : MonoBehaviour
     [SerializeField] private float timeToReappear = 5f;
     [SerializeField] private float blinkInterval = .1f;
 
+
+    private bool isBlinking;
     private MeshRenderer meshRenderer;
     private MeshCollider meshCollider;
     private BoxCollider boxCollider;
+
+    private Coroutine blinkCoroutine;
 
     void Start()
     {
@@ -30,13 +34,13 @@ public class DisappearingLedges : MonoBehaviour
     IEnumerator Vanish()
     {
         // Blink before disappearing
-        //StartCoroutine(Blink());
+        blinkCoroutine = StartCoroutine(Blink());
 
         yield return new WaitForSeconds(timeToDisappear);
 
         // Stop the blinking
-        //StopCoroutine(Blink());
-
+        StopCoroutine(blinkCoroutine);
+        isBlinking = false;
         meshRenderer.enabled = false;
         meshCollider.enabled = false;
         boxCollider.enabled = false;
@@ -53,7 +57,8 @@ public class DisappearingLedges : MonoBehaviour
 
     IEnumerator Blink()
     {
-        while (true)
+        isBlinking = true;
+        while (isBlinking)
         {
             meshRenderer.enabled = !meshRenderer.enabled;
             yield return new WaitForSeconds(blinkInterval);
