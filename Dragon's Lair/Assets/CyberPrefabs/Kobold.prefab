@@ -189,12 +189,16 @@ MonoBehaviour:
   meshResolution: 1
   edgeIterations: 4
   edgeDistance: 0.5
+  attackRange: 2
+  attackDamage: 10
+  attackCooldown: 2
   dissolveMaterial: {fileID: 2100000, guid: d4a3ce5f3d4e2e64e83223c4aec3897e, type: 2}
   renderer: {fileID: 5106866325895331278}
   animator: {fileID: 0}
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
+  hitPlayer: 0
   kData: {fileID: 11400000, guid: 7c8fe1c90523d4c42a6362ef43ff8822, type: 2}
 --- !u!1001 &3985475611548378053
 PrefabInstance:
@@ -254,6 +258,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1040196075061256693, guid: 3f71da226ac5c1347a1bb76c0e2e63bb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 68c84a045a386b942aaf73b02596aefc, type: 2}
     - target: {fileID: 919132149155446097, guid: 3f71da226ac5c1347a1bb76c0e2e63bb,
         type: 3}
       propertyPath: m_Name
