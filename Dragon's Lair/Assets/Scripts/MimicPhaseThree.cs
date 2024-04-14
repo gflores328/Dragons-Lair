@@ -19,9 +19,11 @@ public class MimicPhaseThree : Enemy
     private int actionNumber = 1; // An int that represents the action the enemy should take 
     private bool startLunge = false;
 
+    private bool goLeft;
 
     public GameObject player; // A reference to the player character
     public GameObject healthBar;
+    public GameObject exit;
 
     [Header("Speeds")]
     public float movementSpeed; // The speed that the enemy moves
@@ -39,11 +41,16 @@ public class MimicPhaseThree : Enemy
     public GameObject splashDebris;
     public GameObject splashDebrisSpawn;
 
+    [Header("Projectiles")]
+    public GameObject[] projectiles;
+
+    [Header("Platfroms")]
+    public GameObject platform;
+
+    [Header("Laser")]
+    public GameObject laser;
+
     private Direction directionFacing = Direction.left;
-
-    public GameObject exit;
-
-    private bool goLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -74,16 +81,10 @@ public class MimicPhaseThree : Enemy
                     StartCoroutine(MoveToCorner());
                     actionNumber++;
                     break;
-
                 case 2:
-                    StartCoroutine(MoveToCorner());
-                    actionNumber++;
-                    break;
-                case 3:
-                    StartCoroutine(JumpToCorner());
+                    StartCoroutine(Lazer());
                     actionNumber = 1;
                     break;
-
             }
         }
 
@@ -120,7 +121,7 @@ public class MimicPhaseThree : Enemy
         GetComponentInChildren<Animator>().SetBool("isWalking", true);
 
         takingAction = true;
-        
+
 
 
         // If the object is farther from the left border than goLeft is set to true and if not it is false 
@@ -135,31 +136,31 @@ public class MimicPhaseThree : Enemy
 
         // While the objects position is not at either borders position
 
-            // If go left is true then the object moves towards the left border
-            if (goLeft)
+        // If go left is true then the object moves towards the left border
+        if (goLeft)
+        {
+            while (transform.position.x != leftBorder.transform.position.x)
             {
-                while (transform.position.x != leftBorder.transform.position.x)
-                {
-                    Debug.Log("Left");
-                    directionFacing = Direction.left;
-                    Vector3 targetPosition = new Vector3(leftBorder.transform.position.x, transform.position.y, transform.position.z);
-                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
-                    yield return null;
-                }
+                Debug.Log("Left");
+                directionFacing = Direction.left;
+                Vector3 targetPosition = new Vector3(leftBorder.transform.position.x, transform.position.y, transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+                yield return null;
             }
-            // else it moves towards the right border
-            else
+        }
+        // else it moves towards the right border
+        else
+        {
+            while (transform.position.x != rightBorder.transform.position.x)
             {
-                while (transform.position.x != rightBorder.transform.position.x)
-                {
-                    Debug.Log("Right");
-                    directionFacing = Direction.right;
-                    Vector3 targetPosition = new Vector3(rightBorder.transform.position.x, transform.position.y, transform.position.z);
-                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
-                    yield return null;
-                }
+                Debug.Log("Right");
+                directionFacing = Direction.right;
+                Vector3 targetPosition = new Vector3(rightBorder.transform.position.x, transform.position.y, transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+                yield return null;
             }
-        
+        }
+
 
         if (goLeft)
         {
@@ -240,7 +241,7 @@ public class MimicPhaseThree : Enemy
             directionFacing = Direction.left;
         }
 
-        //SplashDebris();
+        SplashDebris();
 
         yield return new WaitForSeconds(1);
         takingAction = false;
@@ -298,7 +299,6 @@ public class MimicPhaseThree : Enemy
             float xSpawn = Random.Range(leftBorder.transform.position.x, rightBorder.transform.position.x);
             GameObject clone = Instantiate(fallingDebris, new Vector3(xSpawn, fallingDebrisHeight.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
         }
-
     }
 
     private void SplashDebris()
@@ -318,6 +318,47 @@ public class MimicPhaseThree : Enemy
             }
         }
     }
+
+    IEnumerator Spit()
+    {
+        takingAction = true;
+
+        Vector3 spawn = new Vector3(splashDebrisSpawn.transform.position.x, splashDebrisSpawn.transform.position.y, transform.position.z);
+        GameObject clone = Instantiate(splashDebris, spawn, Quaternion.identity);
+
+        int rand = Random.Range(1, 5);
+
+        if (directionFacing == Direction.right)
+        {
+            clone.GetComponent<Rigidbody>().velocity = ((Vector3.right * (rand * 3)) + (Vector3.up * 10));
+        }
+        else if (directionFacing == Direction.left)
+        {
+            clone.GetComponent<Rigidbody>().velocity = ((Vector3.left * (rand * 3)) + (Vector3.up * 10));
+        }
+
+        yield return new WaitForSeconds(.7f);
+
+        takingAction = false;
+    }
+
+    IEnumerator Lazer()
+    {
+        takingAction = true;
+
+        laser.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        laser.SetActive(false);
+        takingAction = false;
+    }
+
+    private void spawnPlatforms()
+    { 
+
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
