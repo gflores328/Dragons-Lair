@@ -25,10 +25,10 @@ public class MouseFollower : MonoBehaviour
             // Calculate the position along the ray at that distance
             Vector3 worldPosition = ray.origin + ray.direction * distance;
 
-            // Ensure that the Z-coordinate of the world position matches the current position of the GameObject
+            // Ensure that the Z-coordinate of the world position matches the current position of the GameObject which should be 0
             worldPosition.z = transform.position.z;
 
-            // Update the position of the GameObject to the calculated world position
+            // Update the position of the gameobject to the mouse pointing
             transform.position = worldPosition;
         }
         
