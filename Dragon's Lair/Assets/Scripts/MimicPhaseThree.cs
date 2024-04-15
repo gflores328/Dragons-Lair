@@ -77,11 +77,35 @@ public class MimicPhaseThree : Enemy
             switch (actionNumber)
             {
                 case 1:
-                    StartCoroutine(Charges());
+                    StartCoroutine(JumpToCorner());
                     actionNumber++;
                     break;
                 case 2:
+                    StartCoroutine(Spit());
+                    actionNumber++;
+                    break;
+                case 3:
+                    StartCoroutine(Corner());
+                    actionNumber++;
+                    break;
+                case 4:
+                    StartCoroutine(Spit());
+                    actionNumber++;
+                    break;
+                case 5:
+                    StartCoroutine(Charges());
+                    actionNumber++;
+                    break;
+                case 6:
                     StartCoroutine(Laser());
+                    actionNumber++;
+                    break;
+                case 7:
+                    StartCoroutine(JumpAbovePlayer());
+                    actionNumber++;
+                    break;
+                case 8:
+                    StartCoroutine(JumpAbovePlayer());
                     actionNumber = 1;
                     break;
             }
@@ -176,7 +200,7 @@ public class MimicPhaseThree : Enemy
     // It takes a float and the value will be the x position that the object will jump to
     IEnumerator Jump(float xTarget)
     {
-        GetComponentInChildren<Animator>().SetTrigger("jumpSlam");
+        GetComponentInChildren<Animator>().SetTrigger("jumpOnly");
 
         float yTarget = gameObject.transform.position.y + 5;
 
@@ -201,6 +225,7 @@ public class MimicPhaseThree : Enemy
         // Waits for .5 seconds before running the code to slam down
         yield return new WaitForSeconds(.5f);
 
+        GetComponentInChildren<Animator>().SetTrigger("slamOnly");
         // A new target position is set
         yTarget = gameObject.transform.position.y - 5;
         targetPosition = new Vector3(xTarget, yTarget, transform.position.z);
@@ -273,21 +298,27 @@ public class MimicPhaseThree : Enemy
     {
         takingAction = true;
 
-        Vector3 spawn = new Vector3(splashDebrisSpawn.transform.position.x, splashDebrisSpawn.transform.position.y, transform.position.z);
-        GameObject clone = Instantiate(splashDebris, spawn, Quaternion.identity);
-
-        int rand = Random.Range(1, 5);
-
-        if (directionFacing == Direction.right)
+        for (int i = 0; i < 5; i++)
         {
-            clone.GetComponent<Rigidbody>().velocity = ((Vector3.right * (rand * 3)) + (Vector3.up * 10));
-        }
-        else if (directionFacing == Direction.left)
-        {
-            clone.GetComponent<Rigidbody>().velocity = ((Vector3.left * (rand * 3)) + (Vector3.up * 10));
+            Vector3 spawn = new Vector3(splashDebrisSpawn.transform.position.x, splashDebrisSpawn.transform.position.y, transform.position.z);
+            GameObject clone = Instantiate(splashDebris, spawn, Quaternion.identity);
+
+        
+            int rand = Random.Range(1, 5);
+
+            if (directionFacing == Direction.right)
+            {
+                clone.GetComponent<Rigidbody>().velocity = ((Vector3.right * (rand * 3)) + (Vector3.up * 10));
+            }
+            else if (directionFacing == Direction.left)
+            {
+                clone.GetComponent<Rigidbody>().velocity = ((Vector3.left * (rand * 3)) + (Vector3.up * 10));
+            }
+
+            yield return new WaitForSeconds(.7f);
         }
 
-        yield return new WaitForSeconds(.7f);
+        yield return new WaitForSeconds(1.5f);
 
         takingAction = false;
     }
@@ -301,6 +332,9 @@ public class MimicPhaseThree : Enemy
         yield return new WaitForSeconds(5);
 
         laser.SetActive(false);
+
+        yield return new WaitForSeconds(1);
+
         takingAction = false;
     }
 
@@ -316,6 +350,17 @@ public class MimicPhaseThree : Enemy
         SpawnPlatforms();
 
         yield return new WaitForSeconds(3);
+        takingAction = false;
+    }
+
+    IEnumerator Corner()
+    {
+        takingAction = true;
+
+        yield return StartCoroutine(MoveToCorner());
+
+        yield return new WaitForSeconds(.5f);
+
         takingAction = false;
     }
 
