@@ -6,7 +6,7 @@ public class DeathBoundsTeleport : MonoBehaviour
     private int currentIndex = 0; // Current index in the respawn points array
     [SerializeField] private float damageAmount = 2f; // Damage amount to apply to the player
     private ChibiPlayerMovement playerMovement; // Reference to the player movement script
-
+    
 
     void Start()
     {
