@@ -205,12 +205,10 @@ public class MimicPhaseTwo : Enemy
             // Wait for next frame
             yield return null;
 
-            Debug.Log("Makes it");
         }
 
 
 
-        Debug.Log("Makes it 2");
         // Waits for .5 seconds before running the code to slam down
         yield return new WaitForSeconds(.5f);
 
@@ -228,7 +226,7 @@ public class MimicPhaseTwo : Enemy
             // Waits for next frame
             yield return null;
         }
-        GetComponent<CinemachineImpulseSource>().GenerateImpulse(0.5f);
+        GetComponent<CinemachineImpulseSource>().GenerateImpulse(1f);
     }
 
     // This function when run will check for whichever border it is closest to and will jump to that position
