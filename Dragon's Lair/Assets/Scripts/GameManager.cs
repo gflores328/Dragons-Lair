@@ -92,6 +92,11 @@ public class GameManager : MonoBehaviour
         // Check if any of the devices are Gamepads
         bool isControllerConnected = Gamepad.current != null;
         
+        if(!isControllerConnected)
+        {
+            controlsKeyboard.SetActive(true);
+            controlsGamepad.SetActive(false);
+        }
         // If a controller is connected and it was previously using mouse, switch to controller
         if (isControllerConnected && isMouse)
         {

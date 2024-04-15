@@ -14,9 +14,9 @@ Material:
   m_ValidKeywords:
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
-  - _PARALLAXMAP
+  - _OCCLUSIONMAP
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -28,11 +28,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: e1d8c73baac362a49ae4edd8f2d75224, type: 3}
+        m_Texture: {fileID: 2800000, guid: b695cf6182ea1cd4196b6c12590ae22d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 63dd19c860ff74d4b91730b620758c32, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5cfd50efa98ae2a44b76dbb711e20631, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -48,23 +48,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a5140dc6ffe0b714394921e03e925fc3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e1d8c73baac362a49ae4edd8f2d75224, type: 3}
+        m_Texture: {fileID: 2800000, guid: b695cf6182ea1cd4196b6c12590ae22d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 9b11a18a9ff4cd24b879972e500a28d1, type: 3}
+        m_Texture: {fileID: 2800000, guid: bf80c0d1c8b12d24ab8e4bdcc9d19d9c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2705aaeff2468984ca171f9c28aa42bd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 3cda59dd6725acf4d987ae99acb71eec, type: 3}
+        m_Texture: {fileID: 2800000, guid: 850b1241e11f03545a2b1cad3c669460, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
