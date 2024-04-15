@@ -12,11 +12,24 @@ using UnityEngine;
 
 public class PlatformBreak : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        if (collision.gameObject.tag == "Enemy")
+        StartCoroutine(WaitAndDestroy());
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject);
+        if (other.tag == "Enemy")
         {
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator WaitAndDestroy()
+    {
+        yield return new WaitForSeconds(8.5f);
+        Destroy(gameObject);
     }
 }
