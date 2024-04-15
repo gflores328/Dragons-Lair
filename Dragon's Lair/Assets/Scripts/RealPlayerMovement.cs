@@ -154,7 +154,7 @@ public class RealPlayerMovement : MonoBehaviour
             Vector3 moveDirection = Vector3.down;
             characterController.Move(moveDirection * moveDistance);
 
-            Debug.Log($"RayCast Hit: {hit.collider.gameObject.name}"); // Log information about the hit object
+            //Debug.Log($"RayCast Hit: {hit.collider.gameObject.name}"); // Log information about the hit object
             Debug.DrawRay(raycastOrigin, Vector3.down * raycastLength, Color.green); // Visualize the raycast
         }
         else
@@ -205,7 +205,7 @@ public class RealPlayerMovement : MonoBehaviour
         }
         else if(other.tag == "Interact")
         {
-            Debug.Log(other.gameObject.name);
+            //Debug.Log(other.gameObject.name);
             currentInteractable = other.gameObject;
             //dialougeInteraction = currentInteractable.GetComponent<DialougeInteraction>();
         }
@@ -213,14 +213,14 @@ public class RealPlayerMovement : MonoBehaviour
         // GABE ADDED
         else if (other.tag == "InteractItem")
         {
-            Debug.Log(other.gameObject.name);
+            //Debug.Log(other.gameObject.name);
             currentInteractable = other.gameObject;
             interact = currentInteractable.GetComponent<Interact>();
         }
 
         else if (other.tag == "DialogueTree")
         {
-            Debug.Log(other.gameObject.name);
+            //Debug.Log(other.gameObject.name);
             currentInteractable = other.gameObject;
            // dialogueTree = currentInteractable.GetComponent<DialogueTree>();
         }
