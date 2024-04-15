@@ -62,7 +62,6 @@ public class MimicPhaseThree : Enemy
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(takingAction);
 
         if (directionFacing == Direction.left)
         {
@@ -316,7 +315,7 @@ public class MimicPhaseThree : Enemy
 
         SpawnPlatforms();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         takingAction = false;
     }
 
@@ -346,6 +345,11 @@ public class MimicPhaseThree : Enemy
     {
         base.TakeDamage(amnt);
         healthBar.GetComponent<Slider>().value = health;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject);
     }
 
 }
