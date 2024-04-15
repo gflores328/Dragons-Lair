@@ -20,9 +20,12 @@ public class MimicPhaseTwoTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //entrance.SetActive(true);
-        mimic.GetComponent<MimicPhaseTwo>().start = true;
-        healthBar.SetActive(true);
+        if (other.tag == "Player")
+        {
+            mimic.GetComponent<MimicPhaseThree>().start = true;
+            healthBar.SetActive(true);
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }
