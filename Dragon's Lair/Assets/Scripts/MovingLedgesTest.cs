@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
 public class MovingLedgesTest : MonoBehaviour
 {
     //initialize variable for speed and waypoints
-    [SerializeField] private int speed;
+    [SerializeField] private float speed = 5f;
     [SerializeField] private GameObject[] waypoints;
     private int currentWaypointIndex;
 
@@ -21,16 +22,19 @@ public class MovingLedgesTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (waypoints.Length <= 0) return;
+        {
+            currentWaypointIndex = 0;
+        }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //if the platform reaches waypoint A it will start moving towards waypoint b
         // and vice versa to set the movement path
         if(!waitForPlayer)
         {
-            if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < 0.1f)
+            /*if (Vector3.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < 0.1f)
             {
                 currentWaypointIndex++;
                 if(currentWaypointIndex >= waypoints.Length)
@@ -39,13 +43,15 @@ public class MovingLedgesTest : MonoBehaviour
                 }
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
+            */
+            HandleMovement();
         }
         if(waitForPlayer)
         {
             if(playerHasArrived)
             {
-                if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < 0.1f)
+                /*if (Vector3.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < 0.1f)
                 {
                     currentWaypointIndex++;
                     if(currentWaypointIndex >= waypoints.Length)
@@ -54,40 +60,51 @@ public class MovingLedgesTest : MonoBehaviour
                     }
                 }
 
-                transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
-                
+                transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
+                */
+
+                HandleMovement();
+
             }
         }
 
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            playerHasArrived = true;
-            moving = true;
-            collision.collider.transform.SetParent(transform);
-            transform.position += (velocity * Time.deltaTime);
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            playerHasArrived = false;
-            moving = false;
-            collision.collider.transform.SetParent(null);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-
         if (moving)
         {
-            transform.position += (velocity * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position,
+            (speed * Time.deltaTime));
         }
+
+    }
+
+    private void HandleMovement()
+    {
+
+        transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position,
+            (speed * Time.deltaTime));
+
+        if (Vector3.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) <= 0)
+        {
+            currentWaypointIndex++;
+        }
+
+        if (currentWaypointIndex != waypoints.Length) return;
+        waypoints.Reverse();
+        currentWaypointIndex = 0;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        other.transform.parent = transform;
+        playerHasArrived = true;
+        moving = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        other.transform.parent = null;
+        playerHasArrived = false;
+        moving = false;
     }
 }
