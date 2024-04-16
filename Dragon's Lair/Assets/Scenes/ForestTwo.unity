@@ -24933,6 +24933,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6088290678465a84b8951b161882e587, type: 3}
+--- !u!1 &2089262135694536749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7409745163675617702, guid: 6088290678465a84b8951b161882e587,
+    type: 3}
+  m_PrefabInstance: {fileID: 2089262135694536748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2089262135694536750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2293472222457787028, guid: 6088290678465a84b8951b161882e587,
+    type: 3}
+  m_PrefabInstance: {fileID: 2089262135694536748}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2263902382817940009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25496,6 +25508,16 @@ PrefabInstance:
       propertyPath: resumeButton
       value: 
       objectReference: {fileID: 1085545741569369359}
+    - target: {fileID: 2725814764895017358, guid: ca6c4fe38bb3639459ac7be4c1450c9b,
+        type: 3}
+      propertyPath: controlsGamepad
+      value: 
+      objectReference: {fileID: 2089262135694536749}
+    - target: {fileID: 2725814764895017358, guid: ca6c4fe38bb3639459ac7be4c1450c9b,
+        type: 3}
+      propertyPath: controlsKeyboard
+      value: 
+      objectReference: {fileID: 2089262135694536750}
     - target: {fileID: 5339420602195815055, guid: ca6c4fe38bb3639459ac7be4c1450c9b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26147,6 +26169,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 206017505}
+    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
+        type: 3}
+      propertyPath: levelToLoad
+      value: ForestTwo
+      objectReference: {fileID: 0}
     - target: {fileID: 4488840170223106238, guid: 0c58ed1322913ee4eb81414ac1092f5b,
         type: 3}
       propertyPath: m_Size.x
@@ -26232,16 +26264,6 @@ PrefabInstance:
       propertyPath: respawnPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1180179564}
-    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
-        type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 206017505}
-    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
-        type: 3}
-      propertyPath: levelToLoad
-      value: ForestTwo
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
