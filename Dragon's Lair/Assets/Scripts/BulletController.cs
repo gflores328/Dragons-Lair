@@ -15,7 +15,7 @@ public class BulletController : MonoBehaviour
 
     [SerializeField] protected float damageAmount = 50;
 
-    private ParticleSystem part; // Particle System
+    public ParticleSystem part; // Particle System
     private List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>(); // For particle collision
 
     public GunController gun; // Gun Controller

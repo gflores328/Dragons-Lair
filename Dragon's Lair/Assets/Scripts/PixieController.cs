@@ -27,6 +27,8 @@ public class PixieController : Enemy
     public bool isHidden = true; //Keeps track of the pixie's visibility
 
 
+    private CapsuleCollider capsuleCollider;
+
     private bool notDead = true;
 
     // Start is called before the first frame update
@@ -38,6 +40,9 @@ public class PixieController : Enemy
         renderer.enabled = false;
         //Make the pixie invisible
         isHidden = true;
+
+        capsuleCollider = GetComponent<CapsuleCollider>();
+
     }
 
     // Update is called once per frame
@@ -75,6 +80,7 @@ public class PixieController : Enemy
 
     protected override void Die()
     {
+        capsuleCollider.enabled = false;
         playerToChase = null;
         notDead = false;
         if (dissolveMaterial != null)

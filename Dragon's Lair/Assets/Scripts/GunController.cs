@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +9,8 @@ public class GunController : MonoBehaviour
     public int shotsFired; // Counter for how many shots fired
     public InputActionReference fireAction; // Input action for shooting
     public BulletController bullet; // Bullet Controller
+
+    public GameObject realBulletPrefab; // Prefab for the RealBullet
     public LaserBeamController laserBeam; // Laser Beam Controller
     
     public float fireRate; // Affects the firing rate of the gun
@@ -65,26 +66,48 @@ public class GunController : MonoBehaviour
     {
         while (isFiring)
         {
-            // Shoots if time passed is greater than or equal to the fire rate counter
-            if (Time.time >= fireRateCounter)
+           if (Time.time >= fireRateCounter)
             {
-                if (isUsingBullet && bullet != null)
-                {
-                    
-                    bullet.Fire(shots); // Shoots a bullet
-                }
-                else if (!isUsingBullet && laserBeam != null)
-                {
-                    fireRate = 100f;
-                    laserBeam.StartFiring(); // Start firing the laser beam
-                }
-                fireRateCounter = Time.time + 1 / fireRate; // Affects fire rate counter
+                // Spawn a RealBullet
+                FireRealBullet();
+
+                // Set the next allowed firing time based on the fire rate
+                fireRateCounter = Time.time + 1 / fireRate;
             }
 
             // Wait for the next frame
             yield return null;
+        
         }
         laserBeam.StopFiring();
+    }
+
+    private void FireRealBullet()
+    {
+        // Instantiate the RealBullet prefab at the bullet spawn point
+        GameObject newBulletObject = Instantiate(realBulletPrefab, transform.position, transform.rotation);
+
+        // Ensure that the newBulletObject is not null
+        if (newBulletObject != null)
+        {
+            // Get the RealBullet component from the instantiated object
+            RealBullet newBullet = newBulletObject.GetComponent<RealBullet>();
+
+            // Set the direction of the bullet to match the gun's forward direction
+            if (newBullet != null)
+            {
+                newBullet.transform.forward = transform.forward;
+                //newBullet.lifetime = 5f; // Set a lifetime for the bullet
+            }
+            else
+            {
+                Debug.LogError("RealBullet component not found on instantiated object.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to instantiate new bullet.");
+        }
     }
 
     public void setFireRate(float newFireRate)
