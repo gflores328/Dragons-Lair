@@ -9,6 +9,9 @@ public class MovingLedgesTest : MonoBehaviour
     //initialize variable for speed and waypoints
     [SerializeField] private float speed = 5f;
     [SerializeField] private GameObject[] waypoints;
+
+    CharacterController controller;
+
     private int currentWaypointIndex;
 
     public bool waitForPlayer = false;
@@ -25,14 +28,16 @@ public class MovingLedgesTest : MonoBehaviour
         if (waypoints.Length <= 0) return;
         {
             currentWaypointIndex = 0;
+            controller = GetComponent<CharacterController>();
         }
     }
 
     private void FixedUpdate()
     {
+
         //if the platform reaches waypoint A it will start moving towards waypoint b
         // and vice versa to set the movement path
-        if(!waitForPlayer)
+        if (!waitForPlayer)
         {
             /*if (Vector3.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < 0.1f)
             {
@@ -47,6 +52,7 @@ public class MovingLedgesTest : MonoBehaviour
             */
             HandleMovement();
         }
+
         if(waitForPlayer)
         {
             if(playerHasArrived)
