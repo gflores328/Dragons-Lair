@@ -30,7 +30,7 @@ public class MimicPhaseOne : Enemy
     public GameObject leftBorder;
     public GameObject rightBorder;
 
-    
+    private Direction directionFacing = Direction.left;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +41,16 @@ public class MimicPhaseOne : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (directionFacing == Direction.left)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else if (directionFacing == Direction.right)
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+
+
         if (start)
         {
             if (!takingAction)
@@ -57,6 +67,15 @@ public class MimicPhaseOne : Enemy
 
         // A vector 3 is created with the x and y targer
         Vector3 targetPosition = new Vector3(xTarget, yTarget, transform.position.z);
+
+        if (targetPosition.x < gameObject.transform.position.x)
+        {
+            directionFacing = Direction.left;
+        }
+        else
+        {
+            directionFacing = Direction.right;
+        }
 
 
         // Object Jumps
