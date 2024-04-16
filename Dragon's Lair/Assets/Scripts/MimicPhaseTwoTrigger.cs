@@ -19,7 +19,7 @@ public class MimicPhaseTwoTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //entrance.SetActive(true);
+        entrance.SetActive(false);
         if (other.tag == "Player")
         {
             mimic.GetComponent<MimicPhaseTwo>().start = true;
