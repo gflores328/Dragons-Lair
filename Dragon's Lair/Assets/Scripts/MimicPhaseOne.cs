@@ -147,6 +147,7 @@ public class MimicPhaseOne : Enemy
     {
         exit.SetActive(false);
         healthBar.SetActive(false);
+
         base.Die();
     }
 
