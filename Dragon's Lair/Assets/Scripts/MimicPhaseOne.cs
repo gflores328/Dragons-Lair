@@ -30,7 +30,7 @@ public class MimicPhaseOne : Enemy
     public GameObject leftBorder;
     public GameObject rightBorder;
 
-    
+    private Direction directionFacing = Direction.left;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +41,16 @@ public class MimicPhaseOne : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (directionFacing == Direction.left)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else if (directionFacing == Direction.right)
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+
+
         if (start)
         {
             if (!takingAction)
@@ -52,10 +62,20 @@ public class MimicPhaseOne : Enemy
 
     IEnumerator Jump(float xTarget)
     {
+        GetComponentInChildren<Animator>().SetTrigger("jumpOnly");
         float yTarget = transform.position.y + 5;
 
         // A vector 3 is created with the x and y targer
         Vector3 targetPosition = new Vector3(xTarget, yTarget, transform.position.z);
+
+        if (targetPosition.x < gameObject.transform.position.x)
+        {
+            directionFacing = Direction.left;
+        }
+        else
+        {
+            directionFacing = Direction.right;
+        }
 
 
         // Object Jumps
@@ -71,6 +91,7 @@ public class MimicPhaseOne : Enemy
 
         // Waits for .5 seconds before running the code to slam down
         yield return new WaitForSeconds(.5f);
+        GetComponentInChildren<Animator>().SetTrigger("slamOnly");
 
         // A new target position is set
         yTarget = transform.position.y - 5;
@@ -87,7 +108,7 @@ public class MimicPhaseOne : Enemy
             yield return null;
         }
 
-        GetComponent<CinemachineImpulseSource>().GenerateImpulse(0.5f);
+        GetComponent<CinemachineImpulseSource>().GenerateImpulse(1f);
 
     }
 
@@ -100,7 +121,7 @@ public class MimicPhaseOne : Enemy
 
 
         // Waits for 1 second
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         // takingAction is set to false
         takingAction = false;
@@ -126,6 +147,7 @@ public class MimicPhaseOne : Enemy
     {
         exit.SetActive(false);
         healthBar.SetActive(false);
+
         base.Die();
     }
 

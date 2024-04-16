@@ -71,7 +71,6 @@ public class MimicPhaseTwo : Enemy
             switch (actionNumber)
             {
                 case 1:
-                    Debug.Log("Makes it");
                     StartCoroutine(JumpAbovePlayer());
                     actionNumber++;
                     break;
@@ -187,7 +186,7 @@ public class MimicPhaseTwo : Enemy
     // It takes a float and the value will be the x position that the object will jump to
     IEnumerator Jump (float xTarget)
     {
-        GetComponentInChildren<Animator>().SetTrigger("jumpSlamAttack");
+        GetComponentInChildren<Animator>().SetTrigger("jumpOnly");
 
         float yTarget = gameObject.transform.position.y + 5;
 
@@ -211,6 +210,7 @@ public class MimicPhaseTwo : Enemy
 
         // Waits for .5 seconds before running the code to slam down
         yield return new WaitForSeconds(.5f);
+        GetComponentInChildren<Animator>().SetTrigger("slamOnly");
 
         // A new target position is set
         yTarget = gameObject.transform.position.y - 5;

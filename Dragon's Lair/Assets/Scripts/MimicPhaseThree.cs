@@ -180,7 +180,7 @@ public class MimicPhaseThree : Enemy
             }
 
         GetComponent<CinemachineImpulseSource>().GenerateImpulse(1f);
-        //FallingDebris();
+        
 
         if (goLeft)
         {
@@ -259,7 +259,7 @@ public class MimicPhaseThree : Enemy
             directionFacing = Direction.left;
         }
 
-        //SplashDebris();
+        SplashDebris();
 
         yield return new WaitForSeconds(1);
         takingAction = false;
@@ -345,6 +345,7 @@ public class MimicPhaseThree : Enemy
         for (int i = 0; i < 3; i++)
         {
             yield return StartCoroutine(MoveToCorner());
+            FallingDebris();
         }
 
         SpawnPlatforms();

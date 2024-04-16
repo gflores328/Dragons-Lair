@@ -19,13 +19,16 @@ public class GrayOut : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameState = GameObject.FindGameObjectWithTag("GameState");
+        gameState = GameObject.Find("GameState");
 
-        foreach (string i in gameState.GetComponent<GameState>().interactedWith)
+        if (gameState != null)
         {
-            if (transform.parent.parent.gameObject.name == i)
+            foreach (string i in gameState.GetComponent<GameState>().interactedWith)
             {
-                gameObject.GetComponent<Image>().sprite = gray;
+                if (transform.parent.parent.gameObject.name == i)
+                {
+                    gameObject.GetComponent<Image>().sprite = gray;
+                }
             }
         }
     }
