@@ -28,17 +28,18 @@ public class SpaceManager : MonoBehaviour
             winScreen.SetActive(true);
             Time.timeScale = 0;
 
-          
 
-            if (((int)gameState.GetComponent<GameState>().storyState) < ((int)GameState.state.SpaceGameDone))
+            if (gameState != null) 
             {
-                gameState.GetComponent<GameState>().storyState = GameState.state.SpaceGameDone;
-                gameState.GetComponent<GameState>().objective = "Turn in tickets for the prize";
-                
-                GameObject.Find("Inventory").GetComponent<Inventory>().AddItem(prize);
-                
+                if (((int)gameState.GetComponent<GameState>().storyState) < ((int)GameState.state.SpaceGameDone))
+                {
+                    gameState.GetComponent<GameState>().storyState = GameState.state.SpaceGameDone;
+                    gameState.GetComponent<GameState>().objective = "Turn in tickets for the prize";
+
+                    GameObject.Find("Inventory").GetComponent<Inventory>().AddItem(prize);
+
+                }
             }
-            
             
         }
     }
