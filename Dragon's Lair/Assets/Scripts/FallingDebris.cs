@@ -30,6 +30,12 @@ public class FallingDebris : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (collision.gameObject.tag == "Bullet")
+        {
+
+            Destroy(gameObject);
+        }
+
         if (collision.gameObject.layer == 7)
         {
             // Play crumble animation
