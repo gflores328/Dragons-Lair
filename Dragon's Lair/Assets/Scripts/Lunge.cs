@@ -20,6 +20,6 @@ public class Lunge : MonoBehaviour
    
     public void Begin()
     {
-        //mimicPhaseTwo.StartLunge();
+        mimicPhaseTwo.StartLunge();
     }
 }
