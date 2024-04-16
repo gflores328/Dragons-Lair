@@ -52,6 +52,7 @@ public class MimicPhaseOne : Enemy
 
     IEnumerator Jump(float xTarget)
     {
+        GetComponentInChildren<Animator>().SetTrigger("jumpOnly");
         float yTarget = transform.position.y + 5;
 
         // A vector 3 is created with the x and y targer
@@ -71,6 +72,7 @@ public class MimicPhaseOne : Enemy
 
         // Waits for .5 seconds before running the code to slam down
         yield return new WaitForSeconds(.5f);
+        GetComponentInChildren<Animator>().SetTrigger("slamOnly");
 
         // A new target position is set
         yTarget = transform.position.y - 5;
@@ -87,7 +89,7 @@ public class MimicPhaseOne : Enemy
             yield return null;
         }
 
-        GetComponent<CinemachineImpulseSource>().GenerateImpulse(0.5f);
+        GetComponent<CinemachineImpulseSource>().GenerateImpulse(1f);
 
     }
 
@@ -100,7 +102,7 @@ public class MimicPhaseOne : Enemy
 
 
         // Waits for 1 second
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         // takingAction is set to false
         takingAction = false;
