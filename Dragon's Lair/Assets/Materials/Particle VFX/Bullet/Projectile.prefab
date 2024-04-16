@@ -173,8 +173,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.07, y: 0.02, z: 0}
-  m_LocalScale: {x: 2.8112466, y: 2.8112466, z: 2.811247}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7787323791681865077}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -5036,7 +5036,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 30
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -5148,7 +5148,7 @@ Transform:
   m_GameObject: {fileID: 8665284859121802607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.24, y: 1.22, z: 0}
+  m_LocalPosition: {x: -2.27, y: 1.32, z: 0}
   m_LocalScale: {x: 0.34, y: 0.34, z: 0.34}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5222,6 +5222,7 @@ MonoBehaviour:
   bulletSpeed: 10
   damageAmount: 1
   lifetime: 2
+  particle: {fileID: 2233529644072428660}
 --- !u!54 &838401987792893835
 Rigidbody:
   m_ObjectHideFlags: 0

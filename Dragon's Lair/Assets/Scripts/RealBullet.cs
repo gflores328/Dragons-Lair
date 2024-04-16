@@ -10,6 +10,8 @@ public class RealBullet : MonoBehaviour
     [SerializeField] protected float damageAmount = 50;
     public float lifetime = 2f; // Time before the bullet is destroyed if it doesn't collide
 
+    public ParticleSystem particle; // Particle system for impact
+
     // Private variables
     private Rigidbody rb;
 
@@ -21,6 +23,10 @@ public class RealBullet : MonoBehaviour
         // Set the velocity of the bullet to move it forward
         rb.velocity = transform.forward * bulletSpeed;
 
+        if (particle != null)
+        {
+            particle.Play();
+        }
         // Destroy the bullet after 'lifetime' seconds if it hasn't collided with anything
         Destroy(gameObject, lifetime);
     }
