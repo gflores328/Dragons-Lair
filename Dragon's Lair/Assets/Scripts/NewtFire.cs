@@ -18,6 +18,8 @@ public class NewtFire : MonoBehaviour
     private Vector3 fireDirection; // The direction that the bullet will be shot in
     private bool firing = false; // A bool to check if the enemy is firing or not
 
+    private bool firstTimeShot = true; // a bool to check if it is the first time a player is being shot at
+
     private void Update()
     {   
         // fireDirection is set to the direction of the player from the position of this game object
@@ -35,12 +37,27 @@ public class NewtFire : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            firstTimeShot = true;
+        }
+    }
+
     // This function will shoot a bullet at the player and then wait 2 seconds
     IEnumerator ShootWithDelay()
     {
         // firing is set to true
         firing = true;
-        
+
+        // If it is the players first time being shot at a small delay appears
+        if (firstTimeShot)
+        {
+            yield return new WaitForSeconds(1);
+            firstTimeShot = false;
+        }
+
         // The bullet prefab is cloned to a new object called clonedBullet
         GameObject clonedBullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity);
 

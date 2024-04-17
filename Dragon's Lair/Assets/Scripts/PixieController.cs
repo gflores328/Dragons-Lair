@@ -20,6 +20,7 @@ public class PixieController : Enemy
     public GameObject playerToChase;
 
     public Material dissolveMaterial; // Reference to the dissolving material
+    public Material hitMaterial;
     public Renderer renderer;
 
     public GameObject newtFire;
@@ -31,6 +32,11 @@ public class PixieController : Enemy
 
     private bool notDead = true;
 
+    private bool touchingWall = false; // A bool to check if the enemy is touching a wall or not
+
+    [HideInInspector]
+    public Vector3 startingPosition; // A vector 3 to hold the starting position of the pixie
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +46,7 @@ public class PixieController : Enemy
         renderer.enabled = false;
         //Make the pixie invisible
         isHidden = true;
+        startingPosition = transform.position;
 
         capsuleCollider = GetComponent<CapsuleCollider>();
 
@@ -75,6 +82,8 @@ public class PixieController : Enemy
         {
             playerToChase.GetComponent<ChibiPlayerMovement>().takeDamage(1);
         }
+
+       
     }
 
 
@@ -103,4 +112,22 @@ public class PixieController : Enemy
         Destroy(newtFire);
         Destroy(gameObject, 1.5f);
     }
+
+    public override void TakeDamage(float damage)
+    {
+        StartCoroutine(HitDelay());
+        base.TakeDamage(damage);
+    }
+    
+    IEnumerator HitDelay()
+    {
+        if (health != 0)
+        {
+            Material original = renderer.material;
+            renderer.material = hitMaterial;
+            yield return new WaitForSeconds(.1f);
+            renderer.material = original;
+        }
+    }
+
 }

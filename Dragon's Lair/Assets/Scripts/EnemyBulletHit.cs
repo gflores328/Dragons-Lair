@@ -24,8 +24,8 @@ public class EnemyBulletHit : MonoBehaviour
             // Call the player's takeDamage function and pass the damage amount
             player.takeDamage(damageAmount);
 
-            
         }
+
         // Destroy the bullet gameObject
         Destroy(gameObject);
     }
