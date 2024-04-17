@@ -9,26 +9,107 @@ using UnityEngine;
 
 public class ClawMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Adjust this value to control the speed of the claw
-    public float verticalSpeed = 3f; // Adjust this value to control the vertical speed of the claw
-
-    private Rigidbody2D rb;
+    public bool clawsOpen;
+    bool goUp, goDown, goLeft, goRight;
+    Rigidbody2D lHook, rHook;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rHook = GameObject.Find("Right_Hook").GetComponent<Rigidbody2D>();
+        lHook = GameObject.Find("Left_Hook").GetComponent<Rigidbody2D>();
+        clawsOpen = true;
     }
 
     void Update()
     {
-        // Get input for horizontal and vertical movement
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            goDown = true;
+        }
 
-        // Calculate movement direction
-        Vector2 movement = new Vector2(horizontalInput, verticalInput) * moveSpeed * Time.deltaTime;
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            goDown = false;
+        }
 
-        // Apply movement to the Rigidbody
-        rb.MovePosition(rb.position + movement);
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            goUp = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            goUp = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            goLeft = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            goLeft = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            goRight = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            goRight = false;
+        }
+
+        if (goUp)
+        {
+            gameObject.transform.Translate(0, 0.01f, 0);
+        }
+
+        if (goDown)
+        {
+            gameObject.transform.Translate(0, -0.01f, 0);
+        }
+
+        if (goLeft)
+        {
+            gameObject.transform.Translate(-0.015f, 0, 0);
+        }
+
+        if (goRight)
+        {
+            gameObject.transform.Translate(0.015f, 0, 0);
+        }
+        
+        if (clawsOpen)
+        {
+            Debug.Log("lHook" + lHook.transform.eulerAngles);
+            Debug.Log("rHook" + rHook.transform.eulerAngles);
+            if (lHook.transform.eulerAngles.z > 5) // > 5
+            {
+                lHook.transform.Rotate(0, 0, 1f);
+            }
+
+            if (rHook.transform.eulerAngles.z < 355) // < 355
+            {
+                rHook.transform.Rotate(0, 0, -1f);
+            }
+        }
+
+        if (!clawsOpen)
+        {
+            Debug.Log("lHook" + lHook.transform.eulerAngles);
+            Debug.Log("rHook" + rHook.transform.eulerAngles);
+            if (lHook.transform.eulerAngles.z < 299) // < 299
+            {
+                lHook.transform.Rotate(0, 0, -1f); // -1f
+            }
+
+            if (rHook.transform.eulerAngles.z > 61) // > 61
+            {
+                rHook.transform.Rotate(0, 0, 1f); // 1f
+            }
+        }
     }
 }
