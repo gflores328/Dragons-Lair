@@ -86,14 +86,15 @@ public class ClawMovement : MonoBehaviour
         {
             Debug.Log("lHook" + lHook.transform.eulerAngles);
             Debug.Log("rHook" + rHook.transform.eulerAngles);
-            if (lHook.transform.eulerAngles.z > 5) // > 5
+            if (rHook.transform.eulerAngles.z < 61) // > 5
             {
-                lHook.transform.Rotate(0, 0, 1f);
+                rHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 15);
             }
 
-            if (rHook.transform.eulerAngles.z < 355) // < 355
+            if (lHook.transform.eulerAngles.z > 299) // < 355
             {
-                rHook.transform.Rotate(0, 0, -1f);
+                Debug.Log(lHook.transform.eulerAngles.z > -61);
+                lHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime * 15);
             }
         }
 
@@ -101,14 +102,14 @@ public class ClawMovement : MonoBehaviour
         {
             Debug.Log("lHook" + lHook.transform.eulerAngles);
             Debug.Log("rHook" + rHook.transform.eulerAngles);
-            if (lHook.transform.eulerAngles.z < 299) // < 299
+            if (rHook.transform.eulerAngles.z > 5) // < 299
             {
-                lHook.transform.Rotate(0, 0, -1f); // -1f
+                rHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime* 15); // -1f
             }
 
-            if (rHook.transform.eulerAngles.z > 61) // > 61
+            if (lHook.transform.eulerAngles.z < 355) // > 61
             {
-                rHook.transform.Rotate(0, 0, 1f); // 1f
+                lHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 15); // 1f
             }
         }
     }
