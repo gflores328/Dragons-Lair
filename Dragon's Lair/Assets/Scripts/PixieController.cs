@@ -115,8 +115,8 @@ public class PixieController : Enemy
 
     public override void TakeDamage(float damage)
     {
-        StartCoroutine(HitDelay());
         base.TakeDamage(damage);
+        StartCoroutine(HitDelay());
     }
     
     IEnumerator HitDelay()
