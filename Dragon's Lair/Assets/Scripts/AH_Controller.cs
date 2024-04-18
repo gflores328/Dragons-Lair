@@ -22,8 +22,10 @@ public class AH_PlayerController : MonoBehaviour
     // Direction variables
     private Vector2 center;
     private float minDir;
+    private float MaxValue = 7f;
     Vector3 basePoint;
     public Vector3 direction;
+
 
     public float difficulty; //level difficulty float used to determine movement for puck and ai
 
@@ -35,13 +37,15 @@ public class AH_PlayerController : MonoBehaviour
 
     private Transform puck; //puck object
 
-    public  Transform pusherR; // ai object
+    public  Transform pusherB; // ai object
+
+    public Transform pusherR; // Player object
 
     public GameObject StartMenu;
 
     public Rigidbody rb; //player rb
 
-    public Rigidbody rbR; // ai rb
+    public Rigidbody rbB; // ai rb
 
     public bool isPlayer = true; //used to determine if it is player or ai
 
@@ -61,9 +65,9 @@ public class AH_PlayerController : MonoBehaviour
     void Start()
     {
         rb = GameObject.FindGameObjectWithTag("AH_Player").GetComponent<Rigidbody>();
-        rbR = GameObject.FindGameObjectWithTag("AH_AI").GetComponent<Rigidbody>();
+        rbB = GameObject.FindGameObjectWithTag("AH_AI").GetComponent<Rigidbody>();
         puck = GameObject.FindGameObjectWithTag("AH_Puck").transform;
-        pusherR = GameObject.FindGameObjectWithTag("AH_AI").transform;
+        pusherB = GameObject.FindGameObjectWithTag("AH_AI").transform;
         Vector2 center = default;
         SetCursor(CustomCursor, center); //starts as open hand cursor
 
@@ -76,6 +80,7 @@ public class AH_PlayerController : MonoBehaviour
         if (this.isPlayer)
         {
             MoveByPlayer();
+           
         }
         else
         {
@@ -90,13 +95,13 @@ public class AH_PlayerController : MonoBehaviour
         // Paddle will only move if we hold down the mouse button
         Ray paddleGrabed = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(paddleGrabed, out RaycastHit raycastHit, float.MaxValue, layers))
+        if (Physics.Raycast(paddleGrabed, out RaycastHit raycastHit, MaxValue, layers))
         {
             //change cursor to closed hand
             Cursor.SetCursor(ClickCursor.texture, center, CursorMode.Auto);
 
             transform.position = raycastHit.point; //moves puck where mouse is
-
+            transform.rotation = Quaternion.FromToRotation(Vector3.right, transform.position.normalized);
         }
         else
         {
@@ -116,7 +121,6 @@ public class AH_PlayerController : MonoBehaviour
         transform.position = newPos;
 
     }
-
 
     public void OnTriggerEnter(Collider other)
     {
