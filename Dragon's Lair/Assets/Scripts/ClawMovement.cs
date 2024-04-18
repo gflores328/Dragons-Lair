@@ -13,33 +13,36 @@ public class ClawMovement : MonoBehaviour
     bool goUp, goDown, goLeft, goRight;
     Rigidbody2D lHook, rHook;
 
+    // Define boundary coordinates
+    float minX, maxX, minY, maxY;
+
     void Start()
     {
         rHook = GameObject.Find("Right_Hook").GetComponent<Rigidbody2D>();
         lHook = GameObject.Find("Left_Hook").GetComponent<Rigidbody2D>();
         clawsOpen = true;
+
+        // Get boundary coordinates
+        minX = -2f; // Example values, adjust according to your box size
+        maxX = 2.5f;
+        minY = -2f;
+        maxY = 2f;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             goDown = true;
+            goUp = false;
         }
 
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             goDown = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
+            // Make the claws close
+            // Wait before the claw goes up
             goUp = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            goUp = false;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -86,12 +89,12 @@ public class ClawMovement : MonoBehaviour
         {
             Debug.Log("lHook" + lHook.transform.eulerAngles);
             Debug.Log("rHook" + rHook.transform.eulerAngles);
-            if (rHook.transform.eulerAngles.z < 61) // > 5
+            if (rHook.transform.eulerAngles.z < 61) // < 61
             {
                 rHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 15);
             }
 
-            if (lHook.transform.eulerAngles.z > 299) // < 355
+            if (lHook.transform.eulerAngles.z > 299) // > 299
             {
                 Debug.Log(lHook.transform.eulerAngles.z > -61);
                 lHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime * 15);
@@ -102,15 +105,22 @@ public class ClawMovement : MonoBehaviour
         {
             Debug.Log("lHook" + lHook.transform.eulerAngles);
             Debug.Log("rHook" + rHook.transform.eulerAngles);
-            if (rHook.transform.eulerAngles.z > 5) // < 299
+            if (rHook.transform.eulerAngles.z > 5) // > 5
             {
                 rHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime* 15); // -1f
             }
 
-            if (lHook.transform.eulerAngles.z < 355) // > 61
+            if (lHook.transform.eulerAngles.z < 355) // < 355
             {
                 lHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 15); // 1f
             }
         }
+
+        // Clamp position within boundaries
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, minX, maxX),
+            Mathf.Clamp(transform.position.y, minY, maxY),
+            transform.position.z
+        );
     }
 }
