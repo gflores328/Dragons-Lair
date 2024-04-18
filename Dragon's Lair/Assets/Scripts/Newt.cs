@@ -6,6 +6,7 @@ public class Newt : Enemy
 {
     public GameObject newtFirePoint; // A public variable meant to grab the newt fire point so when the newt dies the fire point goes away with it
 
+    public Material hitMaterial; // a material that will show when the enemy has been shot
     public Material dissolveMaterial; // Reference to the dissolving material
     public Renderer renderer;
 
@@ -61,4 +62,21 @@ public class Newt : Enemy
             yield return null;
         }
     }
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        StartCoroutine(HitDelay());
+    }
+
+    IEnumerator HitDelay()
+    {
+        if (health != 0)
+        {
+            Material original = renderer.material;
+            renderer.material = hitMaterial;
+            yield return new WaitForSeconds(.1f);
+            renderer.material = original;
+        }
+    }
+
 }

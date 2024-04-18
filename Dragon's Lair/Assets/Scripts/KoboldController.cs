@@ -36,6 +36,7 @@ public class KoboldController : Enemy
     private bool isAttacking = false; // Flag to check if the enemy is currently attacking
     private float nextAttackTime = 0f; // Time when the enemy can perform the next attack
 
+    public Material hitMaterial;
     public Material dissolveMaterial; // Reference to the dissolving material
     public Renderer renderer;
 
@@ -315,6 +316,23 @@ public class KoboldController : Enemy
 
 
 
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        StartCoroutine(HitDelay());
+    }
+
+    IEnumerator HitDelay()
+    {
+        if (health != 0)
+        {
+            Material original = renderer.material;
+            renderer.material = hitMaterial;
+            yield return new WaitForSeconds(.1f);
+            renderer.material = original;
+        }
     }
 
     void Attack()
