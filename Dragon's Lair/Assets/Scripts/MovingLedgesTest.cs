@@ -10,7 +10,7 @@ public class MovingLedgesTest : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private GameObject[] waypoints;
 
-    CharacterController controller;
+    ChibiPlayerMovement controller;
 
     private int currentWaypointIndex;
 
@@ -19,7 +19,7 @@ public class MovingLedgesTest : MonoBehaviour
     private bool playerHasArrived = false;
 
     private Vector3 velocity;
-    private bool moving;
+    private bool moving = true;
 
 
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class MovingLedgesTest : MonoBehaviour
         if (waypoints.Length <= 0) return;
         {
             currentWaypointIndex = 0;
-            controller = GetComponent<CharacterController>();
+            controller = GetComponent<ChibiPlayerMovement>();
         }
     }
 
@@ -39,45 +39,18 @@ public class MovingLedgesTest : MonoBehaviour
         // and vice versa to set the movement path
         if (!waitForPlayer)
         {
-            /*if (Vector3.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < 0.1f)
-            {
-                currentWaypointIndex++;
-                if(currentWaypointIndex >= waypoints.Length)
-                {
-                    currentWaypointIndex = 0;
-                }
-            }
-
-            transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
-            */
             HandleMovement();
+            
+   
         }
 
         if(waitForPlayer)
         {
             if(playerHasArrived)
             {
-                /*if (Vector3.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < 0.1f)
-                {
-                    currentWaypointIndex++;
-                    if(currentWaypointIndex >= waypoints.Length)
-                    {
-                        currentWaypointIndex = 0;
-                    }
-                }
-
-                transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
-                */
-
                 HandleMovement();
-
+                
             }
-        }
-
-        if (moving)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position,
-            (speed * Time.deltaTime));
         }
 
     }
@@ -103,7 +76,16 @@ public class MovingLedgesTest : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         other.transform.parent = transform;
         playerHasArrived = true;
-        moving = true;
+
+        if ((Input.GetKeyDown(KeyCode.D)||(Input.GetKeyDown(KeyCode.LeftArrow))))
+        {
+            other.transform.Translate(Vector3.left * Time.deltaTime, Camera.main.transform);
+        }
+        if ((Input.GetKeyDown(KeyCode.A) || (Input.GetKeyDown(KeyCode.RightArrow))))
+        {
+            other.transform.Translate(Vector3.right * Time.deltaTime, Camera.main.transform);
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -111,6 +93,5 @@ public class MovingLedgesTest : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         other.transform.parent = null;
         playerHasArrived = false;
-        moving = false;
     }
 }
