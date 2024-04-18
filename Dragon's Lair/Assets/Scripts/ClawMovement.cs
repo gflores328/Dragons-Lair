@@ -1,7 +1,7 @@
 /*
  * Created by: Carlos Martinez
  *
- * This script contains the movement of the claw in the crane game (WIP).
+ * This script contains the movement of the claw in the crane game.
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +13,12 @@ public class ClawMovement : MonoBehaviour
     bool goUp, goDown, goLeft, goRight;
     Rigidbody2D lHook, rHook;
 
+    // Define a delay time before going up
+    public float delayBeforeGoingUp = 1f;
+    
+    // Define a delay time before the claw opens up
+    public float delayBeforeClawOpens = 1f;
+
     // Define boundary coordinates
     float minX, maxX, minY, maxY;
 
@@ -23,7 +29,7 @@ public class ClawMovement : MonoBehaviour
         clawsOpen = true;
 
         // Get boundary coordinates
-        minX = -2f; // Example values, adjust according to your box size
+        minX = -2f;
         maxX = 2.5f;
         minY = -2f;
         maxY = 2f;
@@ -31,60 +37,66 @@ public class ClawMovement : MonoBehaviour
 
     void Update()
     {
+        // Holding 'Space' = Descend
         if (Input.GetKeyDown(KeyCode.Space))
         {
             goDown = true;
             goUp = false;
         }
 
+        // Release 'Space' = Ascend
         if (Input.GetKeyUp(KeyCode.Space))
         {
             goDown = false;
-            // Make the claws close
-            // Wait before the claw goes up
-            goUp = true;
+            clawsOpen = !clawsOpen; // Make the claws close
+            StartCoroutine(WaitBeforeGoingUp()); // Start a coroutine to wait before the claw goes up
+            StartCoroutine(WaitBeforeClawOpens()); // Start a coroutine to wait before the claw opens
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        // [<-] and [A] = Move Left
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) // Hold
         {
             goLeft = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) // Release
         {
             goLeft = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        // [->] and [D] = Move Right
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) // Hold
         {
             goRight = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.RightArrow))
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) // Release
         {
             goRight = false;
         }
 
-        if (goUp)
+        // Claw Movement
+        if (goUp) // Up
         {
             gameObject.transform.Translate(0, 0.01f, 0);
         }
 
-        if (goDown)
+        if (goDown) // Down
         {
             gameObject.transform.Translate(0, -0.01f, 0);
         }
 
-        if (goLeft)
+        if (goLeft) // Left
         {
             gameObject.transform.Translate(-0.015f, 0, 0);
         }
 
-        if (goRight)
+        if (goRight) // Right
         {
             gameObject.transform.Translate(0.015f, 0, 0);
         }
         
+        // When the claws open, hooks rotate outward
         if (clawsOpen)
         {
             Debug.Log("lHook" + lHook.transform.eulerAngles);
@@ -101,18 +113,19 @@ public class ClawMovement : MonoBehaviour
             }
         }
 
+        // When the claws close, hooks rotate inward
         if (!clawsOpen)
         {
             Debug.Log("lHook" + lHook.transform.eulerAngles);
             Debug.Log("rHook" + rHook.transform.eulerAngles);
             if (rHook.transform.eulerAngles.z > 5) // > 5
             {
-                rHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime* 15); // -1f
+                rHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime* 15);
             }
 
             if (lHook.transform.eulerAngles.z < 355) // < 355
             {
-                lHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 15); // 1f
+                lHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 15);
             }
         }
 
@@ -122,6 +135,21 @@ public class ClawMovement : MonoBehaviour
             Mathf.Clamp(transform.position.y, minY, maxY),
             transform.position.z
         );
+        
+        // Delay before the claw moves up
+        IEnumerator WaitBeforeGoingUp()
+        {
+            yield return new WaitForSeconds(delayBeforeGoingUp);
+            goUp = true;
+        }
+
+        // Delay before the claw opens
+        IEnumerator WaitBeforeClawOpens()
+        {
+            yield return new WaitForSeconds(delayBeforeClawOpens);
+            // Make the claws Open
+            clawsOpen = !clawsOpen;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
