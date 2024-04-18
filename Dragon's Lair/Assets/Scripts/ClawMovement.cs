@@ -99,8 +99,6 @@ public class ClawMovement : MonoBehaviour
         // When the claws open, hooks rotate outward
         if (clawsOpen)
         {
-            Debug.Log("lHook" + lHook.transform.eulerAngles);
-            Debug.Log("rHook" + rHook.transform.eulerAngles);
             if (rHook.transform.eulerAngles.z < 61) // < 61
             {
                 rHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 15);
@@ -116,8 +114,6 @@ public class ClawMovement : MonoBehaviour
         // When the claws close, hooks rotate inward
         if (!clawsOpen)
         {
-            Debug.Log("lHook" + lHook.transform.eulerAngles);
-            Debug.Log("rHook" + rHook.transform.eulerAngles);
             if (rHook.transform.eulerAngles.z > 5) // > 5
             {
                 rHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime* 15);
@@ -152,8 +148,4 @@ public class ClawMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Trigger touching");
-    }
 }

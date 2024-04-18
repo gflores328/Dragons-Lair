@@ -7,11 +7,19 @@ public class Prize : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("In trigger");
+        transform.parent = collision.gameObject.transform;
+        GetComponent<Rigidbody2D>().gravityScale = 0;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log("in Collision");
+        Debug.Log(other + ": staying");
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        transform.parent = null;
+        GetComponent<Rigidbody2D>().gravityScale = 1;
     }
 }
 

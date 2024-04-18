@@ -2438,7 +2438,7 @@ GameObject:
   - component: {fileID: 1162786751}
   - component: {fileID: 1162786752}
   - component: {fileID: 1162786754}
-  - component: {fileID: 1162786753}
+  - component: {fileID: 1162786755}
   m_Layer: 0
   m_Name: Left_Hook
   m_TagString: Untagged
@@ -2513,8 +2513,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &1162786753
-PolygonCollider2D:
+--- !u!50 &1162786754
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162786750}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!68 &1162786755
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2546,62 +2573,32 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.8340319, y: 0.846261}
-    oldSize: {x: 0.72, y: 1.14}
-    newSize: {x: 0.72, y: 1.14}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_EdgeRadius: 0
   m_Points:
-    m_Paths:
-    - - {x: -0.24050297, y: -0.39473754}
-      - {x: 0.11949703, y: -0.16473755}
-      - {x: 0.11949703, y: -0.07473755}
-      - {x: -0.12050296, y: 0.15526244}
-      - {x: -0.15050296, y: 0.15526244}
-      - {x: -0.32050297, y: 0.03526245}
-      - {x: -0.530503, y: -0.10473755}
-      - {x: -0.60050297, y: -0.18473755}
-      - {x: -0.60050297, y: -0.31473753}
-      - {x: -0.590503, y: -0.36473754}
-      - {x: -0.56050295, y: -0.57473755}
-      - {x: -0.47050294, y: -0.76473755}
-      - {x: -0.28050297, y: -0.96473753}
-      - {x: -0.20050296, y: -0.96473753}
-      - {x: -0.12050296, y: -0.89473754}
-      - {x: -0.13050297, y: -0.77473754}
-      - {x: -0.20050296, y: -0.64473754}
-  m_UseDelaunayMesh: 0
---- !u!50 &1162786754
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162786750}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  - {x: -0.55989474, y: -0.3854637}
+  - {x: -0.54844016, y: -0.57670516}
+  - {x: -0.5080472, y: -0.67913646}
+  - {x: -0.33620837, y: -0.90897584}
+  - {x: -0.23235174, y: -0.97078747}
+  - {x: -0.13131069, y: -0.9060696}
+  - {x: -0.12049551, y: -0.8392636}
+  - {x: -0.19938369, y: -0.62226355}
+  - {x: -0.22637853, y: -0.5116017}
+  - {x: -0.23146236, y: -0.3849804}
+  - {x: -0.18662463, y: -0.33277398}
+  - {x: -0.07444064, y: -0.26253003}
+  - {x: 0.12863132, y: -0.15139022}
+  - {x: 0.019287053, y: 0.006760819}
+  - {x: -0.14733934, y: 0.15522079}
+  - {x: -0.4556243, y: -0.088492095}
+  - {x: -0.5215157, y: -0.10078283}
+  - {x: -0.59895086, y: -0.2114726}
+  - {x: -0.5995217, y: -0.32331464}
+  - {x: -0.5588521, y: -0.38412103}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1273253463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2909,7 +2906,7 @@ Transform:
   m_GameObject: {fileID: 1515980549}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.79, y: 2.32, z: 0}
+  m_LocalPosition: {x: -1.19, y: 0.99, z: 0}
   m_LocalScale: {x: 0.20106143, y: 0.20106143, z: 0.20106143}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3584,6 +3581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clawsOpen: 1
+  delayBeforeGoingUp: 10
+  delayBeforeClawOpens: 10
 --- !u!61 &1615312384
 BoxCollider2D:
   m_ObjectHideFlags: 0
