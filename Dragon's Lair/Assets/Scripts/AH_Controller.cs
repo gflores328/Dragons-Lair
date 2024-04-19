@@ -71,7 +71,7 @@ public class AH_PlayerController : MonoBehaviour
         Vector2 center = default;
         SetCursor(CustomCursor, center); //starts as open hand cursor
 
-        SetDifficulty(1);
+        SetDifficulty(2); //starts game at intermediate difficulty: 1 - easy | 2 - intermediate | 3 - hard
 
 }
 
