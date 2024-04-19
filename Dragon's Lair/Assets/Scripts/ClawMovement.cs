@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClawMovement : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class ClawMovement : MonoBehaviour
 
     // Define boundary coordinates
     float minX, maxX, minY, maxY;
+
+    public bool allowControls = true;
+    public bool touchingPrize = false;
 
     void Start()
     {
@@ -38,12 +42,27 @@ public class ClawMovement : MonoBehaviour
     void Update()
     {
         // Holding 'Space' = Descend
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && allowControls)
         {
             goDown = true;
             goUp = false;
+            allowControls = false;
         }
 
+        if (goDown && !touchingPrize)
+        {
+            gameObject.transform.Translate(0, -0.01f, 0);
+        }
+
+        if (touchingPrize)
+        {
+            goDown = false;
+            clawsOpen = false;
+            touchingPrize = false;
+            StartCoroutine(WaitBeforeGoingUp());
+        }
+
+        /*
         // Release 'Space' = Ascend
         if (Input.GetKeyUp(KeyCode.Space))
         {
@@ -52,50 +71,28 @@ public class ClawMovement : MonoBehaviour
             StartCoroutine(WaitBeforeGoingUp()); // Start a coroutine to wait before the claw goes up
             StartCoroutine(WaitBeforeClawOpens()); // Start a coroutine to wait before the claw opens
         }
+        */
 
         // [<-] and [A] = Move Left
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) // Hold
+        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && allowControls) // Hold
         {
-            goLeft = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) // Release
-        {
-            goLeft = false;
+            gameObject.transform.Translate(-0.015f, 0, 0);
         }
 
         // [->] and [D] = Move Right
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) // Hold
+        if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) & allowControls) // Hold
         {
-            goRight = true;
+            gameObject.transform.Translate(0.015f, 0, 0);
         }
 
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) // Release
-        {
-            goRight = false;
-        }
+
 
         // Claw Movement
         if (goUp) // Up
         {
             gameObject.transform.Translate(0, 0.01f, 0);
         }
-
-        if (goDown) // Down
-        {
-            gameObject.transform.Translate(0, -0.01f, 0);
-        }
-
-        if (goLeft) // Left
-        {
-            gameObject.transform.Translate(-0.015f, 0, 0);
-        }
-
-        if (goRight) // Right
-        {
-            gameObject.transform.Translate(0.015f, 0, 0);
-        }
-        
+     
         // When the claws open, hooks rotate outward
         if (clawsOpen)
         {
@@ -106,7 +103,6 @@ public class ClawMovement : MonoBehaviour
 
             if (lHook.transform.eulerAngles.z > 299) // > 299
             {
-                Debug.Log(lHook.transform.eulerAngles.z > -61);
                 lHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime * 15);
             }
         }
@@ -132,19 +128,56 @@ public class ClawMovement : MonoBehaviour
             transform.position.z
         );
         
-        // Delay before the claw moves up
-        IEnumerator WaitBeforeGoingUp()
-        {
-            yield return new WaitForSeconds(delayBeforeGoingUp);
-            goUp = true;
-        }
+        
+    }
 
-        // Delay before the claw opens
-        IEnumerator WaitBeforeClawOpens()
+    // Delay before the claw moves up
+    IEnumerator WaitBeforeGoingUp()
+    {
+        yield return new WaitForSeconds(delayBeforeGoingUp);
+        goUp = true;
+        StartCoroutine(WaitBeforeClawOpens());
+    }
+
+    // Delay before the claw opens
+    IEnumerator WaitBeforeClawOpens()
+    {
+        yield return new WaitForSeconds(delayBeforeClawOpens);
+        // Make the claws Open
+        clawsOpen = true;
+        CheckForPrize();
+        allowControls = true;
+    }
+
+    // Checks for each object with Prize that is a child of the game object
+    private void CheckForPrize()
+    {
+
+        Prize[] prizes = GetComponentsInChildren<Prize>();
+
+        foreach (Prize i in prizes)
         {
-            yield return new WaitForSeconds(delayBeforeClawOpens);
-            // Make the claws Open
-            clawsOpen = !clawsOpen;
+            clawsOpen = true;
+            // If the prize is a screw driver then the game is won
+            if (i.gameObject.tag == "Screwdriver")
+            {
+                // WIn screen
+                // go back to real life
+                Debug.Log("You win");
+                Time.timeScale = 0;
+
+                SceneManager.LoadScene("LevelDesignRealLife");
+            }
+            Destroy(i.gameObject);
+        }
+    }
+
+    // If the triggger touches a prize then a bool is set to true
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<Prize>(out Prize prize))
+        {
+            touchingPrize = true;
         }
     }
 
