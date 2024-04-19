@@ -44,7 +44,7 @@ public class Inventory : MonoBehaviour
     }
 
     //Removes the last instance of a given item
-    private bool RemoveItem(Item givenItem, bool removeAll)
+    public bool RemoveItem(Item givenItem, bool removeAll)
     {
         //A variable to keep track of whether the item has been removed or not
         //This is returned at the end of the function

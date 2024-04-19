@@ -47,7 +47,7 @@ public class InventoryUI : MonoBehaviour
                 // Move the offset for the inventory index
                 offset++;
 
-                //Debug.Log("Q" + quantity + " O" + offset);
+                Debug.Log("Q" + quantity + " O" + offset);
             }
 
             // Store the item's image in the appropriate slot

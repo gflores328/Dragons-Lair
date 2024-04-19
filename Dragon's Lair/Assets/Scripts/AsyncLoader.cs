@@ -61,7 +61,7 @@ public class AsyncLoader : MonoBehaviour
             if (scene.name == "ForestTwo" && sceneToLoad == "LevelDesignRealLife")
             {
                 gameState.GetComponent<GameState>().storyState = GameState.state.Level1Complete;
-                gameState.GetComponent<GameState>().objective = "Talk to the manager about the machine";
+                gameState.GetComponent<GameState>().objective = "Talk to the Manager about the machine";
             }
 
             if (scene.name == "CaveTwo" && sceneToLoad == "LevelDesignRealLife")
