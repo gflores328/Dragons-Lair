@@ -108,7 +108,7 @@ public class AH_PlayerController : MonoBehaviour
             //change cursor to open hand
             Cursor.SetCursor(CustomCursor.texture, center, CursorMode.Auto);
 
-            rb.velocity = Vector3.zero;
+            //rb.velocity = Vector3.zero;
         }
     }
 

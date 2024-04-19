@@ -504,7 +504,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 116
   m_CollisionDetection: 2
@@ -568,11 +568,11 @@ MonoBehaviour:
   speed: 0
   pusherSpeed: 0.5
   mode: 
-  pusherB: {fileID: 0}
-  pusherR: {fileID: 1206367448}
+  pusherB: {fileID: 1206367448}
+  pusherR: {fileID: 1748312891}
   StartMenu: {fileID: 1386009446}
-  rb: {fileID: 0}
-  rbB: {fileID: 0}
+  rb: {fileID: 1748312898}
+  rbB: {fileID: 80168369}
   isPlayer: 0
   layers:
     serializedVersion: 2
@@ -611,7 +611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -225.82599, y: 243.666}
+  m_AnchoredPosition: {x: -225.82605, y: 243.666}
   m_SizeDelta: {x: -1048.904, y: -485.127}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &81398976
@@ -683,7 +683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -375.82, y: -241.10602}
+  m_AnchoredPosition: {x: -375.82007, y: -241.10602}
   m_SizeDelta: {x: -1048.904, y: -485.127}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &115521337
@@ -2148,7 +2148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -375.68622, y: -32.85898}
+  m_AnchoredPosition: {x: -375.68628, y: -32.85898}
   m_SizeDelta: {x: -1048.904, y: -485.127}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &447990698
@@ -7034,6 +7034,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.23670803, y: 0.25538427, z: 0.18016218}
   m_Center: {x: 0.0006113963, y: 0.0015092032, z: -0.0039032116}
+--- !u!54 &1748312898
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231473607}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1762125088
 GameObject:
   m_ObjectHideFlags: 0
@@ -7579,7 +7606,7 @@ MonoBehaviour:
   pusherB: {fileID: 1206367448}
   pusherR: {fileID: 1748312891}
   StartMenu: {fileID: 1386009446}
-  rb: {fileID: 0}
+  rb: {fileID: 1748312898}
   rbB: {fileID: 80168369}
   isPlayer: 1
   layers:
@@ -8411,6 +8438,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1748312895}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f1ed295c47de6a845b8bb356b490eb90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1748312898}
   m_SourcePrefab: {fileID: 100100000, guid: f1ed295c47de6a845b8bb356b490eb90, type: 3}
 --- !u!1 &2121867325
 GameObject:

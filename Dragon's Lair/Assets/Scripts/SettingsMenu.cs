@@ -124,6 +124,7 @@ public class SettingsMenu : MonoBehaviour
 
         //Used to automatically set dropdown box to the current screen resolution (once it's options have been populated)
         int currentResolutionIndex = 0;
+        
         for (int i = 0; i < resolutions.Length; i++)
         {
             //Convert the selected resolution to a string
@@ -135,8 +136,9 @@ public class SettingsMenu : MonoBehaviour
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
             {
-                currentResolutionIndex = i;
+                continue;
             }
+            currentResolutionIndex = i;
         }
 
         //Update the options in the attached dropdown box
