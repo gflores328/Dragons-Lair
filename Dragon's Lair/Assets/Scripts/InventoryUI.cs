@@ -69,7 +69,6 @@ public class InventoryUI : MonoBehaviour
         // A for loop that clears the remaining inventory slots
         for (int i = lastSlot; i < numberOfSlots; i++)
         {
-            Debug.Log(i);
             transform.GetChild(0).GetChild(i).GetChild(1).gameObject.SetActive(false);
             transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = null;
         }
