@@ -27,6 +27,7 @@ public class InventoryUI : MonoBehaviour
         // Get the new inventory information
         this.inventory = inventory;
         int offset = 0;
+        int lastSlot = 0;
 
         //Debug.Log("Length: " + inventory.Length);
 
@@ -60,6 +61,17 @@ public class InventoryUI : MonoBehaviour
 
             // Stores the item in it's Item Description script
             transform.GetChild(0).GetChild(slotNumber).GetChild(1).GetComponent<ItemDescription>().SetItem(item);
+
+            lastSlot++;
+        }
+
+
+        // A for loop that clears the remaining inventory slots
+        for (int i = lastSlot; i < numberOfSlots; i++)
+        {
+            Debug.Log(i);
+            transform.GetChild(0).GetChild(i).GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = null;
         }
 
     }
