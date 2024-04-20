@@ -209,6 +209,12 @@ public class Interact : MonoBehaviour
         AudioClip audioClip = dialogueManager.GetComponent<DialogueManager>().GetAudioSource().clip;
         dialogueManager.GetComponent<DialogueManager>().GetAudioSource().PlayOneShot(audioClip);
 
+        if (hasItemNeeded && interactionType != InteractionType.menu && needItem)
+        {
+            inventory.GetComponent<Inventory>().RemoveItem(itemNeeded, false);
+            needItem = false;
+        }
+
         //Cursor.lockState = CursorLockMode.None;
         // This if is multi purpose and will run if interaction type is inspect or if hasItemNeeded is false 
         if (interactionType == InteractionType.inspect || !hasItemNeeded || !correctTrigger)
