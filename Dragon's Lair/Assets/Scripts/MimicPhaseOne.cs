@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class MimicPhaseOne : Enemy
 {
@@ -31,6 +32,10 @@ public class MimicPhaseOne : Enemy
     public GameObject rightBorder;
 
     private Direction directionFacing = Direction.left;
+
+    [Header("Cameras")]
+    public GameObject mainCamera;
+    public GameObject bossCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -148,6 +153,10 @@ public class MimicPhaseOne : Enemy
         exit.SetActive(false);
         healthBar.SetActive(false);
 
+        // Camera switch
+       // mainCamera.SetActive(true);
+        //bossCamera.SetActive(false);
+
         base.Die();
     }
 
@@ -155,5 +164,25 @@ public class MimicPhaseOne : Enemy
     {
         base.TakeDamage(amnt);
         healthBar.GetComponent<Slider>().value = health;
+    }
+
+    IEnumerator StartDelay()
+    {
+        GetComponentInChildren<Animator>().SetTrigger("Roar"); 
+
+        yield return new WaitForSeconds(3f);
+
+        healthBar.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        player.GetComponent<PlayerInput>().actions.Enable();
+        start = true;
+
+    }
+
+    public void StartStartDelay()
+    {
+        StartCoroutine(StartDelay());
     }
 }
