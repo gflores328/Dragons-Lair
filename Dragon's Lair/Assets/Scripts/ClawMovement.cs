@@ -35,7 +35,7 @@ public class ClawMovement : MonoBehaviour
         // Get boundary coordinates
         minX = -2f;
         maxX = 2.5f;
-        minY = -2f;
+        minY = -2.5f;
         maxY = 2f;
     }
 
@@ -62,16 +62,13 @@ public class ClawMovement : MonoBehaviour
             StartCoroutine(WaitBeforeGoingUp());
         }
 
-        /*
-        // Release 'Space' = Ascend
-        if (Input.GetKeyUp(KeyCode.Space))
+        // Check if the claw reaches the bottom of the machine
+        if (transform.position.y <= minY)
         {
             goDown = false;
-            clawsOpen = !clawsOpen; // Make the claws close
-            StartCoroutine(WaitBeforeGoingUp()); // Start a coroutine to wait before the claw goes up
-            StartCoroutine(WaitBeforeClawOpens()); // Start a coroutine to wait before the claw opens
+            clawsOpen = false;
+            StartCoroutine(WaitBeforeGoingUp());
         }
-        */
 
         // [<-] and [A] = Move Left
         if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && allowControls) // Hold
@@ -84,8 +81,6 @@ public class ClawMovement : MonoBehaviour
         {
             gameObject.transform.Translate(0.015f, 0, 0);
         }
-
-
 
         // Claw Movement
         if (goUp) // Up
