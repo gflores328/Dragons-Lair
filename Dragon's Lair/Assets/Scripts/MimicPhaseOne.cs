@@ -154,8 +154,8 @@ public class MimicPhaseOne : Enemy
         healthBar.SetActive(false);
 
         // Camera switch
-       // mainCamera.SetActive(true);
-        //bossCamera.SetActive(false);
+        mainCamera.SetActive(true);
+        bossCamera.SetActive(false);
 
         base.Die();
     }

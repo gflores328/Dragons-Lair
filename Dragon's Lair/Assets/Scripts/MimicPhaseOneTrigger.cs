@@ -28,8 +28,8 @@ public class MimicPhaseOneTrigger : MonoBehaviour
             other.GetComponent<PlayerInput>().actions.Disable();
 
             // Camera switch
-            //mainCamera.SetActive(false);
-            //bossCamera.SetActive(true);
+            mainCamera.SetActive(false);
+            bossCamera.SetActive(true);
 
             Destroy(gameObject);
         }
