@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public enum Direction { right, left };
 
@@ -44,6 +45,9 @@ public class MimicPhaseTwo : Enemy
 
     public GameObject exit;
 
+    [Header("Cameras")]
+    public GameObject mainCamera;
+    public GameObject bossCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,8 +67,6 @@ public class MimicPhaseTwo : Enemy
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
-        Debug.Log(actionNumber);
-        Debug.Log(directionFacing);
 
         if (start && !takingAction)
         {
@@ -92,21 +94,47 @@ public class MimicPhaseTwo : Enemy
                     break;
 
                 case 3:
-                    StartCoroutine(Meelee());
+                    if (player.transform.position.x < rightBorder.transform.position.x
+                        && player.transform.position.x > leftBorder.transform.position.x)
+                    {
+                        StartCoroutine(WalkToPlayer());
+                    }
+                    else
+                    {
+                        StartCoroutine(JumpAbovePlayer());
+                    }
                     actionNumber++;
                     break;
 
                 case 4:
-                    StartCoroutine(JumpToCorner());
+                    StartCoroutine(Meelee());
                     actionNumber++;
                     break;
 
                 case 5:
-                    StartCoroutine(Lunge());
+                    StartCoroutine(JumpToCorner());
                     actionNumber++;
                     break;
 
                 case 6:
+                    StartCoroutine(Lunge());
+                    actionNumber++;
+                    break;
+
+                case 7:
+                    if (player.transform.position.x < rightBorder.transform.position.x
+                        && player.transform.position.x > leftBorder.transform.position.x)
+                    {
+                        StartCoroutine(WalkToPlayer());
+                    }
+                    else
+                    {
+                        StartCoroutine(JumpAbovePlayer());
+                    }
+                    actionNumber++;
+                    break;
+
+                case 8:
                     StartCoroutine(Meelee());
                     actionNumber = 1;
                     break;
@@ -120,6 +148,15 @@ public class MimicPhaseTwo : Enemy
     {
         // Taking action is set to true
         takingAction = true;
+
+        if (player.transform.position.x > transform.position.x)
+        {
+            directionFacing = Direction.right;
+        }
+        else
+        {
+            directionFacing = Direction.left;
+        }
 
         yield return StartCoroutine(Jump(player.transform.position.x));
         // FallingDebris();
@@ -236,11 +273,13 @@ public class MimicPhaseTwo : Enemy
 
         if (Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
         {
+            directionFacing = Direction.left;
             yield return StartCoroutine(Jump(leftBorder.transform.position.x));
             directionFacing = Direction.right;
         }
         else
         {
+            directionFacing = Direction.right;
             yield return StartCoroutine(Jump(rightBorder.transform.position.x));
             directionFacing = Direction.left;
         }
@@ -341,6 +380,8 @@ public class MimicPhaseTwo : Enemy
     {
         exit.SetActive(true);
         healthBar.SetActive(false);
+
+        
         Destroy(gameObject);
     }
 
@@ -348,6 +389,53 @@ public class MimicPhaseTwo : Enemy
     {
         base.TakeDamage(amnt);
         healthBar.GetComponent<Slider>().value = health;
+    }
+
+    IEnumerator StartDelay()
+    {
+        GetComponentInChildren<Animator>().SetTrigger("Roar");
+
+        yield return new WaitForSeconds(3f);
+
+        healthBar.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        player.GetComponent<PlayerInput>().actions.Enable();
+        start = true;
+
+    }
+
+    public void StartStartDelay()
+    {
+        StartCoroutine(StartDelay());
+    }
+
+    IEnumerator WalkToPlayer()
+    {
+        takingAction = true;
+        // set animation
+
+        Vector3 targetPosition = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+
+        if (player.transform.position.x > transform.position.x)
+        {
+            directionFacing = Direction.right;
+        }
+        else
+        {
+            directionFacing = Direction.left;
+        }
+
+        while (transform.position != targetPosition)
+        {
+            gameObject.transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        takingAction = false;
+        // end walking animation
+
     }
 
 }

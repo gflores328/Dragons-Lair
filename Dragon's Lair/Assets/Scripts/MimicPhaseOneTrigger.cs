@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MimicPhaseOneTrigger : MonoBehaviour
 {
@@ -15,12 +16,22 @@ public class MimicPhaseOneTrigger : MonoBehaviour
     public GameObject mimic;
     public GameObject healthBar;
 
+    public GameObject mainCamera;
+    public GameObject bossCamera;
     private void OnTriggerEnter(Collider other)
     {
-        entrance.SetActive(true);
-        mimic.GetComponent<MimicPhaseOne>().start = true;
-        healthBar.SetActive(true);
+        if (other.tag == "Player")
+        {
+            entrance.SetActive(true);
+            mimic.GetComponent<MimicPhaseOne>().StartStartDelay();
 
-        Destroy(gameObject);
+            other.GetComponent<PlayerInput>().actions.Disable();
+
+            // Camera switch
+            mainCamera.SetActive(false);
+            bossCamera.SetActive(true);
+
+            Destroy(gameObject);
+        }
     }
 }

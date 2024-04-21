@@ -7,25 +7,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerShip : MonoBehaviour
 {
     public float speed = 5.0f; // Movement Speed
-    
-    //[SerializeField] protected float health; // a float that can only be accessed by children of this class
 
-    // Update is called once per frame
+    private PlayerInput playerInput; // A private variable that is meant to grab the PlayerInput component that is attached to the player ship.
+    private InputAction moveAction; // The variable of type input action that holds the move action
+    
+    void Awake ()
+    {
+        playerInput = GetComponent<PlayerInput>(); //  grabs the player input component from the player ship object
+        moveAction = playerInput.actions.FindAction("Move"); // finds the move action in the player input mapping
+    }
+    
+    private void OnEnable()
+    {
+        moveAction.Enable(); // when object is enabled enable the move action
+    }
+
+    private void OnDisable()
+    {
+        moveAction.Disable(); // when object is disabled disable the move action
+    }
+
     private void Update()
     {
-        // Player Movement (Left and Right)
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) // Left
-        {
-            this.transform.position += Vector3.left * this.speed * Time.deltaTime;
-        }
+        MovePlayerShip(); // calls the move player ship script every frame
+    }
 
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) // Right
-        {
-            this.transform.position += Vector3.right * this.speed * Time.deltaTime;
-        }
+    
+    private void MovePlayerShip() // The function that moves the player
+    {
+        Vector2 direction = moveAction.ReadValue<Vector2>(); // the value that determines which button the player is pressing
+
+        // Player Movement (Left and Right)
+        Vector3 movement = new Vector3(direction.x, 0f, 0f); // Only using X-axis for movement
+        transform.position += movement * speed * Time.deltaTime; // Moves the player by movement position + speed over time
     }
 }
+

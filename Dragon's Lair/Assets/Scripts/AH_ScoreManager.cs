@@ -61,6 +61,12 @@ public class AH_ScoreManager : MonoBehaviour
         {
             sfx.PlayYouWin();
             WinScreen.SetActive(true);
+
+            if (gameState != null && gameState.GetComponent<GameState>().storyState < GameState.state.BeatSarah)
+            {
+                gameState.GetComponent<GameState>().storyState = GameState.state.BeatSarah;
+                gameState.GetComponent<GameState>().objective = "Get VR Coin from Sarah";
+            }
         }
 
 
@@ -68,6 +74,12 @@ public class AH_ScoreManager : MonoBehaviour
         {
             sfx.PlayYouWin();
             WinScreen.SetActive(true);
+
+            if (gameState != null && gameState.GetComponent<GameState>().storyState < GameState.state.BeatSarah)
+            {
+                gameState.GetComponent<GameState>().storyState = GameState.state.BeatSarah;
+                gameState.GetComponent<GameState>().objective = "Get VR Coin from Sarah";
+            }
         }
     }
 
