@@ -58,6 +58,10 @@ public class DetectiveThoughts : MonoBehaviour
 
                 StartCoroutine(ThoughtDelay(thoughtList[4]));
             }
+            if (gameState.GetComponent<GameState>().storyState == GameState.state.GiveScrewdriver)
+            {
+                StartCoroutine(ThoughtDelay(thoughtList[5]));
+            }
 
         }
     }

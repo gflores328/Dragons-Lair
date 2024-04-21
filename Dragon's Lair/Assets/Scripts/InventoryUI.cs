@@ -19,6 +19,7 @@ public class InventoryUI : MonoBehaviour
     public int numberOfSlots;
     [SerializeField]
     private Item[] inventory;
+    public TextMeshProUGUI descriptionText;
 
     // Updates the information in the Inventory UI
     // Gets an array of items to represent the inventory
@@ -72,6 +73,9 @@ public class InventoryUI : MonoBehaviour
             transform.GetChild(0).GetChild(i).GetChild(1).gameObject.SetActive(false);
             transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = null;
         }
+
+        // Resets the description box
+        descriptionText = null;
 
     }
 }

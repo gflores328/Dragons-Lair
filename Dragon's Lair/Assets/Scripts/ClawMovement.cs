@@ -26,6 +26,8 @@ public class ClawMovement : MonoBehaviour
     public bool allowControls = true;
     public bool touchingPrize = false;
 
+    private GameObject gameState;
+    public Item prize;
     void Start()
     {
         rHook = GameObject.Find("Right_Hook").GetComponent<Rigidbody2D>();
@@ -37,6 +39,8 @@ public class ClawMovement : MonoBehaviour
         maxX = 2.5f;
         minY = -2.5f;
         maxY = 2f;
+
+        gameState = GameObject.Find("GameState");
     }
 
     void Update()
@@ -161,6 +165,12 @@ public class ClawMovement : MonoBehaviour
                 Debug.Log("You win");
                 Time.timeScale = 0;
 
+                if (gameState.GetComponent<GameState>().storyState < GameState.state.GiveScrewdriver)
+                {
+                    gameState.GetComponent<GameState>().storyState = GameState.state.GiveScrewdriver;
+                    gameState.GetComponent<GameState>().objective = "Give the screwdriver to Michael";
+                    GameObject.Find("Inventory").GetComponent<Inventory>().AddItem(prize);
+                }
                 SceneManager.LoadScene("LevelDesignRealLife");
             }
             Destroy(i.gameObject);
