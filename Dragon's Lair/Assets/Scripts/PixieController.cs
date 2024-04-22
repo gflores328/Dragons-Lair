@@ -99,7 +99,7 @@ public class PixieController : Enemy
             {
                 renderer.material = dissolveMaterial;
                 // Gradually increase the dissolve amount
-                Debug.Log("Coroutine Started");
+                //Debug.Log("Coroutine Started");
                 StartCoroutine(DissolveOverTime());
             }
             else
@@ -124,7 +124,7 @@ public class PixieController : Enemy
         while (dissolveAmount <= 1f) // Change the loop condition to dissolveAmount < 1f
         {
             dissolveAmount += dissolveSpeed * Time.deltaTime;
-            Debug.Log("" + dissolveAmount);
+            //Debug.Log("" + dissolveAmount);
             dissolveAmount = Mathf.Clamp01(dissolveAmount);
 
             renderer.material.SetFloat("_Dissolve", dissolveAmount);

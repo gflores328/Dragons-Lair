@@ -285,4 +285,28 @@ public class RealPlayerMovement : MonoBehaviour
 
         }
     }
+
+    public void EnablePlayerMovement(bool enable)
+    {
+        if (enable)
+        {
+            walkAction.Enable(); // Enable walk action
+            interactAction.Enable(); // Enable interact action
+            characterController.enabled = true;
+        }
+        else
+        {
+            walkAction.Disable(); // Disable walk action
+            interactAction.Disable(); // Disable interact action
+            characterController.enabled = false;
+        }
+    }
+
+    public void SetPlayerPosition(Vector3 newPosition)
+    {
+        characterController.enabled = false; // Temporarily disable the character controller to directly set the position
+        gameObject.transform.position = newPosition; // Set the player's position
+        characterController.enabled = true; // Re-enable the character controller
+    }
+
 }

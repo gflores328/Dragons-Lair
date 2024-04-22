@@ -12,10 +12,12 @@ public class DoorCutscene : MonoBehaviour
 
     private bool isFading = false;
 
+    private RealPlayerMovement realPlayerMovement;
     void Start()
     {
         // Ensure the fade image is initially turned off
         fadeImage.SetActive(false);
+        realPlayerMovement = FindObjectOfType<RealPlayerMovement>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,20 +54,26 @@ public class DoorCutscene : MonoBehaviour
     private IEnumerator DoTeleportation()
     {
         isFading = true; // Set the flag to indicate that a fade transition is in progress
-
+        if (realPlayerMovement != null)
+        {
+            realPlayerMovement.EnablePlayerMovement(false);
+        }
         // Fade out
         fadeImage.SetActive(true); // Activate the fade image
         yield return StartCoroutine(FadeOut());
 
         // Teleport player
         //player.GetComponent<Collider>().enabled = false;
-        player.transform.position = endPosition.position;
+        realPlayerMovement.SetPlayerPosition(endPosition.position);
         Debug.Log("Player teleported to end position");
         // Fade in
         //player.GetComponent<Collider>().enabled = true;
         yield return StartCoroutine(FadeIn());
         fadeImage.SetActive(false); // Deactivate the fade image
-        
+        if (realPlayerMovement != null)
+        {
+            realPlayerMovement.EnablePlayerMovement(true);
+        }
 
         isFading = false; // Reset the flag after the fade transition is complete
     }
