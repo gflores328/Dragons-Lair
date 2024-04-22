@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 
 public class MimicPhaseThree : Enemy
@@ -50,6 +51,10 @@ public class MimicPhaseThree : Enemy
 
     [Header("Laser")]
     public GameObject laser;
+
+    [Header("Cameras")]
+    public GameObject mainCamera;
+    public GameObject bossCamera;
 
 
     // Start is called before the first frame update
@@ -385,6 +390,9 @@ public class MimicPhaseThree : Enemy
         exit.SetActive(true);
         healthBar.SetActive(false);
         Destroy(gameObject);
+
+        mainCamera.SetActive(true);
+        bossCamera.SetActive(false);
     }
 
     public override void TakeDamage(float amnt)
@@ -398,4 +406,24 @@ public class MimicPhaseThree : Enemy
         Debug.Log(other.gameObject);
     }
 
+
+    IEnumerator StartDelay()
+    {
+        // Roar animation
+
+        yield return new WaitForSeconds(3f);
+
+        healthBar.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        player.GetComponent<PlayerInput>().actions.Enable();
+        start = true;
+
+    }
+
+    public void StartStartDelay()
+    {
+        StartCoroutine(StartDelay());
+    }
 }
