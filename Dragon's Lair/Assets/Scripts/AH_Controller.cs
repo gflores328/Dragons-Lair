@@ -2,6 +2,7 @@
 using UnityEngine.AI;
 using System.Collections;
 using System;
+using UnityEngine.InputSystem;
 
 public class AH_PlayerController : MonoBehaviour
 {
@@ -52,6 +53,8 @@ public class AH_PlayerController : MonoBehaviour
     public LayerMask layers; // layer mask for table
 
 
+    public InputActionReference moveAction; // Input action reference for moving the puck
+
     private void Awake()
     {
         difficulty = PlayerPrefs.GetFloat("Difficulty");
@@ -64,7 +67,13 @@ public class AH_PlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = GameObject.FindGameObjectWithTag("AH_Player").GetComponent<Rigidbody>();
+        
+        if(isPlayer)
+        {
+            transform.position = new Vector3(-0.023f,0.0948000029f,-2.47799993f);
+        }
+        //rb = GameObject.FindGameObjectWithTag("AH_Player").GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
         rbB = GameObject.FindGameObjectWithTag("AH_AI").GetComponent<Rigidbody>();
         puck = GameObject.FindGameObjectWithTag("AH_Puck").transform;
         pusherB = GameObject.FindGameObjectWithTag("AH_AI").transform;
@@ -73,11 +82,11 @@ public class AH_PlayerController : MonoBehaviour
 
         SetDifficulty(2); //starts game at intermediate difficulty: 1 - easy | 2 - intermediate | 3 - hard
 
-}
+    }
 
     void FixedUpdate()
     {
-        if (this.isPlayer)
+        if (isPlayer)
         {
             MoveByPlayer();
            
@@ -92,25 +101,44 @@ public class AH_PlayerController : MonoBehaviour
 
     public void MoveByPlayer()
     {
-        // Paddle will only move if we hold down the mouse button
-        Ray paddleGrabed = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(paddleGrabed, out RaycastHit raycastHit, MaxValue, layers))
+        if (gameManager.GetIsMouse())
         {
-            //change cursor to closed hand
-            Cursor.SetCursor(ClickCursor.texture, center, CursorMode.Auto);
+            // Paddle will only move if we hold down the mouse button
+            Ray paddleGrabed = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            transform.position = raycastHit.point; //moves puck where mouse is
-            transform.rotation = Quaternion.FromToRotation(Vector3.right, transform.position.normalized);
+            if (Physics.Raycast(paddleGrabed, out RaycastHit raycastHit, MaxValue, layers))
+            {
+                //change cursor to closed hand
+                Cursor.SetCursor(ClickCursor.texture, center, CursorMode.Auto);
+
+                transform.position = raycastHit.point; //moves puck where mouse is
+                transform.rotation = Quaternion.FromToRotation(Vector3.right, transform.position.normalized);
+            }
+            else
+            {
+                //change cursor to open hand
+                Cursor.SetCursor(CustomCursor.texture, center, CursorMode.Auto);
+            }
         }
-        else
+        else if (!gameManager.GetIsMouse())
         {
-            //change cursor to open hand
-            Cursor.SetCursor(CustomCursor.texture, center, CursorMode.Auto);
 
-            //rb.velocity = Vector3.zero;
+            Vector2 moveInput = moveAction.action.ReadValue<Vector2>();
+            Debug.Log("Move Input: " + moveInput);
+
+            Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
+            Debug.Log("Raw Move Direction: " + moveDirection);
+
+            // Apply movement relative to the camera's orientation
+            moveDirection = mainCamera.transform.TransformDirection(moveDirection);
+            moveDirection.y = 0f; // Ensure the movement is along the horizontal plane
+            Debug.Log("Transformed Move Direction: " + moveDirection);
+
+            // Move the player
+            transform.position += moveDirection * Time.deltaTime * pusherSpeed;
         }
     }
+
 
     public void MoveByComputer()
     {

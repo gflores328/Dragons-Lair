@@ -23,6 +23,7 @@ public class PixieController : Enemy
     public Material hitMaterial;
     public Renderer renderer;
 
+    public float dissolveSpeed = 0.7f;
     public GameObject newtFire;
 
     public bool isHidden = true; //Keeps track of the pixie's visibility
@@ -94,16 +95,19 @@ public class PixieController : Enemy
         notDead = false;
         if (dissolveMaterial != null)
         {
-            // Apply the dissolve material to the renderer of the game object
-            
             if (renderer != null)
             {
                 renderer.material = dissolveMaterial;
+                // Gradually increase the dissolve amount
+                Debug.Log("Coroutine Started");
+                StartCoroutine(DissolveOverTime());
             }
             else
             {
                 Debug.LogWarning("Renderer not found on Newt object.");
             }
+
+            
         }
         else
         {
@@ -111,6 +115,22 @@ public class PixieController : Enemy
         }
         Destroy(newtFire);
         Destroy(gameObject, 1.5f);
+    }
+
+
+    IEnumerator DissolveOverTime()
+    {
+        float dissolveAmount = 0f;
+        while (dissolveAmount <= 1f) // Change the loop condition to dissolveAmount < 1f
+        {
+            dissolveAmount += dissolveSpeed * Time.deltaTime;
+            Debug.Log("" + dissolveAmount);
+            dissolveAmount = Mathf.Clamp01(dissolveAmount);
+
+            renderer.material.SetFloat("_Dissolve", dissolveAmount);
+
+            yield return null;
+        }
     }
 
     public override void TakeDamage(float damage)

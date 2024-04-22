@@ -40,6 +40,8 @@ public class KoboldController : Enemy
     public Material dissolveMaterial; // Reference to the dissolving material
     public Renderer renderer;
 
+    public float dissolveSpeed = 0.7f;
+
     private bool isDead = false;
 
     public Animator animator;
@@ -285,16 +287,19 @@ public class KoboldController : Enemy
         animator.SetTrigger("IS_Dead");
         if (dissolveMaterial != null)
         {
-            // Apply the dissolve material to the renderer of the game object
-            
-            if (renderer != null && renderer.materials.Length > 1)
+            if (renderer != null)
             {
-                renderer.materials[1] = dissolveMaterial;
+                renderer.material = dissolveMaterial;
+                // Gradually increase the dissolve amount
+                Debug.Log("Coroutine Started");
+                StartCoroutine(DissolveOverTime());
             }
             else
             {
                 Debug.LogWarning("Renderer not found on Newt object.");
             }
+
+            
         }
         else
         {
@@ -316,6 +321,21 @@ public class KoboldController : Enemy
 
 
 
+    }
+
+    IEnumerator DissolveOverTime()
+    {
+        float dissolveAmount = 0f;
+        while (dissolveAmount <= 1f) // Change the loop condition to dissolveAmount < 1f
+        {
+            dissolveAmount += dissolveSpeed * Time.deltaTime;
+            Debug.Log("" + dissolveAmount);
+            dissolveAmount = Mathf.Clamp01(dissolveAmount);
+
+            renderer.material.SetFloat("_Dissolve", dissolveAmount);
+
+            yield return null;
+        }
     }
 
     public override void TakeDamage(float damage)

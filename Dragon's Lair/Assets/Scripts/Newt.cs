@@ -12,7 +12,7 @@ public class Newt : Enemy
 
     private Collider collider;
 
-    public float dissolveSpeed = 1.5f; // Speed at which the material dissolves
+    public float dissolveSpeed = 0.01f; // Speed at which the material dissolves
     private void Start()
     {
         
@@ -23,20 +23,22 @@ public class Newt : Enemy
     protected override void Die()
     {
         collider.enabled = false;
-
+        
         if (dissolveMaterial != null)
         {
             if (renderer != null)
             {
                 renderer.material = dissolveMaterial;
+                // Gradually increase the dissolve amount
+                Debug.Log("Coroutine Started");
+                StartCoroutine(DissolveOverTime());
             }
             else
             {
                 Debug.LogWarning("Renderer not found on Newt object.");
             }
 
-            // Gradually increase the dissolve amount
-            StartCoroutine(DissolveOverTime());
+            
         }
         else
         {
@@ -52,16 +54,19 @@ public class Newt : Enemy
     IEnumerator DissolveOverTime()
     {
         float dissolveAmount = 0f;
-        while (dissolveAmount < 30f)
+        while (dissolveAmount <= 1f) // Change the loop condition to dissolveAmount < 1f
         {
             dissolveAmount += dissolveSpeed * Time.deltaTime;
+            Debug.Log("" + dissolveAmount);
             dissolveAmount = Mathf.Clamp01(dissolveAmount);
 
-            renderer.material.SetFloat("_DissolveAmount", dissolveAmount);
+            renderer.material.SetFloat("_Dissolve", dissolveAmount);
 
             yield return null;
         }
     }
+
+
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
