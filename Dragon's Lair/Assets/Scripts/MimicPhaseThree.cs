@@ -302,6 +302,7 @@ public class MimicPhaseThree : Enemy
     IEnumerator Spit()
     {
         takingAction = true;
+        GetComponentInChildren<Animator>().SetBool("isFiring", true);
 
         for (int i = 0; i < 5; i++)
         {
@@ -325,6 +326,7 @@ public class MimicPhaseThree : Enemy
 
         yield return new WaitForSeconds(1.5f);
 
+        GetComponentInChildren<Animator>().SetBool("isFiring", false);
         takingAction = false;
     }
 
@@ -332,11 +334,14 @@ public class MimicPhaseThree : Enemy
     {
         takingAction = true;
 
+        GetComponentInChildren<Animator>().SetBool("isFiring", true);
+
         laser.SetActive(true);
 
         yield return new WaitForSeconds(5);
 
         laser.SetActive(false);
+        GetComponentInChildren<Animator>().SetBool("isFiring", false);
 
         yield return new WaitForSeconds(1);
 
@@ -410,10 +415,11 @@ public class MimicPhaseThree : Enemy
     IEnumerator StartDelay()
     {
         // Roar animation
-
+        GetComponentInChildren<Animator>().SetBool("isFiring", true);
         yield return new WaitForSeconds(3f);
 
         healthBar.SetActive(true);
+        GetComponentInChildren<Animator>().SetBool("isFiring", false);
 
         yield return new WaitForSeconds(1f);
 

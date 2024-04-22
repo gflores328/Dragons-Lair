@@ -381,6 +381,8 @@ public class MimicPhaseTwo : Enemy
         exit.SetActive(true);
         healthBar.SetActive(false);
 
+        mainCamera.SetActive(true);
+        bossCamera.SetActive(false);
         
         Destroy(gameObject);
     }
