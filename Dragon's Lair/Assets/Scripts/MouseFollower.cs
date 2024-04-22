@@ -7,30 +7,41 @@ public class MouseFollower : MonoBehaviour
 
     private ArmRotation armRotation;
 
+    private SpriteRenderer spriteRenderer;
+
+
+
     void Start()
     {
         armRotation = FindObjectOfType<ArmRotation>(); // Grabs the arm rotation script 
+        spriteRenderer = GetComponent<SpriteRenderer>(); // grans the sprite renderer from the game object
     }
-    // Update is called once per frame
+    
     void Update()
     {
         if(armRotation.GetGunRoationMouse())
         {
-            // Create a ray from the main camera through the mouse position
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Create a ray from the main camera through the mouse position
 
-            // Calculate the distance from the camera to the object's current position
-            float distance = Vector3.Dot(transform.position - Camera.main.transform.position, Camera.main.transform.forward);
+            
+            float distance = Vector3.Dot(transform.position - Camera.main.transform.position, Camera.main.transform.forward);  // Calculate the distance from the camera to the object's current position
 
             // Calculate the position along the ray at that distance
             Vector3 worldPosition = ray.origin + ray.direction * distance;
 
-            // Ensure that the Z-coordinate of the world position matches the current position of the GameObject which should be 0
+            // Ensure that the Z of the world position matches the current position of the GameObject which should be 0
             worldPosition.z = transform.position.z;
 
-            // Update the position of the gameobject to the mouse pointing
+            // Update the position of the gameobject to the mouse position
             transform.position = worldPosition;
         }
         
+    }
+
+     // Method to set the color of the cursor
+    public void SetColor(Color color)
+    {
+        spriteRenderer.color = color;
     }
 }
