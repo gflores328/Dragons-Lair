@@ -17,6 +17,7 @@ public class MimicPhaseThreeTrigger : MonoBehaviour
         //entrance.SetActive(true);
         if (other.tag == "Player")
         {
+            entrance.SetActive(true);
             mimic.GetComponent<MimicPhaseThree>().StartStartDelay();
 
             other.GetComponent<PlayerInput>().actions.Disable();

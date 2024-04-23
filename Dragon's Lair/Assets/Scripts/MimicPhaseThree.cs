@@ -42,6 +42,7 @@ public class MimicPhaseThree : Enemy
     public GameObject fallingDebrisHeight;
     public GameObject splashDebris;
     public GameObject splashDebrisSpawn;
+    
 
     [Header("Projectiles")]
     public GameObject[] projectiles;
