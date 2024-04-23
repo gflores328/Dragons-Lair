@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; // Import the UnityEngine.UI namespace to access UI components
+using Cinemachine;
 
 public class DoorCutscene : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class DoorCutscene : MonoBehaviour
     public GameObject fadeImage;
     public GameObject questionPopUp;
     public float fadeDuration = 1.0f;
+    public CinemachineVirtualCamera activeCam;
+    public CinemachineVirtualCamera previousCam;
 
     private bool isFading = false;
 
@@ -44,6 +47,7 @@ public class DoorCutscene : MonoBehaviour
         {
             if (answer) // If the player answered yes
             {
+                
                 StartCoroutine(DoTeleportation()); // Start the teleportation process
             }
            
@@ -61,11 +65,13 @@ public class DoorCutscene : MonoBehaviour
         // Fade out
         fadeImage.SetActive(true); // Activate the fade image
         yield return StartCoroutine(FadeOut());
-
+        activeCam.Priority = 1;
+        previousCam.Priority = 0;
         // Teleport player
         //player.GetComponent<Collider>().enabled = false;
         realPlayerMovement.SetPlayerPosition(endPosition.position);
         Debug.Log("Player teleported to end position");
+
         // Fade in
         //player.GetComponent<Collider>().enabled = true;
         yield return StartCoroutine(FadeIn());
