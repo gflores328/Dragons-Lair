@@ -378,7 +378,7 @@ public class MimicPhaseTwo : Enemy
 
     protected override void Die()
     {
-        exit.SetActive(true);
+        exit.SetActive(false);
         healthBar.SetActive(false);
 
         mainCamera.SetActive(true);

@@ -24,7 +24,7 @@ public class MimicPhaseTwoTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            entrance.SetActive(false);
+            entrance.SetActive(true);
             mimic.GetComponent<MimicPhaseTwo>().StartStartDelay();
 
             other.GetComponent<PlayerInput>().actions.Disable();
