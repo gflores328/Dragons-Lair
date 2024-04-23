@@ -80,11 +80,15 @@ public class GameManager : MonoBehaviour
         if(inRealLife)
         {
             Cursor.SetCursor(magGlassTexture, Vector2.zero, CursorMode.Auto);
+
         }
         else if(inCyber)
         {
             Cursor.SetCursor(targetTexture, Vector2.zero, CursorMode.Auto);
+            Cursor.visible = false;
         }
+
+    
     }
 
     void Update()
@@ -127,7 +131,20 @@ public class GameManager : MonoBehaviour
             controlsGamepad.SetActive(false);
 
         }
+        else if(inCyber)
+        {
+            if(currentState == pauseState.Paused)
+            {
+                Cursor.visible = true;
+            }
+            else if(currentState == pauseState.Unpaused)
+            {
+                Cursor.visible = false;
+            }
+            
+        }
 
+        
     }
 
 
