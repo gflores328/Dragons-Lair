@@ -40,8 +40,7 @@ public class MovingLedgesTest : MonoBehaviour
         if (!waitForPlayer)
         {
             HandleMovement();
-            
-   
+
         }
 
         if(waitForPlayer)
@@ -76,15 +75,6 @@ public class MovingLedgesTest : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         other.transform.parent = transform;
         playerHasArrived = true;
-
-        if ((Input.GetKeyDown(KeyCode.D)||(Input.GetKeyDown(KeyCode.LeftArrow))))
-        {
-            other.transform.Translate(Vector3.left * Time.deltaTime, Camera.main.transform);
-        }
-        if ((Input.GetKeyDown(KeyCode.A) || (Input.GetKeyDown(KeyCode.RightArrow))))
-        {
-            other.transform.Translate(Vector3.right * Time.deltaTime, Camera.main.transform);
-        }
 
     }
 
