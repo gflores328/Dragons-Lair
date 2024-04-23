@@ -11,6 +11,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public GameObject gameOverMenu; // Game Over Menu
+    public AudioSource gameOverAudioSource; // Reference to AudioSource component
+    public AudioClip gameOverSound; // Sound to play when game over
 
     private void OnEnable()
     {
@@ -25,5 +27,11 @@ public class UIManager : MonoBehaviour
     public void EnableGameOverMenu()
     {
         gameOverMenu.SetActive(true); // Menu is Set Active
+        if (gameOverAudioSource != null && gameOverSound != null)
+        {
+            // Play the game over sound if AudioSource and AudioClip are set
+            gameOverAudioSource.clip = gameOverSound;
+            gameOverAudioSource.Play();
+        }
     }
 }
