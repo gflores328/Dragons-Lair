@@ -33,6 +33,7 @@ public class RealBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        bool destroy = true;
         // If colliding with an enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -51,6 +52,15 @@ public class RealBullet : MonoBehaviour
             }
 
             // Destroy the bullet upon collision with an enemy
+            Destroy(gameObject);
+            
+        }
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            destroy = false;
+        }
+        if(destroy)
+        {
             Destroy(gameObject);
         }
     }
