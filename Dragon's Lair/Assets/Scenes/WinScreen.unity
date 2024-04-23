@@ -390,6 +390,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7febc7264353946b295d7ebc7d6ee670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &801559904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 801559905}
+  m_Layer: 0
+  m_Name: GameManStuff (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &801559905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801559904}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1107.963, y: 412.07697, z: 4.981594}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1096381339 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1504271522690816011, guid: 951cc719003164e3fb4d5ef8bf43c2cb,
@@ -513,7 +544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1683386247}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManStuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,7 +873,7 @@ PrefabInstance:
     - target: {fileID: 1383996914887036638, guid: 813e892a4e56d4c15ba7ecaa1cede3ef,
         type: 3}
       propertyPath: inCyber
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1383996914887036638, guid: 813e892a4e56d4c15ba7ecaa1cede3ef,
         type: 3}
@@ -852,13 +883,23 @@ PrefabInstance:
     - target: {fileID: 1383996914887036638, guid: 813e892a4e56d4c15ba7ecaa1cede3ef,
         type: 3}
       propertyPath: inRealLife
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1383996914887036638, guid: 813e892a4e56d4c15ba7ecaa1cede3ef,
         type: 3}
       propertyPath: resumeButton
       value: 
       objectReference: {fileID: 1085545740825813564}
+    - target: {fileID: 1383996914887036638, guid: 813e892a4e56d4c15ba7ecaa1cede3ef,
+        type: 3}
+      propertyPath: controlsGamepad
+      value: 
+      objectReference: {fileID: 801559904}
+    - target: {fileID: 1383996914887036638, guid: 813e892a4e56d4c15ba7ecaa1cede3ef,
+        type: 3}
+      propertyPath: controlsKeyboard
+      value: 
+      objectReference: {fileID: 1683386246}
     - target: {fileID: 1653348136024004016, guid: 813e892a4e56d4c15ba7ecaa1cede3ef,
         type: 3}
       propertyPath: m_Name
@@ -955,3 +996,4 @@ SceneRoots:
   - {fileID: 1951276603116490210}
   - {fileID: 533363933157758689}
   - {fileID: 1683386247}
+  - {fileID: 801559905}
