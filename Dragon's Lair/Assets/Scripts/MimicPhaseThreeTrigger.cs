@@ -12,6 +12,9 @@ public class MimicPhaseThreeTrigger : MonoBehaviour
     [Header("Cameras")]
     public GameObject mainCamera;
     public GameObject bossCamera;
+
+    public AudioSource source;
+    public AudioSource bossSource;
     private void OnTriggerEnter(Collider other)
     {
         //entrance.SetActive(true);
@@ -24,6 +27,9 @@ public class MimicPhaseThreeTrigger : MonoBehaviour
 
             mainCamera.SetActive(false);
             bossCamera.SetActive(true);
+
+            source.Pause();
+            bossSource.Play();
 
             Destroy(gameObject);
         }
