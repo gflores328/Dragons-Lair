@@ -27,13 +27,16 @@ public class ClawMovement : MonoBehaviour
     public bool touchingPrize = false;
 
     private GameObject gameState;
+    
+    private GameManager gameManager;
     public Item prize;
     void Start()
     {
         rHook = GameObject.Find("Right_Hook").GetComponent<Rigidbody2D>();
         lHook = GameObject.Find("Left_Hook").GetComponent<Rigidbody2D>();
+        gameManager =  GetComponent<GameManager>();
         clawsOpen = true;
-
+        
         // Get boundary coordinates
         minX = -2f;
         maxX = 2.5f;
@@ -45,6 +48,10 @@ public class ClawMovement : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameManager.PauseGame();
+        }
         // Holding 'Space' = Descend
         if (Input.GetKeyDown(KeyCode.Space) && allowControls)
         {
