@@ -88,6 +88,7 @@ public class AH_Puck : MonoBehaviour
 
             newDirection.x = Mathf.Sign(newDirection.x) * Mathf.Max(Mathf.Abs(newDirection.x), this.minDir);
             newDirection.z = Mathf.Sign(newDirection.z) * Mathf.Max(Mathf.Abs(newDirection.z), this.minDir);
+            newDirection.y = 0;
 
             direction = newDirection;
         }
@@ -100,6 +101,7 @@ public class AH_Puck : MonoBehaviour
 
             newDirection.x = Mathf.Sign(newDirection.x) * Mathf.Max(Mathf.Abs(newDirection.x), this.minDir);
             newDirection.z = Mathf.Sign(newDirection.z) * Mathf.Max(Mathf.Abs(newDirection.z), this.minDir);
+            newDirection.y = 0;
 
             direction = newDirection;
         }
