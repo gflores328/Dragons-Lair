@@ -165,13 +165,16 @@ public class ClawMovement : MonoBehaviour
                 Debug.Log("You win");
                 Time.timeScale = 0;
 
-                if (gameState.GetComponent<GameState>().storyState < GameState.state.GiveScrewdriver)
+                if (gameState != null)
                 {
-                    gameState.GetComponent<GameState>().storyState = GameState.state.GiveScrewdriver;
-                    gameState.GetComponent<GameState>().objective = "Give the screwdriver to Michael";
-                    GameObject.Find("Inventory").GetComponent<Inventory>().AddItem(prize);
+                    if (gameState.GetComponent<GameState>().storyState < GameState.state.GiveScrewdriver)
+                    {
+                        gameState.GetComponent<GameState>().storyState = GameState.state.GiveScrewdriver;
+                        gameState.GetComponent<GameState>().objective = "Give the screwdriver to Michael";
+                        GameObject.Find("Inventory").GetComponent<Inventory>().AddItem(prize);
+                    }
                 }
-                SceneManager.LoadScene("LevelDesignRealLife");
+                GetComponent<AsyncLoader>().runAsync();
             }
             Destroy(i.gameObject);
         }
