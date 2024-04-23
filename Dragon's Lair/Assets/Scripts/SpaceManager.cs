@@ -26,6 +26,7 @@ public class SpaceManager : MonoBehaviour
         if (score.text == "Score: 3000" && !hasPlayedVictorySound)
         {
             Time.timeScale = 0;
+            PlayerLives.lives = 3;
             winScreen.SetActive(true);
 
             if (victoryAudioSource != null && victorySound != null)
