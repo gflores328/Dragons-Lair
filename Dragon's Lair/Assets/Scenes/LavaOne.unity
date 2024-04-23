@@ -13605,7 +13605,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 0b52ae06208f12e4bb9013acc51b4412,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2a25e572222cc1a4c9580592f4d17c6e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 75705f2b8b9d77142b7d218cdb4446a6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.165
   m_Pitch: 1
@@ -31687,6 +31687,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6622910687776439677, guid: 68e43b6fb2a306c4db7bdc00df3957a2,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 587489717}
+    - target: {fileID: 6622910687776439677, guid: 68e43b6fb2a306c4db7bdc00df3957a2,
+        type: 3}
+      propertyPath: levelToLoad
+      value: LoseScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622910687776439677, guid: 68e43b6fb2a306c4db7bdc00df3957a2,
+        type: 3}
+      propertyPath: LoadingScreen
+      value: 
+      objectReference: {fileID: 1491684328}
     - target: {fileID: 4488840170223106238, guid: 0c58ed1322913ee4eb81414ac1092f5b,
         type: 3}
       propertyPath: m_Size.x
@@ -31792,21 +31807,6 @@ PrefabInstance:
       propertyPath: respawnPoints.Array.data[2]
       value: 
       objectReference: {fileID: 396993643}
-    - target: {fileID: 6622910687776439677, guid: 68e43b6fb2a306c4db7bdc00df3957a2,
-        type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 587489717}
-    - target: {fileID: 6622910687776439677, guid: 68e43b6fb2a306c4db7bdc00df3957a2,
-        type: 3}
-      propertyPath: levelToLoad
-      value: LoseScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 6622910687776439677, guid: 68e43b6fb2a306c4db7bdc00df3957a2,
-        type: 3}
-      propertyPath: LoadingScreen
-      value: 
-      objectReference: {fileID: 1491684328}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
