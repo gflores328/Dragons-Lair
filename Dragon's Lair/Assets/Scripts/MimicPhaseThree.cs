@@ -393,7 +393,7 @@ public class MimicPhaseThree : Enemy
 
     protected override void Die()
     {
-        exit.SetActive(true);
+        exit.SetActive(false);
         healthBar.SetActive(false);
         Destroy(gameObject);
 
