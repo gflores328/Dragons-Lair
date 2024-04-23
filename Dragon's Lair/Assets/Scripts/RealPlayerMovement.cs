@@ -79,7 +79,7 @@ public class RealPlayerMovement : MonoBehaviour
         }
         footStep = GetComponent<AudioSource>();
 
-        
+        Cursor.visible = true;
     }
 
     
