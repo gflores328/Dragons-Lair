@@ -28,6 +28,9 @@ public class PixieController : Enemy
 
     public bool isHidden = true; //Keeps track of the pixie's visibility
 
+    //pixie sound inputs
+    public AudioSource Pixie_Spawn, Pixie_Attack, Pixie_Death, Pixie_Laugh;
+
 
     private CapsuleCollider capsuleCollider;
 
@@ -64,13 +67,18 @@ public class PixieController : Enemy
             {
                 renderer.enabled = true;
                 isHidden = false;
-                //Sparkle effect here?
-            }
+
+                //Sparkle effect on Spawn
+                 Pixie_Spawn.Play();
+}
 
             //Stay a certain distance away from the player and begin firing projectiles
             if (Vector3.Distance(transform.position, playerToChase.transform.position) > 3f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, playerToChase.transform.position, speed * Time.deltaTime);
+
+                //pixie fire sound
+                Pixie_Attack.Play();
             }
         }
     }
@@ -82,6 +90,9 @@ public class PixieController : Enemy
         if (other.gameObject.CompareTag("Player"))
         {
             playerToChase.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+
+            //pixie laugh sound
+            Pixie_Laugh.Play();
         }
 
        
@@ -104,14 +115,14 @@ public class PixieController : Enemy
             }
             else
             {
-                Debug.LogWarning("Renderer not found on Newt object.");
+                Debug.LogWarning("Renderer not found on Pixie object.");
             }
 
             
         }
         else
         {
-            Debug.LogWarning("Dissolve material not assigned to Newt.");
+            Debug.LogWarning("Dissolve material not assigned to Pixie.");
         }
         Destroy(newtFire);
         Destroy(gameObject, 1.5f);
@@ -137,6 +148,9 @@ public class PixieController : Enemy
     {
         base.TakeDamage(damage);
         StartCoroutine(HitDelay());
+
+        // pixie death sound
+        Pixie_Death.Play();
     }
     
     IEnumerator HitDelay()
