@@ -20,6 +20,8 @@ public class NewtFire : MonoBehaviour
 
     private bool firstTimeShot = true; // a bool to check if it is the first time a player is being shot at
 
+    public AudioSource Newt_Attack;
+
     private void Update()
     {   
         // fireDirection is set to the direction of the player from the position of this game object
@@ -34,6 +36,10 @@ public class NewtFire : MonoBehaviour
         {
             // ShootWithDelay is started
             StartCoroutine(ShootWithDelay());
+
+
+            //audio of newt firing
+            Newt_Attack.Play();
         }
     }
 
@@ -51,10 +57,17 @@ public class NewtFire : MonoBehaviour
         // firing is set to true
         firing = true;
 
+
+
         // If it is the players first time being shot at a small delay appears
         if (firstTimeShot)
         {
             yield return new WaitForSeconds(1);
+
+
+            //audio of newt firing
+            Newt_Attack.Play();
+
             firstTimeShot = false;
         }
 

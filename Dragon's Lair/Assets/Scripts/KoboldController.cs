@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -45,6 +46,9 @@ public class KoboldController : Enemy
     private bool isDead = false;
 
     public Animator animator;
+
+    // Kobold audio
+    public AudioSource Kobold_Attack, Kobold_Hurt, Kobold_Death, Kobold_Aggro;
 
     public Transform[] waypoints; // Waypoints
     int m_CurrentWaypointIndex;
@@ -126,6 +130,10 @@ public class KoboldController : Enemy
 
                 Stop();
                 Attack();
+
+                // audio kobold attack
+                Kobold_Attack.Play();
+
                 Invoke("ResetAttack", animator.GetCurrentAnimatorStateInfo(0).length);
             }
            
@@ -220,6 +228,7 @@ public class KoboldController : Enemy
     void CaughtPlayer()
     {
         m_CaughtPlayer = true; // The kobold has spotted the player
+        Kobold_Aggro.Play();
     }
 
     // The kobold moves to the player's last position then returns to patrol mode
@@ -284,6 +293,10 @@ public class KoboldController : Enemy
     {
         Stop();
         isDead = true;
+
+        // audio Kobold Death
+        Kobold_Death.Play();
+
         animator.SetTrigger("IS_Dead");
         if (dissolveMaterial != null)
         {
@@ -342,6 +355,10 @@ public class KoboldController : Enemy
     {
         base.TakeDamage(damage);
         StartCoroutine(HitDelay());
+
+        //audio kobold hurt
+        Kobold_Hurt.Play();
+
     }
 
     IEnumerator HitDelay()
