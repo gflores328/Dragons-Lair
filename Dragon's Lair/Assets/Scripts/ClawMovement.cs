@@ -153,6 +153,13 @@ public class ClawMovement : MonoBehaviour
         clawsOpen = true;
         CheckForPrize();
         allowControls = true;
+
+        ClawTouch[] claws = GetComponentsInChildren<ClawTouch>();
+
+        foreach (ClawTouch i in claws)
+        {
+            i.canTouch = true;
+        }
     }
 
     // Checks for each object with Prize that is a child of the game object
@@ -187,6 +194,7 @@ public class ClawMovement : MonoBehaviour
         }
     }
 
+    /*
     // If the triggger touches a prize then a bool is set to true
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -195,5 +203,6 @@ public class ClawMovement : MonoBehaviour
             touchingPrize = true;
         }
     }
+    */
 
 }
