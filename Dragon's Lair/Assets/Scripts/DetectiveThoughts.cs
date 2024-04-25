@@ -81,6 +81,7 @@ public class DetectiveThoughts : MonoBehaviour
 
     public void Interact()
     {
+        dialogueManager.GetComponent<DialogueManager>().GetComponent<AudioSource>().Stop();
         AudioClip audioClip = dialogueManager.GetComponent<DialogueManager>().GetAudioSource().clip;
         dialogueManager.GetComponent<DialogueManager>().GetAudioSource().PlayOneShot(audioClip);
 
