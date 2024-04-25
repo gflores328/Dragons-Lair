@@ -45,11 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2942e2e2e722b43468e307bfb4a80eb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsingBullet: 1
   shots: 1
   shotsFired: 0
   fireAction: {fileID: -7405401969529671698, guid: ee89979ffb1c10d49a0c463a6c04ce8e,
     type: 3}
   bullet: {fileID: 8578507514791716711}
+  realBulletPrefab: {fileID: 0}
+  laserBeam: {fileID: 0}
   fireRate: 3
   fireRateCounter: 0
   accuracy: 100
@@ -4898,6 +4901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   damageAmount: 25
+  part: {fileID: 0}
   gun: {fileID: 0}
 --- !u!1 &2947503195398649354
 GameObject:
@@ -5095,6 +5099,7 @@ GameObject:
   - component: {fileID: 5353421390088615025}
   - component: {fileID: 3014572728961207885}
   - component: {fileID: 1647235298587055985}
+  - component: {fileID: 7862837448684032286}
   m_Layer: 8
   m_Name: PlayerW/Gun
   m_TagString: Player
@@ -5236,6 +5241,50 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 719c142d-7676-4bba-9381-4fbc4718dba1
     m_ActionName: DDR/Start[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4b2525fa-2ec4-41f6-87dd-ea41644db4b1
+    m_ActionName: RealLifeMovement/Inventory[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9528eeb0-fa07-488b-94c1-16bf91bfc47c
+    m_ActionName: ChibiMovement/Crouch[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5c218303-205e-456f-9127-b5ea5af0ca5a
+    m_ActionName: ChibiMovement/AimUPDiag[/Keyboard/d,/Keyboard/w,/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4b1fb75a-0985-4b1b-a457-670ea655d9a8
+    m_ActionName: ChibiMovement/AimUp[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 521595b1-82f3-4554-ab95-8dd9581360f4
+    m_ActionName: ChibiMovement/FreeAim[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 626f18ee-256b-441d-8e83-f5a9fa0761e7
+    m_ActionName: ChibiMovement/FreeAimRight[/Keyboard/shift,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ccab532b-5384-41f9-a1e1-da82fe8aff4c
+    m_ActionName: ChibiMovement/FreeAimLeft[/Keyboard/shift,/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4bab392-3a9a-41ef-becb-1bc480b8798c
+    m_ActionName: DDR/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 432bcec9-b7e4-455d-b19f-100bcb2c77b5
+    m_ActionName: MobileAxiomFighter/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1b9ed6fa-5cce-4ffe-9d10-3d67ef2bd44f
+    m_ActionName: MobileAxiomFighter/Shoot[/Mouse/leftButton,/Keyboard/j,/Keyboard/k,/Keyboard/l,/Keyboard/h,/Keyboard/g,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e6fc57db-2531-405e-8617-897e1e30a8ab
+    m_ActionName: AirHockey/Move[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: ChibiMovement
@@ -5281,13 +5330,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeedMultiplier: 5
-  maxForce: 2
-  jumpForce: 15
   gravityForce: 9.81
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
   groundRayLength: 1
+  animator: {fileID: 0}
+  initialJumpVelocity: 0
+  maxJumpHeight: 1
+  maxJumpTime: 0.5
+  maxHealth: 10
+  numOfHearts: 0
+  hearts: []
+  fullHeart: {fileID: 0}
+  emptyHeart: {fileID: 0}
+  invincibilityLength: 0
+  playerRenderer: {fileID: 0}
+  flashLength: 0.1
+  maxExtraJumps: 1
 --- !u!114 &5353421390088615025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5300,12 +5360,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa60e8cf6339a9443841382430e2ac02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimAction: {fileID: 5979198381072014160, guid: ee89979ffb1c10d49a0c463a6c04ce8e,
-    type: 3}
   armPivot: {fileID: 7304891154491330588}
+  armLookTarget: {fileID: 0}
+  armLookTargetUp: {fileID: 0}
+  armLookTargetForward: {fileID: 0}
+  armLookTargetForwardDiag: {fileID: 0}
   rotationSpeed: 5
   maxRotationAngle: 45
   targetYRotation: 90
+  gunRotationWithMouse: 1
 --- !u!114 &3014572728961207885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5345,3 +5408,99 @@ CapsuleCollider:
   m_Height: 1.65
   m_Direction: 1
   m_Center: {x: -0.014974594, y: 0.23, z: 0}
+--- !u!82 &7862837448684032286
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7156870831932225080}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4e09d393823efa545b9363905745137e, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
