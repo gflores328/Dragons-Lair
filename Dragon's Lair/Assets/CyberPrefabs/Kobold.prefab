@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7732064299187122249}
   - component: {fileID: 7004186857131886926}
   - component: {fileID: 3673435240749847181}
+  - component: {fileID: 3870134352292491260}
   m_Layer: 0
   m_Name: Kobold
   m_TagString: Enemy
@@ -189,13 +190,32 @@ MonoBehaviour:
   meshResolution: 1
   edgeIterations: 4
   edgeDistance: 0.5
+  attackRange: 2
+  attackDamage: 10
+  attackCooldown: 2
+  hitMaterial: {fileID: 0}
   dissolveMaterial: {fileID: 2100000, guid: d4a3ce5f3d4e2e64e83223c4aec3897e, type: 2}
   renderer: {fileID: 5106866325895331278}
+  dissolveSpeed: 0.7
   animator: {fileID: 0}
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
+  hitPlayer: 0
   kData: {fileID: 11400000, guid: 7c8fe1c90523d4c42a6362ef43ff8822, type: 2}
+--- !u!114 &3870134352292491260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27667918693238688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52fc235a9ec4348c8997f03e371b0b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetDistance: 0
 --- !u!1001 &3985475611548378053
 PrefabInstance:
   m_ObjectHideFlags: 0
