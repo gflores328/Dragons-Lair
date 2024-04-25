@@ -77,8 +77,8 @@ public class PixieController : Enemy
             {
                 transform.position = Vector3.MoveTowards(transform.position, playerToChase.transform.position, speed * Time.deltaTime);
 
-                //pixie fire sound
-                Pixie_Attack.Play();
+                //pixie laugh sound
+                Pixie_Laugh.Play();
             }
         }
     }
@@ -91,8 +91,8 @@ public class PixieController : Enemy
         {
             playerToChase.GetComponent<ChibiPlayerMovement>().takeDamage(1);
 
-            //pixie laugh sound
-            Pixie_Laugh.Play();
+            //pixie fire sound
+            Pixie_Attack.Play();
         }
 
        
