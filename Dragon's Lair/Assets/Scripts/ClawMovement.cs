@@ -62,14 +62,17 @@ public class ClawMovement : MonoBehaviour
 
         if (goDown && !touchingPrize)
         {
-            gameObject.transform.Translate(0, -0.01f, 0);
+            gameObject.transform.Translate(new Vector3(0, -1f, 0) * Time.deltaTime * 2);
         }
 
-        if (touchingPrize)
+        if (touchingPrize || transform.position.y <= minY)
         {
             goDown = false;
             clawsOpen = false;
             touchingPrize = false;
+
+            gameObject.GetComponent<BoxCollider2D>().enabled = true;
+
             StartCoroutine(WaitBeforeGoingUp());
         }
 
@@ -84,19 +87,19 @@ public class ClawMovement : MonoBehaviour
         // [<-] and [A] = Move Left
         if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && allowControls) // Hold
         {
-            gameObject.transform.Translate(-0.015f, 0, 0);
+            gameObject.transform.Translate(new Vector3(-1f, 0, 0) * Time.deltaTime * 5);
         }
 
         // [->] and [D] = Move Right
         if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) & allowControls) // Hold
         {
-            gameObject.transform.Translate(0.015f, 0, 0);
+            gameObject.transform.Translate(new Vector3(1f, 0, 0) * Time.deltaTime * 5);
         }
 
         // Claw Movement
-        if (goUp) // Up
+        if (goUp && transform.position.y < maxY) // Up
         {
-            gameObject.transform.Translate(0, 0.01f, 0);
+            gameObject.transform.Translate(new Vector3(0, 1f, 0) * Time.deltaTime * 2);
         }
      
         // When the claws open, hooks rotate outward
@@ -104,12 +107,12 @@ public class ClawMovement : MonoBehaviour
         {
             if (rHook.transform.eulerAngles.z < 61) // < 61
             {
-                rHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 15);
+                rHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 20);
             }
 
             if (lHook.transform.eulerAngles.z > 299) // > 299
             {
-                lHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime * 15);
+                lHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime * 20);
             }
         }
 
@@ -118,12 +121,12 @@ public class ClawMovement : MonoBehaviour
         {
             if (rHook.transform.eulerAngles.z > 5) // > 5
             {
-                rHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime* 15);
+                rHook.transform.Rotate(new Vector3(0, 0, -1f) * Time.deltaTime* 20);
             }
 
             if (lHook.transform.eulerAngles.z < 355) // < 355
             {
-                lHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 15);
+                lHook.transform.Rotate(new Vector3(0, 0, 1f) * Time.deltaTime * 20);
             }
         }
 
@@ -153,6 +156,7 @@ public class ClawMovement : MonoBehaviour
         clawsOpen = true;
         CheckForPrize();
         allowControls = true;
+
 
         ClawTouch[] claws = GetComponentsInChildren<ClawTouch>();
 
@@ -192,6 +196,7 @@ public class ClawMovement : MonoBehaviour
             }
             Destroy(i.gameObject);
         }
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     /*
