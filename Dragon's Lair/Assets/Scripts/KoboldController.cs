@@ -11,6 +11,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEditor;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class KoboldController : Enemy
@@ -22,8 +23,12 @@ public class KoboldController : Enemy
     public float speedWalk = 6; // Walking Speed
     public float speedRun = 9; // Running Speed
 
-    public float viewRadius = 15; // Enemy View Radius
-    public float viewAngle = 90; // Enemy View Angle
+    [SerializeField]
+    private float viewRadius = 15; // Enemy View Radius
+
+    [SerializeField]
+    private float viewAngle = 90; // Enemy View Angle
+
     public LayerMask playerMask; // Layer Mask for Player
     public LayerMask obstacleMask; // Layer Mask for Obstacle
     public float meshResolution = 1f;
@@ -87,7 +92,7 @@ public class KoboldController : Enemy
     // Update is called once per frame
     void LateUpdate()
     {
-        if(!isDead)
+        if (!isDead)
 
         {
 
@@ -122,26 +127,23 @@ public class KoboldController : Enemy
             Move(speedRun); // Kobold now runs
             navAgent.SetDestination(m_PlayerPosition); // Follows the player
 
-            // Check if the player is within attack range
-            if (Vector3.Distance(transform.position, m_PlayerPosition) <= attackRange)
+            // Check if the player is within view angle and attack range
+            if (m_PlayerInRange && Vector3.Distance(transform.position, m_PlayerPosition) <= attackRange)
             {
                 // Attack the player
                 Debug.Log("Player in attack range");
-
                 Stop();
                 Attack();
-
                 // audio kobold attack
                 Kobold_Attack.Play();
-
                 Invoke("ResetAttack", animator.GetCurrentAnimatorStateInfo(0).length);
             }
-           
         }
-        if (navAgent.remainingDistance <= navAgent.stoppingDistance) // If 
+
+        if (navAgent.remainingDistance <= navAgent.stoppingDistance)
         {
-            // If the player is not near, return to patrol mode
-            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
+            // If the player is not in sight or not within attack range, return to patrol mode
+            if (m_WaitTime <= 0 && !m_CaughtPlayer && !m_PlayerInRange)
             {
                 m_IsPatrol = true; // Kobold is set in patrol mode
                 m_PlayerNear = false; // Player is out of range
@@ -152,7 +154,7 @@ public class KoboldController : Enemy
             }
             else // The kobold halts its movement
             {
-                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
+                if (!m_PlayerInRange)
                 {
                     Stop();
                     m_WaitTime -= Time.deltaTime;
@@ -161,10 +163,11 @@ public class KoboldController : Enemy
         }
     }
 
+
     // Patrol Mode
     private void Patrolling()
     {
-        
+
         if (m_PlayerNear) // If the kobold is near the player
         {
             if (m_TimeToRotate <= 0) // After turning around...
@@ -211,7 +214,7 @@ public class KoboldController : Enemy
     // Stops the kobold's movement
     void Stop()
     {
-        animator.SetBool("Walking_Kobold",false);
+        animator.SetBool("Walking_Kobold", false);
         // The kobold stops moving
         navAgent.isStopped = true;
         navAgent.speed = 0;
@@ -257,35 +260,30 @@ public class KoboldController : Enemy
     // The kobold's line of sight
     void EnvironmentView()
     {
-        Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask); // Creates a sphere to detect the player within range
-
-        for (int i = 0; i < playerInRange.Length; i++) // When the player is in range 
+        // Cast rays in a cone to detect the player
+        RaycastHit hit;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
         {
-            Transform player = playerInRange[i].transform; // Saves player's position
-            Vector3 dirToPlayer = (player.position - transform.position).normalized; // Calculates the direction to the player
-            if (Vector3.Angle(transform.position, dirToPlayer) < viewAngle / 2) // Calculates the angle the kobold can see the player
+            Vector3 dirToPlayer = (player.transform.position - transform.position).normalized;
+            if (Vector3.Angle(transform.forward, dirToPlayer) < viewAngle / 2)
             {
-                float dstToPlayer = Vector3.Distance(transform.position, player.position); // Calculates distance to the player
-                if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, obstacleMask)) // If the player is NOT hiding behind obstacles
+                if (Physics.Raycast(transform.position, dirToPlayer, out hit, viewRadius, playerMask))
                 {
-                    m_PlayerInRange = true;
-                    m_IsPatrol = false;
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        m_PlayerInRange = true;
+                        m_IsPatrol = false;
+                        m_PlayerPosition = hit.transform.position;
+                        return;
+                    }
                 }
-                else // If the player is hiding behind obstacles
-                {
-                    m_PlayerInRange = false;
-                }
-            }
-            if (Vector3.Distance(transform.position, player.position) > viewRadius) // If the player is out of sight
-            {
-                m_PlayerInRange = false; // The player is out of range
-            }
-            
-            if (m_PlayerInRange) // If the player is in sight
-            {
-                m_PlayerPosition = player.transform.position; // Saves player position
             }
         }
+
+        // If no player is detected, set flags accordingly
+        m_PlayerInRange = false;
+        m_IsPatrol = true;
     }
 
     protected override void Die()
@@ -312,7 +310,7 @@ public class KoboldController : Enemy
                 Debug.LogWarning("Renderer not found on Newt object.");
             }
 
-            
+
         }
         else
         {
@@ -326,7 +324,7 @@ public class KoboldController : Enemy
         {
             collider.enabled = false;
         }
-        
+
 
         float deathDuration = 2f;
 
@@ -374,7 +372,7 @@ public class KoboldController : Enemy
 
     void Attack()
     {
-        
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -383,18 +381,18 @@ public class KoboldController : Enemy
             {
                 isAttacking = true; // Set attacking flag to true
                 Stop();
-               
+
                 Debug.Log("Kobold is Attacking");
-                
+
                 animator.SetBool("Attack_Kobold", true); // Trigger attack animation
 
                 // Calculate the next attack time based on the attack cooldown
                 nextAttackTime = Time.time + attackCooldown;
-                if(hitPlayer)
+                if (hitPlayer)
                 {
                     playerMovement.takeDamage(attackDamage);
                 }
-                
+
 
                 // Reset the attacking flag after the attack animation duration
                 //Invoke("ResetAttack", animator.GetCurrentAnimatorStateInfo(0).length);
@@ -432,5 +430,14 @@ public class KoboldController : Enemy
         hitPlayer = success;
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        // Draw the view angle only when the KoboldController is selected
+        Handles.color = Color.green;
+        Handles.DrawWireArc(transform.position, Vector3.up, Quaternion.Euler(0, -viewAngle / 2, 0) * transform.forward, viewAngle, viewRadius);
 
-} 
+        // Draw the view radius only when the KoboldController is selected
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, viewRadius);
+    }
+}
