@@ -43,12 +43,14 @@ public class AH_UImgr : MonoBehaviour
             {
                 Time.timeScale = 0;
                 showPaused();
+                Cursor.visible = true;
             }
             else if (Time.timeScale == 0)
             {
                 //Debug.Log("high");
                 Time.timeScale = 1;
                 hidePaused();
+                Cursor.visible = false;
             }
         }
 

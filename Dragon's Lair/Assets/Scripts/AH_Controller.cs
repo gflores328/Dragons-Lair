@@ -78,7 +78,8 @@ public class AH_PlayerController : MonoBehaviour
         puck = GameObject.FindGameObjectWithTag("AH_Puck").transform;
         pusherB = GameObject.FindGameObjectWithTag("AH_AI").transform;
         Vector2 center = default;
-        SetCursor(CustomCursor, center); //starts as open hand cursor
+        //SetCursor(CustomCursor, center); //starts as open hand cursor
+        Cursor.visible = false;
 
         SetDifficulty(2); //starts game at intermediate difficulty: 1 - easy | 2 - intermediate | 3 - hard
 
@@ -109,7 +110,7 @@ public class AH_PlayerController : MonoBehaviour
             if (Physics.Raycast(paddleGrabed, out RaycastHit raycastHit, MaxValue, layers))
             {
                 //change cursor to closed hand
-                Cursor.SetCursor(ClickCursor.texture, center, CursorMode.Auto);
+                //Cursor.SetCursor(ClickCursor.texture, center, CursorMode.Auto);
 
                 transform.position = raycastHit.point; //moves puck where mouse is
                 transform.rotation = Quaternion.FromToRotation(Vector3.right, transform.position.normalized);
@@ -117,7 +118,7 @@ public class AH_PlayerController : MonoBehaviour
             else
             {
                 //change cursor to open hand
-                Cursor.SetCursor(CustomCursor.texture, center, CursorMode.Auto);
+                //Cursor.SetCursor(CustomCursor.texture, center, CursorMode.Auto);
             }
         }
         else if (!gameManager.GetIsMouse())
