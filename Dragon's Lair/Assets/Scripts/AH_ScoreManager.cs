@@ -44,7 +44,7 @@ public class AH_ScoreManager : MonoBehaviour
         playerScoreText.text = playerScore.ToString();
 
 
-        if ((playerScore == 7) && (playerController.mode == "easy"))
+        if ((playerScore == 5) && (playerController.mode == "easy"))
         {
             Cursor.visible = true;
             sfx.PlayYouWin();
@@ -59,7 +59,7 @@ public class AH_ScoreManager : MonoBehaviour
         }
 
 
-        if ((playerScore == 5) && (playerController.mode == "intermidate"))
+        if ((playerScore == 7) && (playerController.mode == "intermidate"))
         {
             Cursor.visible = true;
             sfx.PlayYouWin();
