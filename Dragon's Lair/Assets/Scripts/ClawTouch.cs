@@ -11,7 +11,6 @@ public class ClawTouch : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Touched");
         if (collision.gameObject.TryGetComponent<Prize>(out Prize prize) && canTouch)
         {
             GetComponentInParent<ClawMovement>().touchingPrize = true;

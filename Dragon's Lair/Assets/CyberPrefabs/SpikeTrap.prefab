@@ -1,5 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2867928678712786759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6314056884473515310}
+  - component: {fileID: 8995590442810805902}
+  - component: {fileID: 5699791617452486122}
+  m_Layer: 0
+  m_Name: ProximityAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6314056884473515310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867928678712786759}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000006556509, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.640744, y: 0.088998914, z: -0.21090944}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6569289595320646660}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8995590442810805902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867928678712786759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e96697e3dc86a4a924dbe001f37eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuzzSaw: {fileID: 8733131563441719703}
+--- !u!65 &5699791617452486122
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867928678712786759}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.3623543, y: 1.9822035, z: 1}
+  m_Center: {x: -0.22744274, y: 0.49110174, z: -1.1166358e-13}
 --- !u!1 &6545707603228426299
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +199,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc015e6ab2c03e1409febba3cebaca1c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6314056884473515310}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dc015e6ab2c03e1409febba3cebaca1c,
         type: 3}
@@ -222,18 +293,19 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5791944372630185662}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4c51f8c3f7cc6d64cad34e02261db095, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.62
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 0b52ae06208f12e4bb9013acc51b4412,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 9adcc219c85a07543b0a6c544f68cf08, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.478
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 90
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -271,7 +343,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.407
       inSlope: 0
       outSlope: 0
       tangentMode: 0
