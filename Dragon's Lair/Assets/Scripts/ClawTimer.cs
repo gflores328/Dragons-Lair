@@ -24,12 +24,14 @@ public class ClawTimer : MonoBehaviour
     public GameObject loseScreen;
     public AudioClip loseSound;
     public AudioSource loseAudioSource;
+    public AudioSource bgmAudioSource;
     private bool hasPlayedloseSound = false;
     public TextMeshProUGUI CountdownText; // TextMeshPro Required to Show Text
     
     // Start is called before the first frame update
     void Start()
     {
+        bgmAudioSource.volume = 1f; // Unmuted at the Start
         currentTime = startingTime; // Timer Starts of at Starting Time
     }
 
@@ -51,6 +53,12 @@ public class ClawTimer : MonoBehaviour
                 Debug.Log("Playing lose sound.");
                 loseAudioSource.clip = loseSound;
                 loseAudioSource.Play();
+            }
+
+            // Mute the Background Music
+            if (bgmAudioSource != null)
+            {
+                bgmAudioSource.volume = 0f; // Mute the Volume
             }
 
             hasPlayedloseSound = true;

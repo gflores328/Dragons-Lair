@@ -7658,7 +7658,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7325002, y: 0}
   m_AnchorMax: {x: 1, y: 0.14500001}
-  m_AnchoredPosition: {x: -8.727783, y: -4.000061}
+  m_AnchoredPosition: {x: -8.727783, y: -0.0000014305}
   m_SizeDelta: {x: 4.0557, y: -8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671846940
@@ -7681,9 +7681,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[A] [D] or [<-] [->] = Movement
+  m_text: 'Instructions:
 
-    Space Bar = Shoot'
+    [A] [D] or [<-] [->] = Movement
+
+    [Space Bar] =
+    Shoot'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 363e988e24db3b046abea31684354962, type: 2}
   m_sharedMaterial: {fileID: -2422459021632054479, guid: 363e988e24db3b046abea31684354962,
@@ -7711,7 +7714,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.1
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
