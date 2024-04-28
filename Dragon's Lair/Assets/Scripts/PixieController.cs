@@ -67,18 +67,12 @@ public class PixieController : Enemy
             {
                 renderer.enabled = true;
                 isHidden = false;
-
-                //Sparkle effect on Spawn
-                 Pixie_Spawn.Play();
-}
+            }
 
             //Stay a certain distance away from the player and begin firing projectiles
             if (Vector3.Distance(transform.position, playerToChase.transform.position) > 3f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, playerToChase.transform.position, speed * Time.deltaTime);
-
-                //pixie laugh sound
-                Pixie_Laugh.Play();
             }
         }
     }

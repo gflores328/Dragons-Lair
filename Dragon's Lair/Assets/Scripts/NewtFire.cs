@@ -37,9 +37,6 @@ public class NewtFire : MonoBehaviour
             // ShootWithDelay is started
             StartCoroutine(ShootWithDelay());
 
-
-            //audio of newt firing
-            Newt_Attack.Play();
         }
     }
 
@@ -62,11 +59,10 @@ public class NewtFire : MonoBehaviour
         // If it is the players first time being shot at a small delay appears
         if (firstTimeShot)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.5f);
 
 
-            //audio of newt firing
-            Newt_Attack.Play();
+
 
             firstTimeShot = false;
         }
@@ -78,7 +74,9 @@ public class NewtFire : MonoBehaviour
         Rigidbody rb = clonedBullet.GetComponent<Rigidbody>();
         rb.velocity = fireDirection * bulletSpeed;
 
-        
+        //audio of newt firing
+        Newt_Attack.Play();
+
         // Wait for 2 seconds and then destroy the clonedBullet
         yield return new WaitForSeconds(2);
         Destroy(clonedBullet);

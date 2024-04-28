@@ -26,6 +26,9 @@ public class PixieRange : MonoBehaviour
             pixie.playerToChase = other.gameObject;
             player = other.transform;
             pixie.isHidden = false;
+
+            pixie.GetComponent<PixieController>().Pixie_Laugh.Play();
+            pixie.GetComponent<PixieController>().Pixie_Spawn.Play();
         }
     }
 
