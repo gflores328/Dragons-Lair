@@ -44,10 +44,12 @@ public class AH_ScoreManager : MonoBehaviour
         playerScoreText.text = playerScore.ToString();
 
 
-        if ((playerScore == 7) && (playerController.mode == "easy"))
+        if ((playerScore == 5) && (playerController.mode == "easy"))
         {
+            Cursor.visible = true;
             sfx.PlayYouWin();
             WinScreen.SetActive(true);
+            
 
             if (gameState != null && gameState.GetComponent<GameState>().storyState < GameState.state.BeatSarah)
             {
@@ -57,10 +59,12 @@ public class AH_ScoreManager : MonoBehaviour
         }
 
 
-        if ((playerScore == 5) && (playerController.mode == "intermidate"))
+        if ((playerScore == 7) && (playerController.mode == "intermidate"))
         {
+            Cursor.visible = true;
             sfx.PlayYouWin();
             WinScreen.SetActive(true);
+            
 
             if (gameState != null && gameState.GetComponent<GameState>().storyState < GameState.state.BeatSarah)
             {
@@ -72,8 +76,10 @@ public class AH_ScoreManager : MonoBehaviour
 
         if ((playerScore == 3) && (playerController.mode == "hard"))
         {
+            Cursor.visible = true;
             sfx.PlayYouWin();
             WinScreen.SetActive(true);
+            
 
             if (gameState != null && gameState.GetComponent<GameState>().storyState < GameState.state.BeatSarah)
             {
@@ -92,13 +98,16 @@ public class AH_ScoreManager : MonoBehaviour
 
         if ((aiScore == 7) && (playerController.mode == "easy"))
         {
+            Cursor.visible = true;
             sfx.PlayYouLose();
             LossScreen.SetActive(true);
+
         }
 
 
         if ((aiScore == 5) && (playerController.mode == "intermidate"))
         {
+            Cursor.visible = true;
             sfx.PlayYouLose();
             LossScreen.SetActive(true);
         }
@@ -106,6 +115,7 @@ public class AH_ScoreManager : MonoBehaviour
 
         if ((aiScore == 3) && (playerController.mode == "hard"))
         {
+            Cursor.visible = true;
             sfx.PlayYouLose();
             LossScreen.SetActive(true);
         }

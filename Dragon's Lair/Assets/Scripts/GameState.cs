@@ -156,7 +156,7 @@ public class GameState : MonoBehaviour
                 storyState = state.getIntoBasement;
                 break;
 
-            case "Unlock basement door":
+            case "Unlock the basement door":
                 storyState = state.unlockDoor;
                 break;
 

@@ -12,6 +12,8 @@ public class Newt : Enemy
 
     private Collider collider;
 
+    public AudioSource Newt_Death;
+
     public float dissolveSpeed = 0.01f; // Speed at which the material dissolves
     private void Start()
     {
@@ -32,6 +34,9 @@ public class Newt : Enemy
                 // Gradually increase the dissolve amount
                 //Debug.Log("Coroutine Started");
                 StartCoroutine(DissolveOverTime());
+
+                //audio newt death
+                Newt_Death.Play();
             }
             else
             {
