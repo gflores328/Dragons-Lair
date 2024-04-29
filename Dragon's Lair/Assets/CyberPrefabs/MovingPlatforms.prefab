@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 6144195273232650225}
   - component: {fileID: 4684614777965060539}
   - component: {fileID: 8618232181869297799}
-  - component: {fileID: 5763561396378852313}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,31 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   waypoints:
-  - {fileID: 1904916331485593084}
   - {fileID: 8291664982959961327}
+  - {fileID: 1904916331485593084}
   waitForPlayer: 0
 --- !u!65 &8618232181869297799
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121302423444884123}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6.8761697, y: 1.7208478, z: 2.5559912}
-  m_Center: {x: -0.4676211, y: -0.85992825, z: -0.2925229}
---- !u!65 &5763561396378852313
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,8 +70,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.351266, y: 1.173641, z: 2.529758}
-  m_Center: {x: -1.675633, y: 0.08682048, z: -0.27631044}
+  m_Size: {x: 6.8761697, y: 1.7208478, z: 2.5559912}
+  m_Center: {x: -0.4676211, y: 0, z: -0.2925229}
 --- !u!1 &1740794756718677469
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +83,7 @@ GameObject:
   - component: {fileID: 8358437290941087591}
   - component: {fileID: 4558721249193630786}
   - component: {fileID: 4202056879934563474}
+  - component: {fileID: 1100525265014129263}
   m_Layer: 7
   m_Name: MovingLedge
   m_TagString: Untagged
@@ -177,6 +156,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1100525265014129263
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740794756718677469}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.727542, y: 3.5070767, z: 0.9166057}
+  m_Center: {x: 0.0143380165, y: 0.19653785, z: -0.4655791}
 --- !u!1 &1904916331485593084
 GameObject:
   m_ObjectHideFlags: 0
