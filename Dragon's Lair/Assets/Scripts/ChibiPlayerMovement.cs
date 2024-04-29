@@ -166,7 +166,7 @@ public class ChibiPlayerMovement : MonoBehaviour
             animator.SetBool("isWalking", false); // Player is not moving
         }
         isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
-        Debug.Log("" + isGrounded);
+        //Debug.Log("" + isGrounded);
         UpdateJumpState(); // update the jump state for jump buffer and coyote time
         handleJump(); // The function that handles the jumping of the player
     }

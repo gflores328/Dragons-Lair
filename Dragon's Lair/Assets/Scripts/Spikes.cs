@@ -59,6 +59,21 @@ public class Spikes : MonoBehaviour
 
         
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        
+            ChibiPlayerMovement player = collision.gameObject.GetComponent<ChibiPlayerMovement>(); 
+            if (player != null)
+            {
+                // Call the player's takeDamage function and pass the damage amount
+                player.takeDamage(1);
+
+                
+            }
+
+        
+    }
     //wait time function
     private IEnumerator WaitTime(float waitTime)
     {
