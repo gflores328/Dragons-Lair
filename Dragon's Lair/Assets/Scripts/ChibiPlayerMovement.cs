@@ -147,7 +147,7 @@ public class ChibiPlayerMovement : MonoBehaviour
         
         currExtraJumps = maxExtraJumps;
         //setupJumpVariables();
-
+        Cursor.lockState = CursorLockMode.Confined;
     }
    
     void Update()
