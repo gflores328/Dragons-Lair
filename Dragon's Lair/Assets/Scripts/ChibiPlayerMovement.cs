@@ -152,6 +152,17 @@ public class ChibiPlayerMovement : MonoBehaviour
    
     void Update()
     {
+        float playerVelocityMagnitude = characterController.velocity.magnitude;
+
+        // Check if the player is moving by comparing the magnitude to a small threshold
+        if (playerVelocityMagnitude > 0.1f)
+        {
+            animator.SetBool("isWalking", true); // Player is moving
+        }
+        else
+        {
+            animator.SetBool("isWalking", false); // Player is not moving
+        }
         isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
         Debug.Log("" + isGrounded);
         UpdateJumpState(); // update the jump state for jump buffer and coyote time
@@ -228,13 +239,16 @@ public class ChibiPlayerMovement : MonoBehaviour
 
 
             // Check if the player is not moving (velocity is zero)
-            if (Mathf.Approximately(direction.magnitude, 0f))
+           // Check if any movement input is being provided
+            if (moveInput.magnitude > 0.1f)
             {
-                animator.SetBool("isWalking", false); // Set isWalking parameter to false
+                animator.SetBool("isWalking", true); // Player is moving
+                animator.SetFloat("Velocity", 1);
             }
             else
             {
-                animator.SetBool("isWalking", true); // Set isWalking parameter to true
+                animator.SetBool("isWalking", false); // Player is not moving
+                animator.SetFloat("Velocity", 0);
             }
             if (armRotation.gunRotationWithMouse)
             {
@@ -312,11 +326,13 @@ public class ChibiPlayerMovement : MonoBehaviour
             // Apply the calculated jump velocity
             float jumpVelocity = Mathf.Lerp(initialJumpVelocity, 0f, jumpProgress);
             playerVelocity.y = jumpVelocity;
+            animator.SetBool("isJumping", true);
         }
         else if (!isJumpingPressed && playerVelocity.y > 0) // If jump button is released, and player is still going up
         {
             // Reduce the upward velocity to simulate a shorter jump
             playerVelocity.y *= 0.8f; // Adjust this factor as needed
+            animator.SetBool("isJumping", false);
         }
 
         playerVelocity.y += gravityForce * Time.deltaTime;
