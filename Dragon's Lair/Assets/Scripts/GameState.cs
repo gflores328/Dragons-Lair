@@ -188,7 +188,7 @@ public class GameState : MonoBehaviour
                 storyState = state.LookForScrewdriver;
                 break;
 
-            case "Play the claw machine for the screwdriver":
+            case "Play the Claw Machine":
                 storyState = state.WinScrewdriver;
                 break;
 
