@@ -19,7 +19,7 @@ public class DisappearingLedges : MonoBehaviour
     {
         // meshRenderer = GetComponent<MeshRenderer>();
         // meshCollider = GetComponent<MeshCollider>();
-         boxCollider = GetComponent<BoxCollider>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     void OnTriggerEnter(Collider other)
