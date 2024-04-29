@@ -14,8 +14,9 @@ public class ChibiPlayerMovement : MonoBehaviour
     
     [Header("Player Movement Settings")]
     public float playerSpeedMultiplier;
-    public float gravityForce; // A float variable that will deteremine how fast the player is moving, The max force that can be applied to the movement, how powerful the jump is, how strong the gravity is.
+    public float gravityForce = -9.81f; // A float variable that will deteremine how fast the player is moving, The max force that can be applied to the movement, how powerful the jump is, how strong the gravity is.
     public static int jumpsCounter; // A int variable that will hold how many jumps the player currently has
+
     public LayerMask groundLayer; // A layermask that holds the ground layer
     public float groundRayLength = 1f; // the length of the ray that will check if the player is grounded
     public Animator animator;
@@ -23,6 +24,12 @@ public class ChibiPlayerMovement : MonoBehaviour
     private InputAction walkAction; // A private variable that is meant to hold the move action so that its values can be accessed
     private InputAction jumpAction; // A private variable that is meant to hold the jump action 
     private InputAction pauseAction; // A private variable that holds the pause action
+
+    private float velocity;
+    private float verticalVelocity; // Declare vertical velocity as a float
+
+    private Vector3 playerVelocity;
+    [SerializeField] private float gravityMultiplier = 3.0f;
 
     private InputAction freeAimAction; // A private variable that holds the free aim action 
 
@@ -34,7 +41,14 @@ public class ChibiPlayerMovement : MonoBehaviour
     private ArmRotation armRotation; 
     private bool isFreeAiming = false;
     
+    private Vector2 moveInput;
+
+    private Vector3 direction;
+
+    //private Rigidbody playerRB;
     
+    private CharacterController characterController;
+
    
 
     // Jumping variables
@@ -42,12 +56,17 @@ public class ChibiPlayerMovement : MonoBehaviour
    
     
     [Header("Player Jump Settings")]
+    public float maxFallSpeed = 0.5f;
     public float initialJumpVelocity; // The inital velocity of the Jump
     public float maxJumpHeight =1.0f; // The max height that the jump will go
     public float maxJumpTime = 0.5f; // Maximum time the jump button can be held to reach maximum jump height
     private float coyoteTime = 0.2f; // How long the player will be able to jump after leaving the ground
     //private float jumpTimer = 0f; // Timer to track how long the jump button has been held
     private float coyoteTimeCounter; // The counter that will hold the coyote time current time
+    private float jumpTime;
+
+    
+    public float jumpStartTime;
     private bool isJumping; // a bool to know if the player is jumping currently
     private bool isJumpingPressed = false; // a bool to know if the player has pressed the jump button
 
@@ -56,7 +75,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     private PlayerOneWay playerOneWay; // Grabs the Player oneway script to access the isMOving down
 
     private CyberMouseHandler cyberMouseHandler; // Grabs the player cybermousehandler from the player
-    private Rigidbody playerRB; // A rigid body object which will hold the player's rigid body
+    //private Rigidbody //; // A rigid body object which will hold the player's rigid body
     private playerState currentPlayerState; // the state that will hold the players current state by using the playerState enum created below
     private bool isGrounded; // A bool to know if the player is grounded
 
@@ -99,7 +118,8 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     {
         
-        playerRB = GetComponent<Rigidbody>(); // Gets the rigid body of the player
+        //// = GetComponent<Rigidbody>(); // Gets the rigid body of the player
+        characterController = GetComponent<CharacterController>();
         playerOneWay = GetComponent<PlayerOneWay>(); // Gets the player one way script from the player
         cyberMouseHandler = GetComponent<CyberMouseHandler>(); // Gets the cyber mouse handler 
         gameManager = FindObjectOfType<GameManager>(); // Finds the game manger in the scene
@@ -131,10 +151,29 @@ public class ChibiPlayerMovement : MonoBehaviour
     }
    
     void Update()
+    {
+        isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
+        Debug.Log("" + isGrounded);
+        UpdateJumpState(); // update the jump state for jump buffer and coyote time
+        handleJump(); // The function that handles the jumping of the player
+    }
 
+    void FixedUpdate()
     {
        
+        //ApplyGravity(); // calls the apply gravity function so the player is affected by gravity
+        ApplyMovement();
+        handleIFrames();
+        
+
         animator.SetFloat("Aiming", aimingFloat);
+        
+
+        
+        animator.SetFloat("AimingDiag", aimingDiagFloat);
+    }
+    private void handleIFrames()
+    {
         if(playerHealth > numOfHearts)
         {
             playerHealth = numOfHearts;
@@ -180,92 +219,61 @@ public class ChibiPlayerMovement : MonoBehaviour
                 playerRenderer.enabled = true;
             }      
         }
-
-        
-        animator.SetFloat("AimingDiag", aimingDiagFloat);
-
     }
-
-    void FixedUpdate() 
-        {
-            if(!isFreeAiming)
-            {
-                ChibiMovePlayer(); // Calls the chibiMovePlayer function
-            }
-            isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
-            ApplyGravity(); // calls the apply gravity function so the player is affected by gravity
-            UpdateJumpState(); // update the jump state for jump buffer and coyote time
-            handleJump(); // The function that handles the jumping of the player
-        }
-
-    void ChibiMovePlayer()
+    public void Walk(InputAction.CallbackContext context)
     {
+        moveInput = context.ReadValue<Vector2>();
+        direction = new Vector3(moveInput.x, 0.0f, moveInput.y);
         
-        Vector2 direction = walkAction.ReadValue<Vector2>(); // gets the value of the walk action and assigns it to the direction
-
-        // Determine movement direction based on the isAimingRight variable
-        float horizontalInput = direction.x;
-
-        // Move the player left or right depending on the movement of the move action assigns it to a vector 3
-        Vector3 moveDirection = new Vector3(horizontalInput, 0, direction.y);
-
-        // Ensure movement direction is relative to the world axes
-        moveDirection = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * moveDirection;
-          // Determine movement direction based on the isAimingRight variable
-    
-
-        // Calculate the magnitude of the movement input
-        float movementSpeed = Mathf.Abs(horizontalInput);
-
-        // Set the "velocity" parameter in the animator
-        animator.SetFloat("Velocity", movementSpeed);
-        // Apply the movement
-        playerRB.MovePosition(transform.position + moveDirection * Time.deltaTime * playerSpeedMultiplier);
-
-        // Check if the player is not moving (velocity is zero)
-        if (Mathf.Approximately(direction.magnitude, 0f))
-        {
-            animator.SetBool("isWalking", false); // Set isWalking parameter to false
-        }
-        else
-        {
-            animator.SetBool("isWalking", true); // Set isWalking parameter to true
-        }
 
 
-        if (armRotation.gunRotationWithMouse)
-        {
-            if (cyberMouseHandler.isAimingRight)
+            // Check if the player is not moving (velocity is zero)
+            if (Mathf.Approximately(direction.magnitude, 0f))
             {
-                transform.rotation = Quaternion.Euler(0, 0, 0); // Not flipped
+                animator.SetBool("isWalking", false); // Set isWalking parameter to false
             }
             else
             {
-                transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
+                animator.SetBool("isWalking", true); // Set isWalking parameter to true
             }
-        }
-        else
-        {
-            if (direction.x > 0) // Moving right
+            if (armRotation.gunRotationWithMouse)
             {
-                isFacingRight = true;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                if (cyberMouseHandler.isAimingRight)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0); // Not flipped
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
+                }
             }
-            else if (direction.x < 0) // Moving left
+            else
             {
-                isFacingRight = false;
-                transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
+                if (direction.x > 0) // Moving right
+                {
+                    isFacingRight = true;
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                else if (direction.x < 0) // Moving left
+                {
+                    isFacingRight = false;
+                    transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
+                }
+                if (direction.x < 0) // If moving left
+                {
+                    // Flip the x component to make sure the player moves left
+                    direction.x *= -1;
+                }
             }
-            if (direction.x < 0) // If moving left
-            {
-                // Flip the x component to make sure the player moves left
-                moveDirection.x *= -1;
-            }
-        }
-        // Flip the character based on the isAimingRight variable
+
+        
     }
 
 
+    private void ApplyMovement()
+    {
+        characterController.Move(direction * playerSpeedMultiplier * Time.deltaTime);
+    }
 
 
     void setupJumpVariables()
@@ -275,63 +283,85 @@ public class ChibiPlayerMovement : MonoBehaviour
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
-    void OnJump(InputAction.CallbackContext context) // THe on jump that is called when the jump button is pressed
+    private void OnJump(InputAction.CallbackContext context)
     {
-        isJumpingPressed = context.ReadValueAsButton();
+        if (context.started) // When jump button is pressed
+        {
+            isJumpingPressed = true;
+            jumpStartTime = Time.time; // Record the time when the jump started
+        }
+        else if (context.canceled) // When jump button is released
+        {
+            isJumpingPressed = false;
+        }
     }
 
     
-    void handleJump()
+    private void handleJump()
     {
-        if (!isJumping && isJumpingPressed && !playerOneWay.IsDownActionActive())
+        if (isGrounded)
         {
-            if (isGrounded || currExtraJumps > 0)
-            {
-                isJumping = true;
-                playerRB.velocity = new Vector3(playerRB.velocity.x, initialJumpVelocity, 0);
-                //Debug.Log(currExtraJumps);
-                currExtraJumps--; // Decrement extra jumps if not grounded
-                //Debug.Log(currExtraJumps);
-                animator.SetBool("isJumping", true);
-                
-            }
+            playerVelocity.y = 0.0f;
         }
-        else if (!isJumpingPressed && isJumping && isGrounded)
+
+        if (isJumpingPressed && (Time.time - jumpStartTime) < maxJumpTime && isGrounded) // While jump button is held and within max jump time
         {
-            isJumping = false;
-            animator.SetBool("isJumping", false);
+            // Calculate the jump progress based on how long the jump button has been held
+            float jumpProgress = Mathf.Clamp01((Time.time - jumpStartTime) / maxJumpTime);
+
+            // Apply the calculated jump velocity
+            float jumpVelocity = Mathf.Lerp(initialJumpVelocity, 0f, jumpProgress);
+            playerVelocity.y = jumpVelocity;
         }
+        else if (!isJumpingPressed && playerVelocity.y > 0) // If jump button is released, and player is still going up
+        {
+            // Reduce the upward velocity to simulate a shorter jump
+            playerVelocity.y *= 0.8f; // Adjust this factor as needed
+        }
+
+        playerVelocity.y += gravityForce * Time.deltaTime;
+        characterController.Move(playerVelocity * Time.deltaTime);
     }
 
-    void ApplyGravity() // Apply the gravity function which pushed the player down
-    {
 
-        bool isFalling = playerRB.velocity.y <= 0.0f || !isJumpingPressed;
+
+
+
+
+    void ApplyGravity()
+    {
+        bool isFalling = verticalVelocity <= 0.0f || !isJumpingPressed;
         float fallMultiplier = 5.0f;
 
-        if(isGrounded)
+        if (isGrounded)
         {
-            playerRB.AddForce(Vector3.down * gravityForce); // Push the player in the down direction by adding force down
-            StopPlayerMovement();
+            // Reset extra jumps when grounded
             currExtraJumps = maxExtraJumps;
         }
 
-        else if(isFalling)
+        if (!isGrounded)
         {
-            float previousYVelocity = playerRB.velocity.y;
-            float newYVelocity = playerRB.velocity.y + (gravityForce * fallMultiplier * Time.deltaTime);
-            float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
-            playerRB.velocity = new Vector3(playerRB.velocity.x, nextYVelocity, playerRB.velocity.z);
+            if (isFalling)
+            {
+                // Apply gravity multiplied by fallMultiplier when falling
+                verticalVelocity += gravityForce * fallMultiplier * Time.deltaTime;
+            }
+            else
+            {
+                // Apply regular gravity when not falling
+                verticalVelocity += gravityForce * Time.deltaTime;
+            }
+
+            // Limit vertical velocity to prevent excessive falling speed
+            verticalVelocity = Mathf.Max(verticalVelocity, -maxFallSpeed);
+
+            // Move the player using CharacterController's Move function
+            characterController.Move(Vector3.up * verticalVelocity * Time.deltaTime); // Adjust this line if necessary
         }
-        else 
-        {
-            float previousYVelocity = playerRB.velocity.y;
-            float newYVelocity = playerRB.velocity.y + (gravityForce  * Time.deltaTime);
-            float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
-            playerRB.velocity = new Vector3(playerRB.velocity.x, nextYVelocity, playerRB.velocity.z);
-        }
-        
     }
+
+
+
 
     void UpdateJumpState()
     {
@@ -351,7 +381,7 @@ public class ChibiPlayerMovement : MonoBehaviour
     bool IsGrounded() // A function that returns a bool if the raycast hits the ground
     {
         
-
+        //return characterController.isGrounded;
         Vector3 rayOrigin = transform.position + Vector3.down * .5f; // Shoots it from the players feet
 
         // Cast a ray downward to check if the player is on the ground
@@ -448,7 +478,7 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     private void StopPlayerMovement()
     {
-        playerRB.velocity = Vector3.zero;
+        //playerRB.velocity = Vector3.zero;
     }
 
     public void setInitalJump(float jumpSetter)

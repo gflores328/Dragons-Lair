@@ -78,10 +78,19 @@ public class MovingLedgesTest : MonoBehaviour
 
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        other.transform.parent = transform;
+        playerHasArrived = true;
+
+    }
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         other.transform.parent = null;
         playerHasArrived = false;
     }
+
+  
 }
