@@ -152,6 +152,8 @@ public class ChibiPlayerMovement : MonoBehaviour
    
     void Update()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+
         float playerVelocityMagnitude = characterController.velocity.magnitude;
 
         // Check if the player is moving by comparing the magnitude to a small threshold

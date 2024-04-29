@@ -9,26 +9,25 @@ public class DisappearingLedges : MonoBehaviour
 
 
     private bool isBlinking;
-    private MeshRenderer meshRenderer;
-    private MeshCollider meshCollider;
+    public MeshRenderer meshRenderer;
+    public MeshCollider meshCollider;
     private BoxCollider boxCollider;
 
     private Coroutine blinkCoroutine;
 
     void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        meshCollider = GetComponent<MeshCollider>();
+        //meshRenderer = GetComponent<MeshRenderer>();
+        //meshCollider = GetComponent<MeshCollider>();
         boxCollider = GetComponent<BoxCollider>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            StartCoroutine(Vanish());
-            Debug.Log("player on");
-        }
+        
+        StartCoroutine(Vanish());
+        Debug.Log("player on");
+        
     }
 
     IEnumerator Vanish()
