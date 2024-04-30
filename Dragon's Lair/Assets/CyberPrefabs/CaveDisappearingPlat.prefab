@@ -26,12 +26,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 495dfcc6cfb2e0d4e8f39c1e588483cb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.407711
+      value: 106.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 495dfcc6cfb2e0d4e8f39c1e588483cb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 8.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 495dfcc6cfb2e0d4e8f39c1e588483cb,
         type: 3}
@@ -41,22 +41,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 495dfcc6cfb2e0d4e8f39c1e588483cb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 495dfcc6cfb2e0d4e8f39c1e588483cb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 495dfcc6cfb2e0d4e8f39c1e588483cb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 495dfcc6cfb2e0d4e8f39c1e588483cb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 495dfcc6cfb2e0d4e8f39c1e588483cb,
         type: 3}
@@ -150,9 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a5ba150547d4cc9a11c70000d6b1ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDisappear: 2
+  timeToDisappear: 0.75
   timeToReappear: 3
   blinkInterval: 0.1
+  meshRenderer: {fileID: 0}
+  meshCollider: {fileID: 0}
 --- !u!65 &1656333379725983634
 BoxCollider:
   m_ObjectHideFlags: 0
