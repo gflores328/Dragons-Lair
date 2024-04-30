@@ -11,4 +11,12 @@ public class MimicTounge : MonoBehaviour
             collision.gameObject.GetComponent<ChibiPlayerMovement>().takeDamage(1);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.gameObject.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+        }
+    }
 }
