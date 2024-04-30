@@ -180,9 +180,7 @@ public class ChibiPlayerMovement : MonoBehaviour
         
 
         animator.SetFloat("Aiming", aimingFloat);
-        
 
-        
         animator.SetFloat("AimingDiag", aimingDiagFloat);
     }
     private void handleIFrames()
@@ -318,8 +316,13 @@ public class ChibiPlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             playerVelocity.y = 0.0f;
+            animator.SetBool("isJumping", false);
         }
 
+        if(!isGrounded)
+        {
+            animator.SetBool("isJumping",true);
+        }
         if (isJumpingPressed && (Time.time - jumpStartTime) < maxJumpTime && isGrounded) // While jump button is held and within max jump time
         {
             // Calculate the jump progress based on how long the jump button has been held
