@@ -6212,6 +6212,134 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 737435378}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &743923877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 743923879}
+  - component: {fileID: 743923878}
+  m_Layer: 0
+  m_Name: BossMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &743923878
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743923877}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b2de17ffdbf9c374aafee9be1f77d729, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &743923879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743923877}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 120.876205, y: 11.86163, z: -15.906483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &752760550
 GameObject:
   m_ObjectHideFlags: 0
@@ -6686,7 +6814,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.423
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -12158,6 +12286,8 @@ MonoBehaviour:
   healthBar: {fileID: 6508939622206945614}
   mainCamera: {fileID: 1833423540}
   bossCamera: {fileID: 1503451653}
+  bgMusic: {fileID: 792434442}
+  bossMusic: {fileID: 743923878}
 --- !u!1001 &1523956382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21711,6 +21841,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 206017505}
+    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
+        type: 3}
+      propertyPath: levelToLoad
+      value: ForestTwo
+      objectReference: {fileID: 0}
     - target: {fileID: 4488840170223106238, guid: 0c58ed1322913ee4eb81414ac1092f5b,
         type: 3}
       propertyPath: m_Size.x
@@ -21796,16 +21936,6 @@ PrefabInstance:
       propertyPath: respawnPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1180179564}
-    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
-        type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 206017505}
-    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
-        type: 3}
-      propertyPath: levelToLoad
-      value: ForestTwo
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21961,3 +22091,4 @@ SceneRoots:
   - {fileID: 1661546645}
   - {fileID: 1801209276}
   - {fileID: 2114311}
+  - {fileID: 743923879}
