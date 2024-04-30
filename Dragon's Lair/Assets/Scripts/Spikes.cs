@@ -23,18 +23,23 @@ public class Spikes : MonoBehaviour
     
 
     //if player enters collider play animation then wait before playing again
-    // public void OnTriggerEnter(Collider other)
-    // {
+    public void OnTriggerEnter(Collider other)
+    {
 
-    //     if (other.CompareTag("Player"))
-    //     {
+        if (other.CompareTag("Player"))
+        {
             
-    //         anim.SetTrigger("onActive");
-    //         coroutine = WaitTime(waitTime);
-    //         StartCoroutine(coroutine);
+            ChibiPlayerMovement player = other.gameObject.GetComponent<ChibiPlayerMovement>(); 
+            if (player != null)
+            {
+                // Call the player's takeDamage function and pass the damage amount
+                player.takeDamage(1);
+
+                
+            }
             
-    //     }
-    // }
+        }
+    }
 
     // //if player exits collider stop animation playback
     // public void OnTriggerExit(Collider other)
