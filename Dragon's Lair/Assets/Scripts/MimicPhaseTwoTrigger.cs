@@ -20,6 +20,9 @@ public class MimicPhaseTwoTrigger : MonoBehaviour
 
     public GameObject mainCamera;
     public GameObject bossCamera;
+
+    public AudioSource bgMusic;
+    public AudioSource bossMusic;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -32,6 +35,9 @@ public class MimicPhaseTwoTrigger : MonoBehaviour
             // Camera switch
             mainCamera.SetActive(false);
             bossCamera.SetActive(true);
+
+            bgMusic.Pause();
+            bossMusic.Play();
 
             Destroy(gameObject);
         }
