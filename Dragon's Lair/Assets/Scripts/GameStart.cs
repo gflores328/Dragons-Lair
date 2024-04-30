@@ -17,20 +17,22 @@ public class ClawStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0;
-        startMenu.SetActive(true);
+        Time.timeScale = 0; // Game is Paused
+        startMenu.SetActive(true); // Instructions Panel is Active
     }
 
     // Update is called once per frame
     void Update()
     {
+        // If Game has Not Started
         if (!started)
         {
+            // Press 'Enter' Key
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                started = true;
-                startMenu.SetActive(false);
-                Time.timeScale = 1;
+                started = true; // Game Start
+                startMenu.SetActive(false); // Panel Disappears
+                Time.timeScale = 1; // Game Resumes
 
             }
         }
