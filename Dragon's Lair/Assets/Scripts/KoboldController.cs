@@ -11,8 +11,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEditor;
+#if UNITY_EDITOR
 
+using UnityEditor;
+#endif
 [RequireComponent(typeof(NavMeshAgent))]
 public class KoboldController : Enemy
 {
@@ -430,14 +432,16 @@ public class KoboldController : Enemy
         hitPlayer = success;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        // Draw the view angle only when the KoboldController is selected
-        Handles.color = Color.green;
-        Handles.DrawWireArc(transform.position, Vector3.up, Quaternion.Euler(0, -viewAngle / 2, 0) * transform.forward, viewAngle, viewRadius);
+    #if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            // Draw the view angle only when the KoboldController is selected
+            Handles.color = Color.green;
+            Handles.DrawWireArc(transform.position, Vector3.up, Quaternion.Euler(0, -viewAngle / 2, 0) * transform.forward, viewAngle, viewRadius);
 
-        // Draw the view radius only when the KoboldController is selected
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, viewRadius);
-    }
+            // Draw the view radius only when the KoboldController is selected
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, viewRadius);
+        }
+    #endif
 }
