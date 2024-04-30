@@ -34,7 +34,7 @@ public class MimicPhaseOneTrigger : MonoBehaviour
             mainCamera.SetActive(false);
             bossCamera.SetActive(true);
 
-            bgMusic.Stop();
+            bgMusic.Pause();
             bossMusic.Play();
 
             Destroy(gameObject);
