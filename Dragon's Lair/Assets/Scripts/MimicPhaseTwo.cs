@@ -94,15 +94,7 @@ public class MimicPhaseTwo : Enemy
                     break;
 
                 case 3:
-                    if (player.transform.position.x < rightBorder.transform.position.x
-                        && player.transform.position.x > leftBorder.transform.position.x)
-                    {
-                        StartCoroutine(WalkToPlayer());
-                    }
-                    else
-                    {
-                        StartCoroutine(JumpAbovePlayer());
-                    }
+                    StartCoroutine(JumpAbovePlayer());
                     actionNumber++;
                     break;
 
@@ -122,15 +114,8 @@ public class MimicPhaseTwo : Enemy
                     break;
 
                 case 7:
-                    if (player.transform.position.x < rightBorder.transform.position.x
-                        && player.transform.position.x > leftBorder.transform.position.x)
-                    {
-                        StartCoroutine(WalkToPlayer());
-                    }
-                    else
-                    {
-                        StartCoroutine(JumpAbovePlayer());
-                    }
+
+                    StartCoroutine(JumpAbovePlayer());
                     actionNumber++;
                     break;
 
@@ -159,7 +144,7 @@ public class MimicPhaseTwo : Enemy
         }
 
         yield return StartCoroutine(Jump(player.transform.position.x));
-        // FallingDebris();
+        //FallingDebris();
 
         if (player.transform.position.x > transform.position.x)
         {
