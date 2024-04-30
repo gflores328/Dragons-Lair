@@ -3725,35 +3725,53 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -17.673475
+        z: -16.214697
       TangentOut:
         x: 0
         y: 0
-        z: 21.622433
+        z: 16.530607
       Rotation:
         value:
-          x: 0.0003512679
-          y: 0.7110006
-          z: -0.0003904514
-          w: 0.70319116
+          x: -0.0000019252698
+          y: 0.7111294
+          z: -0.00003379315
+          w: 0.7030611
     - Position:
-        x: 283.82977
-        y: -0.9309416
+        x: 261.7898
+        y: -0.6509414
         z: -0.68799996
       TangentIn:
         x: -0
         y: -0
-        z: -7.2119265
+        z: -11.747051
       TangentOut:
         x: 0
         y: 0
-        z: 7.2119265
+        z: 6.37785
       Rotation:
         value:
-          x: 0.002897773
-          y: 0.70768887
-          z: -0.0028596222
-          w: 0.70651245
+          x: -0.0015773259
+          y: 0.70791143
+          z: 0.0015806452
+          w: 0.7062977
+    - Position:
+        x: 276.5498
+        y: -0.42854118
+        z: -0.72
+      TangentIn:
+        x: 0
+        y: 0
+        z: -6.8946457
+      TangentOut:
+        x: 0
+        y: 0
+        z: 6.8946457
+      Rotation:
+        value:
+          x: 0.0009937388
+          y: 0.7078748
+          z: -0.000995903
+          w: 0.70633656
     m_MetaData:
     - Mode: 0
       Tension: 0.5
@@ -3832,6 +3850,8 @@ MonoBehaviour:
     - Mode: 0
       Tension: 0.5
     - Mode: 0
+      Tension: 0.5
+    - Mode: 2
       Tension: 0.5
     m_Closed: 0
     m_IntData:
@@ -4820,7 +4840,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 572413011}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14807,7 +14827,7 @@ MonoBehaviour:
           w: 0.7071067
     - Position:
         x: 386.90002
-        y: 1.1663246
+        y: -1.2536755
         z: 0
       TangentIn:
         x: 0
@@ -20982,6 +21002,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 22.06573
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945694189393755346, guid: 5e5232a3ac1e1e44aaaf0d6a05333470,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 4227556243867121349, guid: 5e5232a3ac1e1e44aaaf0d6a05333470,
         type: 3}
@@ -29351,8 +29376,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7540212213927075681, guid: fda06498efa0c44f496446a559ded134,
         type: 3}
+      propertyPath: m_Height
+      value: 2.5466955
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540212213927075681, guid: fda06498efa0c44f496446a559ded134,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.7584781
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540212213927075681, guid: fda06498efa0c44f496446a559ded134,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.3054663
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540212213927075681, guid: fda06498efa0c44f496446a559ded134,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.3034633
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540212213927075681, guid: fda06498efa0c44f496446a559ded134,
+        type: 3}
       propertyPath: m_IncludeLayers.m_Bits
-      value: 256
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8148738422135594402, guid: fda06498efa0c44f496446a559ded134,
         type: 3}
@@ -30169,6 +30214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540212213927075681, guid: fda06498efa0c44f496446a559ded134,
+        type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8211550837378726961, guid: fda06498efa0c44f496446a559ded134,
         type: 3}

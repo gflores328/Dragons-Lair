@@ -398,6 +398,7 @@ public class ChibiPlayerMovement : MonoBehaviour
 
     bool IsGrounded() // A function that returns a bool if the raycast hits the ground
     {
+    
         
         //return characterController.isGrounded;
         Vector3 rayOrigin = transform.position + Vector3.down * .5f; // Shoots it from the players feet

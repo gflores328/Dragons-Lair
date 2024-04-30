@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6314056884473515310}
   - component: {fileID: 8995590442810805902}
   - component: {fileID: 5699791617452486122}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ProximityAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2214169014738631259}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpikeTrap
   m_TagString: Activator
   m_Icon: {fileID: 0}
@@ -177,10 +177,20 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6110751275128593011, guid: dc015e6ab2c03e1409febba3cebaca1c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -5929458390571628979, guid: dc015e6ab2c03e1409febba3cebaca1c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -3813556686517551935, guid: dc015e6ab2c03e1409febba3cebaca1c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -3809489105079727578, guid: dc015e6ab2c03e1409febba3cebaca1c,
         type: 3}
@@ -192,10 +202,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -870444112897197499, guid: dc015e6ab2c03e1409febba3cebaca1c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: dc015e6ab2c03e1409febba3cebaca1c,
         type: 3}
       propertyPath: m_Name
       value: SpikeTrap_Anima
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dc015e6ab2c03e1409febba3cebaca1c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3266585907695314910, guid: dc015e6ab2c03e1409febba3cebaca1c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -273,7 +298,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
