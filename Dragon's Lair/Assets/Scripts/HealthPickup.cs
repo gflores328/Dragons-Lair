@@ -7,7 +7,7 @@ public class HealthPickup : Powerup
 {
     public float healthToGive;
 
-    
+    public AudioSource powerUp;
 
     protected virtual void Update()
     {
@@ -40,8 +40,9 @@ public class HealthPickup : Powerup
             {
                 // Call the player's takeDamage function and pass the damage amount
                 player.AddHealth(healthToGive);
-                
 
+                // play power up sound
+                powerUp.Play();
                 
             }
             
