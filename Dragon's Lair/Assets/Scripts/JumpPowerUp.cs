@@ -7,6 +7,8 @@ public class JumpPowerUp : Powerup
 
     public float initialJumpVelocitySetter = 15f; // what the new jump velocity should be set to
 
+    public AudioSource jumpSound; // declare public sound to be dragged in from game engine
+
     private ChibiPlayerMovement chibiPlayerMovement; // Grab the players movement script
 
     protected override void Awake()
@@ -21,6 +23,8 @@ public class JumpPowerUp : Powerup
         if(other.gameObject.CompareTag("Player"))
         {
             chibiPlayerMovement.setInitalJump(initialJumpVelocitySetter); // Call the set jump function from player and set jump to the setter in this script
+
+            jumpSound.Play(); // play jump sound
         }
     }
 }
