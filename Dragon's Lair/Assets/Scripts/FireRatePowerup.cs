@@ -5,6 +5,8 @@ public class FireRatePowerup : Powerup
 {
     public float fireRateSetter; // Determines how fast the new fire rate will be 
 
+    public AudioSource fireRate; // fire rate sound
+
     private GunController gunController; // Grabs the gun controller from the player
 
     protected override void Awake()
@@ -19,6 +21,8 @@ public class FireRatePowerup : Powerup
         if (other.gameObject.CompareTag("Player"))
         {
             gunController?.setFireRate(fireRateSetter); // Set the fire rate of the gun the "?" is a C# key and will check if the object if not null before attempting to attach and will skip 
+
+            fireRate.Play(); // play fire rate sound
         }
     }
 }
