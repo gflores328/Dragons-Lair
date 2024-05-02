@@ -8932,36 +8932,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 723327571}
     m_Modifications:
-    - target: {fileID: 1363172307205624393, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3608805834439391451, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4375273810634993473, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5859503165711740126, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6696042919397468014, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8770452180138125647, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 114998181529431742, guid: 6e91d5fc7870b3545a864b2513613a22,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9032,6 +9002,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 832205873145751576, guid: 6e91d5fc7870b3545a864b2513613a22,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9203ee2d1af38d9418c77afdcc4ca4a6, type: 3}
     - target: {fileID: 997353630827617338, guid: 6e91d5fc7870b3545a864b2513613a22,
         type: 3}
       propertyPath: m_Name
@@ -9083,6 +9058,36 @@ PrefabInstance:
       value: -7.6273284e-16
       objectReference: {fileID: 0}
     - target: {fileID: 6814800112801496731, guid: 6e91d5fc7870b3545a864b2513613a22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363172307205624393, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608805834439391451, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375273810634993473, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859503165711740126, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696042919397468014, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8770452180138125647, guid: 11a706f7c5a622f4aa26bb1ae9a7a3a2,
         type: 3}
       propertyPath: m_Layer
       value: 3
@@ -9238,6 +9243,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 832205873145751576, guid: 6e91d5fc7870b3545a864b2513613a22,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9203ee2d1af38d9418c77afdcc4ca4a6, type: 3}
     - target: {fileID: 997353630827617338, guid: 6e91d5fc7870b3545a864b2513613a22,
         type: 3}
       propertyPath: m_Name
@@ -13142,7 +13152,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -14762,7 +14772,7 @@ GameObject:
   - component: {fileID: 8374294985174621855}
   m_Layer: 3
   m_Name: Mimic
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

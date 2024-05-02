@@ -22,6 +22,8 @@ public class NewtFire : MonoBehaviour
 
     public AudioSource Newt_Attack;
 
+    public Animator shooting;
+
     private void Update()
     {   
         // fireDirection is set to the direction of the player from the position of this game object
@@ -74,11 +76,21 @@ public class NewtFire : MonoBehaviour
         Rigidbody rb = clonedBullet.GetComponent<Rigidbody>();
         rb.velocity = fireDirection * bulletSpeed;
 
+        // animator for enemy shooting
+        shooting.SetBool("Shooting", true);
+        
+
         //audio of newt firing
         Newt_Attack.Play();
 
+
+
         // Wait for 2 seconds and then destroy the clonedBullet
         yield return new WaitForSeconds(2);
+
+        // set bool to shoot to false
+        shooting.SetBool("Shooting", false);
+
         Destroy(clonedBullet);
 
         // firing set to false to allow a new bullet to be shot

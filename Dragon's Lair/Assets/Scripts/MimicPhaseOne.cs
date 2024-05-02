@@ -140,6 +140,22 @@ public class MimicPhaseOne : Enemy
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+        }
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Player")

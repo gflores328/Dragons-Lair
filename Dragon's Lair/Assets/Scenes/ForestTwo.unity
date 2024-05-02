@@ -892,6 +892,12 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &140853724 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3206512413963837533, guid: b0f2e9e07f1a8c447ae3855a5b2a2fdf,
+    type: 3}
+  m_PrefabInstance: {fileID: 521247196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &151300895 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4903953379146443190, guid: 85e9cec642f65da409653944264f405a,
@@ -3346,6 +3352,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3767005688881691218, guid: b0f2e9e07f1a8c447ae3855a5b2a2fdf,
         type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767005688881691218, guid: b0f2e9e07f1a8c447ae3855a5b2a2fdf,
+        type: 3}
       propertyPath: m_ProvidesContacts
       value: 1
       objectReference: {fileID: 0}
@@ -3854,6 +3865,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MimicPhaseOne
       objectReference: {fileID: 0}
+    - target: {fileID: 7717131805791064729, guid: b0f2e9e07f1a8c447ae3855a5b2a2fdf,
+        type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 7783369419309854953, guid: b0f2e9e07f1a8c447ae3855a5b2a2fdf,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3952,7 +3968,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8001605467758304373, guid: b0f2e9e07f1a8c447ae3855a5b2a2fdf, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3206512413963837533, guid: b0f2e9e07f1a8c447ae3855a5b2a2fdf,
+        type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1769486131}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7717131805791064729, guid: b0f2e9e07f1a8c447ae3855a5b2a2fdf,
         type: 3}
@@ -15749,14 +15769,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769486130}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.98, y: 10.15, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -105.2802, y: 0.6309197, z: 0.053411227}
+  m_LocalScale: {x: 0.6676403, y: 0.6676403, z: 0.6676403}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 131793253}
   - {fileID: 980383949}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 140853724}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1775471470
 GameObject:
@@ -24093,6 +24113,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 206017505}
+    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
+        type: 3}
+      propertyPath: levelToLoad
+      value: ForestTwo
+      objectReference: {fileID: 0}
     - target: {fileID: 4488840170223106238, guid: 0c58ed1322913ee4eb81414ac1092f5b,
         type: 3}
       propertyPath: m_Size.x
@@ -24188,16 +24218,6 @@ PrefabInstance:
       propertyPath: respawnPoints.Array.data[2]
       value: 
       objectReference: {fileID: 1058957251}
-    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
-        type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 206017505}
-    - target: {fileID: 9021672839882405598, guid: 409c4d3c76c9d7c4985b663b838cfb46,
-        type: 3}
-      propertyPath: levelToLoad
-      value: ForestTwo
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24318,7 +24338,6 @@ SceneRoots:
   - {fileID: 1775471471}
   - {fileID: 1572975805}
   - {fileID: 1466251757}
-  - {fileID: 1769486131}
   - {fileID: 288670777}
   - {fileID: 959072555}
   - {fileID: 321599288}

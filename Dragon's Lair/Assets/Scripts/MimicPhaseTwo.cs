@@ -364,6 +364,14 @@ public class MimicPhaseTwo : Enemy
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+        }
+    }
+
     public void StartLunge()
     {
         startLunge = true;
