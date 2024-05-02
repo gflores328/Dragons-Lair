@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpDesc: {fileID: 0}
-  powerUpRenderer: {fileID: 6603150921051635574}
-  powerUpName: 
+  spriteRenderer: {fileID: 8589179072532159503}
+  powerUpName: LaserBeam
 --- !u!1001 &6986052216735727755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5caadcc0aeac9014c98a24ca6b23f5af,
         type: 3}
       propertyPath: m_Name
-      value: BonePile
+      value: BonePileLaserBeamPowerUp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -208,6 +208,12 @@ PrefabInstance:
 --- !u!4 &7456210591659616096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5caadcc0aeac9014c98a24ca6b23f5af,
+    type: 3}
+  m_PrefabInstance: {fileID: 6986052216735727755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8589179072532159503 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 5caadcc0aeac9014c98a24ca6b23f5af,
     type: 3}
   m_PrefabInstance: {fileID: 6986052216735727755}
   m_PrefabAsset: {fileID: 0}
