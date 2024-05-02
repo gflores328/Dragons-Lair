@@ -409,9 +409,20 @@ public class MimicPhaseThree : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject);
+        if (other.tag == "Player")
+        {
+            other.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+        }
     }
 
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+        }
+    }
 
     IEnumerator StartDelay()
     {
