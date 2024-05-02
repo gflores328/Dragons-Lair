@@ -64,4 +64,13 @@ public class RealBullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Boss")
+        {
+            Destroy(gameObject);
+            other.GetComponent<Enemy>().TakeDamage(damageAmount);
+        }
+    }
 }
