@@ -57,6 +57,13 @@ public class MimicPhaseThree : Enemy
     public GameObject mainCamera;
     public GameObject bossCamera;
 
+    [Header("Audio")]
+    public AudioClip roar;
+    public AudioClip smash;
+    public AudioClip hurt;
+    public AudioClip attack;
+    public AudioClip jump;
+    public AudioClip laserSound;
 
     // Start is called before the first frame update
     void Start()
@@ -186,6 +193,7 @@ public class MimicPhaseThree : Enemy
             }
 
         GetComponent<CinemachineImpulseSource>().GenerateImpulse(1f);
+        GetComponent<AudioSource>().PlayOneShot(smash);
         
 
         if (goLeft)
@@ -207,6 +215,8 @@ public class MimicPhaseThree : Enemy
     IEnumerator Jump(float xTarget)
     {
         GetComponentInChildren<Animator>().SetTrigger("jumpOnly");
+
+        GetComponent<AudioSource>().PlayOneShot(jump);
 
         float yTarget = gameObject.transform.position.y + 5;
 
@@ -247,6 +257,7 @@ public class MimicPhaseThree : Enemy
             yield return null;
         }
         GetComponent<CinemachineImpulseSource>().GenerateImpulse(1f);
+        GetComponent<AudioSource>().PlayOneShot(smash);
     }
 
     // This function when run will check for whichever border it is closest to and will jump to that position
@@ -305,8 +316,10 @@ public class MimicPhaseThree : Enemy
         takingAction = true;
         GetComponentInChildren<Animator>().SetBool("isFiring", true);
 
+
         for (int i = 0; i < 5; i++)
         {
+            GetComponent<AudioSource>().PlayOneShot(attack);
             Vector3 spawn = new Vector3(splashDebrisSpawn.transform.position.x, splashDebrisSpawn.transform.position.y, transform.position.z);
             GameObject clone = Instantiate(splashDebris, spawn, Quaternion.identity);
 
@@ -338,15 +351,19 @@ public class MimicPhaseThree : Enemy
         GetComponentInChildren<Animator>().SetBool("isFiring", true);
 
         laser.SetActive(true);
+        GetComponent<AudioSource>().PlayOneShot(laserSound);
 
         yield return new WaitForSeconds(5);
 
         laser.SetActive(false);
         GetComponentInChildren<Animator>().SetBool("isFiring", false);
+        GetComponent<AudioSource>().Stop();
 
         yield return new WaitForSeconds(1);
 
         takingAction = false;
+
+    
     }
 
     IEnumerator Charges()
@@ -405,6 +422,8 @@ public class MimicPhaseThree : Enemy
     {
         base.TakeDamage(amnt);
         healthBar.GetComponent<Slider>().value = health;
+
+        GetComponent<AudioSource>().PlayOneShot(hurt);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -427,6 +446,7 @@ public class MimicPhaseThree : Enemy
     IEnumerator StartDelay()
     {
         // Roar animation
+        GetComponent<AudioSource>().PlayOneShot(roar);
         GetComponentInChildren<Animator>().SetBool("isFiring", true);
         yield return new WaitForSeconds(3f);
 
@@ -437,6 +457,7 @@ public class MimicPhaseThree : Enemy
 
         player.GetComponent<PlayerInput>().actions.Enable();
         start = true;
+        GetComponent<AudioSource>().Stop();
 
     }
 
