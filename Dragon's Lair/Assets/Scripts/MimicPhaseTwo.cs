@@ -48,6 +48,13 @@ public class MimicPhaseTwo : Enemy
     [Header("Cameras")]
     public GameObject mainCamera;
     public GameObject bossCamera;
+
+    [Header("Audio")]
+    public AudioClip roar;
+    public AudioClip smash;
+    public AudioClip hurt;
+    public AudioClip attack;
+    public AudioClip jump;
     // Start is called before the first frame update
     void Start()
     {
@@ -168,6 +175,8 @@ public class MimicPhaseTwo : Enemy
         takingAction = true;
         bool goLeft;
 
+
+
         // If the object is farther from the left border than goLeft is set to true and if not it is false 
         if(Vector3.Distance(transform.position, leftBorder.transform.position) >= Vector3.Distance(transform.position, rightBorder.transform.position))
         {
@@ -210,6 +219,8 @@ public class MimicPhaseTwo : Enemy
     {
         GetComponentInChildren<Animator>().SetTrigger("jumpOnly");
 
+        GetComponent<AudioSource>().PlayOneShot(jump);
+
         float yTarget = gameObject.transform.position.y + 5;
 
         // A vector 3 is created with the x and y targer
@@ -249,6 +260,7 @@ public class MimicPhaseTwo : Enemy
             yield return null;
         }
         GetComponent<CinemachineImpulseSource>().GenerateImpulse(1f);
+        GetComponent<AudioSource>().PlayOneShot(smash);
     }
 
     // This function when run will check for whichever border it is closest to and will jump to that position
@@ -280,6 +292,8 @@ public class MimicPhaseTwo : Enemy
         takingAction = true;
         GetComponentInChildren<Animator>().SetTrigger("Attack");
 
+        GetComponent<AudioSource>().PlayOneShot(attack);
+
         yield return new WaitForSeconds(3);
         takingAction = false;
     }
@@ -291,6 +305,7 @@ public class MimicPhaseTwo : Enemy
         float xTarget;
         Vector3 targetPosition;
 
+        GetComponent<AudioSource>().PlayOneShot(attack);
         if (directionFacing == Direction.right)
         {
             xTarget = transform.position.x + 10;
@@ -392,18 +407,24 @@ public class MimicPhaseTwo : Enemy
     {
         base.TakeDamage(amnt);
         healthBar.GetComponent<Slider>().value = health;
+
+        GetComponent<AudioSource>().PlayOneShot(hurt);
     }
 
     IEnumerator StartDelay()
     {
-        GetComponentInChildren<Animator>().SetTrigger("Roar");
+        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(3f);
+        GetComponentInChildren<Animator>().SetTrigger("Roar");
+        GetComponent<AudioSource>().PlayOneShot(roar);
+
+        yield return new WaitForSeconds(2f);
 
         healthBar.SetActive(true);
 
         yield return new WaitForSeconds(1f);
 
+        GetComponent<AudioSource>().Stop();
         player.GetComponent<PlayerInput>().actions.Enable();
         start = true;
 
