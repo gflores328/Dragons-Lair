@@ -83,13 +83,14 @@ public class NewtFire : MonoBehaviour
         //audio of newt firing
         Newt_Attack.Play();
 
+        yield return new WaitForSeconds(.5f);
 
+        shooting.SetBool("Shooting", false);
 
         // Wait for 2 seconds and then destroy the clonedBullet
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
 
         // set bool to shoot to false
-        shooting.SetBool("Shooting", false);
 
         Destroy(clonedBullet);
 
