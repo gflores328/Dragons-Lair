@@ -37,6 +37,13 @@ public class MimicPhaseOne : Enemy
     public GameObject mainCamera;
     public GameObject bossCamera;
     // Start is called before the first frame update
+
+    [Header("Audio")]
+    public AudioClip roar;
+    public AudioClip smash;
+    public AudioClip hurt;
+    public AudioClip attack;
+    public AudioClip jump;
     void Start()
     {
         healthBar.GetComponent<Slider>().maxValue = health;
@@ -68,6 +75,9 @@ public class MimicPhaseOne : Enemy
     IEnumerator Jump(float xTarget)
     {
         GetComponentInChildren<Animator>().SetTrigger("jumpOnly");
+
+        GetComponent<AudioSource>().PlayOneShot(jump);
+
         float yTarget = transform.position.y + 5;
 
         // A vector 3 is created with the x and y targer
@@ -114,6 +124,7 @@ public class MimicPhaseOne : Enemy
         }
 
         GetComponent<CinemachineImpulseSource>().GenerateImpulse(1f);
+        GetComponent<AudioSource>().PlayOneShot(smash);
 
     }
 
@@ -180,18 +191,24 @@ public class MimicPhaseOne : Enemy
     {
         base.TakeDamage(amnt);
         healthBar.GetComponent<Slider>().value = health;
+        GetComponent<AudioSource>().PlayOneShot(hurt);
     }
 
     IEnumerator StartDelay()
     {
-        GetComponentInChildren<Animator>().SetTrigger("Roar"); 
+        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(3f);
+        GetComponentInChildren<Animator>().SetTrigger("Roar");
+
+        GetComponent<AudioSource>().PlayOneShot(roar);
+
+        yield return new WaitForSeconds(2f);
 
         healthBar.SetActive(true);
 
         yield return new WaitForSeconds(1f);
 
+        GetComponent<AudioSource>().Stop();
         player.GetComponent<PlayerInput>().actions.Enable();
         start = true;
 

@@ -26,9 +26,7 @@ public class MimicPhaseOneTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             entrance.SetActive(true);
-            mimic.GetComponent<MimicPhaseOne>().StartStartDelay();
 
-            other.GetComponent<PlayerInput>().actions.Disable();
 
             // Camera switch
             mainCamera.SetActive(false);
@@ -36,6 +34,9 @@ public class MimicPhaseOneTrigger : MonoBehaviour
 
             bgMusic.Pause();
             bossMusic.Play();
+
+            mimic.GetComponent<MimicPhaseOne>().StartStartDelay();
+            other.GetComponent<PlayerInput>().actions.Disable();
 
             Destroy(gameObject);
         }
