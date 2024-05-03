@@ -121,10 +121,13 @@ public class KoboldController : Enemy
     // Chase Mode
     void Chasing()
     {
-        m_PlayerNear = false;
-        playerLastPosition = Vector3.zero;
+        // Move towards player's position
+        Move(speedRun);
+        Vector3 targetPosition = new Vector3(m_PlayerPosition.x, m_PlayerPosition.y, transform.position.z);
+        navAgent.SetDestination(targetPosition);
 
-        if (!m_CaughtPlayer) // If the player is spotted
+        // Check if player is in attack range
+        if (m_PlayerInRange && Vector3.Distance(transform.position, m_PlayerPosition) <= attackRange)
         {
             Move(speedRun); // Kobold now runs
             navAgent.SetDestination(m_PlayerPosition); // Follows the player
@@ -142,22 +145,24 @@ public class KoboldController : Enemy
             }
         }
 
+        // Handle transition back to patrol mode
         if (navAgent.remainingDistance <= navAgent.stoppingDistance)
         {
-            // If the player is not in sight or not within attack range, return to patrol mode
             if (m_WaitTime <= 0 && !m_CaughtPlayer && !m_PlayerInRange)
             {
-                m_IsPatrol = true; // Kobold is set in patrol mode
-                m_PlayerNear = false; // Player is out of range
-                Move(speedWalk); // Kobold is moving in walking speed
+                // Transition back to patrol mode
+                m_IsPatrol = true;
+                m_PlayerNear = false;
+                Move(speedWalk);
                 m_TimeToRotate = timeToRotate;
                 m_WaitTime = startWaitTime;
-                navAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position); // Kobold moves to its next waypoint
+                navAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
             }
-            else // The kobold halts its movement
+            else
             {
                 if (!m_PlayerInRange)
                 {
+                    // Halts Kobold's movement
                     Stop();
                     m_WaitTime -= Time.deltaTime;
                 }
@@ -167,43 +172,49 @@ public class KoboldController : Enemy
 
 
     // Patrol Mode
-    private void Patrolling()
+    void Patrolling()
     {
-
-        if (m_PlayerNear) // If the kobold is near the player
+        // Check if Kobold is near the player
+        if (m_PlayerNear)
         {
-            if (m_TimeToRotate <= 0) // After turning around...
+            if (m_TimeToRotate <= 0)
             {
-                Move(speedWalk); // Movement speed is set to walking speed
-                LookingPlayer(playerLastPosition); // the kobold walks to the player's last position
+                Move(speedWalk);
+                LookingPlayer(playerLastPosition);
             }
-            else // The kobold's movement is halted
+            else
             {
                 Stop();
                 m_TimeToRotate -= Time.deltaTime;
             }
         }
-        else // When the player is out of sight, the kobold moves to the next waypoint in the index
+        else
         {
-            m_PlayerNear = false; // Player is out of range
+            m_PlayerNear = false;
             playerLastPosition = Vector3.zero;
-            navAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position); // The kobold follows the waypoints
-            if (navAgent.remainingDistance <= navAgent.stoppingDistance) // If the kobold reaches a waypoint
+            Vector3 targetPosition = new Vector3(waypoints[m_CurrentWaypointIndex].position.x, waypoints[m_CurrentWaypointIndex].position.y, transform.position.z);
+            navAgent.SetDestination(targetPosition);
+
+            // Check if Kobold reaches a waypoint
+            if (navAgent.remainingDistance <= navAgent.stoppingDistance)
             {
-                if (m_WaitTime <= 0) // If wait time is less than or equal to 0
+                if (m_WaitTime <= 0)
                 {
-                    NextPoint(); // The kobold moves to the next waypoint
-                    Move(speedWalk); // Movement speed is set to walking speed
+                    // Move to the next waypoint
+                    NextPoint();
+                    Move(speedWalk);
                     m_WaitTime = startWaitTime;
                 }
-                else // The kobold's movement has been halted
+                else
                 {
+                    // Halts Kobold's movement
                     Stop();
                     m_WaitTime -= Time.deltaTime;
                 }
             }
         }
     }
+
 
     // Sets the kobold's movement speed
     void Move(float speed)
