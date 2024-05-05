@@ -41,6 +41,12 @@ public class ClawTimer : MonoBehaviour
         currentTime -= countdownSpeed * Time.deltaTime; // Timer Counting Down
         CountdownText.text = currentTime.ToString("0"); // Converts Current Time into a String Displayed as a Whole Number
 
+        // Change text color if currentTime is 10 or less
+        if (currentTime <= 10)
+        {
+            CountdownText.color = Color.red; // Change text color to red
+        }
+
         // If the Timer Reaches 0
         if (currentTime <= 0 && !hasPlayedloseSound)
         {

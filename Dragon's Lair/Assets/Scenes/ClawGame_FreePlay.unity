@@ -1204,12 +1204,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307482549}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.58, y: 0.12, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.39329517, y: 0.111209266, z: 0.021326732}
   m_LocalScale: {x: 0.22, y: 0.22, z: 0.22}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 945919194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &307482553
 Rigidbody2D:
@@ -2591,7 +2591,7 @@ PrefabInstance:
     - target: {fileID: 64438168176817623, guid: ec3222cc764cb42948e91a914b19bc15,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: ClawGame
+      value: ClawGame_FreePlay
       objectReference: {fileID: 0}
     - target: {fileID: 321244386990270618, guid: ec3222cc764cb42948e91a914b19bc15,
         type: 3}
@@ -3270,6 +3270,7 @@ Transform:
   - {fileID: 2143783990}
   - {fileID: 373886108}
   - {fileID: 2092805883}
+  - {fileID: 307482552}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &946591504
@@ -3746,7 +3747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1133811582
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5295,7 +5296,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1615312382}
-  - component: {fileID: 1615312383}
+  - component: {fileID: 1615312388}
+  - component: {fileID: 1615312387}
   - component: {fileID: 1615312384}
   - component: {fileID: 1615312385}
   - component: {fileID: 1615312386}
@@ -5324,25 +5326,6 @@ Transform:
   - {fileID: 1274786753}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1615312383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615312381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804e89f13a042464fb8ec7749f599b25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clawsOpen: 1
-  delayBeforeGoingUp: 3
-  delayBeforeClawOpens: 3
-  allowControls: 1
-  touchingPrize: 0
-  prize: {fileID: 11400000, guid: 0e4a2a75013667b43ba532f970c4b48b, type: 2}
-  prizeRemaining: 0
 --- !u!61 &1615312384
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5428,6 +5411,37 @@ MonoBehaviour:
   currentState: 0
   targetTexture: {fileID: 2800000, guid: e8e1aae1ef6283a43ac1013edc9adcc4, type: 3}
   magGlassTexture: {fileID: 2800000, guid: b26ebfebd47e0be4583cd08a9523b385, type: 3}
+--- !u!114 &1615312387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615312381}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994986872647576438925872b68f1407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1615312388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615312381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804e89f13a042464fb8ec7749f599b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clawsOpen: 1
+  delayBeforeGoingUp: 3
+  delayBeforeClawOpens: 3
+  allowControls: 1
+  touchingPrize: 0
+  prize: {fileID: 11400000, guid: 0e4a2a75013667b43ba532f970c4b48b, type: 2}
+  prizeRemaining: 11
 --- !u!1 &1625909792
 GameObject:
   m_ObjectHideFlags: 0
@@ -5815,7 +5829,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1807618997
 Transform:
   m_ObjectHideFlags: 0
@@ -5825,7 +5839,7 @@ Transform:
   m_GameObject: {fileID: 1807618996}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.52, y: 0.46, z: 0.021326732}
+  m_LocalPosition: {x: -1.64, y: -1.57, z: 0.021326732}
   m_LocalScale: {x: 0.20106143, y: 0.20106143, z: 0.20106143}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6336,7 +6350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc29f1d2141f66047b5b3cc69e1a57b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 45
+  startingTime: 15
   countdownSpeed: 0.25
   loseScreen: {fileID: 173691603}
   loseSound: {fileID: 8300000, guid: 05e43b65a99d7a64797f1e3795b2c893, type: 3}
@@ -7994,7 +8008,6 @@ SceneRoots:
   - {fileID: 1643074913}
   - {fileID: 945919194}
   - {fileID: 1615312382}
-  - {fileID: 307482552}
   - {fileID: 343695161}
   - {fileID: 980927968}
   - {fileID: 1696860409}

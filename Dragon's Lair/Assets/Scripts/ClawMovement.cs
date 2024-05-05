@@ -30,6 +30,8 @@ public class ClawMovement : MonoBehaviour
     
     private GameManager gameManager;
     public Item prize;
+    public int prizeRemaining;
+
     void Start()
     {
         rHook = GameObject.Find("Right_Hook").GetComponent<Rigidbody2D>();
@@ -175,6 +177,7 @@ public class ClawMovement : MonoBehaviour
         foreach (Prize i in prizes)
         {
             clawsOpen = true;
+            prizeRemaining -= 1;
             // If the prize is a screw driver then the game is won
             if (i.gameObject.tag == "Screwdriver")
             {
@@ -194,9 +197,33 @@ public class ClawMovement : MonoBehaviour
                 }
                 GetComponent<AsyncLoader>().runAsync();
             }
+
+            // If there are no prizes remaining then the game is won
+            if (prizeRemaining == 0)
+            {
+                // WIn screen
+                // go back to real life
+                Debug.Log("You win");
+                Time.timeScale = 0;
+
+                /*
+                if (gameState != null)
+                {
+                    if (gameState.GetComponent<GameState>().storyState < GameState.state.GiveScrewdriver)
+                    {
+                        gameState.GetComponent<GameState>().storyState = GameState.state.GiveScrewdriver;
+                        gameState.GetComponent<GameState>().objective = "Give the screwdriver to Michael";
+                        GameObject.Find("Inventory").GetComponent<Inventory>().AddItem(prize);
+                    }
+                }
+                */
+                GetComponent<AsyncLoader>().runAsync();
+            }
             Destroy(i.gameObject);
         }
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+        
     }
 
     /*
