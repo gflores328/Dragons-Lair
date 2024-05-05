@@ -188,13 +188,13 @@ public class DialogueManager : MonoBehaviour
     public void ObjectiveActive()
     {
         objectiveBox.SetActive(true);
-        objectiveText.gameObject.SetActive(true);
+        
     }
 
     public void ObjectiveDeactive()
     {
         objectiveBox.SetActive(false);
-        objectiveText.gameObject.SetActive(false);
+        
     }
 
     IEnumerator Wait(float i)
