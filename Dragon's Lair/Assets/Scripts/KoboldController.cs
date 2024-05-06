@@ -136,7 +136,7 @@ public class KoboldController : Enemy
             if (m_PlayerInRange && Vector3.Distance(transform.position, m_PlayerPosition) <= attackRange)
             {
                 // Attack the player
-                Debug.Log("Player in attack range");
+                //Debug.Log("Player in attack range");
                 Stop();
                 Attack();
                 // audio kobold attack
@@ -395,7 +395,7 @@ public class KoboldController : Enemy
                 isAttacking = true; // Set attacking flag to true
                 Stop();
 
-                Debug.Log("Kobold is Attacking");
+                //Debug.Log("Kobold is Attacking");
 
                 animator.SetBool("Attack_Kobold", true); // Trigger attack animation
 

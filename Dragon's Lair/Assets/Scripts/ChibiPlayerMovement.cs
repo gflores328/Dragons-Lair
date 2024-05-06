@@ -152,23 +152,6 @@ public class ChibiPlayerMovement : MonoBehaviour
    
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-
-        float playerVelocityMagnitude = characterController.velocity.magnitude;
-
-        // Check if the player is moving by comparing the magnitude to a small threshold
-        if (playerVelocityMagnitude > 0.1f)
-        {
-            animator.SetBool("isWalking", true); // Player is moving
-        }
-        else
-        {
-            animator.SetBool("isWalking", false); // Player is not moving
-        }
-        isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
-        //Debug.Log("" + isGrounded);
-        UpdateJumpState(); // update the jump state for jump buffer and coyote time
-        handleJump(); // The function that handles the jumping of the player
         if (armRotation.gunRotationWithMouse)
         {
             if (cyberMouseHandler.isAimingRight)
@@ -198,6 +181,24 @@ public class ChibiPlayerMovement : MonoBehaviour
                 direction.x *= -1;
             }
         }
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+
+        float playerVelocityMagnitude = characterController.velocity.magnitude;
+
+        // Check if the player is moving by comparing the magnitude to a small threshold
+        if (playerVelocityMagnitude > 0.1f)
+        {
+            animator.SetBool("isWalking", true); // Player is moving
+        }
+        else
+        {
+            animator.SetBool("isWalking", false); // Player is not moving
+        }
+        isGrounded = IsGrounded(); // calls the isgrounded function which returns a bool to the isgrounded bool
+        //Debug.Log("" + isGrounded);
+        UpdateJumpState(); // update the jump state for jump buffer and coyote time
+        handleJump(); // The function that handles the jumping of the player
+        
     }
 
     void FixedUpdate()
