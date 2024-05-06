@@ -10,7 +10,7 @@ public class FallingDebris : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3 (0, 0, Time.deltaTime) * 10);
+        transform.Rotate(new Vector3 (0, 0, -5) * 20 * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
