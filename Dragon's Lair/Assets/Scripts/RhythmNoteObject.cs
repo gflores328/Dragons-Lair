@@ -23,37 +23,70 @@ public class RhythmNoteObject : MonoBehaviour
     public bool canBePressed;
     [Tooltip("Determines if the note has already been hit by the player.")]
     public bool obtained = false;
-    [Tooltip("The direction the note is facing.")]
+    [Tooltip("The direction the note is facing. This is overwritten by a randomizer when the game starts and is only left here for compatibility purposes.")]
     public RhythmGameManager.Direction direction;
 
+    [Space]
+
+    [Tooltip("The sprite for each note direction")]
+    public Sprite arrowUp;
+    public Sprite arrowDown;
+    public Sprite arrowLeft;
+    public Sprite arrowRight;
+
+    [Space]
+
     [Tooltip("Effects to be played for various note hit/miss conditions")]
-    public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
+    public GameObject hitEffect;
+    public GameObject goodEffect;
+    public GameObject perfectEffect;
+    public GameObject missEffect;
 
     //Input action from the attached player input component
     //This is grabbed from the note in the start function
     private InputAction playerInput;
+    //Sprite renderer from the attached object
+    //This is grabbed from the note in the start function
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
+        /*
+         * Do some magic to get the number of directions for the random number generator
+         * While hardcoding the number of directions would be easier (it's not like there will ever
+         * be more than 4 directions for this game), I'd rather make it scaleable just because I can
+         */
+        int numberOfDirections = System.Enum.GetValues(typeof(RhythmGameManager.Direction)).Length;
+        //Get a random direction (numberOfDirections is exclusive)
+        direction = (RhythmGameManager.Direction)Random.Range(0, numberOfDirections);
+
+        //Get the sprite render from the object
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         //Set the player input to the specified direction
-        //Set the rotation to match the direction
+        //Set the sprite to match the direction
+        //Set the position to match the direction
         switch (direction)
         {
             case RhythmGameManager.Direction.Up:
                 playerInput = GetComponent<PlayerInput>().actions.FindAction("Up Arrow");
-                transform.rotation = Quaternion.Euler(0, 0, 90);
+                spriteRenderer.sprite = arrowUp;
+                transform.position = new Vector3(-0.5f, transform.position.y, 0f);
                 break;
             case RhythmGameManager.Direction.Down:
                 playerInput = GetComponent<PlayerInput>().actions.FindAction("Down Arrow");
-                transform.rotation = Quaternion.Euler(0, 0, 270);
+                spriteRenderer.sprite = arrowDown;
+                transform.position = new Vector3(0.5f, transform.position.y, 0f);
                 break;
             case RhythmGameManager.Direction.Left:
                 playerInput = GetComponent<PlayerInput>().actions.FindAction("Left Arrow");
-                transform.rotation = Quaternion.Euler(0, 0, 180);
+                spriteRenderer.sprite = arrowLeft;
+                transform.position = new Vector3(-1.5f, transform.position.y, 0f);
                 break;
             case RhythmGameManager.Direction.Right:
                 playerInput = GetComponent<PlayerInput>().actions.FindAction("Right Arrow");
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                spriteRenderer.sprite = arrowRight;
+                transform.position = new Vector3(1.5f, transform.position.y, 0f);
                 break;
             default: break;
         }
