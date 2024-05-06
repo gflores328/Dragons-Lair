@@ -13,6 +13,8 @@ public class DoorCutscene : MonoBehaviour
     public CinemachineVirtualCamera activeCam;
     public CinemachineVirtualCamera previousCam;
 
+    public AudioSource footSteps;
+
     private bool isFading = false;
 
     private RealPlayerMovement realPlayerMovement;
@@ -65,12 +67,13 @@ public class DoorCutscene : MonoBehaviour
         // Fade out
         fadeImage.SetActive(true); // Activate the fade image
         yield return StartCoroutine(FadeOut());
+        
         activeCam.Priority = 1;
         previousCam.Priority = 0;
         // Teleport player
         //player.GetComponent<Collider>().enabled = false;
         realPlayerMovement.SetPlayerPosition(endPosition.position);
-        Debug.Log("Player teleported to end position");
+        //Debug.Log("Player teleported to end position");
 
         // Fade in
         //player.GetComponent<Collider>().enabled = true;
@@ -91,6 +94,12 @@ public class DoorCutscene : MonoBehaviour
         Color startColor = fadeImage.GetComponent<Image>().color; // Get the initial color
         Color endColor = new Color(startColor.r, startColor.g, startColor.b, 1f); // Fully opaque black
 
+        if (footSteps != null)
+        {
+            footSteps.PlayOneShot(footSteps.clip); // First footstep
+            yield return new WaitForSeconds(footSteps.clip.length); // Wait for the duration of the footstep sound
+            footSteps.PlayOneShot(footSteps.clip); // Second footstep
+        }
         while (timer < fadeDuration)
         {
             float t = timer / fadeDuration;
