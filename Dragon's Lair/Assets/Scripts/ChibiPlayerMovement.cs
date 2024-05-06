@@ -169,6 +169,35 @@ public class ChibiPlayerMovement : MonoBehaviour
         //Debug.Log("" + isGrounded);
         UpdateJumpState(); // update the jump state for jump buffer and coyote time
         handleJump(); // The function that handles the jumping of the player
+        if (armRotation.gunRotationWithMouse)
+        {
+            if (cyberMouseHandler.isAimingRight)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0); // Not flipped
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
+            }
+        }
+        else
+        {
+            if (direction.x > 0) // Moving right
+            {
+                isFacingRight = true;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else if (direction.x < 0) // Moving left
+            {
+                isFacingRight = false;
+                transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
+            }
+            if (direction.x < 0) // If moving left
+            {
+                // Flip the x component to make sure the player moves left
+                direction.x *= -1;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -238,47 +267,19 @@ public class ChibiPlayerMovement : MonoBehaviour
         
 
 
-            // Check if the player is not moving (velocity is zero)
-           // Check if any movement input is being provided
-            if (moveInput.magnitude > 0.1f)
-            {
-                animator.SetBool("isWalking", true); // Player is moving
-                animator.SetFloat("Velocity", 1);
-            }
-            else
-            {
-                animator.SetBool("isWalking", false); // Player is not moving
-                animator.SetFloat("Velocity", 0);
-            }
-            if (armRotation.gunRotationWithMouse)
-            {
-                if (cyberMouseHandler.isAimingRight)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 0); // Not flipped
-                }
-                else
-                {
-                    transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
-                }
-            }
-            else
-            {
-                if (direction.x > 0) // Moving right
-                {
-                    isFacingRight = true;
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-                }
-                else if (direction.x < 0) // Moving left
-                {
-                    isFacingRight = false;
-                    transform.rotation = Quaternion.Euler(0, 180, 0); // Flipped scale along x-axis
-                }
-                if (direction.x < 0) // If moving left
-                {
-                    // Flip the x component to make sure the player moves left
-                    direction.x *= -1;
-                }
-            }
+        // Check if the player is not moving (velocity is zero)
+        // Check if any movement input is being provided
+        if (moveInput.magnitude > 0.1f)
+        {
+            animator.SetBool("isWalking", true); // Player is moving
+            animator.SetFloat("Velocity", 1);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false); // Player is not moving
+            animator.SetFloat("Velocity", 0);
+        }
+        
 
         
     }

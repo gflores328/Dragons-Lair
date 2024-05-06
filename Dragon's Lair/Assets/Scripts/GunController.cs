@@ -11,12 +11,14 @@ public class GunController : MonoBehaviour
     public BulletController bullet; // Bullet Controller
 
     public GameObject realBulletPrefab; // Prefab for the RealBullet
-    public LaserBeamController laserBeam; // Laser Beam Controller
-    
+    //public LaserBeamController laserBeam; // Laser Beam Controller
+
     public float fireRate; // Affects the firing rate of the gun
     public float fireRateCounter; // Counter for firing rate
 
     public float accuracy = 100; // Affects the accuracy of the gun (Default = 100)
+    
+    private AudioSource bulletSound;
     
     private bool isFiring; // Flag to track if firing action is in progress
 
@@ -28,11 +30,13 @@ public class GunController : MonoBehaviour
         if (bullet) bullet.gun = this;
 
         // Calls Laser Beam Controller
-        if (!laserBeam) laserBeam = GetComponentInChildren<LaserBeamController>();
-        if (laserBeam) laserBeam.gun = this;
+        //if (!laserBeam) laserBeam = GetComponentInChildren<LaserBeamController>();
+        //if (laserBeam) laserBeam.gun = this;
 
         // Initialize isFiring to false
         isFiring = false;
+
+        bulletSound = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -71,6 +75,11 @@ public class GunController : MonoBehaviour
                 // Spawn a RealBullet
                 FireRealBullet();
 
+                if (bulletSound != null)
+                {
+                    bulletSound.Play();
+                }
+                    
                 // Set the next allowed firing time based on the fire rate
                 fireRateCounter = Time.time + 1 / fireRate;
             }
@@ -79,7 +88,7 @@ public class GunController : MonoBehaviour
             yield return null;
         
         }
-        laserBeam.StopFiring();
+        //laserBeam.StopFiring();
     }
 
     private void FireRealBullet()
