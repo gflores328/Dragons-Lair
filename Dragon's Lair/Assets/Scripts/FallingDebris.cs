@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class FallingDebris : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public AudioClip crumble;
+    public GameObject child;
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Rotate(new Vector3 (0, 0, Time.deltaTime) * 10);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -22,27 +19,34 @@ public class FallingDebris : MonoBehaviour
         {
             collision.gameObject.GetComponent<ChibiPlayerMovement>().takeDamage(1);
 
-            Destroy(gameObject);
+            StartCoroutine(RockBreak());
         }
         if (collision.gameObject.tag == "Enemy")
         {
 
-            Destroy(gameObject);
+            StartCoroutine(RockBreak());
         }
 
         if (collision.gameObject.tag == "Bullet")
         {
 
-            Destroy(gameObject);
+            StartCoroutine(RockBreak());
         }
 
         if (collision.gameObject.layer == 7)
         {
-            // Play crumble animation
-            //Wait for animation finish 
 
-            Destroy(gameObject);
+            StartCoroutine(RockBreak());
         }
 
+    }
+
+
+    IEnumerator RockBreak()
+    {
+        GetComponent<SphereCollider>().enabled = false;
+        child.GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<AudioSource>().PlayOneShot(crumble);
+        yield return new WaitForSeconds(.5f);
     }
 }
