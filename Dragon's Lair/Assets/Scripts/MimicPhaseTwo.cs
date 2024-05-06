@@ -20,6 +20,7 @@ public class MimicPhaseTwo : Enemy
     private bool takingAction = false; // A bool to check if the object is currently in an action
     private int actionNumber = 1; // An int that represents the action the enemy should take 
     private bool startLunge = false;
+    private bool hitSoundBuffer = false;
 
 
     public GameObject player; // A reference to the player character
@@ -408,7 +409,12 @@ public class MimicPhaseTwo : Enemy
         base.TakeDamage(amnt);
         healthBar.GetComponent<Slider>().value = health;
 
-        GetComponent<AudioSource>().PlayOneShot(hurt);
+        if (!hitSoundBuffer)
+        {
+            GetComponent<AudioSource>().PlayOneShot(hurt);
+            hitSoundBuffer = true;
+            StartCoroutine(HitSound());
+        }
     }
 
     IEnumerator StartDelay()
@@ -460,6 +466,12 @@ public class MimicPhaseTwo : Enemy
         takingAction = false;
         // end walking animation
 
+    }
+
+    IEnumerator HitSound()
+    {
+        yield return new WaitForSeconds(1.2f);
+        hitSoundBuffer = false;
     }
 
 }

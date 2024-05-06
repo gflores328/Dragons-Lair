@@ -17,6 +17,7 @@ public class MimicPhaseOne : Enemy
 
     public bool start = false; // A bool to determine wheter or not the object should be doing stuff
     private bool takingAction = false; // A bool to check if the object is currently in an action
+    private bool hitSoundBuffer = false; // a bool to check if hit sound should be played
 
     public GameObject player;
     public GameObject exit;
@@ -191,7 +192,12 @@ public class MimicPhaseOne : Enemy
     {
         base.TakeDamage(amnt);
         healthBar.GetComponent<Slider>().value = health;
-        GetComponent<AudioSource>().PlayOneShot(hurt);
+        if (!hitSoundBuffer)
+        {
+            GetComponent<AudioSource>().PlayOneShot(hurt);
+            hitSoundBuffer = true;
+            StartCoroutine(HitSound());
+        }
     }
 
     IEnumerator StartDelay()
@@ -217,5 +223,12 @@ public class MimicPhaseOne : Enemy
     public void StartStartDelay()
     {
         StartCoroutine(StartDelay());
+    }
+
+
+    IEnumerator HitSound()
+    {
+        yield return new WaitForSeconds(1.2f);
+        hitSoundBuffer = false;
     }
 }

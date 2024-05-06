@@ -22,6 +22,7 @@ public class MimicPhaseThree : Enemy
     private bool goLeft;
     public GameObject exit;
     private Direction directionFacing = Direction.left;
+    private bool hitSoundBuffer = false;
 
 
     public GameObject player; // A reference to the player character
@@ -423,7 +424,12 @@ public class MimicPhaseThree : Enemy
         base.TakeDamage(amnt);
         healthBar.GetComponent<Slider>().value = health;
 
-        GetComponent<AudioSource>().PlayOneShot(hurt);
+        if (!hitSoundBuffer)
+        {
+            GetComponent<AudioSource>().PlayOneShot(hurt);
+            hitSoundBuffer = true;
+            StartCoroutine(HitSound());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -464,5 +470,11 @@ public class MimicPhaseThree : Enemy
     public void StartStartDelay()
     {
         StartCoroutine(StartDelay());
+    }
+
+    IEnumerator HitSound()
+    {
+        yield return new WaitForSeconds(1.2f);
+        hitSoundBuffer = false;
     }
 }
