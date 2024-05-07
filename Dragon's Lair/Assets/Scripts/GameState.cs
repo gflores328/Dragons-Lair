@@ -106,6 +106,12 @@ public class GameState : MonoBehaviour
             firstTimeLoad = false;
             playerPosition = new Vector3(26.601f, 0.025f, 31.94f);
         }
+        if (Input.GetKeyDown("7"))
+        {
+            storyState = state.PlayLevel3;
+            firstTimeLoad = false;
+            playerPosition = new Vector3(26.601f, 0.025f, 31.94f);
+        }
     }
 
     // Set function for playerPosition

@@ -424,6 +424,21 @@ public class Interact : MonoBehaviour
         playerInput.actions.FindAction("Walk").Enable();
     }
 
+    public void SpecialMenuClose()
+    {
+        menuOpen = false;
+        menuUI.SetActive(false);
+        
+
+        // Switch Camera
+
+        // Play animation
+
+        // Load Level possibly by parameter
+        
+    }
+
+
     #region Editor
 #if UNITY_EDITOR
 
