@@ -7,17 +7,15 @@ public class Spikes : MonoBehaviour
 
     public Animator anim; //animator variable
 
-    public float waitTime; //wait time between actiations so you dont get hit over and over
+    public float waitTime = 0f; //wait time between actiations so you dont get hit over and over
 
     private IEnumerator coroutine; //couroutine is used to add wait time between actavation
 
     void Start()
     {
-        //initalization of animator and setup of couroutine with wait time
-        
-        anim.SetTrigger("onActive");
-        // coroutine = WaitTime(waitTime);
-        // StartCoroutine(coroutine);
+       
+        StartCoroutine(StartAnimationWithDelay(waitTime));
+       
     }
 
     
@@ -84,5 +82,14 @@ public class Spikes : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         
+    }
+
+    private IEnumerator StartAnimationWithDelay(float delay)
+    {
+        // Wait for the specified delay time
+        yield return new WaitForSeconds(delay);
+
+        // Trigger the animation after the delay
+        anim.SetTrigger("onActive");
     }
 }
