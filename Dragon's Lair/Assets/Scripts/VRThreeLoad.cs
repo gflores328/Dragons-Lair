@@ -15,7 +15,7 @@ public class VRThreeLoad : MonoBehaviour
 
     IEnumerator LoadLevel()
     {
-        player.transform.position = new Vector3(0, 0, 0);
+        player.transform.position = new Vector3(26.601f, 0.025f, 31.94f);
 
         zoomCamera.Priority = 5;
 
