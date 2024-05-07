@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
             if(mainMenu)
             {
                 SetButtonForController(resumeButton);
-                
+                Cursor.visible = true;
             }
         }
         // If no controller is connected and it was previously using controller, switch to mouse
