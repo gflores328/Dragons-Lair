@@ -411,12 +411,26 @@ public class MimicPhaseThree : Enemy
 
     protected override void Die()
     {
-        exit.SetActive(false);
         healthBar.SetActive(false);
-        Destroy(gameObject);
+        GetComponent<BoxCollider>().enabled = false;
 
-        mainCamera.SetActive(true);
-        bossCamera.SetActive(false);
+        StopAllCoroutines();
+
+       
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject i in enemies)
+        {
+            Destroy(i);
+        }
+        
+
+        while (transform.position.y != 9.35f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 9.35f, transform.position.z), slamSpeed * Time.deltaTime);
+        }
+
+        StartCoroutine(Death());
+
     }
 
     public override void TakeDamage(float amnt)
@@ -476,5 +490,18 @@ public class MimicPhaseThree : Enemy
     {
         yield return new WaitForSeconds(1.2f);
         hitSoundBuffer = false;
+    }
+
+    IEnumerator Death()
+    {
+        GetComponentInChildren<Animator>().SetTrigger("Dead");
+
+        yield return new WaitForSeconds(3);
+
+        mainCamera.SetActive(true);
+        bossCamera.SetActive(false);
+        exit.SetActive(false);
+
+        Destroy(gameObject);
     }
 }

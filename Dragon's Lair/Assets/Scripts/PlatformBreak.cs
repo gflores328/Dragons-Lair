@@ -18,15 +18,6 @@ public class PlatformBreak : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.gameObject);
-        if (other.tag == "Enemy")
-        {
-            Destroy(gameObject);
-        }
-    }
-
     IEnumerator WaitAndDestroy()
     {
         yield return new WaitForSeconds(8.5f);

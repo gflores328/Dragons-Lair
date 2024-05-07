@@ -71,6 +71,7 @@ public class DetectiveThoughts : MonoBehaviour
     {
         AudioClip audioClip = dialogueManager.GetComponent<DialogueManager>().GetAudioSource().clip;
         dialogueManager.GetComponent<DialogueManager>().GetAudioSource().PlayOneShot(audioClip);
+        dialogueManager.GetComponent<DialogueManager>().ObjectiveDeactive();
 
         currentDialogue = dialogue;
         dialogueManager.GetComponent<DialogueManager>().StartDialogue(currentDialogue.dialogueArray[currentLine]);
@@ -103,7 +104,7 @@ public class DetectiveThoughts : MonoBehaviour
             playerInput.actions.FindAction("Pause").Enable();
             playerInput.actions.FindAction("Inventory").Enable();
             playerInput.actions.FindAction("Walk").Enable();
-
+            dialogueManager.GetComponent<DialogueManager>().ObjectiveActive();
         }
     }
 
