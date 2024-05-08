@@ -11,11 +11,13 @@ public class VRThreeLoad : MonoBehaviour
     public Animator mimicAnimator;
     public AudioSource source;
     public AudioClip roarClip;
+    public GameObject iconUI;
 
 
     IEnumerator LoadLevel()
     {
         player.transform.position = new Vector3(26.601f, 0.025f, 31.94f);
+        iconUI.SetActive(false);
 
         zoomCamera.Priority = 5;
 
