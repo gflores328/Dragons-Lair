@@ -209,6 +209,11 @@ public class Interact : MonoBehaviour
         AudioClip audioClip = dialogueManager.GetComponent<DialogueManager>().GetAudioSource().clip;
         dialogueManager.GetComponent<DialogueManager>().GetAudioSource().PlayOneShot(audioClip);
 
+        if (transform.childCount >= 2 && transform.GetChild(1).GetComponent<Animator>() != null)
+        {
+            transform.GetChild(1).GetComponent<Animator>().SetBool("Talk", true);
+        }
+
         if (hasItemNeeded && interactionType != InteractionType.menu && needItem)
         {
             inventory.GetComponent<Inventory>().RemoveItem(itemNeeded, false);
@@ -250,7 +255,12 @@ public class Interact : MonoBehaviour
                 {
                     dialogueManager.GetComponent<DialogueManager>().ObjectiveChange(newObjective);
                 }
-                          
+
+                if (transform.childCount >= 2 && transform.GetChild(1).GetComponent<Animator>() != null)
+                {
+                    transform.GetChild(1).GetComponent<Animator>().SetBool("Talk", false);
+                }
+
             }
         }
 
@@ -307,6 +317,11 @@ public class Interact : MonoBehaviour
                 if (updateObjective)
                 {
                     dialogueManager.GetComponent<DialogueManager>().ObjectiveChange(newObjective);
+                }
+
+                if (transform.childCount >= 2 && transform.GetChild(1).GetComponent<Animator>() != null)
+                {
+                    transform.GetChild(1).GetComponent<Animator>().SetBool("Talk", false);
                 }
 
                 if (!gameObject.TryGetComponent(out InteractionState interactionState))
