@@ -9,7 +9,7 @@ public class WinScreenStart : MonoBehaviour
     void Start()
     {
         //Cursor.visible = true;
-        GameObject.Find("GameState").GetComponent<GameState>().objective = "End of Game";
+        GameObject.Find("GameState").GetComponent<GameState>().objective = "Free Play";
         GameObject.Find("GameState").GetComponent<GameState>().storyState = GameState.state.end;
     }
 }
