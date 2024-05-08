@@ -108,6 +108,9 @@ public class ChibiPlayerMovement : MonoBehaviour
     // public LeftMouseCollisionHandler leftMouseCollider;
     // public RightMouseCollisionHandler rightMouseCollider;
 
+    [HideInInspector]
+    public bool inFinalBoss = false;
+
     public enum playerState // An enum that has a real life and chibi state to easily determine what state the character is in
     {
         RealLife,
@@ -433,10 +436,39 @@ public class ChibiPlayerMovement : MonoBehaviour
             if(playerHealth <= 0f)
 
             {
-
+                if (!inFinalBoss)
+                {
                     die();
+                }
+                else if (inFinalBoss)
+                {
+                    gameManager.LoadSceneAsync("LoseScreen");
+                }
 
             } 
+
+            invincibilityCounter = invincibilityLength;
+
+            playerRenderer.enabled = false;
+
+            flashCounter = flashLength;
+        }
+        //Debug.Log($"I have been Hit! Health: {playerHealth}");
+    }
+
+    public void MimicTakeDamage(float dmgAmount) // The amount put in here will be subtracted 
+    {
+        if (invincibilityCounter <= 0)
+        {
+            playerHealth -= dmgAmount; // Substract the damage amount from the players health
+
+            if (playerHealth <= 0f)
+
+            {
+
+                gameManager.LoadSceneAsync("LoseScreen");
+
+            }
 
             invincibilityCounter = invincibilityLength;
 

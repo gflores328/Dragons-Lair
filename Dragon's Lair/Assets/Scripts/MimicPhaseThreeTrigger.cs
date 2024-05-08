@@ -31,6 +31,8 @@ public class MimicPhaseThreeTrigger : MonoBehaviour
             source.Pause();
             bossSource.Play();
 
+            other.GetComponent<ChibiPlayerMovement>().inFinalBoss = true;
+
             Destroy(gameObject);
         }
     }

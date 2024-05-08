@@ -450,7 +450,7 @@ public class MimicPhaseThree : Enemy
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+            other.GetComponent<ChibiPlayerMovement>().MimicTakeDamage(1);
         }
     }
 
@@ -459,7 +459,7 @@ public class MimicPhaseThree : Enemy
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<ChibiPlayerMovement>().takeDamage(1);
+            other.GetComponent<ChibiPlayerMovement>().MimicTakeDamage(1);
         }
     }
 
