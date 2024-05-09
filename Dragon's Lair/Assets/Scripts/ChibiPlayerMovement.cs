@@ -104,6 +104,10 @@ public class ChibiPlayerMovement : MonoBehaviour
     
     private float aimingFloat = 0f;
     private float aimingDiagFloat = 0f;
+
+    public bool inForestOne = false;
+
+    private bool animationPlayed = false;
     // [Header("Mouse Colliders")]
     // public LeftMouseCollisionHandler leftMouseCollider;
     // public RightMouseCollisionHandler rightMouseCollider;
@@ -151,10 +155,17 @@ public class ChibiPlayerMovement : MonoBehaviour
         currExtraJumps = maxExtraJumps;
         //setupJumpVariables();
         Cursor.lockState = CursorLockMode.Confined;
+
+         
     }
    
     void Update()
     {
+        if(inForestOne && !animationPlayed)
+        {
+            PlayWakeUp();
+            animationPlayed = true;
+        }
         if (armRotation.gunRotationWithMouse)
         {
             if (cyberMouseHandler.isAimingRight)
@@ -553,4 +564,47 @@ public class ChibiPlayerMovement : MonoBehaviour
         return aimingFloat;
 
     }
+
+    // Function to play the waking up animation
+    public void PlayWakeUp()
+    {
+        // Disable character controller to prevent movement during animation
+        characterController.enabled = false;
+
+        // Set "WakingUp" parameter to true in the animator
+        animator.SetBool("WakingUp", true);
+
+        // Invoke a method to enable movement after the waking up animation finishes
+        Invoke("EnableMovement", GetWakeUpAnimationLength());
+    }
+
+    // Function to enable movement after the waking up animation finishes
+    private void EnableMovement()
+    {
+        // Enable character controller to allow movement after animation
+        characterController.enabled = true;
+
+        // Set "WakingUp" parameter to false in the animator
+        animator.SetBool("WakingUp", false);
+    }
+
+    // Helper function to get the length of the waking up animation
+    private float GetWakeUpAnimationLength()
+    {
+        // Check if the animator controller and the waking up animation clip exist
+        if (animator && animator.runtimeAnimatorController && animator.HasState(0, Animator.StringToHash("Base Layer.Chibi_WakeUp")))
+        {
+            // Get the waking up animation state
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+
+            // Return the length of the waking up animation clip
+            return state.length;
+        }
+        else
+        {
+            // If the animator or the waking up animation clip doesn't exist, return a default value
+            return 0.0f;
+        }
+    }
+    
 }
