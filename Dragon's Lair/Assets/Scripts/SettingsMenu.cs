@@ -136,9 +136,9 @@ public class SettingsMenu : MonoBehaviour
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
             {
-                continue;
+                currentResolutionIndex = i;
             }
-            currentResolutionIndex = i;
+            
         }
 
         //Update the options in the attached dropdown box
