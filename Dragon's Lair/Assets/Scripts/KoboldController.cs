@@ -123,20 +123,37 @@ public class KoboldController : Enemy
     {
         // Move towards player's position
         Move(speedRun);
+
+        // Calculate target position with constant z-coordinate
         Vector3 targetPosition = new Vector3(m_PlayerPosition.x, m_PlayerPosition.y, transform.position.z);
+
+        // Check if there's a valid path to the player
+        NavMeshHit hit;
+        if (NavMesh.Raycast(transform.position, targetPosition, out hit, NavMesh.AllAreas))
+        {
+            // If there's no valid path, stop following the player and go back to patrol mode
+            Stop();
+            m_IsPatrol = true;
+            m_PlayerNear = false;
+            m_CaughtPlayer = false;
+            m_TimeToRotate = timeToRotate;
+            m_WaitTime = startWaitTime;
+            navAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+            return;
+        }
+
         navAgent.SetDestination(targetPosition);
 
         // Check if player is in attack range
         if (m_PlayerInRange && Vector3.Distance(transform.position, m_PlayerPosition) <= attackRange)
         {
             Move(speedRun); // Kobold now runs
-            navAgent.SetDestination(m_PlayerPosition); // Follows the player
+            navAgent.SetDestination(targetPosition); // Follows the player
 
             // Check if the player is within view angle and attack range
             if (m_PlayerInRange && Vector3.Distance(transform.position, m_PlayerPosition) <= attackRange)
             {
                 // Attack the player
-                //Debug.Log("Player in attack range");
                 Stop();
                 Attack();
                 // audio kobold attack
@@ -169,6 +186,8 @@ public class KoboldController : Enemy
             }
         }
     }
+
+
 
 
     // Patrol Mode
